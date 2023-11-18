@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3pf8kbdk01t7"]
+
+[ext_resource type="Script" path="res://src/UI/punnet_square.gd" id="1_a0y0j"]
+
+[node name="PunnetSquare" type="GridContainer"]
+offset_right = 68.0
+offset_bottom = 77.0
+mouse_filter = 2
+theme_override_constants/h_separation = -1
+theme_override_constants/v_separation = -1
+columns = 3
+script = ExtResource("1_a0y0j")

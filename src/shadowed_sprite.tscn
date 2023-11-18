@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://7dvw7728t334"]
+
+[ext_resource type="Script" path="res://src/shadowed_sprite.gd" id="1_0u015"]
+
+[node name="ShadowedSprite" type="Sprite2D"]
+script = ExtResource("1_0u015")
+object_height = 16

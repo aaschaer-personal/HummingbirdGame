@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsj3pfvi7mv2i"]
+
+[ext_resource type="Texture2D" path="res://assets/Environment/stump.png" id="1_ktcjg"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="2_s8oli"]
+
+[node name="Stump" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -14)
+texture = ExtResource("1_ktcjg")
+
+[node name="ShadowGenerator" parent="Sprite2D" instance=ExtResource("2_s8oli")]
+object_height = 22

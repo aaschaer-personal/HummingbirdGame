@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://yjwuo2ut5r1c"]
+
+[ext_resource type="Script" path="res://src/items/bouquet.gd" id="1_otk1k"]
+
+[node name="Bouquet" type="Node2D"]
+script = ExtResource("1_otk1k")
+
+[node name="FlowerNode1" type="Node2D" parent="."]
+
+[node name="FlowerNode2" type="Node2D" parent="."]
+position = Vector2(-2, -2)
+rotation = -0.0955773
+
+[node name="FlowerNode3" type="Node2D" parent="."]
+position = Vector2(-2, 1)
+rotation = 0.127236
+
+[node name="FlowerNode4" type="Node2D" parent="."]
+position = Vector2(-4, -2)
+rotation = -0.254899
+
+[node name="FlowerNode5" type="Node2D" parent="."]
+position = Vector2(-4, 2)
+rotation = 0.314767

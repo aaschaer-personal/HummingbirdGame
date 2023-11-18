@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://nxry5ro62he1"]
+
+[ext_resource type="Texture2D" uid="uid://bjixdf2uj0dj0" path="res://assets/UI/nectarmeter_under.png" id="1_xy1cr"]
+[ext_resource type="Texture2D" uid="uid://bx6je1bictjs1" path="res://assets/UI/nectarmeter_progress.png" id="2_k6aum"]
+[ext_resource type="Texture2D" uid="uid://d1l0trinlv6xy" path="res://assets/UI/nectarmeter_over.png" id="3_sydl6"]
+
+[node name="NectarMeter" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 36.0
+fill_mode = 3
+texture_under = ExtResource("1_xy1cr")
+texture_progress = ExtResource("2_k6aum")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(6, 18)
+texture = ExtResource("3_sydl6")

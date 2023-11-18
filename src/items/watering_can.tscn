@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://54ivqkg17xxg"]
+
+[ext_resource type="Texture2D" uid="uid://bs1lxybc8qv2e" path="res://assets/Items/watering_can.png" id="1_rsdxe"]
+[ext_resource type="Script" path="res://src/items/watering_can.gd" id="1_y64fi"]
+[ext_resource type="Texture2D" uid="uid://da1r21yv0nkl4" path="res://assets/Items/transport_disk.png" id="2_5kc37"]
+[ext_resource type="Texture2D" uid="uid://bdxq3gpsu1nhk" path="res://assets/Items/water_meter_under.png" id="3_hq3d1"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="3_mimsc"]
+[ext_resource type="Texture2D" uid="uid://bhdxt37ckfcb2" path="res://assets/Items/water_meter_over.png" id="4_6t2nr"]
+[ext_resource type="Texture2D" uid="uid://bh24ood8rtues" path="res://assets/Items/water_meter_progress.png" id="5_b7jyp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="Gradient" id="Gradient_5nv8w"]
+offsets = PackedFloat32Array(0, 0.585185, 0.77037, 1)
+colors = PackedColorArray(0.603922, 0.890196, 0.941176, 1, 0.603922, 0.890196, 0.941176, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_siqkg"]
+gradient = SubResource("Gradient_5nv8w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tqhor"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(2, 3, 1)
+direction = Vector3(0, 0, 0)
+spread = 20.0
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_siqkg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hl44"]
+radius = 4.0
+
+[node name="WateringCan" type="Area2D"]
+script = ExtResource("1_y64fi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wsjay")
+
+[node name="Item" type="Sprite2D" parent="."]
+position = Vector2(0, 6)
+texture = ExtResource("1_rsdxe")
+
+[node name="WaterParticles" type="GPUParticles2D" parent="Item"]
+position = Vector2(10, 2)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_tqhor")
+lifetime = 0.4
+
+[node name="ShadowGenerator" parent="Item" instance=ExtResource("3_mimsc")]
+object_height = 16
+
+[node name="TransportDisk" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, 12)
+texture = ExtResource("2_5kc37")
+
+[node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("3_mimsc")]
+
+[node name="WaterZone" type="Area2D" parent="."]
+position = Vector2(9, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WaterZone"]
+shape = SubResource("CircleShape2D_5hl44")
+
+[node name="WaterMeter" type="TextureProgressBar" parent="."]
+offset_left = -5.0
+offset_top = 19.0
+offset_right = 35.0
+offset_bottom = 59.0
+value = 100.0
+texture_under = ExtResource("3_hq3d1")
+texture_progress = ExtResource("5_b7jyp")
+
+[node name="Sprite2D" type="Sprite2D" parent="WaterMeter"]
+position = Vector2(5, 1)
+texture = ExtResource("4_6t2nr")

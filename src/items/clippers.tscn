@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://75v1hugqikb0"]
+
+[ext_resource type="Script" path="res://src/items/clippers.gd" id="1_k4tqf"]
+[ext_resource type="Texture2D" uid="uid://b7clisib4m80x" path="res://assets/Items/clippers.png" id="2_bpad2"]
+[ext_resource type="Texture2D" uid="uid://da1r21yv0nkl4" path="res://assets/Items/transport_disk.png" id="2_gy2to"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_5q66u"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
+radius = 9.0
+height = 20.0
+
+[node name="Clippers" type="Area2D"]
+script = ExtResource("1_k4tqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wsjay")
+
+[node name="TransportDisk" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(3, 11)
+texture = ExtResource("2_gy2to")
+
+[node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("4_5q66u")]
+
+[node name="Item" type="Sprite2D" parent="."]
+position = Vector2(0, 6)
+texture = ExtResource("2_bpad2")
+
+[node name="ShadowGenerator" parent="Item" instance=ExtResource("4_5q66u")]
+object_height = 16

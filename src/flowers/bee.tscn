@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ch8ex6wgfxtwn"]
+
+[ext_resource type="Texture2D" uid="uid://dsha7oebd3ijb" path="res://assets/Flowers/bee.png" id="1_fsio5"]
+[ext_resource type="Script" path="res://src/flowers/bee.gd" id="2_3uf0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_50o5l"]
+atlas = ExtResource("1_fsio5")
+region = Rect2(0, 0, 6, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84cr7"]
+atlas = ExtResource("1_fsio5")
+region = Rect2(6, 0, 6, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntlpw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_50o5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84cr7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Bee" type="AnimatedSprite2D"]
+show_behind_parent = true
+sprite_frames = SubResource("SpriteFrames_ntlpw")
+autoplay = "default"
+frame_progress = 0.125527
+script = ExtResource("2_3uf0k")

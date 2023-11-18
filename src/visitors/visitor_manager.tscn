@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b48sse34cd42d"]
+
+[ext_resource type="Script" path="res://src/visitors/visitor_manager.gd" id="1_aqo5a"]
+
+[node name="VisitorManager" type="Node2D" groups=["visitor_manager"]]
+script = ExtResource("1_aqo5a")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(-119, -186)
+
+[node name="LandingPoint" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://ov3l2hi8x4rl"]
+
+[ext_resource type="Script" path="res://src/environment/wind.gd" id="1_504wg"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kp1o5"]
+a = Vector2(-2, 3)
+b = Vector2(-262, 417)
+
+[node name="Wind" type="Area2D"]
+script = ExtResource("1_504wg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_kp1o5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 21.0
+autostart = true

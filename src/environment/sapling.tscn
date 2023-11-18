@@ -1,0 +1,171 @@
+[gd_scene load_steps=24 format=3 uid="uid://chvf2ks32aa4d"]
+
+[ext_resource type="Script" path="res://src/environment/sapling.gd" id="1_akgew"]
+[ext_resource type="Texture2D" path="res://assets/Environment/sapling_bottom_rustle.png" id="2_5i7pj"]
+[ext_resource type="Texture2D" path="res://assets/Environment/sapling_rustle.png" id="2_cal4h"]
+[ext_resource type="Texture2D" path="res://assets/Environment/sapling_top_rustle.png" id="3_7ft4f"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="3_ihaxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pnuq"]
+size = Vector2(40, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_air08"]
+atlas = ExtResource("2_5i7pj")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkyam"]
+atlas = ExtResource("2_5i7pj")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7coa4"]
+atlas = ExtResource("2_5i7pj")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djt7q"]
+atlas = ExtResource("2_5i7pj")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lett5"]
+atlas = ExtResource("2_cal4h")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eah4n"]
+atlas = ExtResource("2_cal4h")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sotkc"]
+atlas = ExtResource("2_cal4h")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xtpk"]
+atlas = ExtResource("2_cal4h")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pae8y"]
+atlas = ExtResource("2_cal4h")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6axy0"]
+atlas = ExtResource("3_7ft4f")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0skdw"]
+atlas = ExtResource("3_7ft4f")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w5hv"]
+atlas = ExtResource("3_7ft4f")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vj0fd"]
+atlas = ExtResource("3_7ft4f")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_stthv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_air08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkyam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7coa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djt7q")
+}],
+"loop": false,
+"name": &"bottom_rustle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lett5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eah4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sotkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xtpk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pae8y")
+}],
+"loop": false,
+"name": &"full_rustle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6axy0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0skdw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w5hv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vj0fd")
+}],
+"loop": false,
+"name": &"top_rustle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_liqw1"]
+size = Vector2(13, 2)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c5816"]
+radius = 6.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_48v45"]
+radius = 3.0
+
+[node name="Sapling" type="Area2D"]
+script = ExtResource("1_akgew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -31)
+shape = SubResource("RectangleShape2D_3pnuq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -26)
+sprite_frames = SubResource("SpriteFrames_stthv")
+animation = &"top_rustle"
+frame = 3
+frame_progress = 1.0
+
+[node name="ShadowGenerator" parent="AnimatedSprite2D" instance=ExtResource("3_ihaxk")]
+object_height = 50
+
+[node name="PerchZone" type="Area2D" parent="."]
+position = Vector2(18, -22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PerchZone"]
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_liqw1")
+
+[node name="TopRustleZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopRustleZone"]
+position = Vector2(-2, -41)
+shape = SubResource("CapsuleShape2D_c5816")
+
+[node name="BottomRustleZone" type="Area2D" parent="."]
+position = Vector2(25, 22)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomRustleZone"]
+position = Vector2(-2, -41)
+shape = SubResource("CircleShape2D_48v45")

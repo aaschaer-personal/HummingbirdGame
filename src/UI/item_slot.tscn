@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://n17my5x26ah5"]
+
+[ext_resource type="Texture2D" uid="uid://bemy1kj4ohyn7" path="res://assets/UI/bag_slot.png" id="1_1vlmv"]
+[ext_resource type="Script" path="res://src/UI/item_slot.gd" id="2_chmg2"]
+
+[node name="ItemSlot" type="TextureRect"]
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("1_1vlmv")
+script = ExtResource("2_chmg2")
