@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://75v1hugqikb0"]
+
+[ext_resource type="Script" path="res://src/items/clippers.gd" id="1_k4tqf"]
+[ext_resource type="Texture2D" uid="uid://b7clisib4m80x" path="res://assets/Items/clippers.png" id="2_bpad2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
+radius = 9.0
+height = 20.0
+
+[node name="Clippers" type="Area2D"]
+script = ExtResource("1_k4tqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_wsjay")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(4, 4)
+texture = ExtResource("2_bpad2")

@@ -1,0 +1,168 @@
+class_name Flower extends Interactable
+
+@onready var parent_plant = get_parent().get_parent()
+@onready var main_sprite = $MainSprite
+@onready var petal_sprite = $MainSprite/PetalSprite
+@onready var pollination_timer = $PollinationTimer
+@onready var nectar_meter = $NectarMeter
+@onready var drinkable_area = $DrinkableArea
+@onready var cut_flower_scene = preload("res://src/flowers/cut_lupine.tscn")
+@onready var bee_scene = preload("res://src/flowers/bee.tscn")
+var flower_position: int
+var nectar: float = 0.0
+var max_nectar: float = 30.0
+var stage: int = 0
+var seed_growth: float = 0.0
+var pollen = []
+var bee: Bee = null
+var manualy_pollinated = false
+
+func _ready():
+	pollination_timer.timeout.connect(_wilt)
+	body_entered.connect(_on_body_entered)
+	nectar_meter.max_value = max_nectar
+	nectar_meter.visible = false
+	petal_sprite.modulate = parent_plant.genome.flower_color
+	_play_animation("bloom")
+	await main_sprite.animation_finished
+	stage = 1
+
+func _play_animation(animation_name):
+	main_sprite.play(animation_name)
+	if animation_name in ["bloom", "bloom_rustle", "wilt"]:
+		petal_sprite.visible = true
+		petal_sprite.play(animation_name)
+	else:
+		petal_sprite.visible = false
+
+func receive_nutrients(amount: float):
+	if stage == 1:
+		nectar += amount
+		if nectar >= max_nectar:
+			nectar = max_nectar
+			if pollination_timer.is_stopped():
+				pollination_timer.start(20)
+			if not bee:
+				var new_bee = bee_scene.instantiate()
+				add_child(new_bee)
+				bee = new_bee
+		else:
+			if not pollination_timer.is_stopped() and not manualy_pollinated:
+				pollination_timer.stop()
+			if bee:
+				bee.fly_away()
+				bee = null
+		nectar_meter.value = nectar
+
+	elif stage == 2:
+		seed_growth += amount
+		if seed_growth > parent_plant.genome.growth_threshold:
+			_go_to_seed()
+
+func _on_body_entered(_body):
+	rustle()
+
+func rustle():
+	var current = main_sprite.animation
+	if stage == 1 and current != "wilt":
+		_play_animation("bloom_rustle")
+	elif stage == 2 and current != "to_seed":
+		_play_animation("wilt_rustle")
+	elif stage == 3:
+		_play_animation("to_seed_rustle")
+
+func _wilt():
+	_play_animation("wilt")
+	pollination_timer.stop()
+	if bee:
+		bee.fly_away()
+		bee = null
+	nectar = 0
+	stage = 2
+
+func _go_to_seed():
+	_play_animation("to_seed")
+	await main_sprite.animation_finished
+	stage = 3
+
+func is_interactable():
+	return (
+		(stage == 1 and not player.held_item is Clippers)
+		or (stage == 3 and player.held_item is SeedBag)
+		or (player.held_item is Clippers)
+	)
+
+func on_clicked(point: Vector2):
+	if stage == 1 and not player.held_item is Clippers:
+		var target_point = drinkable_area.global_position
+		if Helpers.point_in_area(point, drinkable_area):
+			# target_point = point
+			target_point = drinkable_area.global_position
+		player.set_interaction_target(
+			"start_drink",
+			self,
+			player.drinking_area,
+			drinkable_area,
+			target_point
+		)
+	elif stage == 3 and player.held_item is SeedBag or player.held_item is Clippers:
+		player.set_interaction_target(
+			"use_tool_on_flower",
+			self,
+			player.general_interaction_area,
+			self,
+			global_position
+		)
+
+func _pick_pollen():
+	pollen.shuffle()
+	for potential in pollen:
+		if potential["species"] == parent_plant.genome.species:
+			return potential
+
+func bag_seeds(seed_bag):
+	var new_seeds = []
+	for i in range(parent_plant.genome.seed_num):
+		var pollen_genome_dict = _pick_pollen()
+		if not pollen_genome_dict:
+			pollen_genome_dict = GenomeGenerator.wild(
+				parent_plant.genome.species)
+		new_seeds.append(GenomeGenerator.genome_dict_from_gamete_dicts(
+			GenomeGenerator.gamete_dict_from_genome_dict(
+				pollen_genome_dict),
+			GenomeGenerator.gamete_dict_from_genome_dict(
+				parent_plant.genome.genome_dict)
+		))
+	seed_bag.add_seeds(new_seeds)
+	harvest()
+
+func drink(delta):
+	pollination_timer.stop()
+	nectar_meter.visible = true
+	if stage == 1:
+		var amount = min(20 * delta, nectar)
+		nectar -= amount
+		nectar_meter.value = nectar
+		return amount
+	else:
+		return 0
+
+func finish_drink():
+	nectar_meter.visible = false
+	pollen = player.pollen
+	if stage == 1 and pollen:
+		manualy_pollinated = true
+		pollination_timer.start(1)
+	player.add_pollen(parent_plant.genome.genome_dict)
+
+func clip():
+	if stage == 1:
+		var cut_flower_instance = cut_flower_scene.instantiate()
+		get_node("/root/Main").add_child(cut_flower_instance)
+		cut_flower_instance.set_color(parent_plant.genome.flower_color)
+		cut_flower_instance.set_global_position(global_position)
+	harvest()
+
+func harvest():
+	parent_plant.on_flower_harvest(flower_position)
+	queue_free()

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvso7t5luq4l"]
+
+[ext_resource type="Script" path="res://src/UI/score.gd" id="1_47ky7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wghga"]
+
+[node name="Score" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1066.0
+offset_bottom = -622.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_wghga")
+script = ExtResource("1_47ky7")

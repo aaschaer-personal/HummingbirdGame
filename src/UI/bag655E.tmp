@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs510j1wjh4d4"]
+
+[ext_resource type="Script" path="res://src/UI/bag_crate_ui.gd" id="1_hf0pt"]
+[ext_resource type="Texture2D" uid="uid://c4ks0ilba863h" path="res://assets/UI/crate_ui_frame.png" id="2_nijox"]
+[ext_resource type="PackedScene" uid="uid://n17my5x26ah5" path="res://src/UI/item_slot.tscn" id="3_oe0p0"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_han4m"]
+
+[node name="BagCrateUI" type="NinePatchRect" groups=["bag_crate_ui"]]
+offset_right = 240.0
+offset_bottom = 200.0
+texture = ExtResource("2_nijox")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("1_hf0pt")
+
+[node name="MouseItemNode" type="Control" parent="."]
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="PlayerItemSlot" parent="." instance=ExtResource("3_oe0p0")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -37.0
+offset_right = 12.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="LabelItemSlot" parent="." instance=ExtResource("3_oe0p0")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = 51.0
+offset_right = 71.0
+offset_bottom = 75.0
+grow_vertical = 2
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_right = 271.0
+offset_bottom = 40.0
+texture_normal = ExtResource("4_han4m")
+
+[node name="ItemSlots" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_top = 13.0
+offset_right = 68.0
+offset_bottom = 93.0
+grow_horizontal = 2
+columns = 5

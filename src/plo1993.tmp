@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dctxne420bfvp"]
+
+[ext_resource type="Script" path="res://src/plot.gd" id="1_76vvh"]
+[ext_resource type="Texture2D" uid="uid://qe5qjm8v0ps0" path="res://assets/Tiles/dirt.png" id="2_m17eg"]
+[ext_resource type="Texture2D" uid="uid://b0k8jijmxs3re" path="res://assets/Tiles/tile_highlight.png" id="3_tduwx"]
+[ext_resource type="PackedScene" uid="uid://c4rxl58nq20ss" path="res://src/mouse_logic.tscn" id="4_jd42t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_537kr"]
+size = Vector2(18, 18)
+
+[node name="Plot" type="Area2D"]
+z_index = -1
+script = ExtResource("1_76vvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+shape = SubResource("RectangleShape2D_537kr")
+
+[node name="PlotSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_m17eg")
+
+[node name="HighlightSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_tduwx")
+
+[node name="MouseLogic" parent="." instance=ExtResource("4_jd42t")]

@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://d4c0a63nm65dn"]
+
+[ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="1_jgm1s"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_onaxd"]
+[ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/plot.tscn" id="3_11k4b"]
+[ext_resource type="PackedScene" uid="uid://54ivqkg17xxg" path="res://src/items/watering_can.tscn" id="4_83ajp"]
+[ext_resource type="PackedScene" uid="uid://75v1hugqikb0" path="res://src/items/clippers.tscn" id="5_phbel"]
+[ext_resource type="PackedScene" uid="uid://bb6jnu2fsjfnw" path="res://src/items/seed_bag.tscn" id="6_6fib2"]
+[ext_resource type="Texture2D" uid="uid://cmmwk13oaugog" path="res://assets/Tiles/grass.png" id="7_vxbj1"]
+[ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="8_42dwo"]
+[ext_resource type="PackedScene" uid="uid://mlfyx3732p21" path="res://src/environment/fence.tscn" id="8_c47sj"]
+[ext_resource type="PackedScene" uid="uid://bvso7t5luq4l" path="res://src/UI/score.tscn" id="9_5hitw"]
+[ext_resource type="PackedScene" uid="uid://ov3l2hi8x4rl" path="res://src/environment/wind.tscn" id="9_aymfp"]
+[ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="10_u8hmd"]
+[ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="11_hr8h2"]
+[ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/items/bag_crate.tscn" id="12_e1gwq"]
+[ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/customers/customer_manager.tscn" id="14_fp0ms"]
+
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_onaxd")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyBar" parent="UI" instance=ExtResource("8_42dwo")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.225
+anchor_top = 0.175
+anchor_right = 0.225
+anchor_bottom = 0.175
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 24.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" parent="UI" instance=ExtResource("9_5hitw")]
+layout_mode = 1
+offset_left = 461.0
+offset_top = 6.0
+offset_right = 490.0
+offset_bottom = 6.0
+
+[node name="PauseScreen" parent="UI" instance=ExtResource("10_u8hmd")]
+visible = false
+layout_mode = 1
+offset_right = 542.0
+offset_bottom = 311.0
+
+[node name="Plot1" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(200, 140)
+
+[node name="Plot2" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(230, 140)
+
+[node name="Plot3" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(260, 140)
+
+[node name="Plot4" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(290, 140)
+
+[node name="Plot5" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(200, 190)
+
+[node name="Plot6" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(230, 190)
+
+[node name="Plot7" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(260, 190)
+
+[node name="Plot8" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(290, 190)
+
+[node name="Plot9" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(200, 240)
+
+[node name="Plot10" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(230, 240)
+
+[node name="Plot11" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(260, 240)
+
+[node name="Plot12" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
+position = Vector2(290, 240)
+
+[node name="Player" parent="." instance=ExtResource("1_jgm1s")]
+position = Vector2(159, 157)
+
+[node name="WateringCan" parent="." instance=ExtResource("4_83ajp")]
+position = Vector2(235, 85)
+
+[node name="Clippers" parent="." instance=ExtResource("5_phbel")]
+position = Vector2(253, 91)
+
+[node name="SeedBag" parent="." instance=ExtResource("6_6fib2")]
+position = Vector2(213, 89)
+
+[node name="Grass" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(286.5, 165)
+scale = Vector2(38.2778, 23.3333)
+texture = ExtResource("7_vxbj1")
+
+[node name="Fence" parent="." instance=ExtResource("8_c47sj")]
+position = Vector2(384, 102)
+
+[node name="Wind" parent="." instance=ExtResource("9_aymfp")]
+
+[node name="Pond" parent="." instance=ExtResource("11_hr8h2")]
+position = Vector2(382, 210)
+
+[node name="BagCrate" parent="." instance=ExtResource("12_e1gwq")]
+position = Vector2(305, 64)
+
+[node name="Plots" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CustomerManager" parent="." instance=ExtResource("14_fp0ms")]
+position = Vector2(65, 249)

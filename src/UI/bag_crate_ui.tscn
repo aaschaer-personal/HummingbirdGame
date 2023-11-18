@@ -1,0 +1,130 @@
+[gd_scene load_steps=13 format=3 uid="uid://cs510j1wjh4d4"]
+
+[ext_resource type="Script" path="res://src/UI/bag_crate_ui.gd" id="1_hf0pt"]
+[ext_resource type="Texture2D" uid="uid://c4ks0ilba863h" path="res://assets/UI/crate_ui_frame.png" id="2_nijox"]
+[ext_resource type="PackedScene" uid="uid://n17my5x26ah5" path="res://src/UI/item_slot.tscn" id="3_oe0p0"]
+[ext_resource type="Texture2D" uid="uid://yfxgd37aenpt" path="res://assets/UI/hummingbird.png" id="4_4n3jp"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_han4m"]
+[ext_resource type="Texture2D" uid="uid://bvl2r6lhosyi3" path="res://assets/Items/BagIcons/circle.png" id="5_br4xt"]
+[ext_resource type="Texture2D" uid="uid://c5l744u8flrpm" path="res://assets/Items/BagIcons/diamond.png" id="6_hjfq8"]
+[ext_resource type="Texture2D" uid="uid://b4gnw1e8pa1g4" path="res://assets/Items/BagIcons/question.png" id="8_cc45n"]
+[ext_resource type="Texture2D" uid="uid://75l460ljiinq" path="res://assets/Items/BagIcons/square.png" id="9_jcp0v"]
+[ext_resource type="Texture2D" uid="uid://bouhc4uub1f7" path="res://assets/Items/BagIcons/heart.png" id="10_70hu5"]
+[ext_resource type="Texture2D" uid="uid://b7q6ty34ufyr8" path="res://assets/Items/BagIcons/triangle.png" id="10_dln5r"]
+[ext_resource type="Texture2D" uid="uid://dlol2f8oeyh70" path="res://assets/UI/bin.png" id="11_6ey1g"]
+
+[node name="BagCrateUI" type="NinePatchRect" groups=["bag_crate_ui"]]
+offset_right = 240.0
+offset_bottom = 240.0
+texture = ExtResource("2_nijox")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("1_hf0pt")
+
+[node name="MouseItemNode" type="Control" parent="."]
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="PlayerItemSlot" parent="." instance=ExtResource("3_oe0p0")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -37.0
+offset_right = 12.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Hummingbird" type="TextureRect" parent="PlayerItemSlot"]
+layout_mode = 0
+offset_left = -6.0
+offset_top = -34.0
+offset_right = 42.0
+offset_bottom = 14.0
+texture = ExtResource("4_4n3jp")
+
+[node name="LabelItemSlot" parent="." instance=ExtResource("3_oe0p0")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 29.0
+offset_top = 72.0
+offset_right = 53.0
+offset_bottom = 96.0
+grow_vertical = 2
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_right = 271.0
+offset_bottom = 40.0
+texture_normal = ExtResource("4_han4m")
+
+[node name="ItemSlots" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_top = 13.0
+offset_right = 68.0
+offset_bottom = 93.0
+grow_horizontal = 2
+columns = 5
+
+[node name="ShapeOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 137.0
+offset_right = 69.0
+offset_bottom = 161.0
+toggle_mode = false
+item_count = 7
+selected = 0
+popup/item_0/text = ""
+popup/item_0/icon = ExtResource("9_jcp0v")
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/icon = ExtResource("5_br4xt")
+popup/item_1/id = 1
+popup/item_2/text = ""
+popup/item_2/icon = ExtResource("10_dln5r")
+popup/item_2/id = 2
+popup/item_3/text = ""
+popup/item_3/icon = ExtResource("6_hjfq8")
+popup/item_3/id = 3
+popup/item_4/text = ""
+popup/item_4/icon = ExtResource("10_70hu5")
+popup/item_4/id = 4
+popup/item_5/text = ""
+popup/item_5/icon = ExtResource("8_cc45n")
+popup/item_5/id = 5
+popup/item_6/text = ""
+popup/item_6/id = 6
+
+[node name="ColorOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 164.0
+offset_right = 69.0
+offset_bottom = 188.0
+toggle_mode = false
+
+[node name="CompostBin" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 183.0
+offset_right = 222.0
+offset_bottom = 229.0
+texture_normal = ExtResource("11_6ey1g")
