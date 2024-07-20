@@ -20,6 +20,10 @@ signal energy_halved
 @onready var landing_area = $Flippables/LandingArea
 @onready var interaction_radius = $InteractionRadius
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
+
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var bath_sound = preload("res://assets/Audio/bath.wav")
+
 var base_speed = 200
 var moving_time = 0
 var quick_turn = false
@@ -450,8 +454,10 @@ func _do_animation():
 			_play_animation("bathe")
 			await get_tree().create_timer(2.0/10.0).timeout
 			_set_wings(false)
-			await get_tree().create_timer(3.0/10.0).timeout
+			await get_tree().create_timer(4.0/10.0).timeout
 			splash_particles.emitting = true
+			audio_player.stream = bath_sound
+			audio_player.play()
 			await get_tree().create_timer(6.0/10.0).timeout
 			splash_particles.emitting = false
 			await get_tree().create_timer(3.0/10.0).timeout
