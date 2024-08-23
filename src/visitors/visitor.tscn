@@ -280,7 +280,7 @@ shape = SubResource("CapsuleShape2D_tddpl")
 [node name="MainSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7, -16)
 sprite_frames = SubResource("SpriteFrames_3lav0")
-animation = &"idle"
+animation = &"landing"
 autoplay = "idle"
 
 [node name="ShadowGenerator" parent="MainSprite" instance=ExtResource("6_sn76w")]
@@ -324,3 +324,5 @@ shape = SubResource("CapsuleShape2D_rcl1j")
 position = Vector2(5, -20)
 rotation = 1.57362
 shape = SubResource("CapsuleShape2D_cb84g")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

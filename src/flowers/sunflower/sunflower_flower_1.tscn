@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://dnn2elj5m0w1q"]
+[gd_scene load_steps=98 format=3 uid="uid://dnn2elj5m0w1q"]
 
 [ext_resource type="Script" path="res://src/flowers/sunflower/sunflower_flower.gd" id="1_cpiy4"]
 [ext_resource type="Texture2D" uid="uid://2ipruanhqn6u" path="res://assets/Flowers/Sunflower/bloom-1.png" id="2_ltxy2"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://yvng33s6rcqw" path="res://assets/Flowers/Sunflower/to_seed_rustle_petals-1.png" id="11_fewd1"]
 [ext_resource type="PackedScene" uid="uid://nxry5ro62he1" path="res://src/UI/nectar_meter.tscn" id="11_jgdrm"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="14_bm55q"]
+[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Audio/rustle.wav" id="16_8c8ob"]
+[ext_resource type="AudioStream" uid="uid://cmy16861yuanr" path="res://assets/Audio/bee.wav" id="16_oh86k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m8c4t"]
 atlas = ExtResource("2_ltxy2")
@@ -683,3 +685,11 @@ position = Vector2(5, -20)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints"]
 position = Vector2(1, -22)
+
+[node name="BeeAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_oh86k")
+max_polyphony = 2
+
+[node name="RustleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_8c8ob")
+max_polyphony = 2

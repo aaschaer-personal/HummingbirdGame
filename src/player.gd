@@ -22,7 +22,11 @@ signal energy_halved
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 
 @onready var audio_player = $AudioStreamPlayer2D
+@onready var humm_player = $HummPlayer
 @onready var bath_sound = preload("res://assets/Audio/bath.wav")
+@onready var dirt_sound = preload("res://assets/Audio/dirt.wav")
+@onready var paper_sound = preload("res://assets/Audio/paper.wav")
+@onready var drinking_sound = preload("res://assets/Audio/drinking.wav")
 
 var base_speed = 200
 var moving_time = 0
@@ -90,7 +94,19 @@ func _process(delta):
 			target_animation = "hovering"
 
 	if drinking_flower and body_sprite.animation == "drinking":
-		energy += drinking_flower.drink(delta)
+		var gained_energy = drinking_flower.drink(delta)
+		energy += gained_energy
+		if gained_energy > 0.1:
+			audio_player.set_pitch_scale(
+					.4 +  (energy/max_energy) * .6
+				)
+			if not audio_player.playing:
+				audio_player.stream = drinking_sound
+				audio_player.play()
+		else:
+			audio_player.stop()
+	elif audio_player.stream == drinking_sound:
+		audio_player.stop()
 
 	if body_sprite.animation in ["perching_h", "perching_v"]:
 		var rate = (-0.2 * energy) + 6
@@ -283,8 +299,12 @@ func start_drink(flower: Flower):
 func use_tool_on_flower(flower: Flower):
 	if flower.stage == 3 and held_item is SeedPacket:
 		flower.bag_seeds(held_item)
+		audio_player.set_pitch_scale(randf_range(.9, 1.1))
+		audio_player.stream = paper_sound
+		audio_player.play()
 	elif held_item is Clippers:
 		flower.clip()
+		held_item.audio_player.play()
 
 func use_tool_on_plot(plot: Plot):
 	if held_item is SeedPacket:
@@ -292,8 +312,14 @@ func use_tool_on_plot(plot: Plot):
 			var removed_seed = held_item.remove_seed()
 			plot.plant_seed(removed_seed)
 			seed_planted.emit()
+			audio_player.set_pitch_scale(randf_range(.9, 1.1))
+			audio_player.stream = dirt_sound
+			audio_player.play()
 		elif plot.plant.stage == 0:
 			held_item.add_seeds([plot.remove_seed()])
+			audio_player.set_pitch_scale(randf_range(.9, 1.1))
+			audio_player.stream = paper_sound
+			audio_player.play()
 
 func open_cache_ui(ui: CacheUI):
 	if held_item == null or held_item is SeedPacket:
@@ -327,9 +353,12 @@ func add_pollen(pollen_dict: Dictionary):
 	pollen = pollen.slice(-10)
 	pollen_sprite.visible = true
 
-func _set_wings(val: bool):
+func _set_wings(val: bool, sound=true):
 	front_wing_sprite.visible = val
 	back_wing_sprite.visible = val
+	if sound:
+		humm_player.playing = val
+
 
 func _flip_h(val: bool):
 	body_sprite.set_flip_h(val)
@@ -380,7 +409,7 @@ func _do_animation():
 			# save current animation frame, stop wings, and start turn
 			var duration = 0.3  # 12 frames at 40fps
 			var current_frame = body_sprite.get_frame()
-			_set_wings(false)
+			_set_wings(false, false)
 			# tween all flippables
 			for flippable in flippables.get_children():
 				var tween = create_tween()
@@ -419,7 +448,7 @@ func _do_animation():
 			await body_sprite.animation_finished
 			_play_animation("drinking")
 		elif target_animation == "perching_h":
-			_set_wings(false)
+			_set_wings(false, false)
 			_play_animation("start_perching_h")
 			var tween = create_tween()
 			tween.tween_property(
@@ -430,6 +459,7 @@ func _do_animation():
 			)
 			_tween_height(13, 8.0/40.0)
 			await body_sprite.animation_finished
+			humm_player.playing = false
 			facing_right = null
 			_play_animation("perching_h")
 			_set_frame(perching_frame)
@@ -456,6 +486,7 @@ func _do_animation():
 			_set_wings(false)
 			await get_tree().create_timer(4.0/10.0).timeout
 			splash_particles.emitting = true
+			audio_player.set_pitch_scale(1)
 			audio_player.stream = bath_sound
 			audio_player.play()
 			await get_tree().create_timer(6.0/10.0).timeout

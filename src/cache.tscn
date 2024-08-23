@@ -682,3 +682,5 @@ sprite_frames = SubResource("SpriteFrames_4se6q")
 animation = &"down"
 autoplay = "down"
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

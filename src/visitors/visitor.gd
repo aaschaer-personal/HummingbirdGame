@@ -7,10 +7,16 @@ class_name Visitor extends Interactable
 @onready var acceptance_area = $AcceptanceArea
 @onready var shadow_generator = $MainSprite/ShadowGenerator
 @onready var desired_bouquet_colors: Array
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var visitor_landing_sound = preload("res://assets/Audio/visitor_landing.wav")
+@onready var house_finch_sound = preload("res://assets/Audio/house_finch.wav")
 
 var off_screen_height = 300
 
 func land(landing_point: Node2D):
+	audio_player.stream = visitor_landing_sound
+	audio_player.play()
+
 	sprite.play("landing")
 	var position_tween = create_tween()
 	var height_tween = create_tween()
@@ -62,10 +68,14 @@ func give_bouquet(bouquet: Bouquet):
 func emote_and_take_off(bouquet_matched):
 	if bouquet_matched:
 		sprite.play("happy")
+		audio_player.stream = house_finch_sound
+		audio_player.play()
 	else:
 		sprite.play("confused")
 	await sprite.animation_finished
 
+	audio_player.stream = visitor_landing_sound
+	audio_player.play()
 	sprite.play_backwards("landing")
 	var position_tween = create_tween()
 	var height_tween = create_tween()

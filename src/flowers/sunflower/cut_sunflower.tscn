@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bt7md0m4ocmgf"]
+[gd_scene load_steps=39 format=3 uid="uid://bt7md0m4ocmgf"]
 
 [ext_resource type="Script" path="res://src/flowers/cut_flower.gd" id="1_to2wj"]
 [ext_resource type="Texture2D" uid="uid://quxgin3fg4g7" path="res://assets/Flowers/Sunflower/cut_decay.png" id="2_234n0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_5vstd"]
 [ext_resource type="Texture2D" uid="uid://yj2l1emtvqjr" path="res://assets/Flowers/Sunflower/cut_decay_petals.png" id="4_jca8k"]
 [ext_resource type="Texture2D" uid="uid://pmh23mftsaal" path="res://assets/Flowers/Sunflower/cut_petals.png" id="5_4dn2j"]
+[ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Audio/levitate.wav" id="7_krq6c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ew62v"]
 radius = 8.0
@@ -267,3 +268,6 @@ offset_rotation = true
 [node name="TransportDisk" type="Sprite2D" parent="."]
 
 [node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("4_5vstd")]
+
+[node name="TransportDiskAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_krq6c")
