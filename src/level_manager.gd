@@ -292,8 +292,8 @@ func tutorial_sequence():
 		
 		if len(desired_bouquet_colors) == 2:
 			dialogue.open([
-				"This visitor is asking for two sunflowers. You'll need to",
-				"deliver both at once by holding two flowers at the same time.",
+				"This visitor is asking for two sunflowers. You can either",
+				"deliver them one at a time or bring them both together.",
 			])
 			multi_expliained = true
 

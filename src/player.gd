@@ -332,8 +332,9 @@ func start_perch_h(perch_zone: Area2D):
 
 func give_bouquet(visitor: Visitor):
 	if held_item is Bouquet:
-		var bouquet = remove_held_item()
-		visitor.give_bouquet(bouquet)
+		visitor.give_bouquet(held_item)
+		if not len(held_item.get_flowers()):
+			remove_held_item()
 
 func bathe(_pond):
 	if held_item == null:

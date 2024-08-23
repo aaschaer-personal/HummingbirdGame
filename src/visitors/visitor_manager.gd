@@ -48,7 +48,7 @@ func on_visitor_left():
 	if bouquet_num == len(bouquet_order):
 		done = true
 	else:
-		timer.start(10)
+		timer.start(5)
 	await visitor.tree_exited
 	visitor = null
 	visitor_left.emit()
@@ -71,21 +71,7 @@ func generate_desired_boquet_colors():
 	current_bouquet_index = chosen_index
 	return bouquet_colors[chosen_index]
 
-func evaluate_bouquet(delivered_bouquet: Bouquet, desired_bouquet_colors):
-	var delivered_flowers = delivered_bouquet.get_flowers()
-
-	# check if every desired flower was in the delivered bouquet
-	for flower in delivered_flowers:
-		for desired_color in desired_bouquet_colors:
-			if flower.color == desired_color:
-					desired_bouquet_colors.erase(desired_color)
-					break
-
-	# the bouqeut matched if no desired flowers are left
-	if len(desired_bouquet_colors) == 0:
-		bouquet_num += 1
-		delivered_bouquet_indexes.append(current_bouquet_index)
-		boquet_accepted.emit()
-		return true
-	else:
-		return false
+func finish_bouquet():
+	bouquet_num += 1
+	delivered_bouquet_indexes.append(current_bouquet_index)
+	boquet_accepted.emit()
