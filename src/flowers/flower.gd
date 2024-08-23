@@ -31,6 +31,7 @@ func _ready():
 	_play_animation("bloom")
 	await main_sprite.animation_finished
 	stage = 1
+	nectar = max_nectar / (parent_plant.genome.max_flowers * 3)
 	SignalBus.flower_bloomed.emit(parent_plant.genome.flower_color)
 
 func _play_animation(animation_name):
@@ -44,7 +45,7 @@ func _play_animation(animation_name):
 
 func receive_nutrients(amount: float):
 	if stage == 1:
-		nectar += amount
+		nectar += amount * .75
 		if nectar >= max_nectar:
 			nectar = max_nectar
 			if pollination_timer.is_stopped():
@@ -66,7 +67,7 @@ func receive_nutrients(amount: float):
 
 	elif stage == 2:
 		seed_growth += amount
-		if seed_growth > parent_plant.genome.growth_factor:
+		if seed_growth > parent_plant.genome.growth_factor / 2:
 			_go_to_seed()
 
 func _on_body_entered(_body):

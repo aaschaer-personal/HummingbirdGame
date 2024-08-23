@@ -4,7 +4,7 @@ var genome_dict: Dictionary
 var species: String
 var flower_color: Color
 var max_concurrent_flowers: int
-var max_total_flowers: int
+var max_flowers: int
 var bloom_time: float
 var seed_num: int
 var growth_factor: float
@@ -25,7 +25,7 @@ func set_vals_from_genome_dict(new_genome_dict):
 		assert(false)
 	
 	max_nectar = 30
-	max_total_flowers = _parse_max_total_flowers()
+	max_flowers = _parse_max_flowers()
 	seed_num = _parse_unique_inbreeding_alleles()
 	# TODO
 	# plants with high growth factor grow faster when kept watered, but use
@@ -34,8 +34,8 @@ func set_vals_from_genome_dict(new_genome_dict):
 	growth_factor = 4
 	water_efficiency = 1
 
-func _parse_max_total_flowers():
-	var loci_1 = genome_dict["max_total_flowers"]
+func _parse_max_flowers():
+	var loci_1 = genome_dict["max_flowers"]
 	return 1 + loci_1
 
 func _parse_unique_inbreeding_alleles():

@@ -126,10 +126,10 @@ func generate_starting_packet():
 	for i in range(4):
 		starting_seeds.append(GenomeGenerator.wild("Sunflower"))
 
-	starting_seeds[0]["max_total_flowers"] = 0
-	starting_seeds[1]["max_total_flowers"] = 0
-	starting_seeds[2]["max_total_flowers"] = 1
-	starting_seeds[3]["max_total_flowers"] = 1
+	starting_seeds[0]["max_flowers"] = 0
+	starting_seeds[1]["max_flowers"] = 0
+	starting_seeds[2]["max_flowers"] = 1
+	starting_seeds[3]["max_flowers"] = 1
 
 	starting_seeds.shuffle()
 	packet.add_seeds(starting_seeds)

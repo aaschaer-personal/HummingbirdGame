@@ -36,7 +36,7 @@ func _pick_copy(dominant_count):
 
 func _standard_keys_by_species(species):
 	var ret = [
-		"max_total_flowers",
+		"max_flowers",
 		"growth_factor_1",
 		"growth_factor_2",
 	]

@@ -73,7 +73,7 @@ func _process(delta):
 		queue_free()
 
 func _flowers_left_to_grow():
-	return total_flowers < genome.max_total_flowers
+	return total_flowers < genome.max_flowers
 
 func rustle():
 	audio_player.set_pitch_scale(randf_range(.9, 1.1))
