@@ -53,6 +53,7 @@ func _on_visitor_left():
 func _on_flower_bloomed(color):
 	colors_grown[color] = true
 	if in_tutorial and not genes_explained and color != Colors.yellow:
+		genes_explained = true
 		await get_tree().create_timer(BRIEF_PAUSE).timeout
 		dialogue.punnet_square.visible = true
 		dialogue.extra_space = 50
@@ -62,10 +63,10 @@ func _on_flower_bloomed(color):
 			"gene called Y and y.", "The table below shows the possibilities",
 			"from crossing two Yy sunflowers.",
 		])
-		genes_explained = true
 
 func _on_flower_gone_to_seed():
 	if in_tutorial and not seeds_explained:
+		seeds_explained = true
 		await get_tree().create_timer(BRIEF_PAUSE).timeout
 		dialogue.open([
 			"That sunflower has gone to seed. Interact with it while holding",
@@ -73,10 +74,10 @@ func _on_flower_gone_to_seed():
 			"If you'd like a new seed bag to stay organized, come",
 			"interact with the cache",
 		])
-		seeds_explained = true
 
 func _on_bee_arrived():
 	if in_tutorial and not bees_explained:
+		bees_explained = true
 		await get_tree().create_timer(BRIEF_PAUSE).timeout
 		dialogue.open([
 			"See those bees buzzing around that flower? When a flower fills",
@@ -85,36 +86,35 @@ func _on_bee_arrived():
 			"are becoming inbred and producing fewer seeds you might want to",
 			"let them bee.",
 		])
-		bees_explained = true
 
 func _on_plant_died():
 	_failure_check()
 	if in_tutorial and not death_explained:
+		death_explained = true
 		await get_tree().create_timer(BRIEF_PAUSE).timeout
 		dialogue.open([
 			"When a plant has its last flower removed it will die. Make sure",
 			"you harvest enough seeds to plant the next generation!",
 		])
-		death_explained = true
 
 func _on_energy_halved():
 	if in_tutorial and not energy_explained:
+		energy_explained = true
 		dialogue.open([
 			"Careful, half your energy is gone. If it runs out you won't be",
 			"able to carry items! Drinking nectar is the best way to restore",
 			"energy, but perching can also restore a little if you're very low.",
 		])
-		energy_explained = true
-		
+
 func _on_packet_printed():
 	if in_tutorial and not packets_explained:
+		packets_explained = true
 		dialogue.open([
 			"Multiple packets can help you organize seeds, although the",
 			"paper will run if you print too many. You can transfer",
 			"seeds from a packet you are holding into another packet by",
 			"interacting with it.",
 		])
-		packets_explained = true
 
 func generate_starting_packet():
 	var packet = seed_packet_scene.instantiate()
@@ -291,13 +291,14 @@ func tutorial_sequence():
 		await get_tree().create_timer(BRIEF_PAUSE).timeout
 		
 		if len(desired_bouquet_colors) == 2:
+			multi_expliained = true
 			dialogue.open([
 				"This visitor is asking for two sunflowers. You can either",
 				"deliver them one at a time or bring them both together.",
 			])
-			multi_expliained = true
 
 		elif not colors_explained:
+			colors_explained = true
 			var color_name
 			if desired_bouquet_colors[0] == Colors.white:
 				color_name = "white"
@@ -305,15 +306,12 @@ func tutorial_sequence():
 				color_name = "orange"
 			else:
 				assert(false)
-				
 			var s2
 			if desired_bouquet_colors[0] not in colors_grown:
 				s2 = "Try cross-pollinating yellow sunflowers and planting their seeds to grow one."
 			else:
 				s2 = "Make sure to bring visitors the colors they are asking for."
-
 			dialogue.open([
 				"This visitor is asking for a", color_name, "sunflower.",
 				s2,
 			])
-			colors_explained = true
