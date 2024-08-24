@@ -39,6 +39,7 @@ var interaction_area = null
 var target_area = null
 var interaction_position = null
 var target_point = null
+var interaction_direction = null
 var held_item = null
 var drinking_flower = null
 var hovering_frame = 0
@@ -189,46 +190,37 @@ func set_interaction_target(
 			interaction_area = new_interaction_area
 			target_area = new_target_area
 			target_point = new_target_point
-			
-			# calculate interaction_position
+
+			# calculate interaction position and direction
 			var right_position = interaction_area.position
 			right_position.x = abs(interaction_area.position.x)
 			var left_position = right_position * Vector2(-1, 1)
 			if interaction_area == pickup_area:
 				right_position *= Vector2(-1, 1)
 				left_position *= Vector2(-1, 1)
-			
 			var right_point = global_position + right_position
 			var left_point = global_position + left_position
-			
 			var right_distance = right_point.distance_to(target_point)
 			var left_distance = left_point.distance_to(target_point)
-			# if we are closer than turn distance, need to figure out if we
-			# should do a quick turn or not
-			if min(right_distance, left_distance) < base_speed / 5.0:
-				if facing_right:
-					if right_distance <= left_distance:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
-						quick_turn = true
+			var right_x_distance = abs(right_point.x - target_point.x)
+			var left_x_distance = abs(left_point.x - target_point.x)
+
+			# for smaller x distances pick the closer interaction point
+			if min(right_x_distance, left_x_distance) < base_speed / 5.0:
+				if right_distance < left_distance:
+					interaction_position = right_position
+					interaction_direction = "right"
 				else:
-					if left_distance <= right_distance:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
-						quick_turn = true
-			# if we are further than turn distance, just check if we're going right or left
+					interaction_position = left_position
+					interaction_direction = "left"
+			# for longer x distances pick the direction of travel
 			else:
 				if target_point.x > global_position.x:
 					interaction_position = right_position
-				elif target_point.x < global_position.x:
-					interaction_position = left_position
+					interaction_direction = "right"
 				else:
-					if facing_right:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
+					interaction_position = left_position
+					interaction_direction = "left"
 
 func _unset_interaction_target():
 	interaction = null
@@ -236,6 +228,7 @@ func _unset_interaction_target():
 	interaction_area = null
 	target_area = null
 	interaction_position = null
+	interaction_direction = null
 	target_point = null
 
 func _on_interaction_area_entered(entering_area, our_area):
@@ -398,40 +391,40 @@ func _do_animation():
 			_set_flippables(false)
 			facing_right = false
 
-	# otherwise check if we should turn
-	elif moving_time >= .1 or quick_turn:
-		var turn_flip_val = null
-		if (quick_turn or velocity.x < 0) and facing_right == true:
-			turn_flip_val = true
-		elif (quick_turn or velocity.x > 0) and facing_right == false:
+	# check if we should turn
+	var turn_flip_val = null  # true: left, false: right
+	if interaction_direction != null:
+		if interaction_direction == "right" and facing_right == false:
 			turn_flip_val = false
-		if turn_flip_val != null:
-			quick_turn = false
-			# save current animation frame, stop wings, and start turn
-			var duration = 0.3  # 12 frames at 40fps
-			var current_frame = body_sprite.get_frame()
-			_set_wings(false, false)
-			# tween all flippables
-			for flippable in flippables.get_children():
-				var tween = create_tween()
-				tween.tween_property(
-					flippable,
-					"position",
-					flippable.position * Vector2(-1, 1),
-					duration
-				)
-			_play_animation("turn")
-			# halfway through the turn, turn any hold item
-			await get_tree().create_timer(duration / 2.0).timeout
-			if held_item:
-				held_item.set_flip_h(turn_flip_val)
-			await body_sprite.animation_finished
-			# start wings and restore previous animation frame
-			_set_wings(true)
-			facing_right = !turn_flip_val
-			_flip_h(turn_flip_val)
-			_play_animation(current)
-			_set_frame(current_frame)
+		elif interaction_direction == "left" and facing_right == true:
+			turn_flip_val = true
+
+	elif moving_time >= .1:
+		if (velocity.x < 0) and facing_right == true:
+			turn_flip_val = true
+		elif (velocity.x > 0) and facing_right == false:
+			turn_flip_val = false
+
+	if turn_flip_val != null:
+		# save current animation frame, stop wings, and start turn
+		var duration = 0.3  # 12 frames at 40fps
+		var current_frame = body_sprite.get_frame()
+		_set_wings(false, false)
+		# flip all flippables
+		for flippable in flippables.get_children():
+			flippable.position *= Vector2(-1, 1)
+		_play_animation("turn")
+		# halfway through the turn, turn any hold item
+		await get_tree().create_timer(duration / 2.0).timeout
+		if held_item:
+			held_item.set_flip_h(turn_flip_val)
+		await body_sprite.animation_finished
+		# start wings and restore previous animation frame
+		_set_wings(true)
+		facing_right = !turn_flip_val
+		_flip_h(turn_flip_val)
+		_play_animation(current)
+		_set_frame(current_frame)
 
 	# stop if we're already playing the target
 	if current == target_animation:
