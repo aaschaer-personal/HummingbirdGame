@@ -377,6 +377,7 @@ animations = [{
 radius = 4.0
 
 [node name="SunflowerPlant" type="Area2D"]
+z_index = -1
 z_as_relative = false
 script = ExtResource("1_wha0n")
 

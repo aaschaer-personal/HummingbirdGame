@@ -458,7 +458,7 @@ func _do_animation():
 				Vector2(position.x, perch_y + 15),
 				8.0/40.0
 			)
-			_tween_height(13, 8.0/40.0)
+			_tween_height(15, 8.0/40.0)
 			await body_sprite.animation_finished
 			humm_player.playing = false
 			facing_right = null

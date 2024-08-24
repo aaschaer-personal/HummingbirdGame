@@ -50,6 +50,7 @@ func _process(delta):
 	if growth >= genome.growth_factor:
 		growth = 0
 		if stage == 0:
+			z_index += 1
 			sprite.play("sprout")
 			await sprite.animation_finished
 			stage = 1
