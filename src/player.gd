@@ -25,6 +25,7 @@ signal energy_halved
 @onready var humm_player = $HummPlayer
 @onready var bath_sound = preload("res://assets/Audio/bath.wav")
 @onready var dirt_sound = preload("res://assets/Audio/dirt.wav")
+@onready var refill_sound = preload("res://assets/Audio/refill.wav")
 @onready var paper_sound = preload("res://assets/Audio/paper.wav")
 @onready var drinking_sound = preload("res://assets/Audio/drinking.wav")
 
@@ -303,11 +304,12 @@ func use_tool_on_plot(plot: Plot):
 	if held_item is SeedPacket:
 		if plot.plant == null:
 			var removed_seed = held_item.remove_seed()
-			plot.plant_seed(removed_seed)
-			seed_planted.emit()
-			audio_player.set_pitch_scale(randf_range(.9, 1.1))
-			audio_player.stream = dirt_sound
-			audio_player.play()
+			if removed_seed != null:
+				plot.plant_seed(removed_seed)
+				seed_planted.emit()
+				audio_player.set_pitch_scale(randf_range(.9, 1.1))
+				audio_player.stream = dirt_sound
+				audio_player.play()
 		elif plot.plant.stage == 0:
 			held_item.add_seeds([plot.remove_seed()])
 			audio_player.set_pitch_scale(randf_range(.9, 1.1))
@@ -337,6 +339,8 @@ func bathe(_pond):
 func refill_can(_pond):
 	if held_item is WateringCan:
 		held_item.refill()
+		audio_player.stream = refill_sound
+		audio_player.play()
 
 func transfer_seeds(to_packet):
 	if held_item is SeedPacket:
