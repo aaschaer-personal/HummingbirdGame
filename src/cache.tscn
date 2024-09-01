@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/cache.gd" id="1_rhkjs"]
 [ext_resource type="PackedScene" uid="uid://cs510j1wjh4d4" path="res://src/UI/cache_ui.tscn" id="3_05chn"]
-[ext_resource type="Texture2D" path="res://assets/Cache/back_rising.png" id="3_5gmsv"]
+[ext_resource type="Texture2D" uid="uid://jonpcny3sb73" path="res://assets/Cache/back_rising.png" id="3_5gmsv"]
 [ext_resource type="Texture2D" uid="uid://b6ssa1246mogs" path="res://assets/Cache/right_door_open.png" id="4_aapyw"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_dse8e"]
 [ext_resource type="Texture2D" uid="uid://cajprhg56glxp" path="res://assets/Cache/right_door_rising.png" id="5_nw40n"]
@@ -682,3 +682,5 @@ sprite_frames = SubResource("SpriteFrames_4se6q")
 animation = &"down"
 autoplay = "down"
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

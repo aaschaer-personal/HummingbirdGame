@@ -11,12 +11,21 @@ signal yes_no(yes: bool)
 @onready var punnet_square = $VisualsContainer/PunnetSquare
 @onready var extra_space: int = 0
 
+@onready var queue = []
+
 func _ready():
 	ok_button.pressed.connect(close)
 	yes_button.pressed.connect(on_yes_pressed)
 	no_button.pressed.connect(on_no_pressed)
 
 func open(lines, yn_mode=false):
+	if visible:
+		queue.append({
+			"lines": lines,
+			"yn_mode": yn_mode,
+		})
+		return
+
 	get_tree().paused = true
 	ok_button.visible = !yn_mode
 	yes_button.visible = yn_mode
@@ -38,6 +47,11 @@ func close():
 	visible = false
 	extra_space = 0
 	punnet_square.visible = false
+
+	if len(queue):
+		await get_tree().create_timer(.3).timeout
+		var queued = queue.pop_front()
+		open(queued["lines"], queued["yn_mode"])
 
 func on_yes_pressed():
 	close()

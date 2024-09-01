@@ -74,7 +74,7 @@ func tween_height(target: int, duration: float):
 	)
 
 func start_decay_timer():
-	decay_timer.start(10)
+	decay_timer.start(15)
 
 func decay():
 	is_decaying = true

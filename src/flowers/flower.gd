@@ -6,7 +6,10 @@ class_name Flower extends Interactable
 @onready var pollination_timer = $PollinationTimer
 @onready var nectar_meter = $NectarMeter
 @onready var drinkable_area = $DrinkableArea
+@onready var rustle_audio_player = $RustleAudioPlayer
+@onready var bee_audio_player = $BeeAudioPlayer
 @onready var bee_scene = preload("res://src/flowers/bee.tscn")
+
 var flower_position: int
 var nectar: float = 0.0
 var max_nectar: float = 30.0
@@ -28,6 +31,7 @@ func _ready():
 	_play_animation("bloom")
 	await main_sprite.animation_finished
 	stage = 1
+	nectar = max_nectar / (parent_plant.genome.max_flowers * 3)
 	SignalBus.flower_bloomed.emit(parent_plant.genome.flower_color)
 
 func _play_animation(animation_name):
@@ -41,7 +45,7 @@ func _play_animation(animation_name):
 
 func receive_nutrients(amount: float):
 	if stage == 1:
-		nectar += amount
+		nectar += amount * .75
 		if nectar >= max_nectar:
 			nectar = max_nectar
 			if pollination_timer.is_stopped():
@@ -50,6 +54,7 @@ func receive_nutrients(amount: float):
 				var new_bee = bee_scene.instantiate()
 				add_child(new_bee)
 				bee = new_bee
+				bee_audio_player.play()
 				SignalBus.bee_arrived.emit()
 		else:
 			if not pollination_timer.is_stopped() and not manualy_pollinated:
@@ -57,11 +62,12 @@ func receive_nutrients(amount: float):
 			if bee:
 				bee.fly_away()
 				bee = null
+				bee_audio_player.stop()
 		nectar_meter.value = nectar
 
 	elif stage == 2:
 		seed_growth += amount
-		if seed_growth > parent_plant.genome.growth_factor:
+		if seed_growth > parent_plant.genome.growth_factor / 2:
 			_go_to_seed()
 
 func _on_body_entered(_body):
@@ -75,6 +81,8 @@ func rustle():
 		_play_animation("wilt_rustle")
 	elif stage == 3:
 		_play_animation("to_seed_rustle")
+	rustle_audio_player.set_pitch_scale(randf_range(.9, 1.1))
+	rustle_audio_player.play()
 
 func _wilt():
 	_play_animation("wilt")
@@ -82,6 +90,7 @@ func _wilt():
 	if bee:
 		bee.fly_away()
 		bee = null
+		bee_audio_player.stop()
 	nectar = 0
 	stage = 2
 

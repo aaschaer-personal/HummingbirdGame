@@ -20,6 +20,15 @@ signal energy_halved
 @onready var landing_area = $Flippables/LandingArea
 @onready var interaction_radius = $InteractionRadius
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
+
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var humm_player = $HummPlayer
+@onready var bath_sound = preload("res://assets/Sounds/bath.wav")
+@onready var dirt_sound = preload("res://assets/Sounds/dirt.wav")
+@onready var refill_sound = preload("res://assets/Sounds/refill.wav")
+@onready var paper_sound = preload("res://assets/Sounds/paper.wav")
+@onready var drinking_sound = preload("res://assets/Sounds/drinking.wav")
+
 var base_speed = 200
 var moving_time = 0
 var quick_turn = false
@@ -31,6 +40,7 @@ var interaction_area = null
 var target_area = null
 var interaction_position = null
 var target_point = null
+var interaction_direction = null
 var held_item = null
 var drinking_flower = null
 var hovering_frame = 0
@@ -86,7 +96,19 @@ func _process(delta):
 			target_animation = "hovering"
 
 	if drinking_flower and body_sprite.animation == "drinking":
-		energy += drinking_flower.drink(delta)
+		var gained_energy = drinking_flower.drink(delta)
+		energy += gained_energy
+		if gained_energy > 0.1:
+			audio_player.set_pitch_scale(
+					.4 +  (energy/max_energy) * .6
+				)
+			if not audio_player.playing:
+				audio_player.stream = drinking_sound
+				audio_player.play()
+		else:
+			audio_player.stop()
+	elif audio_player.stream == drinking_sound:
+		audio_player.stop()
 
 	if body_sprite.animation in ["perching_h", "perching_v"]:
 		var rate = (-0.2 * energy) + 6
@@ -169,46 +191,37 @@ func set_interaction_target(
 			interaction_area = new_interaction_area
 			target_area = new_target_area
 			target_point = new_target_point
-			
-			# calculate interaction_position
+
+			# calculate interaction position and direction
 			var right_position = interaction_area.position
 			right_position.x = abs(interaction_area.position.x)
 			var left_position = right_position * Vector2(-1, 1)
 			if interaction_area == pickup_area:
 				right_position *= Vector2(-1, 1)
 				left_position *= Vector2(-1, 1)
-			
 			var right_point = global_position + right_position
 			var left_point = global_position + left_position
-			
 			var right_distance = right_point.distance_to(target_point)
 			var left_distance = left_point.distance_to(target_point)
-			# if we are closer than turn distance, need to figure out if we
-			# should do a quick turn or not
-			if min(right_distance, left_distance) < base_speed / 5.0:
-				if facing_right:
-					if right_distance <= left_distance:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
-						quick_turn = true
+			var right_x_distance = abs(right_point.x - target_point.x)
+			var left_x_distance = abs(left_point.x - target_point.x)
+
+			# for smaller x distances pick the closer interaction point
+			if min(right_x_distance, left_x_distance) < base_speed / 5.0:
+				if right_distance < left_distance:
+					interaction_position = right_position
+					interaction_direction = "right"
 				else:
-					if left_distance <= right_distance:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
-						quick_turn = true
-			# if we are further than turn distance, just check if we're going right or left
+					interaction_position = left_position
+					interaction_direction = "left"
+			# for longer x distances pick the direction of travel
 			else:
 				if target_point.x > global_position.x:
 					interaction_position = right_position
-				elif target_point.x < global_position.x:
-					interaction_position = left_position
+					interaction_direction = "right"
 				else:
-					if facing_right:
-						interaction_position = right_position
-					else:
-						interaction_position = left_position
+					interaction_position = left_position
+					interaction_direction = "left"
 
 func _unset_interaction_target():
 	interaction = null
@@ -216,6 +229,7 @@ func _unset_interaction_target():
 	interaction_area = null
 	target_area = null
 	interaction_position = null
+	interaction_direction = null
 	target_point = null
 
 func _on_interaction_area_entered(entering_area, our_area):
@@ -279,17 +293,28 @@ func start_drink(flower: Flower):
 func use_tool_on_flower(flower: Flower):
 	if flower.stage == 3 and held_item is SeedPacket:
 		flower.bag_seeds(held_item)
+		audio_player.set_pitch_scale(randf_range(.9, 1.1))
+		audio_player.stream = paper_sound
+		audio_player.play()
 	elif held_item is Clippers:
 		flower.clip()
+		held_item.audio_player.play()
 
 func use_tool_on_plot(plot: Plot):
 	if held_item is SeedPacket:
 		if plot.plant == null:
 			var removed_seed = held_item.remove_seed()
-			plot.plant_seed(removed_seed)
-			seed_planted.emit()
+			if removed_seed != null:
+				plot.plant_seed(removed_seed)
+				seed_planted.emit()
+				audio_player.set_pitch_scale(randf_range(.9, 1.1))
+				audio_player.stream = dirt_sound
+				audio_player.play()
 		elif plot.plant.stage == 0:
 			held_item.add_seeds([plot.remove_seed()])
+			audio_player.set_pitch_scale(randf_range(.9, 1.1))
+			audio_player.stream = paper_sound
+			audio_player.play()
 
 func open_cache_ui(ui: CacheUI):
 	if held_item == null or held_item is SeedPacket:
@@ -302,8 +327,9 @@ func start_perch_h(perch_zone: Area2D):
 
 func give_bouquet(visitor: Visitor):
 	if held_item is Bouquet:
-		var bouquet = remove_held_item()
-		visitor.give_bouquet(bouquet)
+		visitor.give_bouquet(held_item)
+		if not len(held_item.get_flowers()):
+			remove_held_item()
 
 func bathe(_pond):
 	if held_item == null:
@@ -313,6 +339,8 @@ func bathe(_pond):
 func refill_can(_pond):
 	if held_item is WateringCan:
 		held_item.refill()
+		audio_player.stream = refill_sound
+		audio_player.play()
 
 func transfer_seeds(to_packet):
 	if held_item is SeedPacket:
@@ -323,9 +351,12 @@ func add_pollen(pollen_dict: Dictionary):
 	pollen = pollen.slice(-10)
 	pollen_sprite.visible = true
 
-func _set_wings(val: bool):
+func _set_wings(val: bool, sound=true):
 	front_wing_sprite.visible = val
 	back_wing_sprite.visible = val
+	if sound:
+		humm_player.playing = val
+
 
 func _flip_h(val: bool):
 	body_sprite.set_flip_h(val)
@@ -364,40 +395,40 @@ func _do_animation():
 			_set_flippables(false)
 			facing_right = false
 
-	# otherwise check if we should turn
-	elif moving_time >= .1 or quick_turn:
-		var turn_flip_val = null
-		if (quick_turn or velocity.x < 0) and facing_right == true:
-			turn_flip_val = true
-		elif (quick_turn or velocity.x > 0) and facing_right == false:
+	# check if we should turn
+	var turn_flip_val = null  # true: left, false: right
+	if interaction_direction != null:
+		if interaction_direction == "right" and facing_right == false:
 			turn_flip_val = false
-		if turn_flip_val != null:
-			quick_turn = false
-			# save current animation frame, stop wings, and start turn
-			var duration = 0.3  # 12 frames at 40fps
-			var current_frame = body_sprite.get_frame()
-			_set_wings(false)
-			# tween all flippables
-			for flippable in flippables.get_children():
-				var tween = create_tween()
-				tween.tween_property(
-					flippable,
-					"position",
-					flippable.position * Vector2(-1, 1),
-					duration
-				)
-			_play_animation("turn")
-			# halfway through the turn, turn any hold item
-			await get_tree().create_timer(duration / 2.0).timeout
-			if held_item:
-				held_item.set_flip_h(turn_flip_val)
-			await body_sprite.animation_finished
-			# start wings and restore previous animation frame
-			_set_wings(true)
-			facing_right = !turn_flip_val
-			_flip_h(turn_flip_val)
-			_play_animation(current)
-			_set_frame(current_frame)
+		elif interaction_direction == "left" and facing_right == true:
+			turn_flip_val = true
+
+	elif moving_time >= .1:
+		if (velocity.x < 0) and facing_right == true:
+			turn_flip_val = true
+		elif (velocity.x > 0) and facing_right == false:
+			turn_flip_val = false
+
+	if turn_flip_val != null:
+		# save current animation frame, stop wings, and start turn
+		var duration = 0.3  # 12 frames at 40fps
+		var current_frame = body_sprite.get_frame()
+		_set_wings(false, false)
+		# flip all flippables
+		for flippable in flippables.get_children():
+			flippable.position *= Vector2(-1, 1)
+		_play_animation("turn")
+		# halfway through the turn, turn any hold item
+		await get_tree().create_timer(duration / 2.0).timeout
+		if held_item:
+			held_item.set_flip_h(turn_flip_val)
+		await body_sprite.animation_finished
+		# start wings and restore previous animation frame
+		_set_wings(true)
+		facing_right = !turn_flip_val
+		_flip_h(turn_flip_val)
+		_play_animation(current)
+		_set_frame(current_frame)
 
 	# stop if we're already playing the target
 	if current == target_animation:
@@ -415,7 +446,7 @@ func _do_animation():
 			await body_sprite.animation_finished
 			_play_animation("drinking")
 		elif target_animation == "perching_h":
-			_set_wings(false)
+			_set_wings(false, false)
 			_play_animation("start_perching_h")
 			var tween = create_tween()
 			tween.tween_property(
@@ -424,8 +455,9 @@ func _do_animation():
 				Vector2(position.x, perch_y + 15),
 				8.0/40.0
 			)
-			_tween_height(13, 8.0/40.0)
+			_tween_height(15, 8.0/40.0)
 			await body_sprite.animation_finished
+			humm_player.playing = false
 			facing_right = null
 			_play_animation("perching_h")
 			_set_frame(perching_frame)
@@ -450,8 +482,11 @@ func _do_animation():
 			_play_animation("bathe")
 			await get_tree().create_timer(2.0/10.0).timeout
 			_set_wings(false)
-			await get_tree().create_timer(3.0/10.0).timeout
+			await get_tree().create_timer(4.0/10.0).timeout
 			splash_particles.emitting = true
+			audio_player.set_pitch_scale(1)
+			audio_player.stream = bath_sound
+			audio_player.play()
 			await get_tree().create_timer(6.0/10.0).timeout
 			splash_particles.emitting = false
 			await get_tree().create_timer(3.0/10.0).timeout

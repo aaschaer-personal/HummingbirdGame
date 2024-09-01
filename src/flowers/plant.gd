@@ -6,6 +6,7 @@ class_name Plant extends Area2D
 @onready var flower_2_spawn = $FlowerSpawn2
 @onready var flower_3_spawn = $FlowerSpawn3
 @onready var genome = $Genome
+@onready var audio_player = $AudioStreamPlayer2D
 
 # preloaded by subclasses
 var flower_1_scene
@@ -49,6 +50,7 @@ func _process(delta):
 	if growth >= genome.growth_factor:
 		growth = 0
 		if stage == 0:
+			z_index += 1
 			sprite.play("sprout")
 			await sprite.animation_finished
 			stage = 1
@@ -72,13 +74,16 @@ func _process(delta):
 		queue_free()
 
 func _flowers_left_to_grow():
-	return total_flowers < genome.max_total_flowers
+	return total_flowers < genome.max_flowers
 
 func rustle():
+	audio_player.set_pitch_scale(randf_range(.9, 1.1))
 	if stage == 1 and sprite.animation != "grow":
 		sprite.play("sprout_rustle")
+		audio_player.play()
 	elif stage == 2 and sprite.animation != "die":
 		sprite.play("plant_rustle")
+		audio_player.play()
 
 func _rand_flower_positions():
 	var positions = range(3)

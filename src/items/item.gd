@@ -4,6 +4,7 @@ class_name Item extends Interactable
 @onready var disk_sprite = $TransportDisk
 @onready var item_shadow = $Item/ShadowGenerator
 @onready var disk_shadow = $TransportDisk/ShadowGenerator
+@onready var disk_audio = $TransportDiskAudio
 
 @export var pickup_height = 4
 @export var drop_duration = .1
@@ -38,6 +39,7 @@ func drop():
 
 func transport(x, y):
 	disk_sprite.visible = true
+	disk_audio.playing = true
 	var starting_pos = self.global_position
 	
 	var duration = abs(x/30.0)
@@ -61,6 +63,7 @@ func transport(x, y):
 	tween_height(0, .4)
 	await tween.finished
 	disk_sprite.visible = false
+	disk_audio.playing = false
 
 func tween_height(target: int, duration: float):
 	var item_tween = create_tween()

@@ -10,6 +10,10 @@ signal packet_printed
 @onready var watering_can_scene = preload("res://src/items/watering_can.tscn")
 @onready var clippers_scene = preload("res://src/items/clippers.tscn")
 
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var raise_sound = preload("res://assets/Sounds/cache_raise.wav")
+@onready var door_sound = preload("res://assets/Sounds/door.wav")
+
 var packets_printing = 0
 var door_open = false
 
@@ -50,21 +54,31 @@ func raise():
 	back.play("raise")
 	left_door.play("raise")
 	right_door.play("raise")
+	audio_player.stream = raise_sound
+	audio_player.play()
 	await front.animation_finished
+
+func _play_door_sound():
+	audio_player.stream = door_sound
+	audio_player.play()
 
 func left_door_open():
 	left_door.play("open")
+	_play_door_sound()
 	await left_door.animation_finished
 	
 func right_door_open():
 	right_door.play("open")
+	_play_door_sound()
 	await left_door.animation_finished
 
 func left_door_close():
 	left_door.play_backwards("open")
+	_play_door_sound()
 
 func right_door_close ():
 	right_door.play_backwards("open")
+	_play_door_sound()
 
 func quick_dispense_all(seed_packet):
 	seed_packet.generate_starting_seeds()

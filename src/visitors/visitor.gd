@@ -7,10 +7,23 @@ class_name Visitor extends Interactable
 @onready var acceptance_area = $AcceptanceArea
 @onready var shadow_generator = $MainSprite/ShadowGenerator
 @onready var desired_bouquet_colors: Array
+@onready var audio_player = $AudioStreamPlayer2D
+@onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
+@onready var visitor_landing_sound = preload("res://assets/Sounds/visitor_landing.wav")
+@onready var house_finch_sound = preload("res://assets/Sounds/house_finch.wav")
 
 var off_screen_height = 300
+var visitor_bouquet
+
+func _ready():
+	visitor_bouquet = bouquet_scene.instantiate()
+	hold_point.add_child(visitor_bouquet)
+	# bouquet.tween_height(13, 0)
 
 func land(landing_point: Node2D):
+	audio_player.stream = visitor_landing_sound
+	audio_player.play()
+
 	sprite.play("landing")
 	var position_tween = create_tween()
 	var height_tween = create_tween()
@@ -48,24 +61,38 @@ func get_player_interaction():
 func get_interaction_area():
 	return acceptance_area
 
-func give_bouquet(bouquet: Bouquet):
-	speech_bubble_sprite.visible = false
-	bouquet.reparent(hold_point)
-	bouquet.global_position = hold_point.global_position
-	bouquet.set_flip_h(false)
-	bouquet.tween_height(13, 0)
+func give_bouquet(given_bouquet: Bouquet):
+	var flowers_given = 0
 	
-	var bouquet_matched = get_parent().evaluate_bouquet(
-		bouquet, desired_bouquet_colors)
-	emote_and_take_off(bouquet_matched)
+	for flower in given_bouquet.get_flowers():
+		for desired_color in desired_bouquet_colors:
+			if flower.color == desired_color:
+				visitor_bouquet.add_flower(flower)
+				desired_bouquet_colors.erase(desired_color)
+				flowers_given += 1
+				break
 
-func emote_and_take_off(bouquet_matched):
-	if bouquet_matched:
-		sprite.play("happy")
+	if flowers_given:
+		visitor_bouquet.set_flip_h(false)
 	else:
+		speech_bubble_sprite.visible = false
 		sprite.play("confused")
+		await sprite.animation_finished
+		speech_bubble_sprite.visible = true
+
+	if len(desired_bouquet_colors) == 0:
+		get_parent().finish_bouquet()
+		speech_bubble_sprite.visible = false
+		emote_and_take_off()
+
+func emote_and_take_off():
+	audio_player.stream = house_finch_sound
+	audio_player.play()
+	sprite.play("happy")
 	await sprite.animation_finished
 
+	audio_player.stream = visitor_landing_sound
+	audio_player.play()
 	sprite.play_backwards("landing")
 	var position_tween = create_tween()
 	var height_tween = create_tween()
