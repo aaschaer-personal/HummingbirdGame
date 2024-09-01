@@ -11,8 +11,8 @@ signal packet_printed
 @onready var clippers_scene = preload("res://src/items/clippers.tscn")
 
 @onready var audio_player = $AudioStreamPlayer2D
-@onready var raise_sound = preload("res://assets/Audio/cache_raise.wav")
-@onready var door_sound = preload("res://assets/Audio/door.wav")
+@onready var raise_sound = preload("res://assets/Sounds/cache_raise.wav")
+@onready var door_sound = preload("res://assets/Sounds/door.wav")
 
 var packets_printing = 0
 var door_open = false

@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bjvlutxrsbuim" path="res://assets/Hummingbird/Pollen/stop_zooming.png" id="18_hctfd"]
 [ext_resource type="Texture2D" uid="uid://bkgbfr04bg6ja" path="res://assets/Hummingbird/Pollen/turn.png" id="19_e2grt"]
 [ext_resource type="Texture2D" uid="uid://dxsvo0t8eb0ka" path="res://assets/Hummingbird/Pollen/zooming.png" id="20_28sda"]
-[ext_resource type="AudioStream" uid="uid://btncnn3jaxqli" path="res://assets/Audio/humm.wav" id="21_5bfu4"]
+[ext_resource type="AudioStream" uid="uid://btncnn3jaxqli" path="res://assets/Sounds/humm.wav" id="21_5bfu4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pecmv"]
 atlas = ExtResource("2_blfj3")

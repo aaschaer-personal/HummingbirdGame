@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://br0jqo1hwlkkd"
-path="res://.godot/imported/door.wav-3b0ef706c351e04ed756b9d6aacb4901.sample"
+uid="uid://bg3g4wi7ovphu"
+path="res://.godot/imported/rustle.wav-142fe643743e09e18cfce835e1c5a4be.sample"
 
 [deps]
 
-source_file="res://assets/Audio/door.wav"
-dest_files=["res://.godot/imported/door.wav-3b0ef706c351e04ed756b9d6aacb4901.sample"]
+source_file="res://assets/Sounds/rustle.wav"
+dest_files=["res://.godot/imported/rustle.wav-142fe643743e09e18cfce835e1c5a4be.sample"]
 
 [params]
 

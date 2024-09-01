@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="3_mimsc"]
 [ext_resource type="Texture2D" uid="uid://bhdxt37ckfcb2" path="res://assets/Items/water_meter_over.png" id="4_6t2nr"]
 [ext_resource type="Texture2D" uid="uid://bh24ood8rtues" path="res://assets/Items/water_meter_progress.png" id="5_b7jyp"]
-[ext_resource type="AudioStream" uid="uid://b3dejjl5td8rd" path="res://assets/Audio/watering.wav" id="8_ead5q"]
-[ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Audio/levitate.wav" id="9_8083b"]
+[ext_resource type="AudioStream" uid="uid://b3dejjl5td8rd" path="res://assets/Sounds/watering.wav" id="8_ead5q"]
+[ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="9_8083b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
 radius = 9.0

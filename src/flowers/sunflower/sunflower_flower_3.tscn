@@ -15,8 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cr8668jvo80pv" path="res://assets/Flowers/Sunflower/to_seed_rustle_petals-3.png" id="11_b8k88"]
 [ext_resource type="Texture2D" uid="uid://drmibtaepklw0" path="res://assets/Flowers/Sunflower/wilt_petals-3.png" id="12_ksgxi"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="14_ieuho"]
-[ext_resource type="AudioStream" uid="uid://cmy16861yuanr" path="res://assets/Audio/bee.wav" id="16_08cqs"]
-[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Audio/rustle.wav" id="16_s0cfy"]
+[ext_resource type="AudioStream" uid="uid://cmy16861yuanr" path="res://assets/Sounds/bee.wav" id="16_17qjy"]
+[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="17_jcpsi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc5x8"]
 atlas = ExtResource("2_y2yov")
@@ -689,9 +689,9 @@ position = Vector2(9, -12)
 shape = SubResource("CapsuleShape2D_fl2my")
 
 [node name="BeeAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("16_08cqs")
+stream = ExtResource("16_17qjy")
 max_polyphony = 2
 
 [node name="RustleAudioPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("16_s0cfy")
+stream = ExtResource("17_jcpsi")
 max_polyphony = 2

@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://cmy16861yuanr"
-path="res://.godot/imported/bee.wav-31b986d00ae81a724b9f76383e5752c9.sample"
+uid="uid://b3dejjl5td8rd"
+path="res://.godot/imported/watering.wav-5a6b35ff3a0fa89e494b84896ddb6890.sample"
 
 [deps]
 
-source_file="res://assets/Audio/bee.wav"
-dest_files=["res://.godot/imported/bee.wav-31b986d00ae81a724b9f76383e5752c9.sample"]
+source_file="res://assets/Sounds/watering.wav"
+dest_files=["res://.godot/imported/watering.wav-5a6b35ff3a0fa89e494b84896ddb6890.sample"]
 
 [params]
 

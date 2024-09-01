@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://chmicanglpkot"
-path="res://.godot/imported/visitor_landing.wav-7afba1003df328ce90f7c09782fc8b28.sample"
+path="res://.godot/imported/visitor_landing.wav-fd5b7ba9dd59d61202911759e6946eec.sample"
 
 [deps]
 
-source_file="res://assets/Audio/visitor_landing.wav"
-dest_files=["res://.godot/imported/visitor_landing.wav-7afba1003df328ce90f7c09782fc8b28.sample"]
+source_file="res://assets/Sounds/visitor_landing.wav"
+dest_files=["res://.godot/imported/visitor_landing.wav-fd5b7ba9dd59d61202911759e6946eec.sample"]
 
 [params]
 

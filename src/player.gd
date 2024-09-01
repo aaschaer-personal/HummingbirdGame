@@ -23,11 +23,11 @@ signal energy_halved
 
 @onready var audio_player = $AudioStreamPlayer2D
 @onready var humm_player = $HummPlayer
-@onready var bath_sound = preload("res://assets/Audio/bath.wav")
-@onready var dirt_sound = preload("res://assets/Audio/dirt.wav")
-@onready var refill_sound = preload("res://assets/Audio/refill.wav")
-@onready var paper_sound = preload("res://assets/Audio/paper.wav")
-@onready var drinking_sound = preload("res://assets/Audio/drinking.wav")
+@onready var bath_sound = preload("res://assets/Sounds/bath.wav")
+@onready var dirt_sound = preload("res://assets/Sounds/dirt.wav")
+@onready var refill_sound = preload("res://assets/Sounds/refill.wav")
+@onready var paper_sound = preload("res://assets/Sounds/paper.wav")
+@onready var drinking_sound = preload("res://assets/Sounds/drinking.wav")
 
 var base_speed = 200
 var moving_time = 0

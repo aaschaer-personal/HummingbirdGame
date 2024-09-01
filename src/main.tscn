@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://d4c0a63nm65dn"]
+[gd_scene load_steps=19 format=3 uid="uid://d4c0a63nm65dn"]
 
 [ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="1_jgm1s"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_onaxd"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_fp0ms"]
 [ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/level_manager.tscn" id="16_5ycv8"]
 [ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="17_fpc36"]
+[ext_resource type="AudioStream" uid="uid://coyly02ci1b8u" path="res://assets/Music/Level1.ogg" id="18_cof7p"]
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
@@ -140,3 +141,9 @@ z_index = -1
 [node name="Stump" parent="." instance=ExtResource("17_fpc36")]
 z_index = -1
 position = Vector2(72, 267)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("18_cof7p")
+volume_db = -15.0
+autoplay = true

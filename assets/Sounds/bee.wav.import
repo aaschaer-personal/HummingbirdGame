@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://dircmtyt3bfx8"
-path="res://.godot/imported/levitate.wav-e92df4d1d82dd61eb7077be446a8a477.sample"
+uid="uid://cmy16861yuanr"
+path="res://.godot/imported/bee.wav-90424dfbb54cd997b84d1a4da99286b0.sample"
 
 [deps]
 
-source_file="res://assets/Audio/levitate.wav"
-dest_files=["res://.godot/imported/levitate.wav-e92df4d1d82dd61eb7077be446a8a477.sample"]
+source_file="res://assets/Sounds/bee.wav"
+dest_files=["res://.godot/imported/bee.wav-90424dfbb54cd997b84d1a4da99286b0.sample"]
 
 [params]
 
