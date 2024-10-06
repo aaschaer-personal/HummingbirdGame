@@ -8,7 +8,7 @@ extends Node2D
 @onready var visitor_manager = get_tree().get_first_node_in_group("visitor_manager")
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 
-var skip_intro = false
+var skip_intro = true
 var genes_explained = false
 var seeds_explained = false
 var bees_explained = false
@@ -138,8 +138,7 @@ func generate_starting_packet():
 func main():
 	var g = {"species": "Sunflower", "yellow": 1}
 	dialogue.punnet_square.fill(g, g)
-	cache.cache_ui.initialize_genetics("Sunflower")
-	
+
 	if skip_intro:
 		await quick_intro_sequence()
 	else:

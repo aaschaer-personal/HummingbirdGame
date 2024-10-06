@@ -1,0 +1,388 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwdwrfqw5jpww"]
+
+[ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
+[ext_resource type="Script" path="res://src/UI/guide.gd" id="2_ab0ib"]
+[ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_se2j2"]
+[ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
+[ext_resource type="PackedScene" uid="uid://mgqh0bucfav0" path="res://src/UI/interactable_punnet_square.tscn" id="5_7trbm"]
+
+[node name="Guide" type="NinePatchRect"]
+offset_right = 248.0
+offset_bottom = 324.0
+texture = ExtResource("1_8u3um")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_ab0ib")
+
+[node name="Tabs" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -55.0
+offset_top = 4.0
+offset_right = 1.0
+offset_bottom = 250.0
+theme_override_constants/separation = -1
+alignment = 1
+
+[node name="Controls" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/Controls"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UsingItems" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/UsingItems"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Using
+Items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrowingFlowers" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/GrowingFlowers"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Growing
+Flowers"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NectarAndPollen" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/NectarAndPollen"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Nectar &
+Pollen"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Energy" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/Energy"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Visitors" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/Visitors"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Visitors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PrintingPackets" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/PrintingPackets"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Printing
+Packets"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Genetics" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/Genetics"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 32.0
+text = "Genetics"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PunnetSquare" type="TextureButton" parent="Tabs"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_se2j2")
+texture_disabled = ExtResource("4_2koyi")
+
+[node name="Label" type="Label" parent="Tabs/PunnetSquare"]
+layout_mode = 0
+offset_right = 56.0
+offset_bottom = 28.0
+text = "Punnet
+Square"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Content" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Controls" type="RichTextLabel" parent="Content"]
+layout_mode = 2
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Controls[/center][font_size=12]
+
+* Press ESC to pause, unpause, and close windows.
+
+* Move around with WASD or by clicking on a destination.
+
+* Interact with objects by left clicking on them, or by moving close to them and pressing E.
+
+* Drop held items by right clicking or pressing Q."
+
+[node name="UsingItems" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Using Items[/center][font_size=12]
+
+* While not holding anything, interact with an item to pick it up.
+
+* While holding a seed packet:
+
+     * Interact with a bare patch of soil to 
+     plant a seed.
+
+     * Interact with a planted seed to put it
+     inthe packet.
+
+     * Interact with a flower that's gone to
+     seed to harvest the seeds.
+
+     * Interact with another seed packet to
+     combine their seeds.
+
+* While holding a watering can:
+
+     * Move around to water soil below you.
+
+     * Interact with water to refill the can.
+
+* While holding clippers:
+
+     * Interact with a blooming flower to
+     cut it. The cut flower will decay if left
+     on the ground.
+
+     * Interact with a flower gone to seed
+     to remove it without saving the seeds.
+
+"
+
+[node name="GrowingFlowers" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Growing Flowers[/center][font_size=12]
+
+* Plant seeds in bare soil using a seed packet then water with a watering can.
+
+* Once watered seeds will quickly sprout.
+
+* After sprouting plants don't need water but will grow and make nectar faster if kept watered.
+
+* When a flower fills up with nectar it will attract bees that will eventually pollinate it.
+
+* Flowers pollinated by bees or by you will go to seed. These seeds can be harvested with a seed packet.
+
+* Once all a plant's flowers have been removed it will die. Make sure to harvest enough seeds for the next generation!"
+
+[node name="NectarAndPollen" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Nectar and Pollen[/center][font_size=12]
+
+* Interact with a flower to drink energy restoring nectar.
+
+* After drinking from a flower its pollen will get on your beak.
+
+* Drinking from a flower with pollen on your beak will pollinate it. The seeds grown will have a mix of genes from the flower the pollen was from and the pollinated flower.
+
+* Drinking from multiple flowers will mix their pollen together on your beak. The next flower you pollinate could be pollinated by any of them.
+
+* Taking a bath will clean all pollen off your beak. Bathing regularly helps controll pollination."
+
+[node name="Energy" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Energy[/center][font_size=12]
+
+* Energy is shown by the bar in the top left of the screen.
+
+* When your energy runs out you will move slowly and can't hold items.
+
+* Drinking nectar from blooming flowers will quickly restore energy.
+
+* Perching on a sapling will prevent energy loss and slowly restore up to 1/3 of your energy."
+
+[node name="Visitors" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Visitors[/center][font_size=12]
+
+* The numbers of visitor requests you have met and must meet are shown in the top right of the screen.
+
+* Visiting birds will request up to five flowers with specific colors.
+
+* Cut flowers with matching colors with clippers, pick them up, and bring them to the visitor to complete a request.
+
+* You can hold up to five flowers if you want to bring them all at once, but visitors will accept any matching flowers you have and wait for the rest.
+"
+
+[node name="PrintingPackets" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Printing Packets[/center][font_size=12]
+
+* Interacting with the machine that provided the original seeds and tools opens it's packet printing interface.
+
+* Select a color, a pattern, and a pattern color, then hit print to print an additional empty packet.
+
+* Using multiple packets can help keep seeds organized.
+
+* There is only enough paper to print ten additional packets."
+
+[node name="Genetics" type="RichTextLabel" parent="Content"]
+visible = false
+layout_mode = 2
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Genetics[/center][font_size=12]
+
+* Flower traits such as color and number of flowers are determined by genetics.
+
+* Each trait is controlled by one or more genes. Each gene has different forms called alleles. For each gene, a flower will have two alleles, one from each parent.
+
+* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are  three possible combinations RR, YY, and RY that produce red, yellow, and orange flowers.
+
+* The punnet square tabs shows the possible results of crossing two flowers by pollinating one with the pollen of another."
+
+[node name="PunnetSquare" type="Control" parent="Content"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InteractablePunnetSquare" parent="Content/PunnetSquare" instance=ExtResource("5_7trbm")]
+offset_left = 57.0
+offset_top = 90.0
+offset_right = 57.0
+offset_bottom = 90.0
+
+[node name="Text" type="RichTextLabel" parent="Content/PunnetSquare"]
+offset_left = 4.0
+offset_top = 2.0
+offset_right = 244.0
+offset_bottom = 322.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[font_size=8]
+[font_size=24][center]Punnet Square[/center][font_size=12]
+
+* Set the alleles for each parent to see possible outcomes of crossing them."
