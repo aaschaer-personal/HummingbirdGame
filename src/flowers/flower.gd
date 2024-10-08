@@ -135,6 +135,7 @@ func bag_seeds(seed_packet):
 	var new_seeds = []
 	for i in range(parent_plant.genome.seed_num):
 		var pollen_genome_dict = _pick_pollen()
+
 		if not pollen_genome_dict:
 			pollen_genome_dict = GenomeGenerator.wild(
 				parent_plant.genome.species)
@@ -160,7 +161,7 @@ func drink(delta):
 
 func finish_drink():
 	nectar_meter.visible = false
-	pollen = player.pollen
+	pollen = player.pollen.duplicate()
 	if stage == 1 and pollen:
 		manualy_pollinated = true
 		pollination_timer.start(1)

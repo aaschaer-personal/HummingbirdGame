@@ -15,13 +15,14 @@ var species = "Sunflower"
 var done = false
 var bouquet_colors = [
 	[Colors.yellow],
-	[Colors.white],
 	[Colors.orange],
-	[Colors.yellow, Colors.yellow],
-	[Colors.yellow, Colors.orange, Colors.white],
+	[Colors.red, Colors.yellow],
+	[Colors.red, Colors.orange],
+	[Colors.orange, Colors.yellow],
+	[Colors.red, Colors.orange, Colors.yellow],
 ]
 var bouquet_order = [
-	[0], [1,2,3], [1,2,3], [1,2,3], [4]
+	[0], [1], [2,3,4], [2,3,4], [5]
 ]
 var bouquet_num = 0
 var current_bouquet_index

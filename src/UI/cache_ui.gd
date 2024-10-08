@@ -18,8 +18,9 @@ var species
 
 var colors = [
 	Colors.white,
-	Colors.yellow,
+	Colors.red,
 	Colors.orange,
+	Colors.yellow,
 ]
 
 func _ready():

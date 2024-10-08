@@ -17,7 +17,7 @@ func wild(species):
 			ret["inbreeding"].append(allele)
 
 	if species == "Sunflower":
-		ret["yellow"] = 1
+		ret["color"] = 1
 	elif species == "Lupine":
 		ret["red"] = 1
 		ret["blue"] = 1
@@ -41,7 +41,7 @@ func _standard_keys_by_species(species):
 		"growth_factor_2",
 	]
 	if species == "Sunflower":
-		ret.append("yellow")
+		ret.append("color")
 	elif species == "Lupine":
 		ret.append_array(["red", "blue"])
 	else:
@@ -72,13 +72,13 @@ func genome_dict_from_gamete_dicts(gamete_1, gamete_2):
 	ret["inbreeding"] = gamete_1["inbreeding"] + gamete_2["inbreeding"]
 	return ret
 	
-func sunflower_flower_color(yellow):
-	if yellow == 2:
+func sunflower_flower_color(color):
+	if color == 2:
+		return Colors.red
+	elif color == 1:
 		return Colors.orange
-	elif yellow == 1:
+	elif color == 0:
 		return Colors.yellow
-	elif yellow == 0:
-		return Colors.white
 	else:
 		assert(false)
 

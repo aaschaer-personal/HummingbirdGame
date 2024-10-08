@@ -120,25 +120,25 @@ func generate_starting_packet():
 	var packet = seed_packet_scene.instantiate()
 	packet.global_position = Vector2(-100,-100)
 	add_sibling(packet)
-	packet.item_sprite.modulate = Colors.yellow
 	
 	var starting_seeds = []
 	for i in range(4):
 		starting_seeds.append(GenomeGenerator.wild("Sunflower"))
 
 	starting_seeds[0]["max_flowers"] = 0
+	starting_seeds[0]["color"] = 0
 	starting_seeds[1]["max_flowers"] = 0
+	starting_seeds[1]["color"] = 0
 	starting_seeds[2]["max_flowers"] = 1
+	starting_seeds[2]["color"] = 0
 	starting_seeds[3]["max_flowers"] = 1
+	starting_seeds[3]["color"] = 2
 
 	starting_seeds.shuffle()
 	packet.add_seeds(starting_seeds)
 	return packet
 
 func main():
-	var g = {"species": "Sunflower", "yellow": 1}
-	dialogue.punnet_square.fill(g, g)
-
 	if skip_intro:
 		await quick_intro_sequence()
 	else:

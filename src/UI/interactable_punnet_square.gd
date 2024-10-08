@@ -3,6 +3,8 @@ extends Control
 
 
 @onready var punnet_square = $PunnetContainer/PunnetSquare
+@onready var p1_example_petals = $P1/Example/Petals
+@onready var p2_example_petals = $P2/Example/Petals
 @onready var p1a1 = $P1/A1
 @onready var p1a2 = $P1/A2
 @onready var p1b1 = $P1/B1
@@ -25,11 +27,11 @@ func _ready():
 	if species == "Sunflower":
 		for option in [p1a1, p1a2, p2a1, p2a2]:
 			option.visible = true
+			option.add_item("R")
 			option.add_item("Y")
-			option.add_item("y")
 		p1a1.select(0)
-		p1a2.select(1)
-		p2a1.select(0)
+		p1a2.select(0)
+		p2a1.select(1)
 		p2a2.select(1)
 		_on_allele_option_selected(null)
 	else:
@@ -40,17 +42,19 @@ func _on_allele_option_selected(_selected):
 	var g2 = {"species": species}
 
 	if species == "Sunflower":
-		g1["yellow"] = 0
-		g2["yellow"] = 0
+		g1["color"] = 0
+		g2["color"] = 0
 		if p1a1.get_selected_id() == 0:
-			g1["yellow"] += 1
+			g1["color"] += 1
 		if p1a2.get_selected_id() == 0:
-			g1["yellow"] += 1
+			g1["color"] += 1
 		if p2a1.get_selected_id() == 0:
-			g2["yellow"] += 1
+			g2["color"] += 1
 		if p2a2.get_selected_id() == 0:
-			g2["yellow"] += 1
+			g2["color"] += 1
 	else:
 		assert(false)
 
+	p1_example_petals.modulate = GenomeHelpers.sunflower_flower_color(g1["color"])
+	p2_example_petals.modulate = GenomeHelpers.sunflower_flower_color(g2["color"])
 	punnet_square.fill(g1, g2)

@@ -15,7 +15,7 @@ func set_vals_from_genome_dict(new_genome_dict):
 	genome_dict = new_genome_dict
 	species = genome_dict["species"]
 	if species == "Sunflower":
-		flower_color = GenomeHelpers.sunflower_flower_color(genome_dict["yellow"])
+		flower_color = GenomeHelpers.sunflower_flower_color(genome_dict["color"])
 	elif species == "Lupine":
 		flower_color = GenomeHelpers.lupine_flower_color(
 			genome_dict["red"],

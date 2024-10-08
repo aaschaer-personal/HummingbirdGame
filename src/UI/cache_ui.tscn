@@ -15,7 +15,7 @@
 
 [node name="CacheUI" type="NinePatchRect" groups=["cache_ui"]]
 offset_right = 240.0
-offset_bottom = 215.0
+offset_bottom = 205.0
 texture = ExtResource("1_c3u6a")
 region_rect = Rect2(1, 1, 22, 22)
 patch_margin_left = 6
@@ -23,6 +23,15 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 script = ExtResource("1_hf0pt")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 240.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 24
+text = "Packet Printing"
+horizontal_alignment = 1
 
 [node name="ExitButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -34,9 +43,9 @@ texture_normal = ExtResource("4_han4m")
 [node name="PacketColorOption" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 51.0
+offset_top = 69.0
 offset_right = 80.0
-offset_bottom = 75.0
+offset_bottom = 93.0
 toggle_mode = false
 
 [node name="Label" type="Label" parent="PacketColorOption"]
@@ -51,9 +60,9 @@ horizontal_alignment = 1
 [node name="IconOption" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 88.0
-offset_top = 52.0
+offset_top = 68.0
 offset_right = 152.0
-offset_bottom = 77.0
+offset_bottom = 93.0
 toggle_mode = false
 item_count = 7
 selected = 0
@@ -90,9 +99,9 @@ horizontal_alignment = 1
 [node name="IconColorOption" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 161.0
-offset_top = 52.0
+offset_top = 69.0
 offset_right = 225.0
-offset_bottom = 76.0
+offset_bottom = 93.0
 toggle_mode = false
 
 [node name="Label" type="Label" parent="IconColorOption"]
@@ -106,9 +115,9 @@ horizontal_alignment = 1
 [node name="PrintButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 88.0
-offset_top = 164.0
+offset_top = 159.0
 offset_right = 152.0
-offset_bottom = 196.0
+offset_bottom = 191.0
 texture_normal = ExtResource("3_hcjxf")
 texture_disabled = ExtResource("13_tooa7")
 
@@ -122,8 +131,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PacketPreview" type="Sprite2D" parent="."]
-position = Vector2(120, 124)
+position = Vector2(120, 127)
 texture = ExtResource("11_oxnfy")
 
 [node name="IconPreview" type="Sprite2D" parent="."]
-position = Vector2(120, 124)
+position = Vector2(120, 127)
