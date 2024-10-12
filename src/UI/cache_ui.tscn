@@ -1,10 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cs510j1wjh4d4"]
+[gd_scene load_steps=13 format=3 uid="uid://cs510j1wjh4d4"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_c3u6a"]
 [ext_resource type="Script" path="res://src/UI/cache_ui.gd" id="1_hf0pt"]
-[ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_atho0"]
 [ext_resource type="Texture2D" uid="uid://bs6fc6w7ycy5i" path="res://assets/UI/green_button.png" id="3_hcjxf"]
-[ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_0yba0"]
 [ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_han4m"]
 [ext_resource type="Texture2D" uid="uid://bvl2r6lhosyi3" path="res://assets/Items/BagIcons/circle.png" id="5_br4xt"]
 [ext_resource type="Texture2D" uid="uid://c5l744u8flrpm" path="res://assets/Items/BagIcons/diamond.png" id="6_hjfq8"]
@@ -14,11 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://b7q6ty34ufyr8" path="res://assets/Items/BagIcons/triangle.png" id="10_dln5r"]
 [ext_resource type="Texture2D" uid="uid://c6kk8khgnvcqq" path="res://assets/Items/seed_packet.png" id="11_oxnfy"]
 [ext_resource type="Texture2D" uid="uid://g2c7rikx7bu" path="res://assets/UI/grey_button.png" id="13_tooa7"]
-[ext_resource type="PackedScene" uid="uid://d3pf8kbdk01t7" path="res://src/UI/punnet_square.tscn" id="14_q7nbf"]
 
 [node name="CacheUI" type="NinePatchRect" groups=["cache_ui"]]
 offset_right = 240.0
-offset_bottom = 240.0
+offset_bottom = 205.0
 texture = ExtResource("1_c3u6a")
 region_rect = Rect2(1, 1, 22, 22)
 patch_margin_left = 6
@@ -27,6 +24,15 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 script = ExtResource("1_hf0pt")
 
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 240.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 24
+text = "Packet Printing"
+horizontal_alignment = 1
+
 [node name="ExitButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 231.0
@@ -34,74 +40,29 @@ offset_right = 240.0
 offset_bottom = 10.0
 texture_normal = ExtResource("4_han4m")
 
-[node name="PacketsButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 16.0
-offset_right = 104.0
-offset_bottom = 32.0
-disabled = true
-action_mode = 0
-texture_normal = ExtResource("3_atho0")
-texture_disabled = ExtResource("4_0yba0")
-
-[node name="Label" type="Label" parent="PacketsButton"]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -1.0
-offset_right = 70.0
-offset_bottom = 22.0
-theme_override_font_sizes/font_size = 13
-text = "Packets
-"
-
-[node name="GeneticsButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 136.0
-offset_top = 16.0
-offset_right = 192.0
-offset_bottom = 32.0
-action_mode = 0
-texture_normal = ExtResource("3_atho0")
-texture_disabled = ExtResource("4_0yba0")
-
-[node name="Label" type="Label" parent="GeneticsButton"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = -2.0
-offset_right = 68.0
-offset_bottom = 21.0
-theme_override_font_sizes/font_size = 13
-text = "Genetics
-"
-
-[node name="PacketsInterface" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PacketColorOption" type="OptionButton" parent="PacketsInterface"]
+[node name="PacketColorOption" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 72.0
+offset_top = 69.0
 offset_right = 80.0
-offset_bottom = 96.0
+offset_bottom = 93.0
 toggle_mode = false
 
-[node name="Label" type="Label" parent="PacketsInterface/PacketColorOption"]
+[node name="Label" type="Label" parent="PacketColorOption"]
 layout_mode = 0
+offset_left = -3.0
 offset_top = -16.0
-offset_right = 67.0
+offset_right = 68.0
 offset_bottom = 7.0
-theme_override_font_sizes/font_size = 11
 text = "Packet Color"
+horizontal_alignment = 1
 
-[node name="IconOption" type="OptionButton" parent="PacketsInterface"]
+[node name="IconOption" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 88.0
-offset_top = 72.0
+offset_top = 68.0
 offset_right = 152.0
-offset_bottom = 97.0
+offset_bottom = 93.0
 toggle_mode = false
 item_count = 7
 selected = 0
@@ -126,173 +87,52 @@ popup/item_6/text = ""
 popup/item_6/icon = ExtResource("8_cc45n")
 popup/item_6/id = 6
 
-[node name="Label" type="Label" parent="PacketsInterface/IconOption"]
+[node name="Label" type="Label" parent="IconOption"]
 layout_mode = 0
-offset_left = 16.0
 offset_top = -16.0
-offset_right = 83.0
+offset_right = 64.0
 offset_bottom = 7.0
-theme_override_font_sizes/font_size = 11
 text = "Icon
 "
+horizontal_alignment = 1
 
-[node name="IconColorOption" type="OptionButton" parent="PacketsInterface"]
+[node name="IconColorOption" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 160.0
-offset_top = 72.0
-offset_right = 224.0
-offset_bottom = 96.0
+offset_left = 161.0
+offset_top = 69.0
+offset_right = 225.0
+offset_bottom = 93.0
 toggle_mode = false
 
-[node name="Label" type="Label" parent="PacketsInterface/IconColorOption"]
+[node name="Label" type="Label" parent="IconColorOption"]
 layout_mode = 0
 offset_top = -16.0
-offset_right = 67.0
+offset_right = 64.0
 offset_bottom = 7.0
-theme_override_font_sizes/font_size = 11
 text = "Icon Color"
+horizontal_alignment = 1
 
-[node name="PrintButton" type="TextureButton" parent="PacketsInterface"]
+[node name="PrintButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 88.0
-offset_top = 184.0
+offset_top = 159.0
 offset_right = 152.0
-offset_bottom = 216.0
+offset_bottom = 191.0
 texture_normal = ExtResource("3_hcjxf")
 texture_disabled = ExtResource("13_tooa7")
 
-[node name="Label" type="Label" parent="PacketsInterface/PrintButton"]
+[node name="Label" type="Label" parent="PrintButton"]
 layout_mode = 0
 offset_top = 1.0
 offset_right = 63.0
 offset_bottom = 31.0
-theme_override_font_sizes/font_size = 11
 text = "Print"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PacketPreview" type="Sprite2D" parent="PacketsInterface"]
-position = Vector2(120, 144)
+[node name="PacketPreview" type="Sprite2D" parent="."]
+position = Vector2(120, 127)
 texture = ExtResource("11_oxnfy")
 
-[node name="IconPreview" type="Sprite2D" parent="PacketsInterface"]
-position = Vector2(120, 144)
-
-[node name="GeneticsInterface" type="Control" parent="."]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="P1" type="HBoxContainer" parent="GeneticsInterface"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 39.0
-offset_right = 370.0
-offset_bottom = 103.0
-scale = Vector2(0.499995, 0.499995)
-alignment = 1
-
-[node name="A1" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="A2" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="B1" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="B2" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="C1" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="C2" type="OptionButton" parent="GeneticsInterface/P1"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="P2" type="HBoxContainer" parent="GeneticsInterface"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 82.0
-offset_right = 370.0
-offset_bottom = 146.0
-scale = Vector2(0.499995, 0.499995)
-alignment = 1
-
-[node name="A1" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="A2" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="B1" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="B2" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="C1" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="C2" type="OptionButton" parent="GeneticsInterface/P2"]
-visible = false
-custom_minimum_size = Vector2(1, 0)
-layout_mode = 2
-theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 20
-
-[node name="PunnetContainer" type="HBoxContainer" parent="GeneticsInterface"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 137.0
-offset_right = 239.0
-offset_bottom = 214.0
-alignment = 1
-
-[node name="PunnetSquare" parent="GeneticsInterface/PunnetContainer" instance=ExtResource("14_q7nbf")]
-layout_mode = 2
+[node name="IconPreview" type="Sprite2D" parent="."]
+position = Vector2(120, 127)

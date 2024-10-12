@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://d4c0a63nm65dn"]
+[gd_scene load_steps=19 format=3 uid="uid://vxc58t5gss1o"]
 
 [ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="1_jgm1s"]
-[ext_resource type="Script" path="res://src/main.gd" id="1_onaxd"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_xsf42"]
 [ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/plot.tscn" id="3_11k4b"]
-[ext_resource type="PackedScene" uid="uid://rafj70kquf3l" path="res://src/UI/dialogue.tscn" id="5_3r61e"]
 [ext_resource type="PackedScene" uid="uid://byrltxfllybww" path="res://src/UI/failure_screen.tscn" id="6_6ukqi"]
 [ext_resource type="PackedScene" uid="uid://ph7je02sp0tm" path="res://src/UI/completed_screen.tscn" id="7_cv2eu"]
 [ext_resource type="Texture2D" uid="uid://cmmwk13oaugog" path="res://assets/Environment/grass.png" id="7_vxbj1"]
@@ -18,10 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/level_manager.tscn" id="16_5ycv8"]
 [ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="17_fpc36"]
 [ext_resource type="AudioStream" uid="uid://coyly02ci1b8u" path="res://assets/Music/Level1.ogg" id="18_cof7p"]
+[ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="19_2enu1"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["level"]]
 y_sort_enabled = true
-script = ExtResource("1_onaxd")
+script = ExtResource("1_xsf42")
 
 [node name="UI" type="Control" parent="."]
 z_index = 1
@@ -45,24 +45,15 @@ offset_bottom = 24.0
 metadata/_edit_use_anchors_ = true
 
 [node name="VisitorProgress" parent="UI" instance=ExtResource("9_5hitw")]
-offset_left = 549.0
-offset_top = 13.0
-offset_right = 549.0
-offset_bottom = 13.0
+offset_left = 541.0
+offset_right = 541.0
 
 [node name="PauseScreen" parent="UI" instance=ExtResource("10_u8hmd")]
+process_mode = 3
 visible = false
 layout_mode = 1
 offset_right = 600.0
 offset_bottom = 320.0
-
-[node name="Dialogue" parent="UI" instance=ExtResource("5_3r61e")]
-visible = false
-layout_mode = 0
-offset_left = 180.0
-offset_top = 90.0
-offset_right = 500.0
-offset_bottom = 270.0
 
 [node name="FailureScreen" parent="UI" instance=ExtResource("6_6ukqi")]
 visible = false
@@ -80,14 +71,13 @@ offset_top = 90.0
 offset_right = 480.0
 offset_bottom = 270.0
 
-[node name="Version" type="Label" parent="UI"]
+[node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 346.0
-offset_right = 42.0
-offset_bottom = 369.0
-theme_override_font_sizes/font_size = 10
-text = "v0.2"
+offset_left = 463.0
+offset_top = 43.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
 
 [node name="Plot1" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
 position = Vector2(240, 210)
@@ -119,7 +109,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
 
 [node name="Sapling" parent="." instance=ExtResource("8_c47sj")]
-position = Vector2(516, 298)
+position = Vector2(237, 313)
 
 [node name="Wind" parent="." instance=ExtResource("9_aymfp")]
 
@@ -147,3 +137,5 @@ process_mode = 3
 stream = ExtResource("18_cof7p")
 volume_db = -15.0
 autoplay = true
+
+[node name="InputLogic" parent="." instance=ExtResource("19_2enu1")]

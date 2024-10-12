@@ -1,34 +1,141 @@
-[gd_scene load_steps=3 format=3 uid="uid://db3qo575rdolk"]
+[gd_scene load_steps=5 format=3 uid="uid://db3qo575rdolk"]
 
 [ext_resource type="Script" path="res://src/UI/pause_screen.gd" id="1_a0n6x"]
+[ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="2_0kjsx"]
+[ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_a72la"]
+[ext_resource type="PackedScene" uid="uid://dwdwrfqw5jpww" path="res://src/UI/guide.tscn" id="4_i4a7u"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_rdiyy"]
-font_size = 32
-
-[node name="PauseScreen" type="ColorRect"]
-process_mode = 3
+[node name="PauseScreen" type="ColorRect" groups=["pause_screen"]]
+process_mode = 2
 z_index = 2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -640.0
+offset_bottom = -360.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.313726)
 script = ExtResource("1_a0n6x")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -13.0
-offset_right = 31.0
-offset_bottom = 13.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "PAUSED
+[node name="PauseMenu" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 19.0
+offset_right = 460.0
+offset_bottom = 343.0
+texture = ExtResource("2_0kjsx")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="VBoxContainer" type="HFlowContainer" parent="PauseMenu"]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 248.0
+offset_bottom = 324.0
+alignment = 1
+
+[node name="Title" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Space" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "                                                        "
+
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ResumeButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Resume
 "
-label_settings = SubResource("LabelSettings_rdiyy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GuideButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/GuideButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Guide
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/OptionsButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartLevelButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/RestartLevelButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Restart Level"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReturnToMapButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ReturnToMapButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Return to Map"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitToMenuButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+texture_normal = ExtResource("3_a72la")
+
+[node name="Label" type="Label" parent="PauseMenu/VBoxContainer/QuitToMenuButton"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Quit to Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Guide" parent="." instance=ExtResource("4_i4a7u")]
+visible = false
+layout_mode = 0
+offset_left = 212.0
+offset_top = 19.0
+offset_right = 460.0
+offset_bottom = 343.0

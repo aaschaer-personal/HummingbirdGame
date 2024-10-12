@@ -22,7 +22,7 @@ offset_left = 1.0
 offset_top = 5.0
 offset_right = 319.0
 offset_bottom = 46.0
-text = "Cache Completed!"
+text = "Level Completed!"
 horizontal_alignment = 1
 
 [node name="Text" type="RichTextLabel" parent="."]
@@ -32,7 +32,7 @@ offset_top = 37.0
 offset_right = 305.0
 offset_bottom = 137.0
 theme_override_font_sizes/normal_font_size = 12
-text = "Congratulations! You completed the sunflower cache! This is as far as gameplay has been implemented for now, but you can keep playing at this cache if you'd like."
+text = "Congratulations! You completed the sunflower level! This is as far as gameplay has been implemented for now, but you can keep playing if you'd like or restart the level in the pause menu."
 
 [node name="ContinueButton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -44,9 +44,9 @@ texture_normal = ExtResource("3_p37cp")
 
 [node name="Label" type="Label" parent="ContinueButton"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 22.0
-theme_override_font_sizes/font_size = 13
+offset_top = 2.0
+offset_right = 38.0
+offset_bottom = 20.0
 text = "OK"
 horizontal_alignment = 1
 vertical_alignment = 1

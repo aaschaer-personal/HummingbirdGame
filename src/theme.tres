@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cgv34utocg6ov"]
+
+[ext_resource type="FontFile" uid="uid://854s8d2ermjn" path="res://assets/font.ttf" id="1_n8x52"]
+
+[resource]
+default_font = ExtResource("1_n8x52")
+default_font_size = 12
+/font_sizes/default = 12
+/fonts/default = ExtResource("1_n8x52")

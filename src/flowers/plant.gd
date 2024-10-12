@@ -54,7 +54,6 @@ func _process(delta):
 			sprite.play("sprout")
 			await sprite.animation_finished
 			stage = 1
-			SignalBus.seedling_grown.emit()
 		elif stage == 1:
 			sprite.play("grow")
 			await sprite.animation_finished

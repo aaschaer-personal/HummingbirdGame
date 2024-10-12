@@ -1,33 +1,38 @@
 extends Node2D
 
+@onready var tutorial_container = get_tree().get_first_node_in_group("tutorial_container")
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var cache = get_tree().get_first_node_in_group("cache")
-@onready var dialogue = get_tree().get_first_node_in_group("dialogue")
+@onready var watering_can = get_tree().get_first_node_in_group("watering_can")
+@onready var pause_screen = get_tree().get_first_node_in_group("pause_screen")
 @onready var completed_screen = get_tree().get_first_node_in_group("completed_screen")
 @onready var failure_screen = get_tree().get_first_node_in_group("failure_screen")
 @onready var visitor_manager = get_tree().get_first_node_in_group("visitor_manager")
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 
 var skip_intro = false
-var genes_explained = false
-var seeds_explained = false
-var bees_explained = false
-var death_explained = false
+var skip_tutorial = false
+var water_explained = false
 var energy_explained = false
-var packets_explained = false
-var in_tutorial = false
+var packet_printed = false
+var seeds_harvested = false
+var visitor_left = false
+var flowers_grown = 0
 var colors_grown = {}
+var colors_pollinated = {}
+
 var BRIEF_PAUSE = .5
 
 func _ready():
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
-	SignalBus.flower_gone_to_seed.connect(_on_flower_gone_to_seed)
-	SignalBus.bee_arrived.connect(_on_bee_arrived)
-	SignalBus.plant_died.connect(_on_plant_died)
+	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
+	SignalBus.plant_died.connect(_failure_check)
 	SignalBus.cut_flower_decayed.connect(_failure_check)
+	SignalBus.watering_can_emptied.connect(_on_watering_can_emptied)
 	cache.packet_printed.connect(_on_packet_printed)
 	visitor_manager.visitor_left.connect(_on_visitor_left)
-	player.energy_halved.connect(_on_energy_halved)
+	player.energy_quartered.connect(_on_energy_quartered)
+	player.seeds_harvested.connect(_on_seeds_harvested)
 	main.call_deferred()
 
 func _failure_check():
@@ -45,273 +50,230 @@ func _failure_check():
 	failure_screen.open()
 
 func _on_visitor_left():
+	visitor_left = true
 	if visitor_manager.done:
+		var tween = create_tween()
+		tween.tween_property(
+			tutorial_container, "modulate", Color.TRANSPARENT, .2
+		)
+		await tween.finished
 		completed_screen.open()
 	else:
 		_failure_check()
 
 func _on_flower_bloomed(color):
+	flowers_grown += 1
 	colors_grown[color] = true
-	if in_tutorial and not genes_explained and color != Colors.yellow:
-		genes_explained = true
-		await get_tree().create_timer(BRIEF_PAUSE).timeout
-		dialogue.punnet_square.visible = true
-		dialogue.extra_space = 50
-		dialogue.open([
-			"That's a new color of sunflower! Yellow sunflowers are",
-			"heterozygous, meaning they have two different types of color",
-			"gene called Y and y.", "The table below shows the possibilities",
-			"from crossing two Yy sunflowers.",
-		])
-
-func _on_flower_gone_to_seed():
-	if in_tutorial and not seeds_explained:
-		seeds_explained = true
-		await get_tree().create_timer(BRIEF_PAUSE).timeout
-		dialogue.open([
-			"That sunflower has gone to seed. Interact with it while holding",
-			"a seed bag to harvest the next generation of sunflower seeds!",
-			"If you'd like a new seed bag to stay organized, come",
-			"interact with the cache",
-		])
-
-func _on_bee_arrived():
-	if in_tutorial and not bees_explained:
-		bees_explained = true
-		await get_tree().create_timer(BRIEF_PAUSE).timeout
-		dialogue.open([
-			"See those bees buzzing around that flower? When a flower fills",
-			"up with nectar it attracts bees who will eventually pollinate it.",
-			"They'll leave if you drink the nectar first, but if the flowers",
-			"are becoming inbred and producing fewer seeds you might want to",
-			"let them bee.",
-		])
-
-func _on_plant_died():
-	_failure_check()
-	if in_tutorial and not death_explained:
-		death_explained = true
-		await get_tree().create_timer(BRIEF_PAUSE).timeout
-		dialogue.open([
-			"When a plant has its last flower removed it will die. Make sure",
-			"you harvest enough seeds to plant the next generation!",
-		])
-
-func _on_energy_halved():
-	if in_tutorial and not energy_explained:
-		energy_explained = true
-		dialogue.open([
-			"Careful, half your energy is gone. If it runs out you won't be",
-			"able to carry items! Drinking nectar is the best way to restore",
-			"energy, but perching can also restore a little if you're very low.",
-		])
+	visitor_manager.visitors_unlocked = true
+	
+func _on_flower_pollinated(color):
+	colors_pollinated[color] = true
 
 func _on_packet_printed():
-	if in_tutorial and not packets_explained:
-		packets_explained = true
-		dialogue.open([
-			"Multiple packets can help you organize seeds, although the",
-			"paper will run if you print too many. You can transfer",
-			"seeds from a packet you are holding into another packet by",
-			"interacting with it.",
-		])
+	packet_printed = true
+	
+func _on_seeds_harvested():
+	seeds_harvested = true
+
+func _on_energy_quartered():
+	if not energy_explained:
+		energy_explained = true
+		add_tutorial_text("Energy",
+		"""Restore your energy:
+
+1. Perch on the sapling to stop energy loss and restore up to a third of your energy.
+2. Drink nectar from flowers.
+
+""")
+	await player.energy_back_to_half
+	await remove_tutorial_text("Energy")
+
+func _on_watering_can_emptied():
+	if not water_explained:
+		water_explained = true
+		add_tutorial_text("Water",
+		"""Refill the watering can:
+
+1. Interact with the pond while holding the watering can.
+
+""")
+	await SignalBus.watering_can_refilled
+	await remove_tutorial_text("Water")
 
 func generate_starting_packet():
 	var packet = seed_packet_scene.instantiate()
 	packet.global_position = Vector2(-100,-100)
 	add_sibling(packet)
-	packet.item_sprite.modulate = Colors.yellow
 	
 	var starting_seeds = []
 	for i in range(4):
 		starting_seeds.append(GenomeGenerator.wild("Sunflower"))
 
 	starting_seeds[0]["max_flowers"] = 0
+	starting_seeds[0]["color"] = 0
 	starting_seeds[1]["max_flowers"] = 0
+	starting_seeds[1]["color"] = 0
 	starting_seeds[2]["max_flowers"] = 1
+	starting_seeds[2]["color"] = 0
 	starting_seeds[3]["max_flowers"] = 1
+	starting_seeds[3]["color"] = 2
 
 	starting_seeds.shuffle()
 	packet.add_seeds(starting_seeds)
 	return packet
 
 func main():
-	var g = {"species": "Sunflower", "yellow": 1}
-	dialogue.punnet_square.fill(g, g)
-	cache.cache_ui.initialize_genetics("Sunflower")
-	
 	if skip_intro:
 		await quick_intro_sequence()
 	else:
-		player.controllable = false
-		await move_player_on_screen()
-		await cache.raise()
-
-		dialogue.open_yn([
-			"Welcome to your first seed cache! I'm sure your elders already",
-			"talked your feathers off about the journey, but would you like",
-			"a reminder about how things work?",
-		])
-		var yes = await dialogue.yes_no
-		if yes:
-			in_tutorial = true
-			await tutorial_sequence()
-		else:
-			await non_tutorial_sequence()
-
-func move_player_on_screen():
-	player.global_position = Vector2(-100,180)
-	player.move_to_point(Vector2(140,180), true)
-	await player.motion_finished
+		await cinematic_intro_sequence()
+	if not skip_tutorial:
+		tutorial_sequence()
+	else:
+		water_explained = true
+		energy_explained = true
 
 func quick_intro_sequence():
 	cache.quick_raise()
 	cache.quick_dispense_all(generate_starting_packet())
 	player.global_position = Vector2(140,180)
 	player.controllable = true
-	
-	await SignalBus.flower_bloomed
-	visitor_manager.visitors_unlocked = true
 
-func non_tutorial_sequence():
-	dialogue.punnet_square.visible = true
-	dialogue.open([
-		"At this cache you'll be growing sunflowers!",
-		"Sunflowers have one color gene with two alleles.",
-	])
+func move_player_on_screen():
+	player.global_position = Vector2(-100,180)
+	player.move_to_point(Vector2(140,180), true)
+	await player.motion_finished
+
+func cinematic_intro_sequence():
+	player.controllable = false
+	await move_player_on_screen()
+	await cache.raise()
 	player.controllable = true
 	await cache.dispense_all(generate_starting_packet())
 
-	await SignalBus.flower_bloomed
-	visitor_manager.visitors_unlocked = true
+func add_tutorial_text(text_name, text):
+	var rtl = RichTextLabel.new()
+	rtl.name = text_name
+	rtl.text = text
+	rtl.fit_content = true
+	rtl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rtl.modulate = Color.TRANSPARENT
+	tutorial_container.add_child(rtl)
+	var tween = create_tween()
+	tween.tween_property(
+		rtl, "modulate", Color.WHITE, .2
+	)
+	await tween.finished
+
+func remove_tutorial_text(text_name):
+	for rtl in tutorial_container.get_children():
+		if rtl.name == text_name:
+			var tween = create_tween()
+			tween.tween_property(
+				rtl, "modulate", Color.TRANSPARENT, .2
+			)
+			await tween.finished
+			rtl.queue_free()
+			break
 
 func tutorial_sequence():
-	dialogue.open([
-		"First off, lets stretch your wings a bit. Move around with WASD",
-		"or by clicking on a destination.",
-	])
-	player.controllable = true
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	await player.motion_finished
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-
-	dialogue.open([
-		"Next, interaction. You can interact with things by clicking",
-		"on them or by moving close to them and pressing E.",
-		"Try perching on the sapling or bathing in the pond."
-	])
-
-	await player.bath_or_perch_started
-	await get_tree().create_timer(1).timeout
-
-	await cache.dispense_seeds(generate_starting_packet())
-	dialogue.open([
-		"This is a seed packet. You can pick up items",
-		"by interacting with them while you aren't holding anything. You",
-		"can drop items by right clicking or pressing Q."
-	])
-
-	await player.item_picked_up
-	dialogue.open([
-		"That seed packet contains four sunflower seeds. To plant one",
-		"interact with a patch of bare soil while holding the packet.",
-	])
-
-	await player.seed_planted
-	await cache.dispense_watering_can()
+	add_tutorial_text("Title", "Tutorial:\n\n")
+	await get_tree().create_timer(.2).timeout
 	
-	if player.held_item is SeedPacket:
-		dialogue.open([
-			"Seeds need water to germinate, so you'll need this watering can.",
-			"Drop the seed packet with Q or right click, then pick up the can",
-			"and fly over the soil to water it. If the water runs out,",
-			"interact with a body of water for a refill.",
-		])
-	else:
-		dialogue.open([
-			"Seeds need water to germinate, so you'll need this watering can.",
-			"Pick it up and fly over the soil to water it. If the water runs",
-			"out, interact with a body of water for a refill.",
-		])
+	add_tutorial_text("Guide",
+"""Open the guide:
 
-	await SignalBus.seedling_grown
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"Ah. The first of many seedlings you will help grow on this journey.",
-		"You can just wait for it to bloom now, but plants in moist soil will",
-		"grow and produce nectar more quickly."
-	])
+1. Press Esc to open the pause menu.
+2. Click on Guide.
+3. Close with Esc.
+4. Reference back as needed!
 
-	await SignalBus.flower_bloomed
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"Aren't sunflowers beautiful? And their nectar is delicous too, or so",
-		"I've heard. Interact with a flower to drink some!"
-	])
+""")
+	await pause_screen.guide_opened
+	await remove_tutorial_text("Guide")
 
-	await player.drink_finished
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"See that yellow spot on your beak? That's pollen. If you drink from a",
-		"flower with pollen on your beak you will pollinate it. A pollinated",
-		"flower will stop blooming and start making seeds, so if you're not",
-		"ready for that to happen make sure to take a bath!",
-	])
+	if flowers_grown < 6:
+		add_tutorial_text("GrowFlowers",
+"""Grow four sunflower plants:
 
-	visitor_manager.visitors_unlocked = true
-	await visitor_manager.visitor_arrived
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"A visitor has come to evaluate your flowercraft. You'll have to prove",
-		"yourself to five visitors to earn the right to continue your journey.",
-		"This one wants a yellow sunflower. Use these clippers to cut one.",
-	])
+1. Plant seeds by picking up a seed packet then interacting with bare soil.
+2. Drop the seed packet.
+3. Water the seeds by picking up the watering can then flying over them.
+4. Wait for the flowers to grow.
 
-	await cache.dispense_clippers()
-	await SignalBus.flower_clipped
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"Now pick up the flower and bring it to the visitor to complete",
-		"the request. Flowers left on the ground will rot, so don't cut too",
-		"many at once!",
-	])
+""")
+	while true:
+		await SignalBus.flower_bloomed
+		if flowers_grown >= 6:
+			await remove_tutorial_text("GrowFlowers")
+			break
 
-	await visitor_manager.boquet_accepted
-	await get_tree().create_timer(BRIEF_PAUSE).timeout
-	dialogue.open([
-		"Well done! You'll need to prove yourself to four more visitors to",
-		"complete this cache challenge.",
-	])
+	if Colors.orange not in colors_pollinated:
+		add_tutorial_text("OrangePollination",
+	"""Cross-pollinate for an orange sunflower:
 
-	var desired_bouquet_colors
-	var colors_explained = false
-	var multi_expliained = false
-	while !(colors_explained and multi_expliained):
-		desired_bouquet_colors = await visitor_manager.visitor_arrived
-		await get_tree().create_timer(BRIEF_PAUSE).timeout
-		
-		if len(desired_bouquet_colors) == 2:
-			multi_expliained = true
-			dialogue.open([
-				"This visitor is asking for two sunflowers. You can either",
-				"deliver them one at a time or bring them both together.",
-			])
+1. Take a bath if there is any pollen on your beak.
+2. Drink from a red or yellow sunflower.
+3. Drink from the other collor sunflower.
 
-		elif not colors_explained:
-			colors_explained = true
-			var color_name
-			if desired_bouquet_colors[0] == Colors.white:
-				color_name = "white"
-			elif desired_bouquet_colors[0] == Colors.orange:
-				color_name = "orange"
-			else:
-				assert(false)
-			var s2
-			if desired_bouquet_colors[0] not in colors_grown:
-				s2 = "Try cross-pollinating yellow sunflowers and planting their seeds to grow one."
-			else:
-				s2 = "Make sure to bring visitors the colors they are asking for."
-			dialogue.open([
-				"This visitor is asking for a", color_name, "sunflower.",
-				s2,
-			])
+""")
+		while true:
+			await SignalBus.flower_pollinated
+			if Colors.orange in colors_pollinated:
+				break
+		await remove_tutorial_text("OrangePollination")
+
+	if not packet_printed:
+		add_tutorial_text("PrintPacket",
+"""Print a new seed packet:
+
+1. Interact with the cache (the machine that provided your tools and starting seeds).
+2. Select a color, icon, and/or icon color.
+3. Press print.
+
+""")
+		await cache.packet_printed
+		await remove_tutorial_text("PrintPacket")
+
+	if not seeds_harvested:
+		add_tutorial_text("HarvestSeeds",
+"""Harvest seeds:
+
+1. Wait for the cross pollinated flower to go to seed.
+2. While holding a seed packet interact with the flower.
+
+""")
+		await player.seeds_harvested
+		await remove_tutorial_text("HarvestSeeds")
+
+	if not Colors.orange in colors_grown:
+		add_tutorial_text("OrangeGrow",
+"""Grow an orange sunflower:
+
+1. Plant one of the cross-pollinated seeds.
+2. Water them and wait for the flower to grow.
+
+""")
+		while true:
+			await SignalBus.flower_bloomed
+			if Colors.orange in colors_grown:
+				break
+		await remove_tutorial_text("OrangeGrow")
+
+	if not visitor_left:
+		add_tutorial_text("SatisfyVisitor",
+"""Satisfy a visitor:
+
+1. While holding the clipers interact with a flower the visitor wants to cut it.
+2. Pick up the cut flower and bring it to the visitor.
+
+""")
+		await visitor_manager.visitor_left
+		await remove_tutorial_text("SatisfyVisitor")
+
+	add_tutorial_text("FinishLevel",
+"""Finish the level:
+
+1. Satisfy five visitors in total to finish the level.
+
+""")

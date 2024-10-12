@@ -13,12 +13,14 @@ script = ExtResource("1_4tu0l")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 7.0
-offset_top = 10.0
-offset_right = 47.0
-offset_bottom = 33.0
+offset_left = 1.0
+offset_top = 14.0
+offset_right = 27.0
+offset_bottom = 27.0
 theme_override_font_sizes/font_size = 12
-text = "Yy"
+text = "RY"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Flower" type="TextureRect" parent="."]
 layout_mode = 0

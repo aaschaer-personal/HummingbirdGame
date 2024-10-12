@@ -9,3 +9,10 @@
 - Increase decay time and decrease seed time
 - Shadow code cleanup and fixes
 - Rework interaction turning logic to help get to the right place facing the right direction
+
+## v0.3
+- Add splash screen so sound plays properly in browser
+- Add custom font
+- Add pause menu and guide
+- Change sunflower colors to red, orange, yellow
+- Rework tutorial

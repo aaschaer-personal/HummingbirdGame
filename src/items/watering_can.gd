@@ -17,6 +17,7 @@ func _physics_process(delta):
 					overlap.water(delta)
 		else:
 			toggle_water(false)
+			SignalBus.watering_can_emptied.emit()
 		water_meter.value = water_amount * 5
 	else:
 		toggle_water(false)
@@ -45,3 +46,4 @@ func set_flip_h(val):
 
 func refill():
 	water_amount = 20
+	SignalBus.watering_can_refilled.emit()

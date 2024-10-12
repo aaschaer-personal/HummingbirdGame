@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmm2y8bfkj02n"]
+
+[ext_resource type="Script" path="res://src/input_logic.gd" id="1_qo2k0"]
+
+[node name="InputLogic" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_qo2k0")

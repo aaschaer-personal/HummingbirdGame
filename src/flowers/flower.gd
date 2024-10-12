@@ -16,6 +16,7 @@ var max_nectar: float = 30.0
 var stage: int = 0
 var seed_growth: float = 0.0
 var pollen = []
+var seeds = []
 var bee: Bee = null
 var manualy_pollinated = false
 
@@ -55,7 +56,6 @@ func receive_nutrients(amount: float):
 				add_child(new_bee)
 				bee = new_bee
 				bee_audio_player.play()
-				SignalBus.bee_arrived.emit()
 		else:
 			if not pollination_timer.is_stopped() and not manualy_pollinated:
 				pollination_timer.stop()
@@ -87,6 +87,7 @@ func rustle():
 func _wilt():
 	_play_animation("wilt")
 	pollination_timer.stop()
+	generate_seeds()
 	if bee:
 		bee.fly_away()
 		bee = null
@@ -98,7 +99,6 @@ func _go_to_seed():
 	_play_animation("to_seed")
 	await main_sprite.animation_finished
 	stage = 3
-	SignalBus.flower_gone_to_seed.emit()
 
 func is_interactable():
 	return (
@@ -131,20 +131,26 @@ func _pick_pollen():
 		if potential["species"] == parent_plant.genome.species:
 			return potential
 
-func bag_seeds(seed_packet):
-	var new_seeds = []
+func generate_seeds():
 	for i in range(parent_plant.genome.seed_num):
 		var pollen_genome_dict = _pick_pollen()
 		if not pollen_genome_dict:
 			pollen_genome_dict = GenomeGenerator.wild(
 				parent_plant.genome.species)
-		new_seeds.append(GenomeGenerator.genome_dict_from_gamete_dicts(
+		var new_seed = GenomeGenerator.genome_dict_from_gamete_dicts(
 			GenomeGenerator.gamete_dict_from_genome_dict(
 				pollen_genome_dict),
 			GenomeGenerator.gamete_dict_from_genome_dict(
 				parent_plant.genome.genome_dict)
-		))
-	seed_packet.add_seeds(new_seeds)
+		)
+		if new_seed["species"] == "Sunflower":
+			SignalBus.flower_pollinated.emit(
+				GenomeHelpers.sunflower_flower_color(new_seed["color"])
+			)
+		seeds.append(new_seed)
+
+func harvest_seeds(seed_packet):
+	seed_packet.add_seeds(seeds)
 	harvest()
 
 func drink(delta):
@@ -160,7 +166,7 @@ func drink(delta):
 
 func finish_drink():
 	nectar_meter.visible = false
-	pollen = player.pollen
+	pollen = player.pollen.duplicate()
 	if stage == 1 and pollen:
 		manualy_pollinated = true
 		pollination_timer.start(1)
@@ -172,7 +178,6 @@ func clip():
 		get_node("/root/Main").add_child(cut_flower_instance)
 		cut_flower_instance.set_color(parent_plant.genome.flower_color)
 		cut_flower_instance.set_global_position(global_position)
-		SignalBus.flower_clipped.emit()
 	harvest()
 
 func harvest():

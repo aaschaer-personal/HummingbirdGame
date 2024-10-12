@@ -1,13 +1,13 @@
 # autoloaded as GenomeHelpers
 extends Node
 
-func sunflower_flower_color(yellow):
-	if yellow == 2:
+func sunflower_flower_color(color):
+	if color == 2:
+		return Colors.red
+	elif color == 1:
 		return Colors.orange
-	elif yellow == 1:
+	elif color == 0:
 		return Colors.yellow
-	elif yellow == 0:
-		return Colors.white
 	else:
 		assert(false)
 

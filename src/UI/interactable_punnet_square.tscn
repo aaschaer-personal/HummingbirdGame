@@ -1,0 +1,171 @@
+[gd_scene load_steps=5 format=3 uid="uid://mgqh0bucfav0"]
+
+[ext_resource type="PackedScene" uid="uid://d3pf8kbdk01t7" path="res://src/UI/punnet_square.tscn" id="1_0l4an"]
+[ext_resource type="Script" path="res://src/UI/interactable_punnet_square.gd" id="1_itoe1"]
+[ext_resource type="Texture2D" uid="uid://wiv6d7h482up" path="res://assets/UI/Icons/sunflower.png" id="2_2yta0"]
+[ext_resource type="Texture2D" uid="uid://de6n6ymmx7rx4" path="res://assets/UI/Icons/sunflower_petals.png" id="3_7b1fc"]
+
+[node name="InteractablePunnetSquare" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 93.0
+offset_right = 1.0
+offset_bottom = 93.0
+script = ExtResource("1_itoe1")
+
+[node name="P1" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 268.0
+offset_bottom = 64.0
+scale = Vector2(0.499995, 0.499995)
+alignment = 1
+
+[node name="A1" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="A2" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="B1" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="B2" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="C1" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="C2" type="OptionButton" parent="P1"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="Example" type="Control" parent="P1"]
+layout_mode = 2
+
+[node name="Flower" type="TextureRect" parent="P1/Example"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 68.0
+offset_bottom = 64.0
+texture = ExtResource("2_2yta0")
+expand_mode = 2
+
+[node name="Petals" type="TextureRect" parent="P1/Example"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 68.0
+offset_bottom = 64.0
+texture = ExtResource("3_7b1fc")
+expand_mode = 2
+
+[node name="X" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 32.0
+offset_right = 133.0
+offset_bottom = 44.0
+text = "   X"
+horizontal_alignment = 1
+
+[node name="P2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 46.0
+offset_right = 268.0
+offset_bottom = 110.0
+scale = Vector2(0.499995, 0.499995)
+alignment = 1
+
+[node name="A1" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="A2" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="B1" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="B2" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="C1" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="C2" type="OptionButton" parent="P2"]
+visible = false
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 2
+theme_override_constants/h_separation = -1
+theme_override_font_sizes/font_size = 24
+
+[node name="Example" type="Control" parent="P2"]
+layout_mode = 2
+
+[node name="Flower" type="TextureRect" parent="P2/Example"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 68.0
+offset_bottom = 64.0
+texture = ExtResource("2_2yta0")
+expand_mode = 2
+
+[node name="Petals" type="TextureRect" parent="P2/Example"]
+layout_mode = 2
+offset_left = 4.0
+offset_right = 68.0
+offset_bottom = 64.0
+texture = ExtResource("3_7b1fc")
+expand_mode = 2
+
+[node name="PunnetContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 85.0
+offset_right = 134.0
+offset_bottom = 141.0
+alignment = 1
+
+[node name="PunnetSquare" parent="PunnetContainer" instance=ExtResource("1_0l4an")]
+layout_mode = 2
