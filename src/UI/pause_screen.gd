@@ -1,5 +1,7 @@
 class_name PauseScreen extends ColorRect
 
+signal guide_opened
+
 @onready var pause_menu = $PauseMenu
 @onready var guide = $Guide
 @onready var resume_button = $PauseMenu/VBoxContainer/ResumeButton
@@ -27,6 +29,7 @@ func _input(event):
 func open_guide():
 	pause_menu.visible = false
 	guide.visible = true
+	guide_opened.emit()
 
 func resume():
 	visible = false

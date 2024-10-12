@@ -332,7 +332,7 @@ bbcode_enabled = true
 text = "[font_size=8]
 [font_size=24][center]Printing Packets[/center][font_size=12]
 
-* Interacting with the machine that provided the original seeds and tools opens it's packet printing interface.
+* Interacting with the cache (the machine that provides the original seeds and tools) opens it's packet printing interface.
 
 * Select a color, a pattern, and a pattern color, then hit print to print an additional empty packet.
 

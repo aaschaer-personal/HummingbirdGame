@@ -1,11 +1,9 @@
 class_name Player extends CharacterBody2D
 
 signal motion_finished
-signal item_picked_up
-signal seed_planted
-signal drink_finished
-signal bath_or_perch_started
-signal energy_halved
+signal energy_quartered
+signal energy_back_to_half
+signal seeds_harvested
 
 @onready var body_sprite = $Animation/Body
 @onready var front_wing_sprite = $Animation/FrontWing
@@ -52,6 +50,7 @@ var target_animation = "hovering"
 var pollen = []
 var controllable = false
 var in_motion = false
+var low_energy_singal_toggle = false
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -82,7 +81,6 @@ func _process(delta):
 		if drinking_flower:
 			drinking_flower.finish_drink()
 			drinking_flower = null
-			drink_finished.emit()
 		moving_time += delta
 		if moving_time >= .2 and energy and held_item == null:
 			target_animation = "zooming"
@@ -117,8 +115,12 @@ func _process(delta):
 	else:
 		energy -= 1 * delta
 
-	if energy < (max_energy / 2.0) - 1:
-		energy_halved.emit()
+	if not low_energy_singal_toggle and energy <= (max_energy / 4.0):
+			energy_quartered.emit()
+			low_energy_singal_toggle = true
+	elif low_energy_singal_toggle and energy >= (max_energy / 2.0):
+			energy_back_to_half.emit()
+			low_energy_singal_toggle = false
 
 	if energy <= 0:
 		energy = 0
@@ -257,7 +259,6 @@ func pickup(item):
 			item.global_position = hold_point.global_position
 			item.set_flip_h(body_sprite.flip_h)
 			held_item = item
-			item_picked_up.emit()
 			if not item is Bouquet:
 				item.set_pickup_height()
 
@@ -286,13 +287,13 @@ func remove_held_item():
 func start_drink(flower: Flower):
 	if drinking_flower != null and drinking_flower != flower:
 		drinking_flower.finish_drink()
-		drink_finished.emit()
 	drinking_flower = flower
 	target_animation = "drinking"
 	
 func use_tool_on_flower(flower: Flower):
 	if flower.stage == 3 and held_item is SeedPacket:
-		flower.bag_seeds(held_item)
+		flower.harvest_seeds(held_item)
+		seeds_harvested.emit()
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
 		audio_player.stream = paper_sound
 		audio_player.play()
@@ -306,7 +307,6 @@ func use_tool_on_plot(plot: Plot):
 			var removed_seed = held_item.remove_seed()
 			if removed_seed != null:
 				plot.plant_seed(removed_seed)
-				seed_planted.emit()
 				audio_player.set_pitch_scale(randf_range(.9, 1.1))
 				audio_player.stream = dirt_sound
 				audio_player.play()
@@ -321,7 +321,6 @@ func open_cache_ui(ui: CacheUI):
 		ui.open()
 
 func start_perch_h(perch_zone: Area2D):
-	bath_or_perch_started.emit()
 	perch_y = perch_zone.global_position.y
 	target_animation = "perching_h"
 
@@ -470,7 +469,6 @@ func _do_animation():
 			_set_frame(perching_frame)
 		elif target_animation == "bathe":
 			controllable = false
-			bath_or_perch_started.emit()
 			var tween = create_tween()
 			tween.tween_property(
 				self,

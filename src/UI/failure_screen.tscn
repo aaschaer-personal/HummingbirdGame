@@ -21,8 +21,8 @@ layout_mode = 0
 offset_left = 1.0
 offset_top = 5.0
 offset_right = 319.0
-offset_bottom = 46.0
-text = "Cache Failed"
+offset_bottom = 25.0
+text = "Level Failed"
 horizontal_alignment = 1
 
 [node name="Text" type="RichTextLabel" parent="."]
@@ -44,9 +44,10 @@ texture_normal = ExtResource("3_edy3o")
 
 [node name="Label" type="Label" parent="RetryButton"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 1.0
-offset_right = 43.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 13
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 38.0
+offset_bottom = 19.0
 text = "Retry"
+horizontal_alignment = 1
+vertical_alignment = 1

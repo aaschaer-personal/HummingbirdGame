@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://vxc58t5gss1o"]
+[gd_scene load_steps=19 format=3 uid="uid://vxc58t5gss1o"]
 
 [ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="1_jgm1s"]
 [ext_resource type="Script" path="res://src/main.gd" id="1_xsf42"]
 [ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/plot.tscn" id="3_11k4b"]
-[ext_resource type="PackedScene" uid="uid://rafj70kquf3l" path="res://src/UI/dialogue.tscn" id="5_3r61e"]
 [ext_resource type="PackedScene" uid="uid://byrltxfllybww" path="res://src/UI/failure_screen.tscn" id="6_6ukqi"]
 [ext_resource type="PackedScene" uid="uid://ph7je02sp0tm" path="res://src/UI/completed_screen.tscn" id="7_cv2eu"]
 [ext_resource type="Texture2D" uid="uid://cmmwk13oaugog" path="res://assets/Environment/grass.png" id="7_vxbj1"]
@@ -56,14 +55,6 @@ layout_mode = 1
 offset_right = 600.0
 offset_bottom = 320.0
 
-[node name="Dialogue" parent="UI" instance=ExtResource("5_3r61e")]
-visible = false
-layout_mode = 0
-offset_left = 180.0
-offset_top = 90.0
-offset_right = 500.0
-offset_bottom = 270.0
-
 [node name="FailureScreen" parent="UI" instance=ExtResource("6_6ukqi")]
 visible = false
 layout_mode = 0
@@ -79,6 +70,14 @@ offset_left = 160.0
 offset_top = 90.0
 offset_right = 480.0
 offset_bottom = 270.0
+
+[node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 43.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
 
 [node name="Plot1" parent="." groups=["plots"] instance=ExtResource("3_11k4b")]
 position = Vector2(240, 210)
@@ -110,7 +109,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
 
 [node name="Sapling" parent="." instance=ExtResource("8_c47sj")]
-position = Vector2(516, 298)
+position = Vector2(237, 313)
 
 [node name="Wind" parent="." instance=ExtResource("9_aymfp")]
 

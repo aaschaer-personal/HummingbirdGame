@@ -33,7 +33,7 @@ color_ramp = SubResource("GradientTexture1D_siqkg")
 [sub_resource type="CircleShape2D" id="CircleShape2D_5hl44"]
 radius = 4.0
 
-[node name="WateringCan" type="Area2D"]
+[node name="WateringCan" type="Area2D" groups=["watering_can"]]
 script = ExtResource("1_y64fi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
