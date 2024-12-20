@@ -10,8 +10,6 @@ extends Node2D
 @onready var visitor_manager = get_tree().get_first_node_in_group("visitor_manager")
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 
-var skip_intro = false
-var skip_tutorial = false
 var water_explained = false
 var energy_explained = false
 var packet_printed = false
@@ -20,10 +18,11 @@ var visitor_left = false
 var flowers_grown = 0
 var colors_grown = {}
 var colors_pollinated = {}
-
 var BRIEF_PAUSE = .5
+var config = ConfigFile.new()
 
 func _ready():
+	config.load("user://gamedata.cfg")
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
 	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
@@ -57,6 +56,8 @@ func _on_visitor_left():
 			tutorial_container, "modulate", Color.TRANSPARENT, .2
 		)
 		await tween.finished
+		config.set_value("options", "show_tutorial", false)
+		config.save("user://gamedata.cfg")
 		completed_screen.open()
 	else:
 		_failure_check()
@@ -123,11 +124,11 @@ func generate_starting_packet():
 	return packet
 
 func main():
-	if skip_intro:
+	if config.get_value("options", "quick_start", false):
 		await quick_intro_sequence()
 	else:
 		await cinematic_intro_sequence()
-	if not skip_tutorial:
+	if config.get_value("options", "show_tutorial", true):
 		tutorial_sequence()
 	else:
 		water_explained = true

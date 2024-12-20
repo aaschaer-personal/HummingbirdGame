@@ -19,14 +19,6 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 theme_override_font_sizes/font_size = 36
-text = "Click to Play"
+text = "Click to Start"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Version" type="Label" parent="."]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 342.0
-offset_right = 31.0
-offset_bottom = 354.0
-text = "v0.4"

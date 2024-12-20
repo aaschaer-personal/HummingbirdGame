@@ -7,7 +7,7 @@ class_name Visitor extends Interactable
 @onready var acceptance_area = $AcceptanceArea
 @onready var shadow_generator = $MainSprite/ShadowGenerator
 @onready var desired_bouquet_colors: Array
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 @onready var visitor_landing_sound = preload("res://assets/Sounds/visitor_landing.wav")
 @onready var house_finch_sound = preload("res://assets/Sounds/house_finch.wav")

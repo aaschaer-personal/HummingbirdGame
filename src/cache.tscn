@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://cpttbohtndpah"]
+[gd_scene load_steps=97 format=3 uid="uid://cpttbohtndpah"]
 
 [ext_resource type="Script" path="res://src/cache.gd" id="1_rhkjs"]
 [ext_resource type="PackedScene" uid="uid://cs510j1wjh4d4" path="res://src/UI/cache_ui.tscn" id="3_05chn"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cw5ggyn20rpt" path="res://assets/Cache/left_door_rising.png" id="7_6shnh"]
 [ext_resource type="Texture2D" uid="uid://df44tkb1c8nw2" path="res://assets/Cache/front_rising.png" id="8_5rsb8"]
 [ext_resource type="Texture2D" uid="uid://b8dikd1samhvj" path="res://assets/Cache/down.png" id="8_rm6ic"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="11_37lo0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmvfd"]
 size = Vector2(41, 42.8334)
@@ -683,4 +684,4 @@ animation = &"down"
 autoplay = "down"
 frame_progress = 1.0
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("11_37lo0")]

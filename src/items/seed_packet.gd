@@ -9,7 +9,7 @@ func _ready():
 	seed_count.text = "0"
 
 func is_interactable():
-	return !disk_sprite.visible and get_parent() is Main and (
+	return !disk_sprite.visible and get_parent() is Level and (
 		player.held_item == null or player.held_item is SeedPacket
 	)
 

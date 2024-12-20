@@ -6,7 +6,7 @@ class_name Plant extends Area2D
 @onready var flower_2_spawn = $FlowerSpawn2
 @onready var flower_3_spawn = $FlowerSpawn3
 @onready var genome = $Genome
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 
 # preloaded by subclasses
 var flower_1_scene

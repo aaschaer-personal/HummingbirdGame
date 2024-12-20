@@ -1,4 +1,4 @@
-[gd_scene load_steps=323 format=3 uid="uid://dijrw38nqguom"]
+[gd_scene load_steps=324 format=3 uid="uid://dijrw38nqguom"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_j4oqv"]
 [ext_resource type="Texture2D" uid="uid://s1d4ow6e0qhr" path="res://assets/Hummingbird/back_wings.png" id="2_blfj3"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bkgbfr04bg6ja" path="res://assets/Hummingbird/Pollen/turn.png" id="19_e2grt"]
 [ext_resource type="Texture2D" uid="uid://dxsvo0t8eb0ka" path="res://assets/Hummingbird/Pollen/zooming.png" id="20_28sda"]
 [ext_resource type="AudioStream" uid="uid://btncnn3jaxqli" path="res://assets/Sounds/humm.wav" id="21_5bfu4"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="21_vdxad"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pecmv"]
 atlas = ExtResource("2_blfj3")
@@ -2322,10 +2323,10 @@ position = Vector2(0, -26)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRadius"]
 shape = SubResource("CircleShape2D_ebf05")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("21_vdxad")]
 
-[node name="HummPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="HummPlayer" parent="." instance=ExtResource("21_vdxad")]
 stream = ExtResource("21_5bfu4")
-volume_db = -8.0
 autoplay = true
 panning_strength = 6.0
+db_offset = -15

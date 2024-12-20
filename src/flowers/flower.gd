@@ -175,7 +175,7 @@ func finish_drink():
 func clip():
 	if stage == 1:
 		var cut_flower_instance = cut_flower_scene.instantiate()
-		get_node("/root/Main").add_child(cut_flower_instance)
+		get_tree().get_first_node_in_group("level").add_child(cut_flower_instance)
 		cut_flower_instance.set_color(parent_plant.genome.flower_color)
 		cut_flower_instance.set_global_position(global_position)
 	harvest()

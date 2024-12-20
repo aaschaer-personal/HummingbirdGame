@@ -19,7 +19,7 @@ signal seeds_harvested
 @onready var interaction_radius = $InteractionRadius
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 @onready var humm_player = $HummPlayer
 @onready var bath_sound = preload("res://assets/Sounds/bath.wav")
 @onready var dirt_sound = preload("res://assets/Sounds/dirt.wav")

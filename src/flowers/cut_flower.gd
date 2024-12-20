@@ -25,7 +25,7 @@ func _ready():
 	)
 
 func is_interactable():
-	if is_decaying or !get_parent() is Main:
+	if is_decaying or !get_parent() is Level:
 		return false
 
 	return player.held_item == null or (

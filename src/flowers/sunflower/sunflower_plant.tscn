@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://d0sggm2jmyb0b"]
+[gd_scene load_steps=61 format=3 uid="uid://d0sggm2jmyb0b"]
 
 [ext_resource type="Script" path="res://src/flowers/sunflower/sunflower_plant.gd" id="1_wha0n"]
 [ext_resource type="Texture2D" uid="uid://bt40n0wwgjcnw" path="res://assets/Flowers/Sunflower/grow.png" id="2_2imoq"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c0dvvefy6gfrh" path="res://assets/Flowers/sprout_rustle.png" id="6_lyodp"]
 [ext_resource type="PackedScene" uid="uid://do5d23t7cxf21" path="res://src/genome.tscn" id="7_qpyhj"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="8_jbdf0"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="10_atggd"]
 [ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="10_cieq6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2sdh"]
@@ -408,6 +409,6 @@ position = Vector2(0, -16)
 
 [node name="Genome" parent="." instance=ExtResource("7_qpyhj")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("10_atggd")]
 stream = ExtResource("10_cieq6")
 max_polyphony = 2
