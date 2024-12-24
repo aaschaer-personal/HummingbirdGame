@@ -6,8 +6,7 @@ extends AudioStreamPlayer2D
 var global_offset = -20
 
 func _ready():
-	var config = ConfigFile.new()
-	config.load("user://gamedata.cfg")
+	var config = Config.get_config()
 	var volume = config.get_value("options", option, 50)
 	volume_db = linear_to_db(volume) + db_offset + global_offset
 	options.volume_changed.connect(_on_volume_changed)

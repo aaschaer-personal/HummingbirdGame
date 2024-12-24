@@ -19,10 +19,10 @@ var flowers_grown = 0
 var colors_grown = {}
 var colors_pollinated = {}
 var BRIEF_PAUSE = .5
-var config = ConfigFile.new()
+var config
 
 func _ready():
-	config.load("user://gamedata.cfg")
+	config = Config.get_config()
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
 	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
@@ -56,8 +56,6 @@ func _on_visitor_left():
 			tutorial_container, "modulate", Color.TRANSPARENT, .2
 		)
 		await tween.finished
-		config.set_value("options", "show_tutorial", false)
-		config.save("user://gamedata.cfg")
 		completed_screen.open()
 	else:
 		_failure_check()

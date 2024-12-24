@@ -18,9 +18,13 @@ extends Control
 @onready var p2c1 = $P2/C1
 @onready var p2c2 = $P2/C2
 
-@onready var species = get_tree().get_first_node_in_group("level").species
+var species
 
 func _ready():
+	var level = get_tree().get_first_node_in_group("level")
+	if level:
+		species = level.species
+	
 	for allele_option in [p1a1, p1a2, p1b1, p1b2, p1c1, p1c2, p2a1, p2a2, p2b1, p2b2, p2c1, p2c2]:
 		allele_option.item_selected.connect(_on_allele_option_selected)
 
@@ -35,7 +39,7 @@ func _ready():
 		p2a2.select(1)
 		_on_allele_option_selected(null)
 	else:
-		assert(false)
+		assert(level == null)
 
 func _on_allele_option_selected(_selected):
 	var g1 = {"species": species}

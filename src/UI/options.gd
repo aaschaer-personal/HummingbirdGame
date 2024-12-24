@@ -11,8 +11,7 @@ signal volume_changed
 var config
 
 func _ready():
-	config = ConfigFile.new()
-	config.load("user://gamedata.cfg")
+	config = Config.get_config()
 	music_volume.value = config.get_value("options", "music_volume", 50)
 	effects_volume.value = config.get_value("options", "effects_volume", 50)
 	show_tutorial.button_pressed = config.get_value("options", "show_tutorial", true)
@@ -26,7 +25,7 @@ func confirm():
 	config.set_value("options", "effects_volume", effects_volume.value)
 	config.set_value("options", "show_tutorial", show_tutorial.button_pressed)
 	config.set_value("options", "quick_start", quick_start.button_pressed)
-	config.save("user://gamedata.cfg")
+	Config.save_config()
 	visible = false
 
 func emit_music_volume_changed(value):

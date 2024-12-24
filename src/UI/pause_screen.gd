@@ -9,7 +9,7 @@ signal guide_opened
 @onready var guide_button = $PauseMenu/VBoxContainer/GuideButton
 @onready var options_button = $PauseMenu/VBoxContainer/OptionsButton
 @onready var restart_level_button = $PauseMenu/VBoxContainer/RestartLevelButton
-# @onready var return_to_map_button = $PauseMenu/VBoxContainer/ReturnToMapButton
+@onready var return_to_map_button = $PauseMenu/VBoxContainer/ReturnToMapButton
 @onready var quit_to_menu_button = $PauseMenu/VBoxContainer/QuitToMenuButton
 
 
@@ -18,8 +18,19 @@ func _ready():
 	guide_button.pressed.connect(open_guide)
 	options_button.pressed.connect(open_options)
 	restart_level_button.pressed.connect(restart_level)
-	# return_to_map_button.pressed.connect(return_to_map)
+	return_to_map_button.pressed.connect(return_to_map)
 	quit_to_menu_button.pressed.connect(quit_to_menu)
+
+	# only show return to map if level 1 has been completed
+	var config = Config.get_config()
+	if config.get_value("levels", "unlocked", 1) > 1:
+		return_to_map_button.visible = true
+
+	# hide level specific buttons
+	if not get_parent().get_parent() is Level:
+		guide_button.visible = false
+		restart_level_button.visible = false
+		return_to_map_button.visible = false
 
 # reset guide visibility on any Esc press
 func _input(event):
@@ -41,8 +52,14 @@ func resume():
 func restart_level():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
-	
+
+func return_to_map():
+	get_tree().paused = false
+	var main_menu = load("res://src/main_menu.tscn")
+	get_tree().change_scene_to_packed(main_menu)
+
 func quit_to_menu():
 	get_tree().paused = false
+	Config.save_config()
 	var main_menu = load("res://src/main_menu.tscn")
 	get_tree().change_scene_to_packed(main_menu)

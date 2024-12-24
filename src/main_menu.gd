@@ -4,7 +4,6 @@ extends NinePatchRect
 @onready var options_button = $VBoxContainer/OptionsButton
 @onready var exit_button = $VBoxContainer/ExitButton
 @onready var options = $Options
-@onready var level_1 = preload("res://src/levels/level_1.tscn")
 
 func _ready():
 	play_button.pressed.connect(play)
@@ -12,7 +11,13 @@ func _ready():
 	exit_button.pressed.connect(exit)
 
 func play():
-	get_tree().change_scene_to_packed(level_1)
+	var scene
+	var config = Config.get_config()
+	if config.get_value("levels", "last_complete", 0) > 0:
+		scene = load("res://src/map/map.tscn")
+	else:
+		scene = load("res://src/levels/level_1.tscn")
+	get_tree().change_scene_to_packed(scene)
 
 func open_options_menu():
 	options.visible = true
