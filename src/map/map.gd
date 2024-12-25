@@ -49,7 +49,7 @@ func _ready():
 	target_level = last_level
 	
 	last_complete = config.get_value("levels", "last_complete", 0)
-	if last_complete == levels_unlocked:
+	if last_complete == levels_unlocked and levels_unlocked < 7:
 		controllable = false
 		levels_unlocked = last_complete + 1
 		config.set_value("levels", "unlocked", levels_unlocked)
@@ -64,7 +64,7 @@ func _ready():
 		await levels.animation_finished
 		controllable = true
 
-	if levels_unlocked >= 2:
+	if levels_unlocked >= 3:
 		var wip_text = $WIPText
 		wip_text.visible = true
 

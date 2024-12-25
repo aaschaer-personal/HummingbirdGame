@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var level = get_tree().get_first_node_in_group("level")
 @onready var tutorial_container = get_tree().get_first_node_in_group("tutorial_container")
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var cache = get_tree().get_first_node_in_group("cache")
@@ -105,17 +106,29 @@ func generate_starting_packet():
 	add_sibling(packet)
 	
 	var starting_seeds = []
-	for i in range(4):
-		starting_seeds.append(GenomeGenerator.wild("Sunflower"))
-
-	starting_seeds[0]["max_flowers"] = 0
-	starting_seeds[0]["color"] = 0
-	starting_seeds[1]["max_flowers"] = 0
-	starting_seeds[1]["color"] = 0
-	starting_seeds[2]["max_flowers"] = 1
-	starting_seeds[2]["color"] = 0
-	starting_seeds[3]["max_flowers"] = 1
-	starting_seeds[3]["color"] = 2
+	if level.species == "Sunflower":
+		for i in range(4):
+			starting_seeds.append(GenomeGenerator.wild("Sunflower"))
+		starting_seeds[0]["max_flowers"] = 0
+		starting_seeds[0]["color"] = ["Y", "Y"]
+		starting_seeds[1]["max_flowers"] = 0
+		starting_seeds[1]["color"] = ["Y", "Y"]
+		starting_seeds[2]["max_flowers"] = 1
+		starting_seeds[2]["color"] = ["Y", "Y"]
+		starting_seeds[3]["max_flowers"] = 1
+		starting_seeds[3]["color"] = ["R", "R"]
+	elif level.species == "Jewelweed":
+		print("generating JW seeds")
+		for i in range(3):
+			starting_seeds.append(GenomeGenerator.wild("Jewelweed"))
+		starting_seeds[0]["max_flowers"] = 1
+		starting_seeds[0]["color"] = ["R", "P"]
+		starting_seeds[1]["max_flowers"] = 1
+		starting_seeds[1]["color"] = ["R", "Y"]
+		starting_seeds[2]["max_flowers"] = 1
+		starting_seeds[2]["color"] = ["P", "Y"]
+	else:
+		assert(false)
 
 	starting_seeds.shuffle()
 	packet.add_seeds(starting_seeds)
@@ -126,7 +139,7 @@ func main():
 		await quick_intro_sequence()
 	else:
 		await cinematic_intro_sequence()
-	if config.get_value("options", "show_tutorial", true):
+	if level.level_num == 1 and config.get_value("options", "show_tutorial", true):
 		tutorial_sequence()
 	else:
 		water_explained = true

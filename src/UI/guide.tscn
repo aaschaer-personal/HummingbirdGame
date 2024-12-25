@@ -357,7 +357,7 @@ text = "[font_size=8]
 
 * Each trait is controlled by one or more genes. Each gene has different forms called alleles. For each gene, a flower will have two alleles, one from each parent.
 
-* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are  three possible combinations RR, YY, and RY that produce red, yellow, and orange flowers.
+%s
 
 * The punnet square tabs shows the possible results of crossing two flowers by pollinating one with the pollen of another.
 

@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvfykvjh2sqqi"]
+
+[ext_resource type="Script" path="res://src/flowers/plant.gd" id="1_rxyo2"]
+[ext_resource type="Texture2D" uid="uid://b2xcur2g8uput" path="res://assets/Flowers/Jewelweed/jewelweed_seed.png" id="2_l8j31"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="7_7lrlq"]
+[ext_resource type="PackedScene" uid="uid://do5d23t7cxf21" path="res://src/genome.tscn" id="8_lbcbw"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_en4xj"]
+[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="10_xujuk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v6rw"]
+atlas = ExtResource("2_l8j31")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h8nvi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v6rw")
+}],
+"loop": false,
+"name": &"seed",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxkg8"]
+radius = 4.0
+
+[node name="JewelweedPlant" type="Area2D"]
+script = ExtResource("1_rxyo2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_h8nvi")
+animation = &"seed"
+
+[node name="ShadowGenerator" parent="AnimatedSprite2D" instance=ExtResource("7_7lrlq")]
+object_height = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_jxkg8")
+
+[node name="GrowTimer" type="Timer" parent="."]
+
+[node name="FlowerSpawn1" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="FlowerSpawn2" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="FlowerSpawn3" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="Genome" parent="." instance=ExtResource("8_lbcbw")]
+
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("9_en4xj")]
+stream = ExtResource("10_xujuk")
+max_polyphony = 2

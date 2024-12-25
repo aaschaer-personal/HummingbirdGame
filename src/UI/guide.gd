@@ -1,5 +1,6 @@
 extends NinePatchRect
 
+@onready var level = get_tree().get_first_node_in_group("level")
 @onready var tabs = $Tabs
 @onready var content = $Content
 @onready var controls_tab = $Tabs/Controls
@@ -11,6 +12,7 @@ extends NinePatchRect
 @onready var printing_packets_tab = $Tabs/PrintingPackets
 @onready var genetics_tab = $Tabs/Genetics
 @onready var punnet_square_tab = $Tabs/PunnetSquare
+@onready var genetics_content = $Content/Genetics
 
 func _ready():
 	controls_tab.pressed.connect(toggle.bind("Controls"))
@@ -22,6 +24,15 @@ func _ready():
 	printing_packets_tab.pressed.connect(toggle.bind("PrintingPackets"))
 	genetics_tab.pressed.connect(toggle.bind("Genetics"))
 	punnet_square_tab.pressed.connect(toggle.bind("PunnetSquare"))
+	
+	if level:
+		var species = level.species
+		if species == "Sunflower":
+			genetics_content.text = genetics_content.text % "* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are three unique combinations RR, RY, and YY that produce red, orange, and yellow flowers."
+		elif species == "Jewelweed":
+			genetics_content.text = genetics_content.text % "* Jewelweed has one color gene with three alleles, R for red, P for purple, and Y for yellow. There are nine unique combinations some of which produce the same color of flower."
+		else:
+			assert(level == null)
 
 func toggle(tab_name):
 	for tab in tabs.get_children():

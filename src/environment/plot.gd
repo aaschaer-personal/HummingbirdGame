@@ -1,10 +1,9 @@
 class_name Plot extends Interactable
 
 @onready var dirt_sprite = $Dirt
-@onready var sunflower_plant_scene = preload("res://src/flowers/sunflower/sunflower_plant.tscn")
-@onready var lupine_plant_scene = preload("res://src/flowers/lupine/lupine_plant.tscn")
 var plant = null
 var wetness = 0
+var plant_scene = null
 
 func _process(delta):
 	wetness -= 1 * delta
@@ -19,23 +18,20 @@ func is_interactable():
 func get_player_interaction():
 	return "use_tool_on_plot"
 
-func plant_seed(genome_dict):
-	if genome_dict != null:
-		var new_plant
-		if genome_dict["species"] == "Sunflower":
-			new_plant = sunflower_plant_scene.instantiate()
-		elif genome_dict["species"] == "Lupine":
-			new_plant = lupine_plant_scene.instantiate()
-		else:
-			assert(false)
-
+func plant_seed(gene_dict):
+	if gene_dict != null:
+		if plant_scene == null:
+			var species = gene_dict["species"].to_lower()
+			print(species)
+			plant_scene = load("res://src/flowers/%s/%s_plant.tscn" % [species,species])
+		var new_plant = plant_scene.instantiate()
 		add_child(new_plant)
-		new_plant.genome.set_vals_from_genome_dict(genome_dict)
+		new_plant.genome.set_vals_from_gene_dict(gene_dict)
 		plant = new_plant
 
 func remove_seed():
 	if plant.stage == 0:		
-		var seed_genome = plant.genome.genome_dict
+		var seed_genome = plant.genome.gene_dict
 		plant.queue_free()
 		plant = null
 		return seed_genome

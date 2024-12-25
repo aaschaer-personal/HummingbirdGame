@@ -12,7 +12,6 @@ signal guide_opened
 @onready var return_to_map_button = $PauseMenu/VBoxContainer/ReturnToMapButton
 @onready var quit_to_menu_button = $PauseMenu/VBoxContainer/QuitToMenuButton
 
-
 func _ready():
 	resume_button.pressed.connect(resume)
 	guide_button.pressed.connect(open_guide)
@@ -55,8 +54,8 @@ func restart_level():
 
 func return_to_map():
 	get_tree().paused = false
-	var main_menu = load("res://src/main_menu.tscn")
-	get_tree().change_scene_to_packed(main_menu)
+	var map = load("res://src/map/map.tscn")
+	get_tree().change_scene_to_packed(map)
 
 func quit_to_menu():
 	get_tree().paused = false

@@ -2,15 +2,18 @@ extends GridContainer
 
 @onready var grid_unit_scene = preload("res://src/UI/punnet_unit.tscn")
 
-func fill(genome_dict_1, genome_dict_2):
-	if genome_dict_1["species"] != genome_dict_2["species"]:
+func fill(gene_dict_1, gene_dict_2):
+	var species = gene_dict_1["species"]
+	if gene_dict_2["species"] != species:
 		assert(false)
 
 	for child in get_children():
 		child.queue_free()
 
-	if genome_dict_1["species"] == "Sunflower":
-		fill_sunflower(genome_dict_1, genome_dict_2)
+	if species == "Sunflower":
+		fill_sunflower_or_jewelweed(gene_dict_1, gene_dict_2)
+	elif species == "Jewelweed":
+		fill_sunflower_or_jewelweed(gene_dict_1, gene_dict_2)
 	else:
 		assert(false)
 
@@ -20,64 +23,41 @@ func _make_space():
 	ret.add_theme_font_size_override("font_size", 6)
 	return ret
 
-func fill_sunflower(genome_dict_1, genome_dict_2):
+func fill_sunflower_or_jewelweed(gene_dict_1, gene_dict_2):
 	columns = 4
-	var child_colors = [0,0,0,0]
 	var child_units = []
-	var p1_y = genome_dict_1["color"]
-	var p2_y = genome_dict_2["color"]
+	var p1_code = GenomeHelpers.code_from_gene_dict(gene_dict_1)
+	var p2_code = GenomeHelpers.code_from_gene_dict(gene_dict_2)
 
-	# Parent Labels
+	# parent Labels
 	var p1a1 = Label.new()
 	p1a1.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	p1a1.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	p1a1.text = p1_code[0]
 	var p1a2 = Label.new()
 	p1a2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	p1a2.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	p1a2.text = p1_code[1]
 	var p2a1 = Label.new()
 	p2a1.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	p2a1.text = p2_code[0]
 	var p2a2 = Label.new()
 	p2a2.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	p2a2.text = p2_code[1]
 
-	if p1_y == 0:
-		p1a1.text = "Y"
-		p1a2.text = "Y"
-	elif p1_y == 1:
-		p1a1.text = "R"
-		p1a2.text = "Y"
-		child_colors[0] += 1
-		child_colors[1] += 1
-	elif p1_y == 2:
-		p1a1.text = "R"
-		p1a2.text = "R"
-		child_colors[0] += 1
-		child_colors[1] += 1
-		child_colors[2] += 1
-		child_colors[3] += 1
-	else:
-		assert(false)
+	# child gene dicts
+	var child_gene_dicts = []
+	for i in range(4):
+		child_gene_dicts.append({"species": gene_dict_1["species"]})
+	child_gene_dicts[0]["color"] = [p1_code[0], p2_code[0]]
+	child_gene_dicts[1]["color"] = [p1_code[1], p2_code[0]]
+	child_gene_dicts[2]["color"] = [p1_code[0], p2_code[1]]
+	child_gene_dicts[3]["color"] = [p1_code[1], p2_code[1]]
 
-	if p2_y == 0:
-		p2a1.text = "Y"
-		p2a2.text = "Y"
-	elif p2_y == 1:
-		p2a1.text = "R"
-		p2a2.text = "R"
-		child_colors[0] += 1
-		child_colors[2] += 1
-	elif p2_y == 2:
-		p2a1.text = "Y"
-		p2a2.text = "Y"
-		child_colors[0] += 1
-		child_colors[1] += 1
-		child_colors[2] += 1
-		child_colors[3] += 1
-	else:
-		assert(false)
-
-	for child_color in child_colors:
+	# assemble
+	for child_gene_dict in child_gene_dicts:
 		var unit = grid_unit_scene.instantiate()
-		unit.call_deferred("fill_sunflower", child_color)
+		unit.call_deferred("fill", child_gene_dict)
 		child_units.append(unit)
 
 	add_child(_make_space())

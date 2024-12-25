@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://dfbedlwwlmn8x" path="res://assets/Map/level_7.png" id="13_wblfe"]
 [ext_resource type="Texture2D" uid="uid://c0hrgdryfkdhv" path="res://assets/Map/level_7_unlock.png" id="14_toced"]
 [ext_resource type="Texture2D" uid="uid://ck5mt0xxl7f3i" path="res://assets/Map/hummingbird_icon.png" id="16_ysgr6"]
-[ext_resource type="Script" path="res://src/levels/level_1.gd" id="17_51whq"]
 [ext_resource type="PackedScene" uid="uid://cuysebhfwii7x" path="res://src/map/map_sunflower.tscn" id="18_a26im"]
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="19_3wqch"]
 
@@ -687,6 +686,11 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0g0tj"]
 
+[sub_resource type="GDScript" id="GDScript_coq6s"]
+script/source = "class_name Level1 extends Level
+
+"
+
 [node name="Map" type="Node2D"]
 script = ExtResource("1_o2hyj")
 
@@ -787,7 +791,7 @@ text = "* Move with A/D or by clicking on a level
 z_index = 1
 
 [node name="1" type="Node2D" parent="Flowers"]
-script = ExtResource("17_51whq")
+script = SubResource("GDScript_coq6s")
 
 [node name="MapSunflower" parent="Flowers/1" instance=ExtResource("18_a26im")]
 position = Vector2(42, 105)
@@ -842,13 +846,12 @@ process_mode = 3
 visible = false
 offset_right = 0.0
 offset_bottom = 0.0
-color = Color(0, 0, 0, 0.313726)
 
 [node name="WIPText" type="Label" parent="."]
 visible = false
-offset_left = 101.0
-offset_top = 119.0
-offset_right = 173.0
-offset_bottom = 161.0
-text = "Level 2
+offset_left = 180.0
+offset_top = 191.0
+offset_right = 252.0
+offset_bottom = 233.0
+text = "Level 3
 coming soon!"

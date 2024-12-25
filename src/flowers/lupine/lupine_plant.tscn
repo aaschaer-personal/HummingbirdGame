@@ -353,7 +353,7 @@ script = ExtResource("1_hxlsj")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_slwu1")
-animation = &"sprout"
+animation = &"die"
 autoplay = "seed"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

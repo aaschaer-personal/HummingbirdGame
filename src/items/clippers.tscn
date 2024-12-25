@@ -8,24 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="5_vex4k"]
 [ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="6_bh4qs"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpmfy"]
 radius = 9.0
 height = 20.0
 
 [node name="Clippers" type="Area2D"]
 script = ExtResource("1_k4tqf")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 6)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_wsjay")
-
-[node name="TransportDisk" type="Sprite2D" parent="."]
-show_behind_parent = true
-position = Vector2(3, 11)
-texture = ExtResource("2_gy2to")
-
-[node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("4_5q66u")]
 
 [node name="Item" type="Sprite2D" parent="."]
 position = Vector2(0, 6)
@@ -34,9 +22,21 @@ texture = ExtResource("2_bpad2")
 [node name="ShadowGenerator" parent="Item" instance=ExtResource("4_5q66u")]
 object_height = 16
 
-[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("5_vex4k")]
-stream = ExtResource("5_tfke7")
-db_offset = 5
+[node name="TransportDisk" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(3, 11)
+texture = ExtResource("2_gy2to")
+
+[node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("4_5q66u")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rpmfy")
 
 [node name="TransportDiskAudio" parent="." instance=ExtResource("5_vex4k")]
 stream = ExtResource("6_bh4qs")
+
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("5_vex4k")]
+stream = ExtResource("5_tfke7")
+db_offset = 5
