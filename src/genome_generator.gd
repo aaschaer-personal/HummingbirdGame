@@ -8,9 +8,9 @@ var int_keys = [
 ]
 
 var color_keys_by_species = {
-	"Sunflower": ["color"],
-	"Jewelweed": ["color"],
-	"Lupine": ["red", "blue"],
+	"sunflower": ["color"],
+	"jewelweed": ["color"],
+	"lupine": ["red", "blue"],
 }
 
 func wild(species):
@@ -28,16 +28,16 @@ func wild(species):
 		if allele not in ret["inbreeding"]:
 			ret["inbreeding"].append(allele)
 
-	if species == "Sunflower":
+	if species == "sunflower":
 		ret["color"] = ["R", "Y"]
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		var options = {
 			0: ["R", "Y"],
 			1: ["R", "P"],
 			2: ["P", "Y"],
 		}
 		ret["color"] = options[randi() % 3]
-	elif species == "Lupine":
+	elif species == "lupine":
 		ret["red"] = ["R", "r"]
 		ret["blue"] = ["B", "b"]
 	else:

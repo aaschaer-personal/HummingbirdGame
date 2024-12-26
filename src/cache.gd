@@ -140,6 +140,7 @@ func print_packet(seed_packet):
 		await left_door_open()
 		door_open = true
 	seed_packet.global_position = self.global_position + Vector2(-2, -22)
+	seed_packet.visible=true
 	seed_packet.tween_height(4, 0)
 	while packets_printing > 3:
 		await get_tree().create_timer(0.1).timeout

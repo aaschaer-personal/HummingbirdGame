@@ -5,7 +5,7 @@ extends Control
 @onready var label = $Label
 
 func fill(gene_dict):
-	var species = gene_dict["species"].to_lower()
+	var species = gene_dict["species"]
 	var flower_texture = load("res://assets/UI/Icons/%s.png" % species)
 	flower.texture = flower_texture
 	var petals_texture = load("res://assets/UI/Icons/%s_petals.png" % species)

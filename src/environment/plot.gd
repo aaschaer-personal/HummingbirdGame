@@ -21,8 +21,7 @@ func get_player_interaction():
 func plant_seed(gene_dict):
 	if gene_dict != null:
 		if plant_scene == null:
-			var species = gene_dict["species"].to_lower()
-			print(species)
+			var species = gene_dict["species"]
 			plant_scene = load("res://src/flowers/%s/%s_plant.tscn" % [species,species])
 		var new_plant = plant_scene.instantiate()
 		add_child(new_plant)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmt6vh85eyrpy"]
+
+[ext_resource type="Script" path="res://src/flowers/plant.gd" id="1_objam"]
+[ext_resource type="PackedScene" uid="uid://do5d23t7cxf21" path="res://src/genome.tscn" id="2_gpur2"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="3_4e3qo"]
+[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="4_2g0ho"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vcnuc"]
+radius = 4.0
+
+[node name="Plant" type="Area2D"]
+script = ExtResource("1_objam")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vcnuc")
+
+[node name="GrowTimer" type="Timer" parent="."]
+
+[node name="FlowerSpawn1" type="Node2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="FlowerSpawn2" type="Node2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="FlowerSpawn3" type="Node2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="Genome" parent="." instance=ExtResource("2_gpur2")]
+
+[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("3_4e3qo")]
+stream = ExtResource("4_2g0ho")
+max_polyphony = 2

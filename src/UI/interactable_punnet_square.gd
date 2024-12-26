@@ -34,7 +34,7 @@ func _ready():
 	for allele_option in [p1a1, p1a2, p1b1, p1b2, p1c1, p1c2, p2a1, p2a2, p2b1, p2b2, p2c1, p2c2]:
 		allele_option.item_selected.connect(_on_allele_option_selected)
 
-	if species == "Sunflower":
+	if species == "sunflower":
 		for option in [p1a1, p1a2, p2a1, p2a2]:
 			option.visible = true
 			option.add_item("R")
@@ -44,7 +44,7 @@ func _ready():
 		p2a1.select(1)
 		p2a2.select(1)
 		_on_allele_option_selected(null)
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		for option in [p1a1, p1a2, p2a1, p2a2]:
 			option.visible = true
 			option.add_item("R")
@@ -62,14 +62,14 @@ func _on_allele_option_selected(_selected):
 	var g1 = {"species": species}
 	var g2 = {"species": species}
 
-	if species == "Sunflower":
+	if species == "sunflower":
 		var map = {
 			0: "R",
 			1: "Y",
 		}
 		g1["color"] = [map[p1a1.get_selected_id()], map[p1a2.get_selected_id()]]
 		g2["color"] = [map[p2a1.get_selected_id()], map[p2a2.get_selected_id()]]
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		var map = {
 			0: "R",
 			1: "P",

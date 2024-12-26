@@ -3,20 +3,15 @@ class_name DesireIcon extends Node2D
 @onready var main_sprite = $MainSprite
 @onready var petal_sprite = $PetalSprite
 
-@onready var sunflower_main = preload("res://assets/UI/Icons/sunflower.png")
-@onready var sunflower_petal = preload("res://assets/UI/Icons/sunflower_petals.png")
+var main_texture = null
+var petal_texture = null
 
-@onready var lupine_main = preload("res://assets/UI/Icons/lupine.png")
-@onready var lupine_petal = preload("res://assets/UI/Icons/lupine_petals.png")
+func _ready():
+	var species = get_tree().get_first_node_in_group("level").species
+	main_texture = load("res://assets/UI/Icons/%s.png" % species)
+	petal_texture = load("res://assets/UI/Icons/%s_petals.png" % species)
 
-func set_icon(species, color):
-	if species == "Sunflower":
-		main_sprite.set_texture(sunflower_main)
-		petal_sprite.set_texture(sunflower_petal)
-	elif species == "Lupine":
-		main_sprite.set_texture(lupine_main)
-		petal_sprite.set_texture(lupine_petal)
-	else:
-		assert(false)
-	
+func set_icon(color):
+	main_sprite.set_texture(main_texture)
+	petal_sprite.set_texture(petal_texture)
 	petal_sprite.modulate = color

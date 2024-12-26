@@ -3,22 +3,22 @@ extends Node
 
 func code_from_gene_dict(gene_dict):
 	var species = gene_dict["species"]
-	if species == "Sunflower":
+	if species == "sunflower":
 		return sunflower_code(gene_dict["color"])
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		return jewelweed_code(gene_dict["color"])
-	elif species == "Lupine":
+	elif species == "lupine":
 		return lupine_code(gene_dict["red"], gene_dict["blue"])
 	else:
 		assert(false)
 
 func color_from_gene_dict(gene_dict):
 	var species = gene_dict["species"]
-	if species == "Sunflower":
+	if species == "sunflower":
 		return sunflower_color(gene_dict["color"])
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		return jewelweed_color(gene_dict["color"])
-	elif species == "Lupine":
+	elif species == "lupine":
 		return lupine_color(gene_dict["red"], gene_dict["blue"])
 	else:
 		assert(false)

@@ -1,8 +1,8 @@
 class_name Flower extends Interactable
 
 @onready var parent_plant = get_parent().get_parent()
+@onready var petal_sprite = $PetalSprite
 @onready var main_sprite = $MainSprite
-@onready var petal_sprite = $MainSprite/PetalSprite
 @onready var pollination_timer = $PollinationTimer
 @onready var nectar_meter = $NectarMeter
 @onready var drinkable_area = $DrinkableArea
@@ -19,11 +19,12 @@ var pollen = []
 var seeds = []
 var bee: Bee = null
 var manualy_pollinated = false
-
-# preloaded by subclasses
-var cut_flower_scene
+var cut_flower_scene = null
 
 func _ready():
+	var species = parent_plant.genome.species
+	cut_flower_scene = load("res://src/flowers/%s/cut_%s.tscn" % [species, species])
+
 	pollination_timer.timeout.connect(_wilt)
 	body_entered.connect(_on_body_entered)
 	nectar_meter.max_value = max_nectar
@@ -133,19 +134,19 @@ func _pick_pollen():
 
 func generate_seeds():
 	for i in range(parent_plant.genome.seed_num):
-		var pollen_genome_dict = _pick_pollen()
-		if not pollen_genome_dict:
-			pollen_genome_dict = GenomeGenerator.wild(
+		var pollen_gene_dict = _pick_pollen()
+		if not pollen_gene_dict:
+			pollen_gene_dict = GenomeGenerator.wild(
 				parent_plant.genome.species)
-		var new_seed = GenomeGenerator.genome_dict_from_gamete_dicts(
-			GenomeGenerator.gamete_dict_from_genome_dict(
-				pollen_genome_dict),
-			GenomeGenerator.gamete_dict_from_genome_dict(
-				parent_plant.genome.genome_dict)
+		var new_seed = GenomeGenerator.gene_dict_from_gamete_dicts(
+			GenomeGenerator.gamete_dict_from_gene_dict(
+				pollen_gene_dict),
+			GenomeGenerator.gamete_dict_from_gene_dict(
+				parent_plant.genome.gene_dict)
 		)
-		if new_seed["species"] == "Sunflower":
+		if new_seed["species"] == "sunflower":
 			SignalBus.flower_pollinated.emit(
-				GenomeHelpers.sunflower_flower_color(new_seed["color"])
+				GenomeHelpers.color_from_gene_dict(new_seed)
 			)
 		seeds.append(new_seed)
 
@@ -170,7 +171,7 @@ func finish_drink():
 	if stage == 1 and pollen:
 		manualy_pollinated = true
 		pollination_timer.start(1)
-	player.add_pollen(parent_plant.genome.genome_dict)
+	player.add_pollen(parent_plant.genome.gene_dict)
 
 func clip():
 	if stage == 1:

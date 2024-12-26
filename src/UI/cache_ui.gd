@@ -14,16 +14,11 @@ class_name CacheUI extends Control
 
 var packets_toggled = true
 var packets_remaining = 10
-var species
-
-var colors = [
-	Colors.white,
-	Colors.red,
-	Colors.orange,
-	Colors.yellow,
-]
+var colors = [Colors.white]
 
 func _ready():
+	var species = get_tree().get_first_node_in_group("level").species
+	colors.append_array(Colors.flower_colors(species))
 	for color in colors:
 		var swathe = Image.create(10, 10, false, Image.FORMAT_RGBA8)
 		swathe.fill(color)
@@ -57,6 +52,7 @@ func print():
 	var icon = icon_option.get_item_icon(icon_option.get_selected_id())
 	var icon_color = colors[icon_color_option.get_selected_id()]
 	var packet = packet_scene.instantiate()
+	packet.visible = false
 	get_parent().add_sibling(packet)
 	if not packet.is_node_ready():
 		await packet.ready

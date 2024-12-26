@@ -10,3 +10,11 @@ var yellow =  Color("fbff86")
 var lightest_green = Color("b7f48e")
 var blue = Color("4d9be6")
 var purple = Color("a884f3")
+
+var colors_by_species = {
+	"sunflower": [red, orange, yellow],
+	"jewelweed": [red, orange, yellow, purple],
+}
+
+func flower_colors(species):
+	return colors_by_species[species]

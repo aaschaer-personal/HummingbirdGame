@@ -10,9 +10,9 @@ func fill(gene_dict_1, gene_dict_2):
 	for child in get_children():
 		child.queue_free()
 
-	if species == "Sunflower":
+	if species == "sunflower":
 		fill_sunflower_or_jewelweed(gene_dict_1, gene_dict_2)
-	elif species == "Jewelweed":
+	elif species == "jewelweed":
 		fill_sunflower_or_jewelweed(gene_dict_1, gene_dict_2)
 	else:
 		assert(false)

@@ -49,9 +49,7 @@ func show_desires():
 	
 	for i in desired_bouquet_colors.size():
 		var desired_color = desired_bouquet_colors[i]
-		desire_icons.get_children()[i].set_icon(
-			get_parent().species, desired_color)
-
+		desire_icons.get_children()[i].set_icon(desired_color)
 func is_interactable():
 	return player.held_item is Bouquet
 
