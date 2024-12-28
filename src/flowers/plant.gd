@@ -21,7 +21,7 @@ var parent_plot: Plot
 
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
-	var species = level.species
+	var species = level.flower_species
 	flower_1_scene = load("res://src/flowers/%s/%s_flower_1.tscn" % [species, species])
 	flower_2_scene = load("res://src/flowers/%s/%s_flower_2.tscn" % [species, species])
 	flower_3_scene = load("res://src/flowers/%s/%s_flower_3.tscn" % [species, species])

@@ -2236,7 +2236,7 @@ height_off_ground = 15
 
 [node name="Body" type="AnimatedSprite2D" parent="Animation"]
 sprite_frames = SubResource("SpriteFrames_kuglu")
-animation = &"hovering"
+animation = &"perching_h"
 autoplay = "hovering"
 
 [node name="ShadowGenerator" parent="Animation/Body" instance=ExtResource("11_u3ina")]

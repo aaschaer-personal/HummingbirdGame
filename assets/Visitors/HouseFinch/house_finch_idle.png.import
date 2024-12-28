@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mfpsgak0m8a4"
-path="res://.godot/imported/house_finch_confused.png-51d40fe859faa014873218e68c5c74eb.ctex"
+uid="uid://b7dwq2cxxyoxo"
+path="res://.godot/imported/house_finch_idle.png-a9af2ac63e405673d766797a6201b920.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Visitors/house_finch_confused.png"
-dest_files=["res://.godot/imported/house_finch_confused.png-51d40fe859faa014873218e68c5c74eb.ctex"]
+source_file="res://assets/Visitors/HouseFinch/house_finch_idle.png"
+dest_files=["res://.godot/imported/house_finch_idle.png-a9af2ac63e405673d766797a6201b920.ctex"]
 
 [params]
 

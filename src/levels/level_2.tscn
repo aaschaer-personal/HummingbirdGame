@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/plot.tscn" id="4_s8c2g"]
 
 [node name="Level" instance=ExtResource("1_qv6ek")]
-species = "jewelweed"
+flower_species = "jewelweed"
+visitor_species = "tufted_titmouse"
 level_num = 2
 
 [node name="Pond" parent="." index="10" instance=ExtResource("2_6crh2")]

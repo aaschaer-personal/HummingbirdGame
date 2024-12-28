@@ -1,7 +1,6 @@
-[gd_scene load_steps=39 format=3 uid="uid://dcseks6b72fk7"]
+[gd_scene load_steps=38 format=3 uid="uid://dcseks6b72fk7"]
 
 [ext_resource type="PackedScene" uid="uid://bthpcl3gbouwc" path="res://src/flowers/cut_flower.tscn" id="1_e4ryc"]
-[ext_resource type="Script" path="res://src/flowers/cut_flower.gd" id="2_eadwl"]
 [ext_resource type="Texture2D" uid="uid://15eew7idwlku" path="res://assets/Flowers/Sunflower/sunflower_cut_decay.png" id="2_eu8vk"]
 [ext_resource type="Texture2D" uid="uid://5y2mcocfjuek" path="res://assets/Flowers/Sunflower/sunflower_cut.png" id="3_f63ia"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_5vstd"]
@@ -235,7 +234,7 @@ animations = [{
 }]
 
 [node name="CutFlower" instance=ExtResource("1_e4ryc")]
-script = ExtResource("2_eadwl")
+species = "sunflower"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(12, 6.98492e-10)

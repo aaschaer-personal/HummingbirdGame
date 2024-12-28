@@ -17,8 +17,8 @@ var packets_remaining = 10
 var colors = [Colors.white]
 
 func _ready():
-	var species = get_tree().get_first_node_in_group("level").species
-	colors.append_array(Colors.flower_colors(species))
+	var flower_species = get_tree().get_first_node_in_group("level").flower_species
+	colors.append_array(Colors.flower_colors(flower_species))
 	for color in colors:
 		var swathe = Image.create(10, 10, false, Image.FORMAT_RGBA8)
 		swathe.fill(color)

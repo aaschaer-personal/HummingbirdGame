@@ -23,7 +23,7 @@ var species
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	if level:
-		species = level.species
+		species = level.flower_species
 		var flower_texture = load("res://assets/UI/Icons/%s.png" % species.to_lower())
 		p1_example_flower.texture = flower_texture
 		p2_example_flower.texture = flower_texture

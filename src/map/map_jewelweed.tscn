@@ -1,0 +1,168 @@
+[gd_scene load_steps=24 format=3 uid="uid://dmtpyvohvlyr1"]
+
+[ext_resource type="Script" path="res://src/map/map_flower.gd" id="1_dx7ud"]
+[ext_resource type="Texture2D" uid="uid://b2wrelvl8n3vw" path="res://assets/Map/jewelweed.png" id="2_f0yvp"]
+[ext_resource type="Texture2D" uid="uid://btekv3scv7bxh" path="res://assets/Map/jewelweed_petals.png" id="3_y5fnd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgftu"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(0, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag73q"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(11, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5kkg"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(22, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf418"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(33, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl4fw"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(44, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyjvx"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(55, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3g44"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(66, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_imehk"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(77, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b14mn"]
+atlas = ExtResource("2_f0yvp")
+region = Rect2(77, 0, 11, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvl24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgftu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag73q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5kkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf418")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl4fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyjvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3g44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_imehk")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b14mn")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 1.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gsqwj"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(0, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffps0"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(11, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs651"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(22, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nscib"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(33, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m71ub"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(44, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_watvy"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(55, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u0o7a"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(66, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q5mp"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(77, 0, 11, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l8sa"]
+atlas = ExtResource("3_y5fnd")
+region = Rect2(77, 0, 11, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egvsl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gsqwj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffps0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs651")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nscib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m71ub")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_watvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u0o7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q5mp")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l8sa")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 1.0
+}]
+
+[node name="MapJewelweed" type="Node2D"]
+script = ExtResource("1_dx7ud")
+
+[node name="Plant" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wvl24")
+animation = &"bloomed"
+
+[node name="Petals" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_egvsl")
+animation = &"bloomed"

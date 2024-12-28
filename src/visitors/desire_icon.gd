@@ -7,9 +7,9 @@ var main_texture = null
 var petal_texture = null
 
 func _ready():
-	var species = get_tree().get_first_node_in_group("level").species
-	main_texture = load("res://assets/UI/Icons/%s.png" % species)
-	petal_texture = load("res://assets/UI/Icons/%s_petals.png" % species)
+	var flower_species = get_tree().get_first_node_in_group("level").flower_species
+	main_texture = load("res://assets/UI/Icons/%s.png" % flower_species)
+	petal_texture = load("res://assets/UI/Icons/%s_petals.png" % flower_species)
 
 func set_icon(color):
 	main_sprite.set_texture(main_texture)

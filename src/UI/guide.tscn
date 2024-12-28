@@ -9,6 +9,7 @@
 [node name="Guide" type="NinePatchRect"]
 offset_right = 248.0
 offset_bottom = 324.0
+mouse_filter = 0
 texture = ExtResource("1_8u3um")
 region_rect = Rect2(1, 1, 22, 22)
 patch_margin_left = 6

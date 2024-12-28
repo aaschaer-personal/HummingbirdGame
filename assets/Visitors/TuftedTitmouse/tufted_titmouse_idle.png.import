@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7dwq2cxxyoxo"
-path="res://.godot/imported/house_finch_idle.png-549697372f580bde1400442b69406e90.ctex"
+uid="uid://dmc2nco8x5u6m"
+path="res://.godot/imported/tufted_titmouse_idle.png-97a978b726d96be24c913e8ab2d9a6b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Visitors/house_finch_idle.png"
-dest_files=["res://.godot/imported/house_finch_idle.png-549697372f580bde1400442b69406e90.ctex"]
+source_file="res://assets/Visitors/TuftedTitmouse/tufted_titmouse_idle.png"
+dest_files=["res://.godot/imported/tufted_titmouse_idle.png-97a978b726d96be24c913e8ab2d9a6b4.ctex"]
 
 [params]
 

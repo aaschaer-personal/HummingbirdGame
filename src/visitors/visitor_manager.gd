@@ -7,9 +7,12 @@ signal boquet_accepted
 @onready var spawn_point = $SpawnPoint
 @onready var landing_point = $LandingPoint
 @onready var timer = $Timer
-@onready var visitor_scene = preload("res://src/visitors/visitor.tscn")
 @onready var visitor: Visitor
 @onready var visitors_unlocked = false
+var bouquets = []
+var bouquet_num = 0
+var done = false
+var visitor_scene = null
 
 var rainbow_order = {
 	Colors.red: 0,
@@ -17,6 +20,35 @@ var rainbow_order = {
 	Colors.yellow: 2,
 	Colors.purple: 3,
 }
+
+var bouquet_tiers_by_species = {
+	"sunflower": [
+		[[Colors.yellow]],
+		[[Colors.orange]],
+		generate_boquets(Colors.flower_colors("sunflower"), 2, 2, 1),
+		[[Colors.red, Colors.orange, Colors.yellow]],
+	],
+	"jewelweed": [
+		generate_boquets([Colors.red, Colors.yellow], 1, 1, 1),
+		generate_boquets([Colors.orange, Colors.purple], 1, 1, 1),
+		generate_boquets(Colors.flower_colors("jewelweed"), 3, 2, 1),
+		generate_boquets(Colors.flower_colors("jewelweed"), 2, 3, 2),
+		[[Colors.red, Colors.orange, Colors.yellow, Colors.purple]],
+	]
+}
+
+func _ready():
+	var level = get_tree().get_first_node_in_group("level")
+	var visitor_species = level.visitor_species
+	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
+	
+	var flower_species = level.flower_species
+	for tier in bouquet_tiers_by_species[flower_species]:
+		tier.shuffle()
+		for bouquet in tier:
+			bouquets.append(bouquet)
+	timer.timeout.connect(_on_timeout)
+	timer.start(1)
 
 func _color_compare(color1, color2):
 	return rainbow_order[color1] < rainbow_order[color2]
@@ -37,34 +69,6 @@ func generate_boquets(colors, count, size, max_repetitions):
 				ret.append(bouquet)
 				break
 	return ret
-
-var bouquet_tiers_by_species = {
-	"sunflower": [
-		[[Colors.yellow]],
-		[[Colors.orange]],
-		generate_boquets(Colors.flower_colors("sunflower"), 2, 2, 1),
-		[[Colors.red, Colors.orange, Colors.yellow]],
-	],
-	"jewelweed": [
-		generate_boquets([Colors.red, Colors.yellow], 1, 1, 1),
-		generate_boquets([Colors.orange, Colors.purple], 1, 1, 1),
-		generate_boquets(Colors.flower_colors("jewelweed"), 3, 2, 1),
-		generate_boquets(Colors.flower_colors("jewelweed"), 2, 3, 2),
-		[[Colors.red, Colors.orange, Colors.yellow, Colors.purple]],
-	]
-}
-
-var bouquets = []
-var bouquet_num = 0
-var done = false
-
-func _ready():
-	var species = get_tree().get_first_node_in_group("level").species
-	for tier in bouquet_tiers_by_species[species]:
-		for bouquet in tier:
-			bouquets.append(bouquet)
-	timer.timeout.connect(_on_timeout)
-	timer.start(1)
 
 func spawn_visitor():
 	if visitor == null:
