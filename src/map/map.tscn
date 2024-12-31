@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://cwlks03m5fxs5"]
+[gd_scene load_steps=111 format=3 uid="uid://cwlks03m5fxs5"]
 
 [ext_resource type="Texture2D" uid="uid://cvmachil2lwep" path="res://assets/Map/map.png" id="1_hmhcj"]
 [ext_resource type="Script" path="res://src/map/map.gd" id="1_o2hyj"]
@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://dmtpyvohvlyr1" path="res://src/map/map_jewelweed.tscn" id="18_2snvb"]
 [ext_resource type="PackedScene" uid="uid://cuysebhfwii7x" path="res://src/map/map_sunflower.tscn" id="18_a26im"]
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="19_3wqch"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="20_q4jsa"]
+[ext_resource type="AudioStream" uid="uid://bmuvoofmtnshv" path="res://assets/Music/Map.ogg" id="21_kadte"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1rnfu"]
 atlas = ExtResource("2_52um0")
@@ -909,3 +911,9 @@ offset_right = 252.0
 offset_bottom = 233.0
 text = "Level 3
 coming soon!"
+
+[node name="MusicPlayer" parent="." instance=ExtResource("20_q4jsa")]
+process_mode = 3
+stream = ExtResource("21_kadte")
+autoplay = true
+option = "music_volume"
