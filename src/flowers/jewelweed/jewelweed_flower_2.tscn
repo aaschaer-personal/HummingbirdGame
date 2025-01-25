@@ -680,43 +680,7 @@ height = 4.0
 
 [node name="Flower" instance=ExtResource("1_nhxkl")]
 
-[node name="PetalSprite" type="AnimatedSprite2D" parent="." index="3"]
-sprite_frames = SubResource("SpriteFrames_25wva")
-animation = &"bloom"
-autoplay = "bloom"
-
-[node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("8_ydbb0")]
-object_height = 10
-height_off_ground = 8
-
-[node name="MainSprite" type="AnimatedSprite2D" parent="." index="4"]
-show_behind_parent = true
-sprite_frames = SubResource("SpriteFrames_ba82n")
-animation = &"bloom"
-autoplay = "bloom"
-
-[node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("8_ydbb0")]
-object_height = 10
-height_off_ground = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="5"]
-position = Vector2(-8, -11)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ta5n1")
-
-[node name="DrinkableArea" type="Area2D" parent="." index="6"]
-position = Vector2(-11, -12)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
-shape = SubResource("CapsuleShape2D_0dfgi")
-
-[node name="NectarMeter" parent="." index="7" instance=ExtResource("15_ekxvo")]
-offset_left = -16.0
-offset_top = -54.0
-offset_right = 24.0
-offset_bottom = -14.0
-
-[node name="BeeHoverPoints" type="Node2D" parent="." index="8"]
+[node name="BeeHoverPoints" type="Node2D" parent="." index="3"]
 
 [node name="HoverPoint1" type="Node2D" parent="BeeHoverPoints" index="0"]
 position = Vector2(-15, -17)
@@ -735,3 +699,39 @@ position = Vector2(-12, -13)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints" index="5"]
 position = Vector2(-11, -9)
+
+[node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
+sprite_frames = SubResource("SpriteFrames_25wva")
+animation = &"bloom"
+autoplay = "bloom"
+
+[node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("8_ydbb0")]
+object_height = 10
+height_off_ground = 8
+
+[node name="MainSprite" type="AnimatedSprite2D" parent="." index="5"]
+show_behind_parent = true
+sprite_frames = SubResource("SpriteFrames_ba82n")
+animation = &"bloom"
+autoplay = "bloom"
+
+[node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("8_ydbb0")]
+object_height = 10
+height_off_ground = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
+position = Vector2(-8, -11)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ta5n1")
+
+[node name="DrinkableArea" type="Area2D" parent="." index="7"]
+position = Vector2(-11, -12)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
+shape = SubResource("CapsuleShape2D_0dfgi")
+
+[node name="NectarMeter" parent="." index="8" instance=ExtResource("15_ekxvo")]
+offset_left = -16.0
+offset_top = -54.0
+offset_right = 24.0
+offset_bottom = -14.0

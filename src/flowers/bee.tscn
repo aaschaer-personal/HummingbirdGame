@@ -26,7 +26,6 @@ animations = [{
 }]
 
 [node name="Bee" type="AnimatedSprite2D"]
-show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_ntlpw")
 autoplay = "default"
 frame_progress = 0.125527
