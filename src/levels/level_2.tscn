@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blyyeqy2xq7mg"]
+[gd_scene load_steps=7 format=3 uid="uid://blyyeqy2xq7mg"]
 
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_qv6ek"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="2_6crh2"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_albgu"]
+[ext_resource type="AudioStream" uid="uid://bfwmjoq2a0hni" path="res://assets/Music/Level2.ogg" id="3_cb3gk"]
 [ext_resource type="PackedScene" uid="uid://chvf2ks32aa4d" path="res://src/environment/sapling.tscn" id="3_wtd84"]
 [ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/plot.tscn" id="4_s8c2g"]
 
@@ -10,26 +12,33 @@ flower_species = "jewelweed"
 visitor_species = "tufted_titmouse"
 level_num = 2
 
-[node name="Pond" parent="." index="10" instance=ExtResource("2_6crh2")]
+[node name="MusicPlayer" parent="." index="10" instance=ExtResource("2_albgu")]
+process_mode = 3
+position = Vector2(443, 320)
+stream = ExtResource("3_cb3gk")
+autoplay = true
+option = "music_volume"
+
+[node name="Pond" parent="." index="11" instance=ExtResource("2_6crh2")]
 position = Vector2(200, 139)
 
-[node name="Pond2" parent="." index="11" instance=ExtResource("2_6crh2")]
+[node name="Pond2" parent="." index="12" instance=ExtResource("2_6crh2")]
 position = Vector2(516, 287)
 
-[node name="Sapling" parent="." index="12" instance=ExtResource("3_wtd84")]
+[node name="Sapling" parent="." index="13" instance=ExtResource("3_wtd84")]
 position = Vector2(368, 227)
 
-[node name="Plot1" parent="." index="13" groups=["plots"] instance=ExtResource("4_s8c2g")]
+[node name="Plot1" parent="." index="14" groups=["plots"] instance=ExtResource("4_s8c2g")]
 position = Vector2(145, 112)
 
-[node name="Plot2" parent="." index="14" groups=["plots"] instance=ExtResource("4_s8c2g")]
+[node name="Plot2" parent="." index="15" groups=["plots"] instance=ExtResource("4_s8c2g")]
 position = Vector2(258, 167)
 
-[node name="Plot3" parent="." index="15" groups=["plots"] instance=ExtResource("4_s8c2g")]
+[node name="Plot3" parent="." index="16" groups=["plots"] instance=ExtResource("4_s8c2g")]
 position = Vector2(168, 182)
 
-[node name="Plot4" parent="." index="16" groups=["plots"] instance=ExtResource("4_s8c2g")]
+[node name="Plot4" parent="." index="17" groups=["plots"] instance=ExtResource("4_s8c2g")]
 position = Vector2(443, 320)
 
-[node name="Plot5" parent="." index="17" groups=["plots"] instance=ExtResource("4_s8c2g")]
+[node name="Plot5" parent="." index="18" groups=["plots"] instance=ExtResource("4_s8c2g")]
 position = Vector2(518, 243)
