@@ -50,9 +50,9 @@ func _ready():
 			option.add_item("R")
 			option.add_item("P")
 			option.add_item("Y")
-		p1a1.select(0)
+		p1a1.select(1)
 		p1a2.select(1)
-		p2a1.select(1)
+		p2a1.select(2)
 		p2a2.select(2)
 		_on_allele_option_selected(null)
 	else:

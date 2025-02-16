@@ -90,11 +90,13 @@ func _input(_event):
 		elif Input.is_action_just_released("interact"):
 			enter_level(last_level)
 	if Input.is_action_just_released("Esc"):
-		var flag = pause_screen.visible
-		controllable = flag
-		pause_screen.visible = not flag
+		pause_screen.visible = true
+		get_tree().paused = true
+		await get_tree().create_timer(0.01).timeout
 
 func _process(delta):
+	# print(get_tree().paused)
+	
 	var target_progress = level_progress_map[target_level]
 	var speed = move_speed * delta
 	if path_follow.progress < target_progress:
@@ -109,7 +111,7 @@ func _process(delta):
 			path_follow.progress = target_progress
 
 func _on_input_event(_viewport, event, _shape, level_num):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if controllable and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			if level_num <= levels_unlocked:
 				target_level = level_num

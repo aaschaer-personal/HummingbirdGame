@@ -1,15 +1,10 @@
-[gd_scene load_steps=26 format=3 uid="uid://chvf2ks32aa4d"]
+[gd_scene load_steps=20 format=3 uid="uid://cxdexh1a3sbge"]
 
-[ext_resource type="Script" path="res://src/environment/sapling.gd" id="1_akgew"]
+[ext_resource type="PackedScene" uid="uid://chvf2ks32aa4d" path="res://src/environment/base_sapling.tscn" id="1_fottv"]
 [ext_resource type="Texture2D" uid="uid://cw71i7uec1rbb" path="res://assets/Environment/sapling_bottom_rustle.png" id="2_5i7pj"]
 [ext_resource type="Texture2D" uid="uid://ddg6r8qafc8e8" path="res://assets/Environment/sapling_rustle.png" id="2_cal4h"]
 [ext_resource type="Texture2D" uid="uid://dsupmf5yhbxba" path="res://assets/Environment/sapling_top_rustle.png" id="3_7ft4f"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="3_ihaxk"]
-[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="6_0l48f"]
-[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="7_yy1a6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3pnuq"]
-size = Vector2(40, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_air08"]
 atlas = ExtResource("2_5i7pj")
@@ -63,7 +58,7 @@ region = Rect2(48, 0, 48, 64)
 atlas = ExtResource("3_7ft4f")
 region = Rect2(0, 0, 48, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_stthv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_56wau"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -125,53 +120,12 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_liqw1"]
-size = Vector2(13, 2)
+[node name="Sapling" instance=ExtResource("1_fottv")]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c5816"]
-radius = 6.0
-height = 24.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_48v45"]
-radius = 3.0
-
-[node name="Sapling" type="Area2D"]
-script = ExtResource("1_akgew")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, -31)
-shape = SubResource("RectangleShape2D_3pnuq")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
 position = Vector2(8, -26)
-sprite_frames = SubResource("SpriteFrames_stthv")
-animation = &"top_rustle"
-frame = 3
-frame_progress = 1.0
+sprite_frames = SubResource("SpriteFrames_56wau")
+animation = &"bottom_rustle"
 
-[node name="ShadowGenerator" parent="AnimatedSprite2D" instance=ExtResource("3_ihaxk")]
+[node name="ShadowGenerator" parent="AnimatedSprite2D" index="0" instance=ExtResource("3_ihaxk")]
 object_height = 50
-
-[node name="PerchZone" type="Area2D" parent="."]
-position = Vector2(18, -22)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PerchZone"]
-position = Vector2(-4, 0)
-shape = SubResource("RectangleShape2D_liqw1")
-
-[node name="TopRustleZone" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopRustleZone"]
-position = Vector2(-2, -41)
-shape = SubResource("CapsuleShape2D_c5816")
-
-[node name="BottomRustleZone" type="Area2D" parent="."]
-position = Vector2(25, 22)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomRustleZone"]
-position = Vector2(-2, -41)
-shape = SubResource("CircleShape2D_48v45")
-
-[node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("7_yy1a6")]
-stream = ExtResource("6_0l48f")
-max_polyphony = 2

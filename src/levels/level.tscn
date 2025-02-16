@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cu1hmijlk3lrc"]
+[gd_scene load_steps=14 format=3 uid="uid://cu1hmijlk3lrc"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_fflhd"]
 [ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
@@ -7,15 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://byrltxfllybww" path="res://src/UI/failure_screen.tscn" id="5_yaipp"]
 [ext_resource type="PackedScene" uid="uid://ph7je02sp0tm" path="res://src/UI/completed_screen.tscn" id="6_m4ebb"]
 [ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="8_j54jp"]
-[ext_resource type="Texture2D" uid="uid://cmmwk13oaugog" path="res://assets/Environment/grass.png" id="9_1atlh"]
 [ext_resource type="PackedScene" uid="uid://ov3l2hi8x4rl" path="res://src/environment/wind.tscn" id="11_xf04e"]
-[ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache.tscn" id="13_hr6dh"]
+[ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
 [ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/levels/level_manager.tscn" id="15_8npl5"]
 [ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="16_krw1c"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
 
 [node name="Level" type="Node2D" groups=["level"]]
+process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_fflhd")
 
@@ -45,7 +45,6 @@ offset_left = 564.0
 offset_right = 564.0
 
 [node name="PauseScreen" parent="UI" instance=ExtResource("4_7uf0a")]
-process_mode = 3
 visible = false
 layout_mode = 1
 offset_right = 600.0
@@ -78,14 +77,6 @@ mouse_filter = 2
 [node name="Player" parent="." instance=ExtResource("8_j54jp")]
 position = Vector2(62, 201)
 
-[node name="Grass" type="Sprite2D" parent="."]
-z_index = -3
-texture_repeat = 2
-position = Vector2(320, 180)
-texture = ExtResource("9_1atlh")
-region_enabled = true
-region_rect = Rect2(0, 0, 640, 360)
-
 [node name="Wind" parent="." instance=ExtResource("11_xf04e")]
 
 [node name="Cache" parent="." instance=ExtResource("13_hr6dh")]
@@ -105,3 +96,4 @@ z_index = -1
 position = Vector2(72, 267)
 
 [node name="InputLogic" parent="." instance=ExtResource("18_dnpum")]
+process_mode = 1

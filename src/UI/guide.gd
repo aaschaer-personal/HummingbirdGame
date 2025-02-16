@@ -13,6 +13,7 @@ extends NinePatchRect
 @onready var genetics_tab = $Tabs/Genetics
 @onready var punnet_square_tab = $Tabs/PunnetSquare
 @onready var genetics_content = $Content/Genetics
+@onready var exit_button = $ExitButton
 
 func _ready():
 	controls_tab.pressed.connect(toggle.bind("Controls"))
@@ -24,6 +25,7 @@ func _ready():
 	printing_packets_tab.pressed.connect(toggle.bind("PrintingPackets"))
 	genetics_tab.pressed.connect(toggle.bind("Genetics"))
 	punnet_square_tab.pressed.connect(toggle.bind("PunnetSquare"))
+	exit_button.pressed.connect(close)
 	
 	if level:
 		if level.flower_species == "sunflower":
@@ -46,3 +48,6 @@ func toggle(tab_name):
 				
 	for blob in content.get_children():
 			blob.visible = blob.name == tab_name
+
+func close():
+	visible = false

@@ -16,9 +16,18 @@ signal packet_printed
 
 var packets_printing = 0
 var door_open = false
+var top
+var top_positions = [0,0,0,0,0,0,-1,-3,-5,-8,-11,-14,-17,-19,-20]
 
 func _ready():
 	front.frame_changed.connect(sync_frames)
+	var level_num = get_tree().get_first_node_in_group("level").level_num
+	var top_scene = load("res://src/cache/level%d_cache_top.tscn" % [level_num])
+	# var top_scene = load("res://src/cache/level1_cache_top.tscn")
+	while top_scene == null:
+		pass
+	top = top_scene.instantiate()
+	front.add_child(top)
 
 func sync_frames():
 	var frame = front.get_frame()
@@ -26,6 +35,7 @@ func sync_frames():
 	back.set_frame_and_progress(frame, progress)
 	left_door.set_frame_and_progress(frame, progress)
 	right_door.set_frame_and_progress(frame, progress)
+	top.position = Vector2(0,top_positions[frame])
 
 func is_interactable():
 	return player.held_item == null or player.held_item is SeedPacket
@@ -44,6 +54,7 @@ func quick_raise():
 	back.play("raise")
 	left_door.play("raise")
 	right_door.play("raise")
+	top.position = Vector2(0, -20)
 	front.set_frame_and_progress(14, 0)
 	back.set_frame_and_progress(14, 0)
 	left_door.set_frame_and_progress(14, 0)

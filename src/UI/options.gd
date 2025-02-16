@@ -7,6 +7,7 @@ signal volume_changed
 @onready var effects_volume = $VBoxContainer/EffectsVolume/HSlider
 @onready var show_tutorial = $VBoxContainer/ShowTutorial/CheckBox
 @onready var quick_start = $VBoxContainer/QuickStart/CheckBox
+@onready var exit_button = $ExitButton
 
 var config
 
@@ -19,6 +20,7 @@ func _ready():
 	music_volume.value_changed.connect(emit_music_volume_changed)
 	effects_volume.value_changed.connect(emit_effects_volume_changed)
 	confirm_button.pressed.connect(confirm)
+	exit_button.pressed.connect(close)
 
 func confirm():
 	config.set_value("options", "music_volume", music_volume.value)
@@ -33,3 +35,11 @@ func emit_music_volume_changed(value):
 	
 func emit_effects_volume_changed(value):
 	volume_changed.emit("effects_volume", value)
+
+func close():
+	visible = false
+
+func _input(event):
+	if event.is_action_released("Esc"):
+		if not get_parent() is PauseScreen:
+			close()

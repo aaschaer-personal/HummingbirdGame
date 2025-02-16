@@ -14,9 +14,9 @@ func _input(event):
 		if cache_ui.visible:
 			cache_ui.close()
 		else:
-			var flag = get_tree().paused
-			get_tree().paused = not flag
-			pause_screen.visible = not flag
+			pause_screen.visible = true
+			await get_tree().create_timer(0.01).timeout
+			get_tree().paused = true
 
 # global clicking logic
 func _unhandled_input(event):

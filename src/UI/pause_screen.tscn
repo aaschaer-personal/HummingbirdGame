@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://db3qo575rdolk"]
+[gd_scene load_steps=7 format=3 uid="uid://db3qo575rdolk"]
 
 [ext_resource type="Script" path="res://src/UI/pause_screen.gd" id="1_a0n6x"]
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="2_0kjsx"]
 [ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_a72la"]
 [ext_resource type="PackedScene" uid="uid://dwdwrfqw5jpww" path="res://src/UI/guide.tscn" id="4_i4a7u"]
 [ext_resource type="PackedScene" uid="uid://cs238mtvd8a3i" path="res://src/UI/options.tscn" id="5_did5y"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_ut6jw"]
 
 [node name="PauseScreen" type="ColorRect" groups=["pause_screen"]]
 process_mode = 2
@@ -146,3 +147,11 @@ offset_left = 212.0
 offset_top = 19.0
 offset_right = 460.0
 offset_bottom = 343.0
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 19.0
+offset_right = 460.0
+offset_bottom = 29.0
+texture_normal = ExtResource("6_ut6jw")

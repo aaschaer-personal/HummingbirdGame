@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvg1a7ujr62p4"
-path="res://.godot/imported/sapling_grass.png-af1c4ffadcd5eaf115a03c2af75f56cd.ctex"
+uid="uid://bgc5xoeiinrt0"
+path="res://.godot/imported/forest_grass.png-3ba2b63bf28216b74b5c72d999d95802.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Environment/sapling_grass.png"
-dest_files=["res://.godot/imported/sapling_grass.png-af1c4ffadcd5eaf115a03c2af75f56cd.ctex"]
+source_file="res://assets/Environment/forest_grass.png"
+dest_files=["res://.godot/imported/forest_grass.png-3ba2b63bf28216b74b5c72d999d95802.ctex"]
 
 [params]
 
