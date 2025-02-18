@@ -16,3 +16,10 @@
 - Add pause menu and guide
 - Change sunflower colors to red, orange, yellow
 - Rework tutorial
+
+## v0.4
+- Add level 2
+- Add main menu
+- Add options
+- Add level map
+- Various cleanups and fixes

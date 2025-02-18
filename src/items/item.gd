@@ -13,7 +13,7 @@ func _ready():
 	disk_sprite.visible = false
 
 func is_interactable():
-	return !disk_sprite.visible and get_parent() is Main and player.held_item == null
+	return !disk_sprite.visible and get_parent() is Level and player.held_item == null
 
 func get_player_interaction():
 	return "pickup"

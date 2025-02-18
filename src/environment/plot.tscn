@@ -1,22 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dctxne420bfvp"]
+[gd_scene load_steps=3 format=3 uid="uid://bto2m1l4qg2fe"]
 
-[ext_resource type="Script" path="res://src/environment/plot.gd" id="1_76vvh"]
-[ext_resource type="Texture2D" uid="uid://baxhh0m5nc24s" path="res://assets/Environment/plot_dirt.png" id="2_tmhfb"]
+[ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/base_plot.tscn" id="1_5djyg"]
 [ext_resource type="Texture2D" uid="uid://5w0e4vdoxrab" path="res://assets/Environment/plot_grasst.png" id="3_actkf"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gyty2"]
-radius = 9.99999
+[node name="Plot" instance=ExtResource("1_5djyg")]
 
-[node name="Plot" type="Area2D"]
-z_index = -2
-script = ExtResource("1_76vvh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.57243
-shape = SubResource("CapsuleShape2D_gyty2")
-
-[node name="Dirt" type="Sprite2D" parent="."]
-texture = ExtResource("2_tmhfb")
-
-[node name="Grass" type="Sprite2D" parent="."]
+[node name="Grass" type="Sprite2D" parent="." index="2"]
 texture = ExtResource("3_actkf")

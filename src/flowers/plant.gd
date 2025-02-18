@@ -6,13 +6,11 @@ class_name Plant extends Area2D
 @onready var flower_2_spawn = $FlowerSpawn2
 @onready var flower_3_spawn = $FlowerSpawn3
 @onready var genome = $Genome
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 
-# preloaded by subclasses
-var flower_1_scene
-var flower_2_scene
-var flower_3_scene
-
+var flower_1_scene = null
+var flower_2_scene = null
+var flower_3_scene = null
 var growth = 0
 var stage = 0
 var dying = false
@@ -22,6 +20,11 @@ var flowers = [null, null, null]
 var parent_plot: Plot
 
 func _ready():
+	var level = get_tree().get_first_node_in_group("level")
+	var species = level.flower_species
+	flower_1_scene = load("res://src/flowers/%s/%s_flower_1.tscn" % [species, species])
+	flower_2_scene = load("res://src/flowers/%s/%s_flower_2.tscn" % [species, species])
+	flower_3_scene = load("res://src/flowers/%s/%s_flower_3.tscn" % [species, species])
 	add_to_group("plants")
 	sprite.play("seed")
 	parent_plot = get_parent()

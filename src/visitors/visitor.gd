@@ -1,5 +1,6 @@
 class_name Visitor extends Interactable
 
+@export var species: String
 @onready var sprite = $MainSprite
 @onready var speech_bubble_sprite = $SpeechBubbleSprite
 @onready var desire_icons = $SpeechBubbleSprite/DesireIconHolder
@@ -7,15 +8,17 @@ class_name Visitor extends Interactable
 @onready var acceptance_area = $AcceptanceArea
 @onready var shadow_generator = $MainSprite/ShadowGenerator
 @onready var desired_bouquet_colors: Array
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
+@onready var collision_shape = $Collision/CollisionShape2D
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 @onready var visitor_landing_sound = preload("res://assets/Sounds/visitor_landing.wav")
-@onready var house_finch_sound = preload("res://assets/Sounds/house_finch.wav")
+var birdsong = null
 
 var off_screen_height = 300
 var visitor_bouquet
 
 func _ready():
+	birdsong = load("res://assets/Sounds/%s.wav" % species)
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
 	# bouquet.tween_height(13, 0)
@@ -41,6 +44,7 @@ func land(landing_point: Node2D):
 		10.0/10.0
 	)
 	await sprite.animation_finished
+	collision_shape.disabled = false
 	sprite.play("idle")
 	show_desires()
 
@@ -49,9 +53,7 @@ func show_desires():
 	
 	for i in desired_bouquet_colors.size():
 		var desired_color = desired_bouquet_colors[i]
-		desire_icons.get_children()[i].set_icon(
-			get_parent().species, desired_color)
-
+		desire_icons.get_children()[i].set_icon(desired_color)
 func is_interactable():
 	return player.held_item is Bouquet
 
@@ -78,6 +80,7 @@ func give_bouquet(given_bouquet: Bouquet):
 		speech_bubble_sprite.visible = false
 		sprite.play("confused")
 		await sprite.animation_finished
+		sprite.play("idle")
 		speech_bubble_sprite.visible = true
 
 	if len(desired_bouquet_colors) == 0:
@@ -86,11 +89,12 @@ func give_bouquet(given_bouquet: Bouquet):
 		emote_and_take_off()
 
 func emote_and_take_off():
-	audio_player.stream = house_finch_sound
+	audio_player.stream = birdsong
 	audio_player.play()
 	sprite.play("happy")
 	await sprite.animation_finished
 
+	collision_shape.disabled = true
 	audio_player.stream = visitor_landing_sound
 	audio_player.play()
 	sprite.play_backwards("landing")

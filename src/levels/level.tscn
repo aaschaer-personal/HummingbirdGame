@@ -1,0 +1,99 @@
+[gd_scene load_steps=14 format=3 uid="uid://cu1hmijlk3lrc"]
+
+[ext_resource type="Script" path="res://src/levels/level.gd" id="1_fflhd"]
+[ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
+[ext_resource type="PackedScene" uid="uid://bvso7t5luq4l" path="res://src/UI/visitor_progress.tscn" id="3_ht7nh"]
+[ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="4_7uf0a"]
+[ext_resource type="PackedScene" uid="uid://byrltxfllybww" path="res://src/UI/failure_screen.tscn" id="5_yaipp"]
+[ext_resource type="PackedScene" uid="uid://ph7je02sp0tm" path="res://src/UI/completed_screen.tscn" id="6_m4ebb"]
+[ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="8_j54jp"]
+[ext_resource type="PackedScene" uid="uid://ov3l2hi8x4rl" path="res://src/environment/wind.tscn" id="11_xf04e"]
+[ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
+[ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
+[ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/levels/level_manager.tscn" id="15_8npl5"]
+[ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="16_krw1c"]
+[ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
+
+[node name="Level" type="Node2D" groups=["level"]]
+process_mode = 1
+y_sort_enabled = true
+script = ExtResource("1_fflhd")
+
+[node name="UI" type="Control" parent="."]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EnergyBar" parent="UI" instance=ExtResource("2_2p5c1")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.225
+anchor_top = 0.175
+anchor_right = 0.225
+anchor_bottom = 0.175
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 24.0
+metadata/_edit_use_anchors_ = true
+
+[node name="VisitorProgress" parent="UI" instance=ExtResource("3_ht7nh")]
+offset_left = 564.0
+offset_right = 564.0
+
+[node name="PauseScreen" parent="UI" instance=ExtResource("4_7uf0a")]
+visible = false
+layout_mode = 1
+offset_right = 600.0
+offset_bottom = 320.0
+
+[node name="FailureScreen" parent="UI" instance=ExtResource("5_yaipp")]
+visible = false
+layout_mode = 0
+offset_left = 180.0
+offset_top = 90.0
+offset_right = 500.0
+offset_bottom = 270.0
+
+[node name="CompletedScreen" parent="UI" instance=ExtResource("6_m4ebb")]
+visible = false
+layout_mode = 0
+offset_left = 160.0
+offset_top = 90.0
+offset_right = 480.0
+offset_bottom = 270.0
+
+[node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 43.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+
+[node name="Player" parent="." instance=ExtResource("8_j54jp")]
+position = Vector2(62, 201)
+
+[node name="Wind" parent="." instance=ExtResource("11_xf04e")]
+
+[node name="Cache" parent="." instance=ExtResource("13_hr6dh")]
+position = Vector2(320, 82)
+
+[node name="VisitorManager" parent="." groups=["customer_manager"] instance=ExtResource("14_alqih")]
+position = Vector2(65, 249)
+
+[node name="LevelManager" parent="." instance=ExtResource("15_8npl5")]
+
+[node name="ShadowCanvasGroup" type="CanvasGroup" parent="." groups=["shadow_canvas_group"]]
+self_modulate = Color(0, 0, 0, 0.196078)
+z_index = -1
+
+[node name="Stump" parent="." instance=ExtResource("16_krw1c")]
+z_index = -1
+position = Vector2(72, 267)
+
+[node name="InputLogic" parent="." instance=ExtResource("18_dnpum")]
+process_mode = 1

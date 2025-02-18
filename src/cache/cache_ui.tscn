@@ -1,0 +1,138 @@
+[gd_scene load_steps=13 format=3 uid="uid://cs510j1wjh4d4"]
+
+[ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_rkfuj"]
+[ext_resource type="Script" path="res://src/cache/cache_ui.gd" id="2_qwleh"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="3_ee8d3"]
+[ext_resource type="Texture2D" uid="uid://75l460ljiinq" path="res://assets/Items/BagIcons/square.png" id="4_3mfcs"]
+[ext_resource type="Texture2D" uid="uid://bvl2r6lhosyi3" path="res://assets/Items/BagIcons/circle.png" id="5_5vsi6"]
+[ext_resource type="Texture2D" uid="uid://b7q6ty34ufyr8" path="res://assets/Items/BagIcons/triangle.png" id="6_iuoa5"]
+[ext_resource type="Texture2D" uid="uid://c5l744u8flrpm" path="res://assets/Items/BagIcons/diamond.png" id="7_u7rg1"]
+[ext_resource type="Texture2D" uid="uid://bouhc4uub1f7" path="res://assets/Items/BagIcons/heart.png" id="8_wvnqs"]
+[ext_resource type="Texture2D" uid="uid://b4gnw1e8pa1g4" path="res://assets/Items/BagIcons/question.png" id="9_6vera"]
+[ext_resource type="Texture2D" uid="uid://bs6fc6w7ycy5i" path="res://assets/UI/green_button.png" id="10_a1iop"]
+[ext_resource type="Texture2D" uid="uid://g2c7rikx7bu" path="res://assets/UI/grey_button.png" id="11_23f6r"]
+[ext_resource type="Texture2D" uid="uid://c6kk8khgnvcqq" path="res://assets/Items/seed_packet.png" id="12_fl5pr"]
+
+[node name="CacheUI" type="NinePatchRect" groups=["cache_ui"]]
+offset_right = 240.0
+offset_bottom = 205.0
+texture = ExtResource("1_rkfuj")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_qwleh")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_top = 9.0
+offset_right = 240.0
+offset_bottom = 43.0
+theme_override_font_sizes/font_size = 24
+text = "Packet Printing"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 231.0
+offset_right = 240.0
+offset_bottom = 10.0
+texture_normal = ExtResource("3_ee8d3")
+
+[node name="PacketColorOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 69.0
+offset_right = 80.0
+offset_bottom = 93.0
+toggle_mode = false
+
+[node name="Label" type="Label" parent="PacketColorOption"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -16.0
+offset_right = 68.0
+offset_bottom = 7.0
+text = "Packet Color"
+horizontal_alignment = 1
+
+[node name="IconOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 68.0
+offset_right = 152.0
+offset_bottom = 93.0
+toggle_mode = false
+item_count = 7
+selected = 0
+popup/item_0/text = ""
+popup/item_0/id = 0
+popup/item_1/text = ""
+popup/item_1/icon = ExtResource("4_3mfcs")
+popup/item_1/id = 1
+popup/item_2/text = ""
+popup/item_2/icon = ExtResource("5_5vsi6")
+popup/item_2/id = 2
+popup/item_3/text = ""
+popup/item_3/icon = ExtResource("6_iuoa5")
+popup/item_3/id = 3
+popup/item_4/text = ""
+popup/item_4/icon = ExtResource("7_u7rg1")
+popup/item_4/id = 4
+popup/item_5/text = ""
+popup/item_5/icon = ExtResource("8_wvnqs")
+popup/item_5/id = 5
+popup/item_6/text = ""
+popup/item_6/icon = ExtResource("9_6vera")
+popup/item_6/id = 6
+
+[node name="Label" type="Label" parent="IconOption"]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 64.0
+offset_bottom = 7.0
+text = "Icon
+"
+horizontal_alignment = 1
+
+[node name="IconColorOption" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 69.0
+offset_right = 225.0
+offset_bottom = 93.0
+toggle_mode = false
+
+[node name="Label" type="Label" parent="IconColorOption"]
+layout_mode = 0
+offset_top = -16.0
+offset_right = 64.0
+offset_bottom = 7.0
+text = "Icon Color"
+horizontal_alignment = 1
+
+[node name="PrintButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 159.0
+offset_right = 152.0
+offset_bottom = 191.0
+texture_normal = ExtResource("10_a1iop")
+texture_disabled = ExtResource("11_23f6r")
+
+[node name="Label" type="Label" parent="PrintButton"]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 31.0
+text = "Print"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PacketPreview" type="Sprite2D" parent="."]
+position = Vector2(120, 127)
+texture = ExtResource("12_fl5pr")
+
+[node name="IconPreview" type="Sprite2D" parent="."]
+position = Vector2(120, 127)

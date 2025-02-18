@@ -4,7 +4,7 @@ class_name Sapling extends Interactable
 @onready var top_rustle_zone = $TopRustleZone
 @onready var bottom_rustle_zone = $BottomRustleZone
 @onready var sprite = $AnimatedSprite2D
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 @export var is_horizontal = true
 
 func _ready():

@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://8yrwu1paqh1p"]
+
+[ext_resource type="PackedScene" uid="uid://chvf2ks32aa4d" path="res://src/environment/base_sapling.tscn" id="1_il6wh"]
+[ext_resource type="Texture2D" uid="uid://cu6gmjlgoetwm" path="res://assets/Environment/sapling_bottom_rustle_forest.png" id="2_gc1au"]
+[ext_resource type="Texture2D" uid="uid://c7meeyeum38k1" path="res://assets/Environment/sapling_rustle_forest.png" id="4_033o5"]
+[ext_resource type="Texture2D" uid="uid://cttvgdra6hvs8" path="res://assets/Environment/sapling_top_rustle_forest.png" id="4_iymqx"]
+[ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="5_iagxb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4wk6"]
+atlas = ExtResource("2_gc1au")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xf7cs"]
+atlas = ExtResource("2_gc1au")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxs3a"]
+atlas = ExtResource("4_033o5")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2urdf"]
+atlas = ExtResource("4_033o5")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf7if"]
+atlas = ExtResource("4_033o5")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fynt8"]
+atlas = ExtResource("4_iymqx")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3kop"]
+atlas = ExtResource("4_iymqx")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdb11"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4wk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf7cs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4wk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xf7cs")
+}],
+"loop": false,
+"name": &"bottom_rustle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxs3a")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2urdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf7if")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2urdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf7if")
+}],
+"loop": false,
+"name": &"full_rustle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fynt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3kop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fynt8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3kop")
+}],
+"loop": false,
+"name": &"top_rustle",
+"speed": 10.0
+}]
+
+[node name="Sapling" instance=ExtResource("1_il6wh")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="5"]
+position = Vector2(8, -26)
+sprite_frames = SubResource("SpriteFrames_vdb11")
+animation = &"bottom_rustle"
+
+[node name="ShadowGenerator" parent="AnimatedSprite2D" index="0" instance=ExtResource("5_iagxb")]
+object_height = 50

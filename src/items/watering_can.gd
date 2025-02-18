@@ -3,7 +3,7 @@ class_name WateringCan extends Item
 @onready var water_particles = $Item/WaterParticles
 @onready var water_zone = $WaterZone
 @onready var water_meter = $WaterMeter
-@onready var audio_player = $AudioStreamPlayer2D
+@onready var audio_player = $OptionAwareAudioPlayer
 var water_amount = 20
 
 func _physics_process(delta):

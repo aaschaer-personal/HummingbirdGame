@@ -1,0 +1,106 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs238mtvd8a3i"]
+
+[ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8cfm1"]
+[ext_resource type="Script" path="res://src/UI/options.gd" id="2_oj78r"]
+[ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_oddd3"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_wocj4"]
+
+[node name="Options" type="NinePatchRect" groups=["options"]]
+offset_right = 248.0
+offset_bottom = 324.0
+mouse_filter = 0
+texture = ExtResource("1_8cfm1")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_oj78r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 7.0
+offset_right = 242.0
+offset_bottom = 225.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Options
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicVolume" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MusicVolume"]
+layout_mode = 2
+text = "Music Volume:     "
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/MusicVolume"]
+layout_mode = 2
+value = 50.0
+
+[node name="EffectsVolume" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/EffectsVolume"]
+layout_mode = 2
+text = "Effects Volume:"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/EffectsVolume"]
+layout_mode = 2
+value = 50.0
+
+[node name="ShowTutorial" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/ShowTutorial"]
+layout_mode = 2
+text = "Show Tutorial:"
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/ShowTutorial"]
+layout_mode = 2
+
+[node name="QuickStart" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/QuickStart"]
+layout_mode = 2
+text = "Quick Start:      "
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/QuickStart"]
+layout_mode = 2
+
+[node name="ConfirmButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 271.0
+offset_right = 228.0
+offset_bottom = 307.0
+texture_normal = ExtResource("3_oddd3")
+
+[node name="Label" type="Label" parent="ConfirmButton"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Confirm
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="."]
+offset_left = 239.0
+offset_right = 248.0
+offset_bottom = 10.0
+texture_normal = ExtResource("4_wocj4")

@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://mgqh0bucfav0"]
+[gd_scene load_steps=3 format=3 uid="uid://mgqh0bucfav0"]
 
 [ext_resource type="PackedScene" uid="uid://d3pf8kbdk01t7" path="res://src/UI/punnet_square.tscn" id="1_0l4an"]
 [ext_resource type="Script" path="res://src/UI/interactable_punnet_square.gd" id="1_itoe1"]
-[ext_resource type="Texture2D" uid="uid://wiv6d7h482up" path="res://assets/UI/Icons/sunflower.png" id="2_2yta0"]
-[ext_resource type="Texture2D" uid="uid://de6n6ymmx7rx4" path="res://assets/UI/Icons/sunflower_petals.png" id="3_7b1fc"]
 
 [node name="InteractablePunnetSquare" type="Control"]
 layout_mode = 3
@@ -71,7 +69,6 @@ layout_mode = 2
 offset_left = 4.0
 offset_right = 68.0
 offset_bottom = 64.0
-texture = ExtResource("2_2yta0")
 expand_mode = 2
 
 [node name="Petals" type="TextureRect" parent="P1/Example"]
@@ -79,7 +76,6 @@ layout_mode = 2
 offset_left = 4.0
 offset_right = 68.0
 offset_bottom = 64.0
-texture = ExtResource("3_7b1fc")
 expand_mode = 2
 
 [node name="X" type="Label" parent="."]
@@ -149,7 +145,6 @@ layout_mode = 2
 offset_left = 4.0
 offset_right = 68.0
 offset_bottom = 64.0
-texture = ExtResource("2_2yta0")
 expand_mode = 2
 
 [node name="Petals" type="TextureRect" parent="P2/Example"]
@@ -157,7 +152,6 @@ layout_mode = 2
 offset_left = 4.0
 offset_right = 68.0
 offset_bottom = 64.0
-texture = ExtResource("3_7b1fc")
 expand_mode = 2
 
 [node name="PunnetContainer" type="HBoxContainer" parent="."]

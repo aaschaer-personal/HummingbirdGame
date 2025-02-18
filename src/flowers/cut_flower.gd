@@ -5,7 +5,11 @@ class_name CutFlower extends Item
 @onready var collision_shape = $CollisionShape2D
 @onready var decay_timer = $DecayTimer
 @export var species: String
-var x_offset = 12
+
+var x_offset_by_species = {
+	"sunflower": 12,
+	"jewelweed": 6,
+}
 var color: Color
 var is_decaying = false
 
@@ -25,7 +29,7 @@ func _ready():
 	)
 
 func is_interactable():
-	if is_decaying or !get_parent() is Main:
+	if is_decaying or !get_parent() is Level:
 		return false
 
 	return player.held_item == null or (
@@ -40,6 +44,7 @@ func set_color(new_color: Color):
 func set_flip_h(val: bool):
 	item_sprite.set_flip_h(val)
 	petal_sprite.set_flip_h(val)
+	var x_offset = x_offset_by_species[species]
 	if val:
 		item_sprite.position.x = x_offset * -1
 		petal_sprite.position.x = x_offset * -1

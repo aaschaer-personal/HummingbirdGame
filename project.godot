@@ -21,6 +21,7 @@ Helpers="*res://src/helpers.gd"
 Colors="*res://src/colors.gd"
 SignalBus="*res://src/signal_bus.gd"
 GenomeHelpers="*res://src/genome_helpers.gd"
+Config="*res://src/config.gd"
 
 [display]
 
@@ -28,6 +29,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
+
+[filesystem]
+
+import/blender/enabled=false
 
 [gui]
 

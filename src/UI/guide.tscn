@@ -1,14 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwdwrfqw5jpww"]
+[gd_scene load_steps=7 format=3 uid="uid://dwdwrfqw5jpww"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
 [ext_resource type="Script" path="res://src/UI/guide.gd" id="2_ab0ib"]
 [ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_se2j2"]
 [ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
 [ext_resource type="PackedScene" uid="uid://mgqh0bucfav0" path="res://src/UI/interactable_punnet_square.tscn" id="5_7trbm"]
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_koo0c"]
 
 [node name="Guide" type="NinePatchRect"]
 offset_right = 248.0
 offset_bottom = 324.0
+mouse_filter = 0
 texture = ExtResource("1_8u3um")
 region_rect = Rect2(1, 1, 22, 22)
 patch_margin_left = 6
@@ -357,7 +359,7 @@ text = "[font_size=8]
 
 * Each trait is controlled by one or more genes. Each gene has different forms called alleles. For each gene, a flower will have two alleles, one from each parent.
 
-* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are  three possible combinations RR, YY, and RY that produce red, yellow, and orange flowers.
+%s
 
 * The punnet square tabs shows the possible results of crossing two flowers by pollinating one with the pollen of another.
 
@@ -389,3 +391,9 @@ text = "[font_size=8]
 [font_size=24][center]Punnet Square[/center][font_size=12]
 
 * Set the alleles for each parent to see possible outcomes of crossing them."
+
+[node name="ExitButton" type="TextureButton" parent="."]
+offset_left = 239.0
+offset_right = 248.0
+offset_bottom = 10.0
+texture_normal = ExtResource("6_koo0c")

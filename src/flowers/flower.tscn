@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://5rcf7awoltde"]
+
+[ext_resource type="Script" path="res://src/flowers/flower.gd" id="1_sv1xc"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="1_xpgpl"]
+[ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="2_pao7f"]
+[ext_resource type="AudioStream" uid="uid://cmy16861yuanr" path="res://assets/Sounds/bee.wav" id="3_bgpyq"]
+
+[node name="Flower" type="Area2D"]
+z_as_relative = false
+script = ExtResource("1_sv1xc")
+
+[node name="PollinationTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RustleAudioPlayer" parent="." instance=ExtResource("1_xpgpl")]
+stream = ExtResource("2_pao7f")
+max_polyphony = 2
+
+[node name="BeeAudioPlayer" parent="." instance=ExtResource("1_xpgpl")]
+stream = ExtResource("3_bgpyq")
+max_polyphony = 2
