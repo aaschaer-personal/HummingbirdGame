@@ -70,7 +70,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bloomed",
-"speed": 1.0
+"speed": 10.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5cgus"]
@@ -139,7 +139,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bloomed",
-"speed": 1.0
+"speed": 10.0
 }]
 
 [node name="MapSunflower" type="Node2D"]

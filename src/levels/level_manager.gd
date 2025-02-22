@@ -126,6 +126,17 @@ func generate_starting_packet():
 		starting_seeds[2]["color"] = ["Y", "Y"]
 		starting_seeds[1]["max_flowers"] = 0
 		starting_seeds[1]["color"] = ["P", "P"]
+	elif level.flower_species == "lupine":
+		for i in range(4):
+			starting_seeds.append(GenomeGenerator.wild("lupine"))
+		starting_seeds[0]["max_flowers"] = 1
+		starting_seeds[1]["max_flowers"] = 0
+		starting_seeds[2]["red"] = ["r", "r"]
+		starting_seeds[2]["blue"] = ["B", "B"]
+		starting_seeds[2]["max_flowers"] = 0
+		starting_seeds[3]["red"] = ["R", "r"]
+		starting_seeds[3]["blue"] = ["b", "b"]
+		starting_seeds[3]["max_flowers"] = 1
 	else:
 		assert(false)
 

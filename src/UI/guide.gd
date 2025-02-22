@@ -31,7 +31,9 @@ func _ready():
 		if level.flower_species == "sunflower":
 			genetics_content.text = genetics_content.text % "* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are three unique combinations RR, RY, and YY that produce red, orange, and yellow flowers."
 		elif level.flower_species == "jewelweed":
-			genetics_content.text = genetics_content.text % "* Jewelweed has one color gene with three alleles, R for red, P for purple, and Y for yellow. There are nine unique combinations some of which produce the same color of flower."
+			genetics_content.text = genetics_content.text % "* Jewelweed has one color gene with three alleles, R for red, P for purple, and Y for yellow. There are six unique combinations some of which produce the same color of flower."
+		elif level.flower_species == "lupine":
+			genetics_content.text = genetics_content.text % "* Lupines have two color genes with two alleles each for nine unique combinations. The red gene has alleles R and r, with R adding red to the flower. The blue gene has alleles B and b, with B adding blue to the flower."
 		else:
 			assert(level == null)
 

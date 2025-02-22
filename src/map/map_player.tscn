@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjcx1de7vtgpx"]
+
+[ext_resource type="Texture2D" uid="uid://ck5mt0xxl7f3i" path="res://assets/Map/hummingbird_icon.png" id="1_2cfbh"]
+[ext_resource type="Script" path="res://src/map/map_player.gd" id="2_4lea6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uelip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgors"]
+atlas = ExtResource("1_2cfbh")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwg0g"]
+atlas = ExtResource("1_2cfbh")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qt7do"]
+atlas = ExtResource("1_2cfbh")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1uun"]
+atlas = ExtResource("1_2cfbh")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_11yyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgors")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwg0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qt7do")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q1uun")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="MapPlayer" type="CharacterBody2D"]
+script = ExtResource("2_4lea6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_uelip")
+
+[node name="AnimatedSprites2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_11yyw")
+autoplay = "default"
+frame_progress = 0.191207
+offset = Vector2(0, -10)

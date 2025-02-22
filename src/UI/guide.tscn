@@ -393,6 +393,7 @@ text = "[font_size=8]
 * Set the alleles for each parent to see possible outcomes of crossing them."
 
 [node name="ExitButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 239.0
 offset_right = 248.0
 offset_bottom = 10.0

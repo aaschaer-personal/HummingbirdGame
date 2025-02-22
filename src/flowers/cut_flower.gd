@@ -9,6 +9,7 @@ class_name CutFlower extends Item
 var x_offset_by_species = {
 	"sunflower": 12,
 	"jewelweed": 6,
+	"lupine": 10,
 }
 var color: Color
 var is_decaying = false

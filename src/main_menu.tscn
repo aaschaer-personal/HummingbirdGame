@@ -22,7 +22,7 @@ offset_left = 6.0
 offset_top = 342.0
 offset_right = 31.0
 offset_bottom = 354.0
-text = "v0.4"
+text = "v0.5"
 
 [node name="VBoxContainer" type="HFlowContainer" parent="."]
 layout_mode = 0

@@ -16,36 +16,49 @@ var visitor_scene = null
 
 var rainbow_order = {
 	Colors.red: 0,
-	Colors.orange: 1,
-	Colors.yellow: 2,
-	Colors.purple: 3,
+	Colors.pink: 1,
+	Colors.orange: 2,
+	Colors.yellow: 3,
+	Colors.blue: 4,
+	Colors.purple: 5,
+	Colors.white: 6,
 }
 
-var bouquet_tiers_by_species = {
+# colors, count, size, max_repetitions
+var bouquet_recipes_by_species = {
 	"sunflower": [
-		[[Colors.yellow]],
-		[[Colors.orange]],
-		generate_boquets(Colors.flower_colors("sunflower"), 2, 2, 1),
-		[[Colors.red, Colors.orange, Colors.yellow]],
+		[[Colors.yellow], 1, 1, 1],
+		[[Colors.orange], 1, 1, 1],
+		["sunflower", 2, 2, 1],
+		["sunflower", 1, 3, 1],
 	],
 	"jewelweed": [
-		generate_boquets([Colors.red, Colors.yellow], 1, 1, 1),
-		generate_boquets([Colors.orange, Colors.purple], 1, 1, 1),
-		generate_boquets(Colors.flower_colors("jewelweed"), 3, 2, 1),
-		generate_boquets(Colors.flower_colors("jewelweed"), 2, 3, 2),
-		[[Colors.red, Colors.orange, Colors.yellow, Colors.purple]],
-	]
+		[[Colors.red, Colors.yellow], 1, 1, 1],
+		[[Colors.orange, Colors.purple], 1, 1, 1],
+		["jewelweed", 3, 2, 1],
+		["jewelweed", 2, 3, 2],
+		["jewelweed", 1, 4, 1],
+	],
+	"lupine": [
+		[[Colors.purple], 1, 1, 1],
+		[[Colors.purple, Colors.blue, Colors.pink], 2, 2, 1],
+		[[Colors.red, Colors.white], 2, 1, 1],
+		[[Colors.purple, Colors.blue, Colors.pink], 2, 3, 2],
+		[[Colors.pink, Colors.red, Colors.white], 1, 2, 1],
+		["lupine", 2, 3, 2],
+		["lupine", 3, 4, 2],
+		["lupine", 1, 5, 1],
+	],
 }
 
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	var visitor_species = level.visitor_species
 	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
-	
 	var flower_species = level.flower_species
-	for tier in bouquet_tiers_by_species[flower_species]:
-		tier.shuffle()
-		for bouquet in tier:
+
+	for recipe in bouquet_recipes_by_species[flower_species]:
+		for bouquet in callv("generate_boquets", recipe):
 			bouquets.append(bouquet)
 	timer.timeout.connect(_on_timeout)
 	timer.start(1)
@@ -54,6 +67,8 @@ func _color_compare(color1, color2):
 	return rainbow_order[color1] < rainbow_order[color2]
 
 func generate_boquets(colors, count, size, max_repetitions):
+	if colors is String:
+		colors = Colors.flower_colors(colors)
 	var ret = []
 	for i in range(count):
 		while true:

@@ -13,7 +13,7 @@ func _ready():
 func play():
 	var scene
 	var config = Config.get_config()
-	if config.get_value("levels", "last_complete", 0) > 0:
+	if config.get_value("levels", "completed", 0) > 0 or config.get_value("levels", "last_complete", 0) == 1:
 		scene = load("res://src/map/map.tscn")
 	else:
 		scene = load("res://src/levels/level_1.tscn")

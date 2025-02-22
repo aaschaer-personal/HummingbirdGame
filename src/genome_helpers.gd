@@ -82,7 +82,7 @@ func lupine_code(red, blue):
 	if blue[0] == "B":
 		code += blue[0] + blue[1]
 	else:
-		code += blue[1] + blue[2]
+		code += blue[1] + blue[0]
 	return code
 
 func lupine_color(red, blue):

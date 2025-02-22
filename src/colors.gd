@@ -14,6 +14,7 @@ var purple = Color("a884f3")
 var colors_by_species = {
 	"sunflower": [red, orange, yellow],
 	"jewelweed": [red, orange, yellow, purple],
+	"lupine": [purple, blue, red, pink, white],
 }
 
 func flower_colors(species):
