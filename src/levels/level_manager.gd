@@ -64,7 +64,9 @@ func _on_visitor_left():
 func _on_flower_bloomed(color):
 	flowers_grown += 1
 	colors_grown[color] = true
-	visitor_manager.visitors_unlocked = true
+	if not visitor_manager.visitors_unlocked:
+		visitor_manager.visitors_unlocked = true
+		visitor_manager.timer.start(1)
 	
 func _on_flower_pollinated(color):
 	colors_pollinated[color] = true

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdukg4e0bvkv"]
+
+[ext_resource type="Script" path="res://src/visitors/visitor_spawn.gd" id="1_3pkhr"]
+
+[node name="VisitorSpawn" type="Node2D" groups=["visitor_spawns"]]
+script = ExtResource("1_3pkhr")
+
+[node name="LeftSpawnPoint" type="Node2D" parent="."]
+position = Vector2(-119, -186)
+
+[node name="RightSpawnPoint" type="Node2D" parent="."]
+position = Vector2(119, -186)
+
+[node name="LandingPoint" type="Node2D" parent="."]

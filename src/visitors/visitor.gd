@@ -16,14 +16,25 @@ var birdsong = null
 
 var off_screen_height = 300
 var visitor_bouquet
+var spawn = null
 
 func _ready():
 	birdsong = load("res://assets/Sounds/%s.wav" % species)
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
-	# bouquet.tween_height(13, 0)
 
-func land(landing_point: Node2D):
+func flip():
+	sprite.flip_h = true
+	speech_bubble_sprite.flip_h = true
+	for child in get_children():
+		child.position.x *= -1
+
+func land(visitor_spawn: VisitorSpawn):
+	spawn = visitor_spawn
+	if not spawn.left_to_right:
+		flip()
+
+	global_position = spawn.spawn_point
 	audio_player.stream = visitor_landing_sound
 	audio_player.play()
 
@@ -32,8 +43,8 @@ func land(landing_point: Node2D):
 	var height_tween = create_tween()
 	position_tween.tween_property(
 		self,
-		"position",
-		landing_point.position,
+		"global_position",
+		spawn.landing_point,
 		10.0/10.0
 	)
 	shadow_generator.height_off_ground = off_screen_height
@@ -75,8 +86,8 @@ func give_bouquet(given_bouquet: Bouquet):
 				break
 
 	if flowers_given:
-		visitor_bouquet.set_flip_h(false)
-	else:
+		visitor_bouquet.set_flip_h(not spawn.left_to_right)
+	if not flowers_given:
 		speech_bubble_sprite.visible = false
 		sprite.play("confused")
 		await sprite.animation_finished
@@ -116,5 +127,6 @@ func emote_and_take_off():
 	var bouquet = Helpers.get_only_child(hold_point)
 	bouquet.tween_height(off_screen_height, duration)
 	await sprite.animation_finished
-	get_parent().on_visitor_left()
+	spawn.visitor = null
+	get_parent().on_visitor_left(self)
 	queue_free()

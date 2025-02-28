@@ -4,15 +4,16 @@ signal visitor_arrived(desired_bouquet_colors)
 signal visitor_left
 signal boquet_accepted
 
-@onready var spawn_point = $SpawnPoint
-@onready var landing_point = $LandingPoint
 @onready var timer = $Timer
-@onready var visitor: Visitor
-@onready var visitors_unlocked = false
 var bouquets = []
 var bouquet_num = 0
+var bouquets_done = 0
 var done = false
-var visitor_scene = null
+var visitors_unlocked = false
+
+var visitor_spawns: Array
+var num_visitors: int
+var visitor_scene: Resource
 
 var rainbow_order = {
 	Colors.red: 0,
@@ -40,13 +41,12 @@ var bouquet_recipes_by_species = {
 		["jewelweed", 1, 4, 1],
 	],
 	"lupine": [
-		[[Colors.purple], 1, 1, 1],
 		[[Colors.purple, Colors.blue, Colors.pink], 2, 2, 1],
-		[[Colors.red, Colors.white], 2, 1, 1],
-		[[Colors.purple, Colors.blue, Colors.pink], 2, 3, 2],
-		[[Colors.pink, Colors.red, Colors.white], 1, 2, 1],
-		["lupine", 2, 3, 2],
-		["lupine", 3, 4, 2],
+		[[Colors.red, Colors.white], 1, 1, 1],
+		[[Colors.purple, Colors.blue, Colors.pink], 1, 3, 2],
+		[[Colors.red, Colors.white], 1, 2, 1],
+		["lupine", 3, 3, 2],
+		["lupine", 3, 4, 3],
 		["lupine", 1, 5, 1],
 	],
 }
@@ -54,6 +54,9 @@ var bouquet_recipes_by_species = {
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	var visitor_species = level.visitor_species
+	visitor_spawns = get_tree().get_nodes_in_group("visitor_spawns")
+	num_visitors = len(visitor_spawns)
+
 	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
 	var flower_species = level.flower_species
 
@@ -61,7 +64,6 @@ func _ready():
 		for bouquet in callv("generate_boquets", recipe):
 			bouquets.append(bouquet)
 	timer.timeout.connect(_on_timeout)
-	timer.start(1)
 
 func _color_compare(color1, color2):
 	return rainbow_order[color1] < rainbow_order[color2]
@@ -86,34 +88,39 @@ func generate_boquets(colors, count, size, max_repetitions):
 	return ret
 
 func spawn_visitor():
-	if visitor == null:
-		await get_tree().create_timer(5).timeout
-		visitor = visitor_scene.instantiate()
-		add_child(visitor)
-		visitor.desired_bouquet_colors = bouquets[bouquet_num]
-		visitor.set_position(spawn_point.position)
-		await visitor.land(landing_point)
-		visitor_arrived.emit(visitor.desired_bouquet_colors)
-	else:
-		timer.start(1)
+	var spawn
+	for potential_spawn in visitor_spawns:
+		if potential_spawn.visitor == null:
+			spawn = potential_spawn
+			break
+	var visitor = visitor_scene.instantiate()
+	add_child(visitor)
+	spawn.visitor = visitor
+	visitor.desired_bouquet_colors = bouquets[bouquet_num]
+	bouquet_num += 1
+	await visitor.land(spawn)
+	visitor_arrived.emit(visitor.desired_bouquet_colors)
 
-func on_visitor_left():
-	visitor.queue_free()
-	if bouquet_num == len(bouquets):
-		done = true
-	else:
-		timer.start(5)
+func on_visitor_left(visitor):
 	await visitor.tree_exited
-	visitor = null
+	visitor.spawn.visitor = null
 	visitor_left.emit()
+	if timer.is_stopped():
+		timer.start(5)
 
 func _on_timeout():
-	if visitors_unlocked:
+	if bouquet_num < len(bouquets):
 		spawn_visitor()
-		timer.stop()
+		if len(get_children()) - 1 < num_visitors:
+			timer.start(5)
+		else:
+			timer.stop()
 	else:
-		timer.start(1)
+		timer.stop()
 
 func finish_bouquet():
-	bouquet_num += 1
+	bouquets_done += 1
 	boquet_accepted.emit()
+	if bouquets_done == len(bouquets):
+		done = true
+		timer.stop()

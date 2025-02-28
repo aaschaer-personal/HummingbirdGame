@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://duk7bers5o86p"]
+[gd_scene load_steps=9 format=3 uid="uid://duk7bers5o86p"]
 
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_uvec3"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_1tbx1"]
@@ -7,46 +7,61 @@
 [ext_resource type="PackedScene" uid="uid://cxdexh1a3sbge" path="res://src/environment/sapling.tscn" id="5_qcbbc"]
 [ext_resource type="PackedScene" uid="uid://bto2m1l4qg2fe" path="res://src/environment/plot.tscn" id="6_72agm"]
 [ext_resource type="Texture2D" uid="uid://cmmwk13oaugog" path="res://assets/Environment/grass.png" id="7_auds3"]
+[ext_resource type="PackedScene" uid="uid://cdukg4e0bvkv" path="res://src/visitors/visitor_spawn.tscn" id="8_27cxd"]
 
 [node name="Level" instance=ExtResource("1_uvec3")]
 flower_species = "lupine"
 visitor_species = "house_finch"
 level_num = 3
 
-[node name="Stump2" parent="." index="8" instance=ExtResource("2_kjkq2")]
-z_index = -1
-position = Vector2(553, 314)
-
-[node name="MusicPlayer" parent="." index="10" instance=ExtResource("2_1tbx1")]
+[node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_1tbx1")]
 process_mode = 3
 autoplay = true
 option = "music_volume"
 
-[node name="Pond" parent="." index="11" instance=ExtResource("4_l321p")]
-position = Vector2(300, 262)
+[node name="Pond" parent="." index="9" instance=ExtResource("4_l321p")]
+position = Vector2(329, 176)
 
-[node name="Sapling" parent="." index="12" instance=ExtResource("5_qcbbc")]
-position = Vector2(486, 133)
+[node name="Sapling" parent="." index="10" instance=ExtResource("5_qcbbc")]
+position = Vector2(487, 140)
 
-[node name="Plot1" parent="." index="13" instance=ExtResource("6_72agm")]
-position = Vector2(239, 306)
+[node name="Plot1" parent="." index="11" instance=ExtResource("6_72agm")]
+position = Vector2(249, 191)
 
-[node name="Plot2" parent="." index="14" instance=ExtResource("6_72agm")]
-position = Vector2(366, 314)
+[node name="Plot2" parent="." index="12" instance=ExtResource("6_72agm")]
+position = Vector2(293, 224)
 
-[node name="Plot3" parent="." index="15" instance=ExtResource("6_72agm")]
-position = Vector2(225, 194)
+[node name="Plot3" parent="." index="13" instance=ExtResource("6_72agm")]
+position = Vector2(358, 222)
 
-[node name="Plot4" parent="." index="16" instance=ExtResource("6_72agm")]
-position = Vector2(301, 172)
+[node name="Plot4" parent="." index="14" instance=ExtResource("6_72agm")]
+position = Vector2(406, 191)
 
-[node name="Plot5" parent="." index="17" instance=ExtResource("6_72agm")]
-position = Vector2(398, 204)
+[node name="Plot5" parent="." index="15" instance=ExtResource("6_72agm")]
+position = Vector2(184, 297)
 
-[node name="Grass" type="Sprite2D" parent="." index="18"]
+[node name="Plot6" parent="." index="16" instance=ExtResource("6_72agm")]
+position = Vector2(433, 296)
+
+[node name="Grass" type="Sprite2D" parent="." index="17"]
 z_index = -3
 texture_repeat = 2
 position = Vector2(320, 180)
 texture = ExtResource("7_auds3")
 region_enabled = true
 region_rect = Rect2(0, 0, 640, 360)
+
+[node name="Stump" parent="." index="18" instance=ExtResource("2_kjkq2")]
+z_index = -1
+position = Vector2(62, 279)
+
+[node name="VisitorSpawn" parent="Stump" index="1" instance=ExtResource("8_27cxd")]
+position = Vector2(1, -21)
+
+[node name="Stump2" parent="." index="19" instance=ExtResource("2_kjkq2")]
+z_index = -1
+position = Vector2(571, 301)
+
+[node name="VisitorSpawn" parent="Stump2" index="1" instance=ExtResource("8_27cxd")]
+position = Vector2(1, -21)
+left_to_right = false

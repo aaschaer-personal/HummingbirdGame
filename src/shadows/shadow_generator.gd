@@ -22,7 +22,7 @@ func _ready():
 	parent.visibility_changed.connect(set_visibility)
 	set_visibility()
 	shadow_canvas_group.add_child(shadow)
-	shadow.scale = Vector2(1, .5)
+	shadow.scale.y = parent.scale.y * -.5
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
@@ -45,10 +45,9 @@ func _process(_delta):
 		(height_off_ground * 2) +
 		rotation_offset
 	)
-	shadow.flip_v = !parent.flip_v
+	shadow.flip_v = parent.flip_v
 	shadow.flip_h = parent.flip_h
 	shadow.rotation_degrees = -parent.global_rotation_degrees
-	
 
 func play_parent_animation():
 	shadow.play(parent.animation)

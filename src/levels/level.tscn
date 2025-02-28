@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cu1hmijlk3lrc"]
+[gd_scene load_steps=13 format=3 uid="uid://cu1hmijlk3lrc"]
 
 [ext_resource type="Script" path="res://src/levels/level.gd" id="1_fflhd"]
 [ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
 [ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/levels/level_manager.tscn" id="15_8npl5"]
-[ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="16_krw1c"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
 
 [node name="Level2" type="Node2D" groups=["level"]]
@@ -83,17 +82,12 @@ position = Vector2(62, 201)
 position = Vector2(320, 82)
 
 [node name="VisitorManager" parent="." groups=["customer_manager"] instance=ExtResource("14_alqih")]
-position = Vector2(65, 249)
 
 [node name="LevelManager" parent="." instance=ExtResource("15_8npl5")]
 
 [node name="ShadowCanvasGroup" type="CanvasGroup" parent="." groups=["shadow_canvas_group"]]
 self_modulate = Color(0, 0, 0, 0.196078)
 z_index = -1
-
-[node name="Stump" parent="." instance=ExtResource("16_krw1c")]
-z_index = -1
-position = Vector2(72, 267)
 
 [node name="InputLogic" parent="." instance=ExtResource("18_dnpum")]
 process_mode = 1
