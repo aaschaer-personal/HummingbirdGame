@@ -20,6 +20,7 @@ var spawn = null
 
 func _ready():
 	birdsong = load("res://assets/Sounds/%s.wav" % species)
+	
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
 

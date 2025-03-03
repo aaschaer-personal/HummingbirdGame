@@ -11,7 +11,7 @@
 
 [node name="Level" instance=ExtResource("1_uvec3")]
 flower_species = "lupine"
-visitor_species = "house_finch"
+visitor_species = "yellow_breasted_chat"
 level_num = 3
 
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_1tbx1")]

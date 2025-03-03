@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://mfpsgak0m8a4" path="res://assets/Visitors/HouseFinch/house_finch_confused.png" id="2_0s3ps"]
 [ext_resource type="Texture2D" uid="uid://m4wffctol4y6" path="res://assets/Visitors/HouseFinch/house_finch_happy.png" id="3_jd4xu"]
 [ext_resource type="Texture2D" uid="uid://b7dwq2cxxyoxo" path="res://assets/Visitors/HouseFinch/house_finch_idle.png" id="4_rqu4s"]
-[ext_resource type="Texture2D" uid="uid://bpbmns4qcl84s" path="res://assets/Visitors/HouseFinch/house_finch_landing.png" id="5_tkqpq"]
+[ext_resource type="Texture2D" uid="uid://bpbmns4qcl84s" path="res://assets/Visitors/YellowBreastedChat/yellow_breasted_chat_landing.png" id="5_tkqpq"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="6_i7aq2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mmtrs"]
