@@ -21,9 +21,9 @@ script = ExtResource("2_pw7k5")
 layout_mode = 0
 offset_left = 1.0
 offset_top = 20.0
-offset_right = 319.0
+offset_right = 318.0
 offset_bottom = 61.0
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 24
 text = "Level Completed!"
 horizontal_alignment = 1
 
@@ -50,7 +50,7 @@ vertical_alignment = 1
 
 [node name="Spacing" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-text = "                                                        "
+text = "                          "
 
 [node name="StayButton" type="TextureButton" parent="HBoxContainer"]
 layout_mode = 2

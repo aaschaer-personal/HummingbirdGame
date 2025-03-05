@@ -14,4 +14,4 @@ func _ready():
 func set_text():
 	var total_bouquets = len(visitor_manager.bouquets)
 	var num_done = visitor_manager.bouquets_done
-	label.text = ": " + str(num_done) + " / " + str(total_bouquets)
+	label.text = " : " + str(num_done) + "/" + str(total_bouquets)

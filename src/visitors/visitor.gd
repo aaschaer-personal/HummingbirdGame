@@ -12,15 +12,15 @@ class_name Visitor extends Interactable
 @onready var collision_shape = $Collision/CollisionShape2D
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 @onready var visitor_landing_sound = preload("res://assets/Sounds/visitor_landing.wav")
+@onready var song_players = $SongPlayers
 var birdsong = null
 
 var off_screen_height = 300
 var visitor_bouquet
 var spawn = null
 
+
 func _ready():
-	birdsong = load("res://assets/Sounds/%s.wav" % species)
-	
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
 
@@ -101,9 +101,9 @@ func give_bouquet(given_bouquet: Bouquet):
 		emote_and_take_off()
 
 func emote_and_take_off():
-	audio_player.stream = birdsong
-	audio_player.play()
-	sprite.play("happy")
+	var song_number = randi() % len(song_players.get_children())
+	song_players.get_children()[song_number].play()
+	sprite.play("happy_%d" % (song_number + 1))
 	await sprite.animation_finished
 
 	collision_shape.disabled = true

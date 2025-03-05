@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://n17my5x26ah5"]
+[gd_scene load_steps=3 format=3 uid="uid://c7fscptjvgrd6"]
 
 [ext_resource type="Texture2D" uid="uid://bemy1kj4ohyn7" path="res://assets/UI/bag_slot.png" id="1_1vlmv"]
 [ext_resource type="Script" path="res://src/UI/item_slot.gd" id="2_chmg2"]

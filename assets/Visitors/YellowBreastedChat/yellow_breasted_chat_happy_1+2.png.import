@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4tywdca1pos"
-path="res://.godot/imported/house_finch_landing.png-bc3546b10795892cf64f470401d40bbd.ctex"
+uid="uid://bhoajbg7q4we5"
+path="res://.godot/imported/yellow_breasted_chat_happy_1+2.png-3bb92f2d77d32ecd8aca6dfd4d922e87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Visitors/HouseFinch/house_finch_landing.png"
-dest_files=["res://.godot/imported/house_finch_landing.png-bc3546b10795892cf64f470401d40bbd.ctex"]
+source_file="res://assets/Visitors/YellowBreastedChat/yellow_breasted_chat_happy_1+2.png"
+dest_files=["res://.godot/imported/yellow_breasted_chat_happy_1+2.png-3bb92f2d77d32ecd8aca6dfd4d922e87.ctex"]
 
 [params]
 

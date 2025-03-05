@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy1urt2pfi2en"
-path="res://.godot/imported/yellow_breasted_chat_happy.png-a70cad3d20312d0d876c0e893603fa4f.ctex"
+uid="uid://dgrp27gx2adnr"
+path="res://.godot/imported/yellow_breasted_chat_happy_3.png-588efcdff6a98073771347c053445c2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Visitors/YellowBreastedChat/yellow_breasted_chat_happy.png"
-dest_files=["res://.godot/imported/yellow_breasted_chat_happy.png-a70cad3d20312d0d876c0e893603fa4f.ctex"]
+source_file="res://assets/Visitors/YellowBreastedChat/yellow_breasted_chat_happy_3.png"
+dest_files=["res://.godot/imported/yellow_breasted_chat_happy_3.png-588efcdff6a98073771347c053445c2e.ctex"]
 
 [params]
 

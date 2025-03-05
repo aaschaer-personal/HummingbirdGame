@@ -37,8 +37,9 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/Controls"]
 layout_mode = 0
-offset_top = 1.0
-offset_right = 56.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 55.0
 offset_bottom = 32.0
 text = "Controls"
 horizontal_alignment = 1
@@ -52,8 +53,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/UsingItems"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Using
 Items"
 horizontal_alignment = 1
@@ -67,8 +70,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/GrowingFlowers"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Growing
 Flowers"
 horizontal_alignment = 1
@@ -82,8 +87,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/NectarAndPollen"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Nectar &
 Pollen"
 horizontal_alignment = 1
@@ -97,8 +104,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/Energy"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Energy"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -111,8 +120,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/Visitors"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Visitors"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -125,8 +136,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/PrintingPackets"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Printing
 Packets"
 horizontal_alignment = 1
@@ -140,8 +153,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/Genetics"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 32.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 55.0
+offset_bottom = 31.0
 text = "Genetics"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -154,8 +169,10 @@ texture_disabled = ExtResource("4_2koyi")
 
 [node name="Label" type="Label" parent="Tabs/PunnetSquare"]
 layout_mode = 0
-offset_right = 56.0
-offset_bottom = 28.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 55.0
+offset_bottom = 29.0
 text = "Punnet
 Square"
 horizontal_alignment = 1
@@ -174,7 +191,7 @@ offset_right = 244.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Controls[/center][font_size=12]
+[font_size=24][center]Controls[/center][font_size=8]
 
 * Press ESC to pause, unpause, and close windows.
 
@@ -191,11 +208,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Using Items[/center][font_size=12]
+[font_size=16][center]Using Items[/center][font_size=8]
 
 * While not holding anything, interact with an item to pick it up.
 
@@ -237,11 +252,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Growing Flowers[/center][font_size=12]
+[font_size=16][center]Growing Flowers[/center][font_size=8]
 
 * Plant seeds in bare soil using a seed packet then water with a watering can.
 
@@ -262,11 +275,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Nectar and Pollen[/center][font_size=12]
+[font_size=16][center]Nectar and Pollen[/center][font_size=8]
 
 * Interact with a flower to drink energy restoring nectar.
 
@@ -285,11 +296,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Energy[/center][font_size=12]
+[font_size=16][center]Energy[/center][font_size=8]
 
 * Energy is shown by the bar in the top left of the screen.
 
@@ -306,11 +315,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Visitors[/center][font_size=12]
+[font_size=16][center]Visitors[/center][font_size=8]
 
 * The numbers of visitor requests you have met and must meet are shown in the top right of the screen.
 
@@ -328,11 +335,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Printing Packets[/center][font_size=12]
+[font_size=16][center]Printing Packets[/center][font_size=8]
 
 * Interacting with the cache (the machine that provides the original seeds and tools) opens it's packet printing interface.
 
@@ -349,11 +354,9 @@ offset_left = 4.0
 offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Genetics[/center][font_size=12]
+[font_size=16][center]Genetics[/center][font_size=8]
 
 * Flower traits such as color and number of flowers are determined by genetics.
 
@@ -384,11 +387,9 @@ offset_top = 2.0
 offset_right = 244.0
 offset_bottom = 322.0
 mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 8
-theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[font_size=8]
-[font_size=24][center]Punnet Square[/center][font_size=12]
+[font_size=16][center]Punnet Square[/center][font_size=8]
 
 * Set the alleles for each parent to see possible outcomes of crossing them."
 

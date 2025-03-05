@@ -2,12 +2,15 @@ extends NinePatchRect
 
 @onready var play_button = $VBoxContainer/PlayButton
 @onready var options_button = $VBoxContainer/OptionsButton
+@onready var credits_button = $VBoxContainer/CreditsButton
 @onready var exit_button = $VBoxContainer/ExitButton
 @onready var options = $Options
+@onready var credits = $Credits
 
 func _ready():
 	play_button.pressed.connect(play)
 	options_button.pressed.connect(open_options_menu)
+	credits_button.pressed.connect(open_credits)
 	exit_button.pressed.connect(exit)
 
 func play():
@@ -21,6 +24,9 @@ func play():
 
 func open_options_menu():
 	options.visible = true
+
+func open_credits():
+	credits.visible = true
 
 func exit():
 	get_tree().quit()

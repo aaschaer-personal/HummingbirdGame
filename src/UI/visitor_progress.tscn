@@ -13,7 +13,7 @@ offset_left = 31.0
 offset_top = 8.0
 offset_right = 93.0
 offset_bottom = 31.0
-text = ": 0 / 5"
+text = " : 0/5"
 
 [node name="VisitorIcon" type="TextureRect" parent="."]
 layout_mode = 0
