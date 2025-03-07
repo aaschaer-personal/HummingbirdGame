@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://duk7bers5o86p"]
+[gd_scene load_steps=10 format=3 uid="uid://duk7bers5o86p"]
 
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_uvec3"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_1tbx1"]
 [ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="2_kjkq2"]
+[ext_resource type="AudioStream" uid="uid://c2heryua61ndi" path="res://assets/Music/Level3.ogg" id="3_fciyc"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="4_l321p"]
 [ext_resource type="PackedScene" uid="uid://cxdexh1a3sbge" path="res://src/environment/sapling.tscn" id="5_qcbbc"]
 [ext_resource type="PackedScene" uid="uid://bto2m1l4qg2fe" path="res://src/environment/plot.tscn" id="6_72agm"]
@@ -16,6 +17,7 @@ level_num = 3
 
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_1tbx1")]
 process_mode = 3
+stream = ExtResource("3_fciyc")
 autoplay = true
 option = "music_volume"
 
