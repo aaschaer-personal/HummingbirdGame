@@ -55,7 +55,7 @@ func print_packet():
 	var icon = icon_option.get_item_icon(icon_option.get_selected_id())
 	var icon_color = colors[icon_color_option.get_selected_id()]
 	var packet = packet_scene.instantiate()
-	packet.visible = false
+	packet.global_position = get_parent().global_position + Vector2(-2, -22)
 	get_parent().add_sibling(packet)
 	if not packet.is_node_ready():
 		await packet.ready
@@ -67,5 +67,5 @@ func print_packet():
 	packets_remaining -= 1
 	if packets_remaining == 0:
 		print_button.disabled = true
-		$PacketsInterface/PrintButton/Label.text = "No Paper"
+		$PrintButton/Label.text = "No Paper"
 	close()

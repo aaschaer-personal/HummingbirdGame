@@ -25,7 +25,7 @@ func _physics_process(delta):
 
 func toggle_water(val):
 	water_particles.emitting = val
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	if audio_player.playing != val:
 		audio_player.playing = val
 

@@ -6,3 +6,4 @@ signal plant_died
 signal flower_pollinated
 signal watering_can_emptied
 signal watering_can_refilled
+signal flower_accepted

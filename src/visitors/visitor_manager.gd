@@ -12,7 +12,8 @@ var done = false
 var visitors_unlocked = false
 
 var visitor_spawns: Array
-var num_visitors: int
+var num_visitors = 0
+var max_visitors: int
 var visitor_scene: Resource
 
 var rainbow_order = {
@@ -55,7 +56,7 @@ func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	var visitor_species = level.visitor_species
 	visitor_spawns = get_tree().get_nodes_in_group("visitor_spawns")
-	num_visitors = len(visitor_spawns)
+	max_visitors = len(visitor_spawns)
 
 	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
 	var flower_species = level.flower_species
@@ -94,16 +95,18 @@ func spawn_visitor():
 			spawn = potential_spawn
 			break
 	var visitor = visitor_scene.instantiate()
-	add_child(visitor)
+	add_sibling(visitor)
 	spawn.visitor = visitor
 	visitor.desired_bouquet_colors = bouquets[bouquet_num]
 	bouquet_num += 1
+	num_visitors += 1
 	await visitor.land(spawn)
 	visitor_arrived.emit(visitor.desired_bouquet_colors)
 
 func on_visitor_left(visitor):
 	await visitor.tree_exited
 	visitor.spawn.visitor = null
+	num_visitors -= 1
 	visitor_left.emit()
 	if timer.is_stopped():
 		timer.start(5)
@@ -111,7 +114,7 @@ func on_visitor_left(visitor):
 func _on_timeout():
 	if bouquet_num < len(bouquets):
 		spawn_visitor()
-		if len(get_children()) - 1 < num_visitors:
+		if num_visitors < max_visitors:
 			timer.start(5)
 		else:
 			timer.stop()

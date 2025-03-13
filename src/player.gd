@@ -44,7 +44,6 @@ var drinking_flower = null
 var hovering_frame = 0
 var perching_frame = 0
 var perch_y = 0
-var perch_x = 0
 var facing_right = true
 var target_animation = "hovering"
 var pollen = []
@@ -94,21 +93,26 @@ func _process(delta):
 			target_animation = "hovering"
 
 	if drinking_flower and body_sprite.animation == "drinking":
-		var gained_energy = drinking_flower.drink(delta)
-		energy += gained_energy
-		if gained_energy > 0.1:
-			audio_player.set_pitch_scale(
-					.4 +  (energy/max_energy) * .6
-				)
-			if not audio_player.playing:
-				audio_player.stream = drinking_sound
-				audio_player.play()
+		if drinking_flower.stage == 1:
+			var gained_energy = drinking_flower.drink(delta)
+			energy += gained_energy
+			if gained_energy > 0.1:
+				audio_player.set_pitch_scale(
+						.4 +  (energy/max_energy) * .6
+					)
+				if not audio_player.playing:
+					audio_player.stream = drinking_sound
+					audio_player.play()
+			else:
+				audio_player.stop()
 		else:
-			audio_player.stop()
+			drinking_flower.finish_drink()
+			drinking_flower = null
+			target_animation = "hovering"
 	elif audio_player.stream == drinking_sound:
 		audio_player.stop()
 
-	if body_sprite.animation in ["perching_h", "perching_v"]:
+	if body_sprite.animation == "perching":
 		var rate = (-0.2 * energy) + 6
 		rate = max(rate, 0)
 		energy += rate * delta
@@ -291,6 +295,12 @@ func start_drink(flower: Flower):
 	target_animation = "drinking"
 	
 func use_tool_on_flower(flower: Flower):
+	# don't remove a flower while drinking from it!
+	if drinking_flower:
+		drinking_flower.finish_drink()
+		drinking_flower = null
+		target_animation = "hovering"
+
 	if flower.stage == 3 and held_item is SeedPacket:
 		flower.harvest_seeds(held_item)
 		seeds_harvested.emit()
@@ -320,9 +330,9 @@ func open_cache_ui(ui: CacheUI):
 	if held_item == null or held_item is SeedPacket:
 		ui.open()
 
-func start_perch_h(perch_zone: Area2D):
+func start_perch(perch_zone: Area2D):
 	perch_y = perch_zone.global_position.y
-	target_animation = "perching_h"
+	target_animation = "perching"
 
 func give_bouquet(visitor: Visitor):
 	if held_item is Bouquet:
@@ -356,7 +366,6 @@ func _set_wings(val: bool, sound=true):
 	if sound:
 		humm_player.playing = val
 
-
 func _flip_h(val: bool):
 	body_sprite.set_flip_h(val)
 	front_wing_sprite.set_flip_h(val)
@@ -383,7 +392,7 @@ func _do_animation():
 	if not body_sprite.sprite_frames.get_animation_loop(current):
 		return
 	
-	# if we were perched, immediatly flip sprite to current direction 
+	# if we were perched, immediatly flip sprite to current direction
 	if facing_right == null:
 		if velocity.x > 0:
 			_flip_h(false)
@@ -408,7 +417,7 @@ func _do_animation():
 		elif (velocity.x > 0) and facing_right == false:
 			turn_flip_val = false
 
-	if turn_flip_val != null:
+	if turn_flip_val != null and current != "perching":
 		# save current animation frame, stop wings, and start turn
 		var duration = 0.3  # 12 frames at 40fps
 		var current_frame = body_sprite.get_frame()
@@ -418,10 +427,13 @@ func _do_animation():
 			flippable.position *= Vector2(-1, 1)
 		_play_animation("turn")
 		# halfway through the turn, turn any hold item
-		await get_tree().create_timer(duration / 2.0).timeout
+		await get_tree().create_timer(duration / 2.0, false).timeout
 		if held_item:
 			held_item.set_flip_h(turn_flip_val)
 		await body_sprite.animation_finished
+		# flip any item picked up after the halfway point
+		if held_item:
+			held_item.set_flip_h(turn_flip_val)
 		# start wings and restore previous animation frame
 		_set_wings(true)
 		facing_right = !turn_flip_val
@@ -444,9 +456,9 @@ func _do_animation():
 			_play_animation("start_drinking")
 			await body_sprite.animation_finished
 			_play_animation("drinking")
-		elif target_animation == "perching_h":
+		elif target_animation == "perching":
 			_set_wings(false, false)
-			_play_animation("start_perching_h")
+			_play_animation("start_perching")
 			var tween = create_tween()
 			tween.tween_property(
 				self,
@@ -458,14 +470,7 @@ func _do_animation():
 			await body_sprite.animation_finished
 			humm_player.playing = false
 			facing_right = null
-			_play_animation("perching_h")
-			_set_frame(perching_frame)
-		elif target_animation == "perching_v":
-			_set_wings(false)
-			_play_animation("start_perching_v")
-			await body_sprite.animation_finished
-			facing_right = null
-			_play_animation("perching_h")
+			_play_animation("perching")
 			_set_frame(perching_frame)
 		elif target_animation == "bathe":
 			controllable = false
@@ -478,16 +483,16 @@ func _do_animation():
 			)
 			_tween_height(0, 2.0/10.0)
 			_play_animation("bathe")
-			await get_tree().create_timer(2.0/10.0).timeout
+			await get_tree().create_timer(2.0/10.0, false).timeout
 			_set_wings(false)
-			await get_tree().create_timer(4.0/10.0).timeout
+			await get_tree().create_timer(4.0/10.0, false).timeout
 			splash_particles.emitting = true
 			audio_player.set_pitch_scale(1)
 			audio_player.stream = bath_sound
 			audio_player.play()
-			await get_tree().create_timer(6.0/10.0).timeout
+			await get_tree().create_timer(6.0/10.0, false).timeout
 			splash_particles.emitting = false
-			await get_tree().create_timer(3.0/10.0).timeout
+			await get_tree().create_timer(3.0/10.0, false).timeout
 			_set_wings(true)
 			controllable = true
 			tween = create_tween()
@@ -511,13 +516,10 @@ func _do_animation():
 			_play_animation("stop_zooming")
 		elif current == "drinking":
 			_play_animation("stop_drinking")
-		elif current == "perching_h":
+		elif current == "perching":
 			perching_frame = body_sprite.get_frame()
-			_play_animation("stop_perching_h")
+			_play_animation("stop_perching")
 			_tween_height(15, .2)
-		elif current == "perching_h":
-			perching_frame = body_sprite.get_frame()
-			_play_animation("stop_perching_y")
 		await body_sprite.animation_finished
 		_set_wings(true)
 		_play_animation("hovering")

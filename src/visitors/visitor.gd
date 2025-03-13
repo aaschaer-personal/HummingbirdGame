@@ -15,12 +15,14 @@ class_name Visitor extends Interactable
 @onready var song_players = $SongPlayers
 var birdsong = null
 
+var visitor_manager
 var off_screen_height = 300
 var visitor_bouquet
 var spawn = null
 
 
 func _ready():
+	visitor_manager = get_tree().get_nodes_in_group("visitor_manager")[0]
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
 
@@ -86,19 +88,20 @@ func give_bouquet(given_bouquet: Bouquet):
 				flowers_given += 1
 				break
 
+	if len(desired_bouquet_colors) == 0:
+		visitor_manager.finish_bouquet()
+		speech_bubble_sprite.visible = false
+		emote_and_take_off()
+
 	if flowers_given:
 		visitor_bouquet.set_flip_h(not spawn.left_to_right)
+		SignalBus.flower_accepted.emit()
 	if not flowers_given:
 		speech_bubble_sprite.visible = false
 		sprite.play("confused")
 		await sprite.animation_finished
 		sprite.play("idle")
 		speech_bubble_sprite.visible = true
-
-	if len(desired_bouquet_colors) == 0:
-		get_parent().finish_bouquet()
-		speech_bubble_sprite.visible = false
-		emote_and_take_off()
 
 func emote_and_take_off():
 	var song_number = randi() % len(song_players.get_children())
@@ -129,5 +132,5 @@ func emote_and_take_off():
 	bouquet.tween_height(off_screen_height, duration)
 	await sprite.animation_finished
 	spawn.visitor = null
-	get_parent().on_visitor_left(self)
+	visitor_manager.on_visitor_left(self)
 	queue_free()

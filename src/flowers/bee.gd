@@ -10,9 +10,9 @@ func _ready():
 func fly_then_hover():
 	if not active:
 		return
-	var point = hover_points.pick_random().position
+	var point = hover_points.pick_random().global_position
 	var tween = create_tween()
-	tween.tween_property(self, "position", point, .4)
+	tween.tween_property(self, "global_position", point, .4)
 	await tween.finished
 	hover_then_fly()
 

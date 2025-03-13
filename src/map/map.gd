@@ -125,7 +125,7 @@ func _ready():
 			if int(str(level_group.name)) == last_complete:
 				for flower in level_group.get_children():
 					flower.bloom_with_random_delay()
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(1.5, false).timeout
 		controllable = true
 
 	# unlock new levels

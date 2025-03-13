@@ -178,7 +178,9 @@ animations = [{
 }]
 
 [node name="CutFlower" instance=ExtResource("1_biryu")]
-species = "sunflower"
+species = "lupine"
+pickup_height = 13
+drop_duration = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(12, 6.98492e-10)

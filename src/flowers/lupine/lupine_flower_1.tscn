@@ -1,11 +1,14 @@
-[gd_scene load_steps=76 format=3 uid="uid://cjwglivsxpekk"]
+[gd_scene load_steps=94 format=3 uid="uid://cjwglivsxpekk"]
 
 [ext_resource type="PackedScene" uid="uid://5rcf7awoltde" path="res://src/flowers/flower.tscn" id="1_ht5im"]
 [ext_resource type="Texture2D" uid="uid://cpvoybuxn8kwb" path="res://assets/Flowers/Lupine/lupine_bloom_petals-1.png" id="2_q36j6"]
 [ext_resource type="Texture2D" uid="uid://cactorr58ko66" path="res://assets/Flowers/Lupine/lupine_bloom_rustle_petals-1.png" id="3_8qwim"]
+[ext_resource type="Texture2D" uid="uid://cke1v8dcksrsk" path="res://assets/Flowers/Lupine/lupine_to_seed_petals-1.png" id="4_edl7e"]
 [ext_resource type="Texture2D" uid="uid://d3f3q3tupklxp" path="res://assets/Flowers/Lupine/lupine_wilt_petals-1.png" id="4_wrpxv"]
+[ext_resource type="Texture2D" uid="uid://gof7p45u6jhg" path="res://assets/Flowers/Lupine/lupine_to_seed_rustle_petals-1.png" id="5_a8bfa"]
 [ext_resource type="Texture2D" uid="uid://c7yilf5nfy8ix" path="res://assets/Flowers/Lupine/lupine_bloom-1.png" id="6_0cwuf"]
 [ext_resource type="Texture2D" uid="uid://b1hla2fl0madu" path="res://assets/Flowers/Lupine/lupine_bloom_rustle-1.png" id="7_5aqvm"]
+[ext_resource type="Texture2D" uid="uid://dd3q73ipe52q5" path="res://assets/Flowers/Lupine/lupine_wilt_rustle_petals-1.png" id="7_5jblp"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="8_1avbj"]
 [ext_resource type="Texture2D" uid="uid://jjoxmdlvi4n6" path="res://assets/Flowers/Lupine/lupine_to_seed-1.png" id="8_n3cbk"]
 [ext_resource type="Texture2D" uid="uid://bapb0irvi0rlk" path="res://assets/Flowers/Lupine/lupine_to_seed_rustle-1.png" id="9_u0hkc"]
@@ -73,6 +76,50 @@ region = Rect2(64, 0, 32, 64)
 atlas = ExtResource("3_8qwim")
 region = Rect2(96, 0, 32, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_fmyhm"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awh88"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ehopm"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0g8wt"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27s8f"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcrrx"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fakbk"]
+atlas = ExtResource("4_edl7e")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ut2bw"]
+atlas = ExtResource("5_a8bfa")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_116k3"]
+atlas = ExtResource("5_a8bfa")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bryo1"]
+atlas = ExtResource("5_a8bfa")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eet5o"]
+atlas = ExtResource("5_a8bfa")
+region = Rect2(96, 0, 32, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcw8e"]
 atlas = ExtResource("4_wrpxv")
 region = Rect2(0, 0, 32, 64)
@@ -100,6 +147,22 @@ region = Rect2(160, 0, 32, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ggpje"]
 atlas = ExtResource("4_wrpxv")
 region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwgx0"]
+atlas = ExtResource("7_5jblp")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3d76"]
+atlas = ExtResource("7_5jblp")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctxan"]
+atlas = ExtResource("7_5jblp")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og1bi"]
+atlas = ExtResource("7_5jblp")
+region = Rect2(96, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p87xr"]
 animations = [{
@@ -158,12 +221,45 @@ animations = [{
 "name": &"bloom_rustle",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fmyhm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awh88")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ehopm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0g8wt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27s8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcrrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fakbk")
+}],
 "loop": false,
 "name": &"to_seed",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ut2bw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_116k3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bryo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eet5o")
+}],
 "loop": false,
 "name": &"to_seed_rustle",
 "speed": 10.0
@@ -194,7 +290,19 @@ animations = [{
 "name": &"wilt",
 "speed": 10.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwgx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3d76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctxan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og1bi")
+}],
 "loop": false,
 "name": &"wilt_rustle",
 "speed": 10.0
@@ -523,10 +631,8 @@ position = Vector2(4, -2)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_p87xr")
-animation = &"bloom_rustle"
+animation = &"bloom"
 autoplay = "bloom"
-frame = 3
-frame_progress = 1.0
 
 [node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("8_1avbj")]
 object_height = 10
@@ -537,8 +643,6 @@ show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_30355")
 animation = &"bloom"
 autoplay = "bloom"
-frame = 10
-frame_progress = 1.0
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("8_1avbj")]
 object_height = 10

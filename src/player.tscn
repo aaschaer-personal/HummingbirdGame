@@ -929,7 +929,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_djn84")
 }],
 "loop": true,
-"name": &"perching_h",
+"name": &"perching",
 "speed": 10.0
 }, {
 "frames": [{
@@ -969,7 +969,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_12xl0")
 }],
 "loop": false,
-"name": &"start_perching_h",
+"name": &"start_perching",
 "speed": 40.0
 }, {
 "frames": [{
@@ -1020,7 +1020,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_04osg")
 }],
 "loop": false,
-"name": &"stop_perching_h",
+"name": &"stop_perching",
 "speed": 40.0
 }, {
 "frames": [{
@@ -1972,7 +1972,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_taeq0")
 }],
 "loop": true,
-"name": &"perching_h",
+"name": &"perching",
 "speed": 10.0
 }, {
 "frames": [{
@@ -2012,7 +2012,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_sj2hw")
 }],
 "loop": false,
-"name": &"start_perching_h",
+"name": &"start_perching",
 "speed": 40.0
 }, {
 "frames": [{
@@ -2063,7 +2063,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mnerq")
 }],
 "loop": false,
-"name": &"stop_perching_h",
+"name": &"stop_perching",
 "speed": 40.0
 }, {
 "frames": [{
@@ -2236,7 +2236,7 @@ height_off_ground = 15
 
 [node name="Body" type="AnimatedSprite2D" parent="Animation"]
 sprite_frames = SubResource("SpriteFrames_kuglu")
-animation = &"hovering"
+animation = &"stop_perching"
 autoplay = "hovering"
 
 [node name="ShadowGenerator" parent="Animation/Body" instance=ExtResource("11_u3ina")]
@@ -2246,7 +2246,7 @@ height_off_ground = 15
 [node name="Pollen" type="AnimatedSprite2D" parent="Animation"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_2l22o")
-animation = &"hovering"
+animation = &"stop_perching"
 autoplay = "hovering"
 
 [node name="FrontWing" type="AnimatedSprite2D" parent="Animation"]

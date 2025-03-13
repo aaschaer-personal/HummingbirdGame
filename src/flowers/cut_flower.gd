@@ -9,7 +9,13 @@ class_name CutFlower extends Item
 var x_offset_by_species = {
 	"sunflower": 12,
 	"jewelweed": 6,
-	"lupine": 10,
+	"lupine": 14,
+}
+# height, duration
+var decay_data_by_species = {
+	"sunflower": [4, .6],
+	"jewelweed": [4, .4],
+	"lupine": [1, .3],
 }
 var color: Color
 var is_decaying = false
@@ -28,6 +34,16 @@ func _ready():
 		0,
 		.1,
 	)
+
+func is_in_play():
+	# for level_manager._failure_check
+	if is_decaying:
+		return false
+	elif get_parent() is Level:
+		return true
+	elif get_parent().get_parent().get_parent().get_parent() is Visitor:
+		return false
+	return true
 
 func is_interactable():
 	if is_decaying or !get_parent() is Level:
@@ -86,6 +102,8 @@ func decay():
 	is_decaying = true
 	item_sprite.play("decay")
 	petal_sprite.play("decay")
+	var data = decay_data_by_species[species]
+	tween_height(data[0], data[1])
 	await item_sprite.animation_finished
 	SignalBus.cut_flower_decayed.emit()
 	queue_free()

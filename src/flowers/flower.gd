@@ -21,6 +21,12 @@ var bee: Bee = null
 var manualy_pollinated = false
 var cut_flower_scene = null
 
+var cut_offsets = {
+	0: Vector2(0,0),
+	1: Vector2(-5,1),
+	2: Vector2(5,1),
+}
+
 func _ready():
 	var species = parent_plant.genome.species
 	cut_flower_scene = load("res://src/flowers/%s/cut_%s.tscn" % [species, species])
@@ -39,11 +45,6 @@ func _ready():
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
 	petal_sprite.play(animation_name)
-	#if animation_name in ["bloom", "bloom_rustle", "wilt"]:
-	# 	petal_sprite.visible = true
-	#	petal_sprite.play(animation_name)
-	#else:
-	#	petal_sprite.visible = false
 
 func receive_nutrients(amount: float):
 	if stage == 1:
@@ -86,9 +87,8 @@ func rustle():
 	rustle_audio_player.play()
 
 func _wilt():
-	_play_animation("wilt")
 	pollination_timer.stop()
-	generate_seeds()
+	await _play_animation("wilt")
 	if bee:
 		bee.fly_away()
 		bee = null
@@ -97,15 +97,17 @@ func _wilt():
 	stage = 2
 
 func _go_to_seed():
-	_play_animation("to_seed")
-	await main_sprite.animation_finished
-	stage = 3
+	if main_sprite.animation != "to_seed":
+		generate_seeds()
+		_play_animation("to_seed")
+		await main_sprite.animation_finished
+		stage = 3
 
 func is_interactable():
 	return (
 		(stage == 1 and not player.held_item is Clippers)
 		or (stage == 3 and player.held_item is SeedPacket)
-		or (player.held_item is Clippers)
+		or (stage > 0 and player.held_item is Clippers)
 	)
 
 func get_player_interaction():
@@ -178,7 +180,7 @@ func clip():
 		var cut_flower_instance = cut_flower_scene.instantiate()
 		get_tree().get_first_node_in_group("level").add_child(cut_flower_instance)
 		cut_flower_instance.set_color(parent_plant.genome.flower_color)
-		cut_flower_instance.set_global_position(global_position)
+		cut_flower_instance.set_global_position(global_position + cut_offsets[flower_position]) 
 	harvest()
 
 func harvest():

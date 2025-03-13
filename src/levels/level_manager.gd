@@ -28,6 +28,7 @@ func _ready():
 	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
 	SignalBus.cut_flower_decayed.connect(_failure_check)
+	SignalBus.flower_accepted.connect(_failure_check)
 	SignalBus.watering_can_emptied.connect(_on_watering_can_emptied)
 	cache.packet_printed.connect(_on_packet_printed)
 	visitor_manager.visitor_left.connect(_on_visitor_left)
@@ -45,7 +46,7 @@ func _failure_check():
 		if plant.current_flowers or plant._flowers_left_to_grow():
 			return
 	for cut_flower in get_tree().get_nodes_in_group("cut_flowers"):
-		if not cut_flower.is_decaying:
+		if cut_flower.is_in_play():
 			return
 	failure_screen.open()
 
@@ -58,8 +59,6 @@ func _on_visitor_left():
 		)
 		await tween.finished
 		completed_screen.open()
-	else:
-		_failure_check()
 
 func _on_flower_bloomed(color):
 	flowers_grown += 1
@@ -131,11 +130,11 @@ func generate_starting_packet():
 	elif level.flower_species == "lupine":
 		for i in range(4):
 			starting_seeds.append(GenomeGenerator.wild("lupine"))
-		starting_seeds[0]["max_flowers"] = 1
-		starting_seeds[1]["max_flowers"] = 0
+		starting_seeds[0]["max_flowers"] = 0
+		starting_seeds[1]["max_flowers"] = 1
 		starting_seeds[2]["red"] = ["r", "r"]
 		starting_seeds[2]["blue"] = ["B", "B"]
-		starting_seeds[2]["max_flowers"] = 0
+		starting_seeds[2]["max_flowers"] = 1
 		starting_seeds[3]["red"] = ["R", "r"]
 		starting_seeds[3]["blue"] = ["b", "b"]
 		starting_seeds[3]["max_flowers"] = 1
@@ -202,7 +201,7 @@ func remove_tutorial_text(text_name):
 
 func tutorial_sequence():
 	add_tutorial_text("Title", "Tutorial:\n\n")
-	await get_tree().create_timer(.2).timeout
+	await get_tree().create_timer(.2, false).timeout
 	
 	add_tutorial_text("Guide",
 """Open the guide:

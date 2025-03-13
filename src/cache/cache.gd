@@ -6,6 +6,7 @@ signal packet_printed
 @onready var left_door = $LeftDoor
 @onready var right_door = $RightDoor
 @onready var back = $Back
+@onready var shadow = $Shadow
 @onready var cache_ui = $CacheUI
 @onready var watering_can_scene = preload("res://src/items/watering_can.tscn")
 @onready var clippers_scene = preload("res://src/items/clippers.tscn")
@@ -28,6 +29,10 @@ func _ready():
 		pass
 	top = top_scene.instantiate()
 	front.add_child(top)
+	var shadow_pos = shadow.global_position
+	var shadow_canvas_group = get_tree().get_first_node_in_group("shadow_canvas_group")
+	Helpers.set_parent(shadow, shadow_canvas_group)
+	shadow.global_position = shadow_pos
 
 func sync_frames():
 	var frame = front.get_frame()
@@ -35,6 +40,7 @@ func sync_frames():
 	back.set_frame_and_progress(frame, progress)
 	left_door.set_frame_and_progress(frame, progress)
 	right_door.set_frame_and_progress(frame, progress)
+	shadow.set_frame_and_progress(frame, progress)
 	top.position = Vector2(0,top_positions[frame])
 
 func is_interactable():
@@ -54,17 +60,20 @@ func quick_raise():
 	back.play("raise")
 	left_door.play("raise")
 	right_door.play("raise")
+	shadow.play("raise")
 	top.position = Vector2(0, -20)
 	front.set_frame_and_progress(14, 0)
 	back.set_frame_and_progress(14, 0)
 	left_door.set_frame_and_progress(14, 0)
 	right_door.set_frame_and_progress(14, 0)
+	shadow.set_frame_and_progress(14, 0)
 
 func raise():
 	front.play("raise")
 	back.play("raise")
 	left_door.play("raise")
 	right_door.play("raise")
+	shadow.play("raise")
 	audio_player.stream = raise_sound
 	audio_player.play()
 	await front.animation_finished
@@ -106,9 +115,9 @@ func quick_dispense_all(seed_packet):
 func dispense_all(seed_packet):
 	await left_door_open()
 	_dispense_seeds(seed_packet)
-	await get_tree().create_timer(0.7).timeout
+	await get_tree().create_timer(0.7, false).timeout
 	_dispense_watering_can()
-	await get_tree().create_timer(0.7).timeout
+	await get_tree().create_timer(0.7, false).timeout
 	await _dispense_clippers()
 	left_door_close()
 
@@ -150,11 +159,9 @@ func print_packet(seed_packet):
 	if not door_open:
 		await left_door_open()
 		door_open = true
-	seed_packet.global_position = self.global_position + Vector2(-2, -22)
-	seed_packet.visible=true
 	seed_packet.tween_height(4, 0)
 	while packets_printing > 3:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.1, false).timeout
 	packets_printing += 1
 	await seed_packet.transport(-10 + (-20 * packets_printing), 6)
 	packet_printed.emit()

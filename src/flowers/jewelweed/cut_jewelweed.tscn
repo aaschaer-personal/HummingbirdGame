@@ -207,6 +207,8 @@ animations = [{
 
 [node name="CutFlower" instance=ExtResource("1_iligp")]
 species = "jewelweed"
+pickup_height = 13
+drop_duration = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(10, 1)

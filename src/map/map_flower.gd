@@ -15,5 +15,5 @@ func play(animation):
 
 func bloom_with_random_delay():
 	var frames = randi() % 8
-	await get_tree().create_timer(0.1 * frames).timeout
+	await get_tree().create_timer(0.1 * frames, false).timeout
 	play("bloom")

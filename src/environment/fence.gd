@@ -10,7 +10,7 @@ func get_interaction_target():
 	return perch_zone
 
 func get_player_interaction():
-	return "start_perch_h"
+	return "start_perch"
 
 func get_player_interaction_area():
 	return player.landing_area

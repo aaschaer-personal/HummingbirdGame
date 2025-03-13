@@ -67,5 +67,5 @@ func return_to_map():
 func quit_to_menu():
 	get_tree().paused = false
 	Config.save_config()
-	var main_menu = load("res://src/main_menu.tscn")
+	var main_menu = load("res://src/UI/main_menu.tscn")
 	get_tree().change_scene_to_packed(main_menu)
