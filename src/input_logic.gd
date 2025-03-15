@@ -34,7 +34,6 @@ func _unhandled_input(event):
 				continue
 			elif area is Interactable and area.is_interactable():
 				clickables.append(area)
-				break
 
 		for area in clickables:
 			# always pick the same area as when the click started

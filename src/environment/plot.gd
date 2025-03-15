@@ -36,7 +36,7 @@ func remove_seed():
 		return seed_genome
 
 func water(delta):
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5, false).timeout
 	wetness += delta * 80
 	if wetness >= 40:
 		wetness = 40

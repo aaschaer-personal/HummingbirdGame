@@ -1,0 +1,122 @@
+[gd_scene load_steps=6 format=3 uid="uid://p20nhe72cui7"]
+
+[ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_okmmr"]
+[ext_resource type="Script" path="res://src/UI/main_menu.gd" id="2_vo58w"]
+[ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_vkfmv"]
+[ext_resource type="PackedScene" uid="uid://cs238mtvd8a3i" path="res://src/UI/options.tscn" id="4_ijhxi"]
+[ext_resource type="PackedScene" uid="uid://csw74gsfwu543" path="res://src/UI/credits.tscn" id="5_a16ur"]
+
+[node name="MainMenu" type="NinePatchRect"]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_okmmr")
+region_rect = Rect2(1, 1, 22, 22)
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+script = ExtResource("2_vo58w")
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 342.0
+offset_right = 31.0
+offset_bottom = 354.0
+text = "v0.5"
+
+[node name="VBoxContainer" type="HFlowContainer" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 50.0
+offset_right = 450.0
+offset_bottom = 210.0
+alignment = 1
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="Space" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "                                                        "
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_vkfmv")
+
+[node name="Label" type="Label" parent="VBoxContainer/PlayButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Play
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_vkfmv")
+
+[node name="Label" type="Label" parent="VBoxContainer/OptionsButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_vkfmv")
+
+[node name="Label" type="Label" parent="VBoxContainer/CreditsButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Credits
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_vkfmv")
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" parent="." instance=ExtResource("4_ijhxi")]
+visible = false
+layout_mode = 0
+offset_left = 196.0
+offset_top = 14.0
+offset_right = 444.0
+offset_bottom = 338.0
+
+[node name="Credits" parent="." instance=ExtResource("5_a16ur")]
+visible = false
+layout_mode = 0
+offset_left = 170.0
+offset_top = 10.0
+offset_right = 470.0
+offset_bottom = 350.0

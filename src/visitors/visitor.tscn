@@ -75,3 +75,5 @@ disabled = true
 
 [node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("9_k8pmv")]
 db_offset = -5
+
+[node name="SongPlayers" type="Node2D" parent="."]

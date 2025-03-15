@@ -26,10 +26,11 @@ script = ExtResource("2_qwleh")
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
+offset_left = 2.0
 offset_top = 9.0
-offset_right = 240.0
+offset_right = 238.0
 offset_bottom = 43.0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 16
 text = "Packet Printing"
 horizontal_alignment = 1
 

@@ -1,70 +1,70 @@
-[gd_scene load_steps=38 format=3 uid="uid://dcseks6b72fk7"]
+[gd_scene load_steps=38 format=3 uid="uid://cdl3ck42uaywc"]
 
 [ext_resource type="PackedScene" uid="uid://bthpcl3gbouwc" path="res://src/flowers/cut_flower.tscn" id="1_e4ryc"]
-[ext_resource type="Texture2D" uid="uid://15eew7idwlku" path="res://assets/Flowers/Sunflower/sunflower_cut_decay.png" id="2_eu8vk"]
-[ext_resource type="Texture2D" uid="uid://5y2mcocfjuek" path="res://assets/Flowers/Sunflower/sunflower_cut.png" id="3_f63ia"]
+[ext_resource type="Texture2D" uid="uid://15eew7idwlku" path="res://assets/Flowers/Sunflower/sunflower_cut_decay.png" id="2_ejlsl"]
+[ext_resource type="Texture2D" uid="uid://5y2mcocfjuek" path="res://assets/Flowers/Sunflower/sunflower_cut.png" id="3_5ukpp"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_5vstd"]
-[ext_resource type="Texture2D" uid="uid://cnocwq7yca03" path="res://assets/Flowers/Sunflower/sunflower_cut_decay_petals.png" id="5_7hf4g"]
-[ext_resource type="Texture2D" uid="uid://sdl3m7e4rp6c" path="res://assets/Flowers/Sunflower/sunflower_cut_petals.png" id="5_ymq27"]
+[ext_resource type="Texture2D" uid="uid://cnocwq7yca03" path="res://assets/Flowers/Sunflower/sunflower_cut_decay_petals.png" id="5_kmiun"]
+[ext_resource type="Texture2D" uid="uid://sdl3m7e4rp6c" path="res://assets/Flowers/Sunflower/sunflower_cut_petals.png" id="6_cnsfm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxx6l"]
 radius = 8.0
 height = 32.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8s6k"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3o2e"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(40, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dbg6n"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(80, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j7cdh"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(120, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mu3bm"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(160, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyl02"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(200, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87eta"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(240, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i1gcc"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(280, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i8sts"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(320, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhsbn"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(360, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jwusr"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(400, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvmsy"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(440, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ibxv"]
-atlas = ExtResource("2_eu8vk")
+atlas = ExtResource("2_ejlsl")
 region = Rect2(480, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_asxcs"]
-atlas = ExtResource("3_f63ia")
+atlas = ExtResource("3_5ukpp")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x6mtb"]
@@ -123,59 +123,59 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6wc8"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fusnr"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(40, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uq5u0"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(80, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ofhm5"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(120, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e0cvs"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(160, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7bds7"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(200, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sb7ah"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(240, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a5mu"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(280, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0c0a"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(320, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oert1"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(360, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgr01"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(400, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td2d3"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(440, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8v8wn"]
-atlas = ExtResource("5_7hf4g")
+atlas = ExtResource("5_kmiun")
 region = Rect2(480, 0, 40, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cluk2"]
-atlas = ExtResource("5_ymq27")
+atlas = ExtResource("6_cnsfm")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eq720"]
@@ -235,6 +235,8 @@ animations = [{
 
 [node name="CutFlower" instance=ExtResource("1_e4ryc")]
 species = "sunflower"
+pickup_height = 13
+drop_duration = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(12, 6.98492e-10)

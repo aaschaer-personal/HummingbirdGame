@@ -343,7 +343,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"seed",
-"speed": 1.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,

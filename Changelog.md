@@ -23,3 +23,10 @@
 - Add options
 - Add level map
 - Various cleanups and fixes
+
+## v0.5
+- Add level 3
+- Add credits
+- Higher quality birdsonts
+- Rework font
+- Various bugfixes

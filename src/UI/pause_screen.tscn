@@ -56,7 +56,9 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ResumeButton"]
 layout_mode = 0
-offset_right = 208.0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
 text = "Resume
@@ -70,7 +72,9 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/GuideButton"]
 layout_mode = 0
-offset_right = 208.0
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
 text = "Guide
@@ -84,8 +88,10 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/OptionsButton"]
 layout_mode = 0
-offset_right = 208.0
-offset_bottom = 34.0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 207.0
+offset_bottom = 31.0
 theme_override_font_sizes/font_size = 24
 text = "Options"
 horizontal_alignment = 1
@@ -97,7 +103,9 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/RestartLevelButton"]
 layout_mode = 0
-offset_right = 208.0
+offset_left = 1.0
+offset_top = 4.0
+offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
 text = "Restart Level"
@@ -111,6 +119,7 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ReturnToMapButton"]
 layout_mode = 0
+offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
@@ -124,11 +133,12 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/QuitToMenuButton"]
 layout_mode = 0
-offset_left = 2.0
-offset_right = 208.0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
-text = "Quit to Main Menu"
+text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1
 

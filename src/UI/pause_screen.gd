@@ -24,7 +24,7 @@ func _ready():
 
 	# only show return to map if level 1 has been completed
 	var config = Config.get_config()
-	if config.get_value("levels", "unlocked", 1) > 1:
+	if config.get_value("levels", "unlocks", 0) > 0:
 		return_to_map_button.visible = true
 
 	# hide level specific buttons
@@ -67,5 +67,5 @@ func return_to_map():
 func quit_to_menu():
 	get_tree().paused = false
 	Config.save_config()
-	var main_menu = load("res://src/main_menu.tscn")
+	var main_menu = load("res://src/UI/main_menu.tscn")
 	get_tree().change_scene_to_packed(main_menu)

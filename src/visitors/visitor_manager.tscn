@@ -5,9 +5,4 @@
 [node name="VisitorManager" type="Node2D" groups=["visitor_manager"]]
 script = ExtResource("1_aqo5a")
 
-[node name="SpawnPoint" type="Node2D" parent="."]
-position = Vector2(-119, -186)
-
-[node name="LandingPoint" type="Node2D" parent="."]
-
 [node name="Timer" type="Timer" parent="."]
