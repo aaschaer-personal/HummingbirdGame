@@ -4,6 +4,6 @@
 
 [resource]
 default_font = ExtResource("1_n8x52")
-default_font_size = 8
+default_font_size = 12
 /font_sizes/default = 12
 /fonts/default = ExtResource("1_n8x52")

@@ -35,7 +35,7 @@ alignment = 1
 
 [node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Main Menu"
 horizontal_alignment = 1
 
@@ -50,10 +50,10 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/PlayButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 207.0
-offset_bottom = 30.0
-theme_override_font_sizes/font_size = 16
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
 text = "Play
 "
 horizontal_alignment = 1
@@ -66,10 +66,10 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/OptionsButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 207.0
-offset_bottom = 30.0
-theme_override_font_sizes/font_size = 16
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 24
 text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -81,10 +81,10 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/CreditsButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Credits
 "
 horizontal_alignment = 1
@@ -97,10 +97,10 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/QuitButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1

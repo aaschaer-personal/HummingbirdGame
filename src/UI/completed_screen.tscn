@@ -23,7 +23,7 @@ offset_left = 1.0
 offset_top = 20.0
 offset_right = 318.0
 offset_bottom = 61.0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Level Completed!"
 horizontal_alignment = 1
 
@@ -41,7 +41,7 @@ texture_normal = ExtResource("3_xtff1")
 [node name="Label" type="Label" parent="HBoxContainer/OnwardsButton"]
 layout_mode = 0
 offset_left = 2.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 55.0
 offset_bottom = 31.0
 text = "Onwards!"
@@ -60,7 +60,7 @@ texture_pressed = ExtResource("4_gp1o2")
 [node name="Label" type="Label" parent="HBoxContainer/StayButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 3.0
 offset_right = 55.0
 offset_bottom = 31.0
 text = "Stay"

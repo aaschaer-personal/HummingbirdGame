@@ -22,19 +22,19 @@ offset_top = 2.0
 offset_right = 298.0
 offset_bottom = 338.0
 bbcode_enabled = true
-text = "[font_size=4]
-[font_size=24][center]Credits[/center][font_size=8]
+text = "[font_size=6]
+[font_size=24][center]Credits[/center][font_size=12]
 
 
-Development, art, and music:[font_size=4]
+Development, art, and music:[font_size=6]
 
-[font_size=8]    Aaron Schaer
+[font_size=12]    Aaron Schaer
 
 
 Bird song and call audio © Lang Elliot
 
 
-This game uses Godot Engine, available under the following license:[font_size=4]
+This game uses Godot Engine, available under the following license:[font_size=6]
 
 Copyright (c) 2014-present Godot Engine contributors.
 Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur.

@@ -24,42 +24,42 @@ visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="A2" type="OptionButton" parent="P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="B1" type="OptionButton" parent="P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="B2" type="OptionButton" parent="P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="C1" type="OptionButton" parent="P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="C2" type="OptionButton" parent="P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="Example" type="Control" parent="P1"]
 layout_mode = 2
@@ -100,42 +100,42 @@ visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="A2" type="OptionButton" parent="P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="B1" type="OptionButton" parent="P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="B2" type="OptionButton" parent="P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="C1" type="OptionButton" parent="P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="C2" type="OptionButton" parent="P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 
 [node name="Example" type="Control" parent="P2"]
 layout_mode = 2

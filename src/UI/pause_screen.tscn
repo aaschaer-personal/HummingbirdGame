@@ -42,7 +42,7 @@ alignment = 1
 
 [node name="Title" type="Label" parent="PauseMenu/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 text = "Pause Menu"
 horizontal_alignment = 1
 
@@ -57,10 +57,10 @@ texture_normal = ExtResource("3_a72la")
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ResumeButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 4.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Resume
 "
 horizontal_alignment = 1
@@ -73,10 +73,10 @@ texture_normal = ExtResource("3_a72la")
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/GuideButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 6.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Guide
 "
 horizontal_alignment = 1
@@ -89,9 +89,10 @@ texture_normal = ExtResource("3_a72la")
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/OptionsButton"]
 layout_mode = 0
 offset_left = 1.0
+offset_top = 4.0
 offset_right = 207.0
 offset_bottom = 31.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -103,10 +104,10 @@ texture_normal = ExtResource("3_a72la")
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/RestartLevelButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 4.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Restart Level"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -118,9 +119,10 @@ texture_normal = ExtResource("3_a72la")
 
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/ReturnToMapButton"]
 layout_mode = 0
+offset_top = 3.0
 offset_right = 208.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Return to Map"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -132,10 +134,10 @@ texture_normal = ExtResource("3_a72la")
 [node name="Label" type="Label" parent="PauseMenu/VBoxContainer/QuitToMenuButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 5.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Main Menu"
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -92,10 +92,10 @@ texture_normal = ExtResource("3_oddd3")
 [node name="Label" type="Label" parent="ConfirmButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 1.0
+offset_top = 5.0
 offset_right = 207.0
 offset_bottom = 34.0
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Confirm
 "
 horizontal_alignment = 1
