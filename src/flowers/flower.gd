@@ -31,7 +31,7 @@ func _ready():
 	var species = parent_plant.genome.species
 	cut_flower_scene = load("res://src/flowers/%s/cut_%s.tscn" % [species, species])
 
-	pollination_timer.timeout.connect(_wilt)
+	pollination_timer.timeout.connect(_go_to_seed)
 	body_entered.connect(_on_body_entered)
 	nectar_meter.max_value = max_nectar
 	nectar_meter.visible = false
@@ -67,28 +67,22 @@ func receive_nutrients(amount: float):
 				bee_audio_player.stop()
 		nectar_meter.value = nectar
 
-	elif stage == 2:
-		seed_growth += amount
-		if seed_growth > parent_plant.genome.growth_factor / 2:
-			_go_to_seed()
-
 func _on_body_entered(_body):
 	rustle()
 
 func rustle():
 	var current = main_sprite.animation
-	if stage == 1 and current != "wilt":
+	if stage == 1 and current != "to_seed":
 		_play_animation("bloom_rustle")
-	elif stage == 2 and current != "to_seed":
-		_play_animation("wilt_rustle")
-	elif stage == 3:
+	elif stage == 2:
 		_play_animation("to_seed_rustle")
 	rustle_audio_player.set_pitch_scale(randf_range(.9, 1.1))
 	rustle_audio_player.play()
 
-func _wilt():
+func _go_to_seed():
 	pollination_timer.stop()
-	await _play_animation("wilt")
+	generate_seeds()
+	await _play_animation("to_seed")
 	if bee:
 		bee.fly_away()
 		bee = null
@@ -96,17 +90,10 @@ func _wilt():
 	nectar = 0
 	stage = 2
 
-func _go_to_seed():
-	if main_sprite.animation != "to_seed":
-		generate_seeds()
-		_play_animation("to_seed")
-		await main_sprite.animation_finished
-		stage = 3
-
 func is_interactable():
 	return (
 		(stage == 1 and not player.held_item is Clippers)
-		or (stage == 3 and player.held_item is SeedPacket)
+		or (stage == 2 and player.held_item is SeedPacket)
 		or (stage > 0 and player.held_item is Clippers)
 	)
 

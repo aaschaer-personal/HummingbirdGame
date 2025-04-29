@@ -10,6 +10,7 @@ var x_offset_by_species = {
 	"sunflower": 12,
 	"jewelweed": 6,
 	"lupine": 14,
+	"zinnia": 8,
 }
 # height, duration
 var decay_data_by_species = {

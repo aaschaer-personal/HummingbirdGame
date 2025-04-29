@@ -301,7 +301,7 @@ func use_tool_on_flower(flower: Flower):
 		drinking_flower = null
 		target_animation = "hovering"
 
-	if flower.stage == 3 and held_item is SeedPacket:
+	if flower.stage == 2 and held_item is SeedPacket:
 		flower.harvest_seeds(held_item)
 		seeds_harvested.emit()
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
