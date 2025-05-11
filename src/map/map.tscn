@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://cwlks03m5fxs5"]
+[gd_scene load_steps=119 format=3 uid="uid://cwlks03m5fxs5"]
 
 [ext_resource type="Texture2D" uid="uid://cvmachil2lwep" path="res://assets/Map/map.png" id="1_hmhcj"]
 [ext_resource type="Script" path="res://src/map/map.gd" id="1_o2hyj"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="19_3wqch"]
 [ext_resource type="PackedScene" uid="uid://br0agnqnsrs0s" path="res://src/map/map_lupine.tscn" id="19_twa7m"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="20_q4jsa"]
+[ext_resource type="PackedScene" uid="uid://ct7hf35er0cso" path="res://src/map/map_zinnia.tscn" id="20_rayuv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d30o"]
 atlas = ExtResource("2_ph2jq")
@@ -863,151 +864,194 @@ text = "* Move with WASD or by clicking on a level
 z_index = 1
 
 [node name="1" type="Node2D" parent="Flowers"]
-position = Vector2(39, 84)
+position = Vector2(47, 62)
 script = SubResource("GDScript_coq6s")
 
 [node name="MapSunflower" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-13, -52)
+position = Vector2(-21, -30)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapSunflower2" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(43, 7)
+position = Vector2(35, 29)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapSunflower3" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(27, -43)
+position = Vector2(19, -21)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapSunflower4" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-32, -17)
+position = Vector2(-40, 5)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapSunflower5" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(35, -23)
+position = Vector2(27, -1)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapSunflower6" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(24, 14)
+position = Vector2(16, 36)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapSunflower7" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-18, -33)
+position = Vector2(-26, -11)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapSunflower8" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(25, -63)
+position = Vector2(17, -41)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapSunflower9" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-3, -4)
+position = Vector2(-11, 18)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapSunflower10" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(6, -44)
+position = Vector2(-2, -22)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapSunflower11" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-1, -66)
+position = Vector2(-9, -44)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapSunflower12" parent="Flowers/1" instance=ExtResource("18_a26im")]
-position = Vector2(-23, 13)
+position = Vector2(-32, 35)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="2" type="Node2D" parent="Flowers"]
-position = Vector2(133, 106)
+position = Vector2(174, 122)
 script = SubResource("GDScript_coq6s")
 
 [node name="MapJewelweed" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(126, 7)
+position = Vector2(85, -9)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapJewelweed2" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(24, 28)
+position = Vector2(-17, 12)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapJewelweed3" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(-30, -7)
+position = Vector2(-71, -23)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapJewelweed4" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(-9, 14)
+position = Vector2(-50, -2)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapJewelweed5" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(9, -40)
+position = Vector2(-32, -56)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapJewelweed6" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(113, 49)
+position = Vector2(72, 33)
 color = Color(0.984314, 0.72549, 0.329412, 1)
 
 [node name="MapJewelweed7" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(11, -8)
+position = Vector2(-30, -24)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapJewelweed8" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(82, 4)
+position = Vector2(41, -12)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapJewelweed9" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(58, 42)
+position = Vector2(17, 26)
 color = Color(0.984314, 1, 0.52549, 1)
 
 [node name="MapJewelweed10" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(-17, -33)
+position = Vector2(-58, -49)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapJewelweed11" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(35, -3)
+position = Vector2(-6, -19)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapJewelweed12" parent="Flowers/2" instance=ExtResource("18_2snvb")]
-position = Vector2(97, 30)
+position = Vector2(56, 14)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="3" type="Node2D" parent="Flowers"]
-position = Vector2(133, 106)
+position = Vector2(255, 183)
 script = SubResource("GDScript_coq6s")
 
 [node name="MapLupine" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(154, 118)
+position = Vector2(32, 41)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapLupine2" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(142, 78)
+position = Vector2(20, 1)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapLupine3" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(85, 85)
+position = Vector2(-37, 8)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapLupine4" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(140, 100)
+position = Vector2(18, 23)
 color = Color(0.658824, 0.517647, 0.952941, 1)
 
 [node name="MapLupine5" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(42, 60)
+position = Vector2(-80, -17)
 color = Color(0.301961, 0.607843, 0.901961, 1)
 
 [node name="MapLupine6" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(107, 97)
+position = Vector2(-15, 20)
 color = Color(0.301961, 0.607843, 0.901961, 1)
 
 [node name="MapLupine7" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(53, 81)
+position = Vector2(-69, 4)
 color = Color(0.917647, 0.678431, 0.929412, 1)
 
 [node name="MapLupine8" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(75, 58)
+position = Vector2(-47, -19)
 color = Color(0.917647, 0.678431, 0.929412, 1)
 
 [node name="MapLupine9" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(97, 70)
+position = Vector2(-25, -7)
 color = Color(0.909804, 0.231373, 0.231373, 1)
 
 [node name="MapLupine10" parent="Flowers/3" instance=ExtResource("19_twa7m")]
-position = Vector2(160, 89)
+position = Vector2(38, 12)
+
+[node name="4" type="Node2D" parent="Flowers"]
+position = Vector2(360, 251)
+script = SubResource("GDScript_coq6s")
+
+[node name="MapZinnia" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(6, 19)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapZinnia2" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(61, 11)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapZinnia3" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(-29, -1)
+color = Color(0.984314, 0.72549, 0.329412, 1)
+
+[node name="MapZinnia4" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(43, 2)
+color = Color(0.917647, 0.678431, 0.929412, 1)
+
+[node name="MapZinnia5" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(24, 13)
+color = Color(1, 0, 1, 1)
+
+[node name="MapZinnia6" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(-51, -14)
+color = Color(1, 0, 1, 1)
+
+[node name="MapZinnia7" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(-8, -16)
+color = Color(1, 0, 1, 1)
+
+[node name="MapZinnia8" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(-46, 10)
+color = Color(0.984314, 1, 0.52549, 1)
+
+[node name="MapZinnia9" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(43, 17)
+color = Color(0.984314, 1, 0.52549, 1)
+
+[node name="MapZinnia10" parent="Flowers/4" instance=ExtResource("20_rayuv")]
+position = Vector2(-21, 16)
 
 [node name="PauseScreen" parent="." instance=ExtResource("19_3wqch")]
 visible = false
@@ -1016,11 +1060,11 @@ offset_bottom = 0.0
 
 [node name="WIPText" type="Label" parent="."]
 visible = false
-offset_left = 327.0
-offset_top = 264.0
-offset_right = 399.0
-offset_bottom = 306.0
-text = "Level 4
+offset_left = 490.0
+offset_top = 240.0
+offset_right = 562.0
+offset_bottom = 282.0
+text = "Level 5
 coming soon!"
 
 [node name="MusicPlayer" parent="." instance=ExtResource("20_q4jsa")]

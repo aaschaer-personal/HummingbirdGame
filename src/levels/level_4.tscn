@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmlnjvm7dpe2x"]
+
+[ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_rgt6q"]
+[ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_cgaro"]
+[ext_resource type="AudioStream" uid="uid://coyly02ci1b8u" path="res://assets/Music/Level1.ogg" id="3_xuote"]
+[ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="4_7h76m"]
+[ext_resource type="PackedScene" uid="uid://vwc0fhdx6gim" path="res://src/environment/desert_plot.tscn" id="4_i2lc5"]
+[ext_resource type="Texture2D" uid="uid://c15pyad7xml5e" path="res://assets/Environment/desert_grass.png" id="7_1v02w"]
+[ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="8_kcrbe"]
+[ext_resource type="PackedScene" uid="uid://cfppnnu0gs3qi" path="res://src/environment/sapling_desert.tscn" id="9_7qa7v"]
+[ext_resource type="PackedScene" uid="uid://cdukg4e0bvkv" path="res://src/visitors/visitor_spawn.tscn" id="9_wic7m"]
+
+[node name="Level" instance=ExtResource("1_rgt6q")]
+flower_species = "zinnia"
+visitor_species = "house_finch"
+level_num = 4
+
+[node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_cgaro")]
+process_mode = 3
+stream = ExtResource("3_xuote")
+autoplay = true
+option = "music_volume"
+
+[node name="Plot1" parent="." index="9" instance=ExtResource("4_i2lc5")]
+position = Vector2(165, 294)
+
+[node name="Plot2" parent="." index="10" instance=ExtResource("4_i2lc5")]
+position = Vector2(331, 317)
+
+[node name="Plot3" parent="." index="11" instance=ExtResource("4_i2lc5")]
+position = Vector2(445, 270)
+
+[node name="Plot4" parent="." index="12" instance=ExtResource("4_i2lc5")]
+position = Vector2(263, 194)
+
+[node name="Plot5" parent="." index="13" instance=ExtResource("4_i2lc5")]
+position = Vector2(315, 173)
+
+[node name="Plot6" parent="." index="14" instance=ExtResource("4_i2lc5")]
+position = Vector2(365, 188)
+
+[node name="Pond" parent="." index="15" instance=ExtResource("4_7h76m")]
+position = Vector2(321, 212)
+
+[node name="Grass" type="Sprite2D" parent="." index="16"]
+z_index = -3
+texture_repeat = 2
+position = Vector2(320, 180)
+texture = ExtResource("7_1v02w")
+region_enabled = true
+region_rect = Rect2(0, 0, 640, 360)
+
+[node name="Stump" parent="." index="17" instance=ExtResource("8_kcrbe")]
+z_index = -1
+position = Vector2(72, 267)
+
+[node name="VisitorSpawn" parent="Stump" index="1" instance=ExtResource("9_wic7m")]
+position = Vector2(1, -21)
+
+[node name="Stump2" parent="." index="18" instance=ExtResource("8_kcrbe")]
+z_index = -1
+position = Vector2(573, 175)
+
+[node name="VisitorSpawn" parent="Stump2" index="1" instance=ExtResource("9_wic7m")]
+position = Vector2(1, -21)
+left_to_right = false
+
+[node name="Sapling" parent="." index="19" instance=ExtResource("9_7qa7v")]
+position = Vector2(495, 312)

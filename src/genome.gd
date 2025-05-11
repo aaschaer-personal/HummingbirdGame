@@ -18,7 +18,7 @@ func set_vals_from_gene_dict(new_gene_dict):
 	max_nectar = 30
 	max_flowers = _parse_max_flowers()
 	seed_num = _parse_unique_inbreeding_alleles()
-	# TODO
+	# TODO?
 	# plants with high growth factor grow faster when kept watered, but use
 	# up their water quickly
 	# idealy all plants would grow equally quickly with one full water

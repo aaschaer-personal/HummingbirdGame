@@ -16,6 +16,8 @@ func fill(gene_dict_1, gene_dict_2):
 		fill_one_gene(gene_dict_1, gene_dict_2)
 	elif species == "lupine":
 		fill_two_gene(gene_dict_1, gene_dict_2)
+	elif species == "zinnia":
+		fill_one_gene(gene_dict_1, gene_dict_2)
 	else:
 		assert(false)
 
@@ -53,9 +55,9 @@ func fill_one_gene(gene_dict_1, gene_dict_2):
 	for i in range(4):
 		child_gene_dicts.append({"species": gene_dict_1["species"]})
 	
-	for p1_index in [0,1]:
-		for p2_index in [0,1]:
-			child_gene_dicts[p1_index*2 + p2_index]["color"] = [p1_code[p1_index], p2_code[p2_index]]
+	for p2_index in [0,1]:
+		for p1_index in [0,1]:
+			child_gene_dicts[p2_index*2 + p1_index]["color"] = [p1_code[p1_index], p2_code[p2_index]]
 
 	# assemble
 	for child_gene_dict in child_gene_dicts:

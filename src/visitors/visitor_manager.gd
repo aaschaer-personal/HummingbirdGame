@@ -18,30 +18,31 @@ var visitor_scene: Resource
 
 var rainbow_order = {
 	Colors.red: 0,
-	Colors.pink: 1,
-	Colors.orange: 2,
-	Colors.yellow: 3,
-	Colors.blue: 4,
-	Colors.purple: 5,
-	Colors.white: 6,
+	Colors.fushia: 1,
+	Colors.pink: 2,
+	Colors.orange: 3,
+	Colors.yellow: 4,
+	Colors.blue: 5,
+	Colors.purple: 6,
+	Colors.white: 7,
 }
 
 # colors, count, size, max_repetitions
-var bouquet_recipes_by_species = {
-	"sunflower": [
+var bouquet_recipes_by_level_num = {
+	1: [
 		[[Colors.yellow], 1, 1, 1],
 		[[Colors.orange], 1, 1, 1],
 		["sunflower", 2, 2, 1],
 		["sunflower", 1, 3, 1],
 	],
-	"jewelweed": [
+	2: [
 		[[Colors.red, Colors.yellow], 1, 1, 1],
 		[[Colors.orange, Colors.purple], 1, 1, 1],
 		["jewelweed", 3, 2, 1],
 		["jewelweed", 2, 3, 2],
 		["jewelweed", 1, 4, 1],
 	],
-	"lupine": [
+	3: [
 		[[Colors.purple, Colors.blue, Colors.pink], 2, 2, 1],
 		[[Colors.red, Colors.white], 1, 1, 1],
 		[[Colors.purple, Colors.blue, Colors.pink], 1, 3, 2],
@@ -50,6 +51,15 @@ var bouquet_recipes_by_species = {
 		["lupine", 3, 4, 3],
 		["lupine", 1, 5, 1],
 	],
+	4: [
+		[[Colors.orange, Colors.pink], 1, 2, 1],
+		[[Colors.red, Colors.yellow, Colors.white], 2, 2, 1],
+		[[Colors.fushia], 1, 2, 2],
+		["zinnia", 4, 3, 2],
+		["zinnia", 3, 4, 3],
+		["zinnia", 2, 5, 2],
+		["zinnia", 1, 5, 1],
+	]
 }
 
 func _ready():
@@ -57,11 +67,8 @@ func _ready():
 	var visitor_species = level.visitor_species
 	visitor_spawns = get_tree().get_nodes_in_group("visitor_spawns")
 	max_visitors = len(visitor_spawns)
-
 	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
-	var flower_species = level.flower_species
-
-	for recipe in bouquet_recipes_by_species[flower_species]:
+	for recipe in bouquet_recipes_by_level_num[level.level_num]:
 		for bouquet in callv("generate_boquets", recipe):
 			bouquets.append(bouquet)
 	timer.timeout.connect(_on_timeout)

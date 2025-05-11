@@ -1,0 +1,168 @@
+[gd_scene load_steps=24 format=3 uid="uid://ct7hf35er0cso"]
+
+[ext_resource type="Script" path="res://src/map/map_flower.gd" id="1_1exrg"]
+[ext_resource type="Texture2D" uid="uid://dyral3qrny2b1" path="res://assets/Map/zinnia.png" id="2_srm7k"]
+[ext_resource type="Texture2D" uid="uid://cy6ypy0fl0kx6" path="res://assets/Map/zinnia_petals.png" id="3_qxo5r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fhc7"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(0, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vjbg"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(7, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y348t"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(14, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvtdb"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(21, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4msw7"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(28, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vpje"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(35, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_830b1"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84bwd"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(49, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y42ju"]
+atlas = ExtResource("2_srm7k")
+region = Rect2(49, 0, 7, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvl24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fhc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vjbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y348t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvtdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4msw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vpje")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_830b1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84bwd")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y42ju")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0ywa"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(0, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d4ja8"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(7, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtbds"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(14, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvlvl"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(21, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiiwr"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(28, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivrdd"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(35, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ex4n"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qekw"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(49, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm7dp"]
+atlas = ExtResource("3_qxo5r")
+region = Rect2(49, 0, 7, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egvsl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0ywa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d4ja8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtbds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvlvl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiiwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivrdd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ex4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qekw")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm7dp")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 10.0
+}]
+
+[node name="MapZinnia" type="Node2D"]
+script = ExtResource("1_1exrg")
+
+[node name="Plant" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wvl24")
+animation = &"bloomed"
+
+[node name="Petals" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_egvsl")
+animation = &"bloomed"

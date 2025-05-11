@@ -17,6 +17,7 @@ var decay_data_by_species = {
 	"sunflower": [4, .6],
 	"jewelweed": [4, .4],
 	"lupine": [1, .3],
+	"zinnia": [2, .6],
 }
 var color: Color
 var is_decaying = false
