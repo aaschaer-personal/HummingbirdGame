@@ -552,7 +552,7 @@ db_offset = -5
 [node name="MainSprite" type="AnimatedSprite2D" parent="." index="8"]
 position = Vector2(-7, -16)
 sprite_frames = SubResource("SpriteFrames_mft4q")
-animation = &"happy_1"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("6_i7aq2")]
