@@ -24,10 +24,10 @@ func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	if level:
 		species = level.flower_species
-		var flower_texture = load("res://assets/UI/Icons/%s.png" % species.to_lower())
+		var flower_texture = level.flower_icon_texture
 		p1_example_flower.texture = flower_texture
 		p2_example_flower.texture = flower_texture
-		var petals_texture = load("res://assets/UI/Icons/%s_petals.png" % species.to_lower())
+		var petals_texture = level.petals_icon_texture
 		p1_example_petals.texture = petals_texture
 		p2_example_petals.texture = petals_texture
 	

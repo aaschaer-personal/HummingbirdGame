@@ -22,9 +22,7 @@ var top_positions = [0,0,0,0,0,0,-1,-3,-5,-8,-11,-14,-17,-19,-20]
 
 func _ready():
 	front.frame_changed.connect(sync_frames)
-	var level_num = get_tree().get_first_node_in_group("level").level_num
-	var top_scene = load("res://src/cache/level%d_cache_top.tscn" % [level_num])
-	# var top_scene = load("res://src/cache/level1_cache_top.tscn")
+	var top_scene = get_tree().get_first_node_in_group("level").cache_top_scene
 	while top_scene == null:
 		pass
 	top = top_scene.instantiate()

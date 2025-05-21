@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmlnjvm7dpe2x"]
+[gd_scene load_steps=11 format=3 uid="uid://cmlnjvm7dpe2x"]
 
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_rgt6q"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_cgaro"]
+[ext_resource type="Script" path="res://src/levels/zinnia_level.gd" id="2_lpvmw"]
 [ext_resource type="AudioStream" uid="uid://coyly02ci1b8u" path="res://assets/Music/Level1.ogg" id="3_xuote"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="4_7h76m"]
 [ext_resource type="PackedScene" uid="uid://vwc0fhdx6gim" path="res://src/environment/desert_plot.tscn" id="4_i2lc5"]
@@ -11,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cdukg4e0bvkv" path="res://src/visitors/visitor_spawn.tscn" id="9_wic7m"]
 
 [node name="Level" instance=ExtResource("1_rgt6q")]
-flower_species = "zinnia"
-visitor_species = "blue_grosbeak"
+script = ExtResource("2_lpvmw")
 level_num = 4
+flower_species = "zinnia"
 
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_cgaro")]
 process_mode = 3

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://blyyeqy2xq7mg"]
+[gd_scene load_steps=11 format=3 uid="uid://blyyeqy2xq7mg"]
 
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_qv6ek"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="2_6crh2"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_albgu"]
+[ext_resource type="Script" path="res://src/levels/jewelweed_level.gd" id="2_d4rxv"]
 [ext_resource type="AudioStream" uid="uid://bfwmjoq2a0hni" path="res://assets/Music/Level2.ogg" id="3_cb3gk"]
 [ext_resource type="PackedScene" uid="uid://8yrwu1paqh1p" path="res://src/environment/sapling_forest.tscn" id="5_5jk1m"]
 [ext_resource type="PackedScene" uid="uid://b1bfbka1jk4lx" path="res://src/environment/forest_plot.tscn" id="6_ngnhu"]
@@ -11,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://cdukg4e0bvkv" path="res://src/visitors/visitor_spawn.tscn" id="9_knw15"]
 
 [node name="Level" instance=ExtResource("1_qv6ek")]
-flower_species = "jewelweed"
-visitor_species = "tufted_titmouse"
+script = ExtResource("2_d4rxv")
 level_num = 2
+flower_species = "jewelweed"
 
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_albgu")]
 process_mode = 3

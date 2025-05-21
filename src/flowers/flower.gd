@@ -28,8 +28,7 @@ var cut_offsets = {
 }
 
 func _ready():
-	var species = parent_plant.genome.species
-	cut_flower_scene = load("res://src/flowers/%s/cut_%s.tscn" % [species, species])
+	cut_flower_scene = get_tree().get_first_node_in_group("level").cut_flower_scene
 
 	pollination_timer.timeout.connect(_go_to_seed)
 	body_entered.connect(_on_body_entered)

@@ -28,9 +28,9 @@ func _ready():
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
 
-	var flower_species = get_tree().get_first_node_in_group("level").flower_species
-	desire_icon_main_texture = load("res://assets/UI/Icons/%s.png" % flower_species)
-	desire_icon_petal_texture = load("res://assets/UI/Icons/%s_petals.png" % flower_species)
+	var level = get_tree().get_first_node_in_group("level")
+	desire_icon_main_texture = level.flower_icon_texture
+	desire_icon_petal_texture = level.petals_icon_texture
 
 func flip():
 	sprite.flip_h = true

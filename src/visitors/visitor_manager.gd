@@ -63,10 +63,9 @@ var bouquet_recipes_by_level_num = {
 
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
-	var visitor_species = level.visitor_species
 	visitor_spawns = get_tree().get_nodes_in_group("visitor_spawns")
 	max_visitors = len(visitor_spawns)
-	visitor_scene = load("res://src/visitors/%s.tscn" % visitor_species)
+	visitor_scene = level.visitor_scene
 	for recipe in bouquet_recipes_by_level_num[level.level_num]:
 		for bouquet in callv("generate_boquets", recipe):
 			bouquets.append(bouquet)
