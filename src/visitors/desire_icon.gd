@@ -1,17 +1,10 @@
-class_name DesireIcon extends Node2D
+class_name DesireIcon extends Control
 
 @onready var main_sprite = $MainSprite
 @onready var petal_sprite = $PetalSprite
+@onready var check_sprite = $CheckSprite
 
-var main_texture = null
-var petal_texture = null
-
-func _ready():
-	var flower_species = get_tree().get_first_node_in_group("level").flower_species
-	main_texture = load("res://assets/UI/Icons/%s.png" % flower_species)
-	petal_texture = load("res://assets/UI/Icons/%s_petals.png" % flower_species)
-
-func set_icon(color):
+func set_texture_and_color(main_texture, petal_texture, color):
 	main_sprite.set_texture(main_texture)
 	petal_sprite.set_texture(petal_texture)
 	petal_sprite.modulate = color

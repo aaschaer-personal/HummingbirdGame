@@ -13,8 +13,10 @@ class_name Visitor extends Interactable
 @onready var bouquet_scene = preload("res://src/items/bouquet.tscn")
 @onready var visitor_landing_sound = preload("res://assets/Sounds/visitor_landing.wav")
 @onready var song_players = $SongPlayers
+@onready var desire_icon_scene = preload("res://src/visitors/desire_icon.tscn")
+var desire_icon_main_texture
+var desire_icon_petal_texture
 var birdsong = null
-
 var visitor_manager
 var off_screen_height = 300
 var visitor_bouquet
@@ -25,6 +27,10 @@ func _ready():
 	visitor_manager = get_tree().get_nodes_in_group("visitor_manager")[0]
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)
+
+	var flower_species = get_tree().get_first_node_in_group("level").flower_species
+	desire_icon_main_texture = load("res://assets/UI/Icons/%s.png" % flower_species)
+	desire_icon_petal_texture = load("res://assets/UI/Icons/%s_petals.png" % flower_species)
 
 func flip():
 	sprite.flip_h = true
@@ -64,10 +70,17 @@ func land(visitor_spawn: VisitorSpawn):
 
 func show_desires():
 	speech_bubble_sprite.visible = true
-	
 	for i in desired_bouquet_colors.size():
 		var desired_color = desired_bouquet_colors[i]
-		desire_icons.get_children()[i].set_icon(desired_color)
+		var icon = desire_icon_scene.instantiate()
+		desire_icons.add_child(icon)
+		icon.call_deferred(
+			"set_texture_and_color",
+			desire_icon_main_texture,
+			desire_icon_petal_texture,
+			desired_color
+		)
+
 func is_interactable():
 	return player.held_item is Bouquet
 
@@ -86,6 +99,14 @@ func give_bouquet(given_bouquet: Bouquet):
 				visitor_bouquet.add_flower(flower)
 				desired_bouquet_colors.erase(desired_color)
 				flowers_given += 1
+				# set check mark
+				for icon in desire_icons.get_children():
+					if (
+						not icon.check_sprite.visible and
+						icon.petal_sprite.modulate == desired_color
+					):
+						icon.check_sprite.visible = true
+						break
 				break
 
 	if len(desired_bouquet_colors) == 0:

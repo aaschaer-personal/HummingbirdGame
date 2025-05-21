@@ -55,10 +55,9 @@ var bouquet_recipes_by_level_num = {
 		[[Colors.orange, Colors.pink], 1, 2, 1],
 		[[Colors.red, Colors.yellow, Colors.white], 2, 2, 1],
 		[[Colors.fushia], 1, 2, 2],
-		["zinnia", 4, 3, 2],
+		["zinnia", 3, 3, 2],
 		["zinnia", 3, 4, 3],
 		["zinnia", 2, 5, 2],
-		["zinnia", 1, 5, 1],
 	]
 }
 
