@@ -1,7 +1,7 @@
 extends Level
 
 # flower specific scenes
-var cache_top_scene = preload("res://src/cache/level1_cache_top.tscn")
+var cache_top_scene = preload("res://src/cache/level4_cache_top.tscn")
 var plant_scene = preload("res://src/flowers/zinnia/zinnia_plant.tscn")
 var flower_1_scene = preload("res://src/flowers/zinnia/zinnia_flower_1.tscn")
 var flower_2_scene = preload("res://src/flowers/zinnia/zinnia_flower_2.tscn")

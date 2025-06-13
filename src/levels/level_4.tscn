@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_rgt6q"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="2_cgaro"]
 [ext_resource type="Script" path="res://src/levels/zinnia_level.gd" id="2_lpvmw"]
-[ext_resource type="AudioStream" uid="uid://coyly02ci1b8u" path="res://assets/Music/Level1.ogg" id="3_xuote"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="4_7h76m"]
+[ext_resource type="AudioStream" uid="uid://cfpgdvvqbep48" path="res://assets/Music/Level4.ogg" id="4_82tbm"]
 [ext_resource type="PackedScene" uid="uid://vwc0fhdx6gim" path="res://src/environment/desert_plot.tscn" id="4_i2lc5"]
 [ext_resource type="Texture2D" uid="uid://c15pyad7xml5e" path="res://assets/Environment/desert_grass.png" id="7_1v02w"]
 [ext_resource type="PackedScene" uid="uid://dsj3pfvi7mv2i" path="res://src/environment/stump.tscn" id="8_kcrbe"]
@@ -18,7 +18,7 @@ flower_species = "zinnia"
 
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("2_cgaro")]
 process_mode = 3
-stream = ExtResource("3_xuote")
+stream = ExtResource("4_82tbm")
 autoplay = true
 option = "music_volume"
 

@@ -43,7 +43,7 @@ var bouquet_recipes_by_level_num = {
 		["jewelweed", 1, 4, 1],
 	],
 	3: [
-		[[Colors.purple, Colors.blue, Colors.pink], 2, 2, 1],
+		[[Colors.purple, [Colors.blue, Colors.pink]], 2, 2, 1],
 		[[Colors.red, Colors.white], 1, 1, 1],
 		[[Colors.purple, Colors.blue, Colors.pink], 1, 3, 2],
 		[[Colors.red, Colors.white], 1, 2, 1],
@@ -53,11 +53,12 @@ var bouquet_recipes_by_level_num = {
 	],
 	4: [
 		[[Colors.orange, Colors.pink], 1, 2, 1],
-		[[Colors.red, Colors.yellow, Colors.white], 2, 2, 1],
+		[[Colors.red, [Colors.yellow, Colors.white]], 2, 2, 1],
 		[[Colors.fushia], 1, 2, 2],
 		["zinnia", 3, 3, 2],
 		["zinnia", 3, 4, 3],
-		["zinnia", 2, 5, 2],
+		["zinnia", 1, 5, 3],
+		["zinnia", 1, 5, 1],
 	]
 }
 
@@ -84,6 +85,8 @@ func generate_boquets(colors, count, size, max_repetitions):
 			for j in range(size):
 				while true:
 					var color = colors[randi() % len(colors)]
+					if color is Array:
+						color = color[randi() % len(color)]
 					if bouquet.count(color) < max_repetitions:
 						bouquet.append(color)
 						break
