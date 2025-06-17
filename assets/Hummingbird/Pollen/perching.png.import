@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://s1d4ow6e0qhr"
-path="res://.godot/imported/back_wings.png-d5a42a556d2ebef57f8ef4a975a3e270.ctex"
+uid="uid://coyv3tq0uookt"
+path="res://.godot/imported/perching.png-cb5ad94666bb6dc64903b084ff5118ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Hummingbird/back_wings.png"
-dest_files=["res://.godot/imported/back_wings.png-d5a42a556d2ebef57f8ef4a975a3e270.ctex"]
+source_file="res://assets/Hummingbird/Pollen/perching.png"
+dest_files=["res://.godot/imported/perching.png-cb5ad94666bb6dc64903b084ff5118ea.ctex"]
 
 [params]
 

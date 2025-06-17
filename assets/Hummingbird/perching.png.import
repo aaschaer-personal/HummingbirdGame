@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://u7nohp2hbjgh"
-path="res://.godot/imported/perching_h.png-515919e9861f912b05af738a7f71023b.ctex"
+uid="uid://b40ni5h8rxglu"
+path="res://.godot/imported/perching.png-e1603a8e1ca1fc272db53ae4cf113334.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Hummingbird/perching_h.png"
-dest_files=["res://.godot/imported/perching_h.png-515919e9861f912b05af738a7f71023b.ctex"]
+source_file="res://assets/Hummingbird/perching.png"
+dest_files=["res://.godot/imported/perching.png-e1603a8e1ca1fc272db53ae4cf113334.ctex"]
 
 [params]
 

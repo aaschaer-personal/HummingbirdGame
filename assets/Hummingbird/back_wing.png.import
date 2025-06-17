@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2mn5wj8hqdlt"
-path="res://.godot/imported/front_wings.png-da35d5a344f8e517d2035dc6d5d3e430.ctex"
+uid="uid://s1d4ow6e0qhr"
+path="res://.godot/imported/back_wing.png-4e5731aaca6a1e74e87f791d80481556.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Hummingbird/front_wings.png"
-dest_files=["res://.godot/imported/front_wings.png-da35d5a344f8e517d2035dc6d5d3e430.ctex"]
+source_file="res://assets/Hummingbird/back_wing.png"
+dest_files=["res://.godot/imported/back_wing.png-4e5731aaca6a1e74e87f791d80481556.ctex"]
 
 [params]
 

@@ -360,11 +360,10 @@ func add_pollen(pollen_dict: Dictionary):
 	pollen = pollen.slice(-10)
 	pollen_sprite.visible = true
 
-func _set_wings(val: bool, sound=true):
-	front_wing_sprite.visible = val
-	back_wing_sprite.visible = val
-	if sound:
-		humm_player.playing = val
+func _set_wings(vis: bool, aud: bool):
+	front_wing_sprite.visible = vis
+	back_wing_sprite.visible = vis
+	humm_player.playing = aud
 
 func _flip_h(val: bool):
 	body_sprite.set_flip_h(val)
@@ -419,9 +418,11 @@ func _do_animation():
 
 	if turn_flip_val != null and current != "perching":
 		# save current animation frame, stop wings, and start turn
-		var duration = 0.3  # 12 frames at 40fps
+		var duration = 0.25  # 10 frames at 40fps
 		var current_frame = body_sprite.get_frame()
-		_set_wings(false, false)
+		var wing_vis = front_wing_sprite.visible
+		var wing_sound = humm_player.playing
+		_set_wings(false, true)
 		# flip all flippables
 		for flippable in flippables.get_children():
 			flippable.position *= Vector2(-1, 1)
@@ -434,8 +435,8 @@ func _do_animation():
 		# flip any item picked up after the halfway point
 		if held_item:
 			held_item.set_flip_h(turn_flip_val)
-		# start wings and restore previous animation frame
-		_set_wings(true)
+		# restore previous state
+		_set_wings(wing_vis, wing_sound)
 		facing_right = !turn_flip_val
 		_flip_h(turn_flip_val)
 		_play_animation(current)
@@ -449,6 +450,7 @@ func _do_animation():
 	if current == "hovering":
 		hovering_frame = body_sprite.get_frame()
 		if target_animation == "zooming":
+			_set_wings(false, true)
 			_play_animation("start_zooming")
 			await body_sprite.animation_finished
 			_play_animation("zooming")
@@ -479,30 +481,30 @@ func _do_animation():
 				self,
 				"position",
 				Vector2(position.x, position.y + 16),
-				2.0/10.0
+				4.0/20.0
 			)
-			_tween_height(0, 2.0/10.0)
+			_tween_height(0, 4.0/20.0)
 			_play_animation("bathe")
-			await get_tree().create_timer(2.0/10.0, false).timeout
-			_set_wings(false)
-			await get_tree().create_timer(4.0/10.0, false).timeout
+			await get_tree().create_timer(4.0/20.0, false).timeout
+			_set_wings(false, false)
+			await get_tree().create_timer(6.0/20.0, false).timeout
 			splash_particles.emitting = true
 			audio_player.set_pitch_scale(1)
 			audio_player.stream = bath_sound
 			audio_player.play()
-			await get_tree().create_timer(6.0/10.0, false).timeout
+			await get_tree().create_timer(14.0/20.0, false).timeout
 			splash_particles.emitting = false
-			await get_tree().create_timer(3.0/10.0, false).timeout
-			_set_wings(true)
+			await get_tree().create_timer(6.0/20.0, false).timeout
+			_set_wings(true, true)
 			controllable = true
 			tween = create_tween()
 			tween.tween_property(
 				self,
 				"position",
 				Vector2(position.x, position.y - 16),
-				2.0/10.0
+				4.0/20.0
 			)
-			_tween_height(15, 2.0/10.0)
+			_tween_height(15, 4.0/20.0)
 			await body_sprite.animation_finished
 			pollen = []
 			pollen_sprite.visible = false
@@ -521,7 +523,7 @@ func _do_animation():
 			_play_animation("stop_perching")
 			_tween_height(15, .2)
 		await body_sprite.animation_finished
-		_set_wings(true)
+		_set_wings(true, true)
 		_play_animation("hovering")
 		_set_frame(hovering_frame)
 
