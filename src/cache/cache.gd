@@ -15,6 +15,15 @@ signal packet_printed
 @onready var raise_sound = preload("res://assets/Sounds/cache_raise.wav")
 @onready var door_sound = preload("res://assets/Sounds/door.wav")
 
+var PACKET_START = Vector2(-2, -22)
+var PACKET_TRANSPORT = Vector2(-73, 6)
+var CAN_START = Vector2(0, -24)
+var CAN_TRANSPORT = Vector2(-55, 6)
+var CLIPPER_START = Vector2(4, -19)
+var CLIPPER_TRANSPORT = Vector2(-36, 6)
+
+# 3 initial slots plus up to 10 printed packets
+var dispense_slots = [true, true, true, false, false, false, false, false, false, false, false, false, false]
 var packets_printing = 0
 var door_open = false
 var top
@@ -31,6 +40,7 @@ func _ready():
 	var shadow_canvas_group = get_tree().get_first_node_in_group("shadow_canvas_group")
 	Helpers.set_parent(shadow, shadow_canvas_group)
 	shadow.global_position = shadow_pos
+	player.dispense_slot_pickup.connect(_on_dispense_slot_pickup)
 
 func sync_frames():
 	var frame = front.get_frame()
@@ -99,16 +109,19 @@ func right_door_close ():
 	_play_door_sound()
 
 func quick_dispense_all(seed_packet):
-	seed_packet.generate_starting_seeds()
-	seed_packet.global_position = self.global_position + Vector2(-2, -22) + Vector2(-78, 8)
+	seed_packet.global_position = self.global_position + PACKET_START + PACKET_TRANSPORT
+	seed_packet.dispense_slot = 2
 
 	var watering_can = watering_can_scene.instantiate()
 	self.add_sibling(watering_can)
-	watering_can.global_position = self.global_position + Vector2(0, -24) + Vector2(-60, 8)
+	watering_can.global_position = self.global_position + CAN_START + CAN_TRANSPORT
+	watering_can.dispense_slot = 1
 
 	var clippers = clippers_scene.instantiate()
 	self.add_sibling(clippers)
-	clippers.global_position =  self.global_position + Vector2(4, -19) + Vector2(-40, 8)
+	clippers.global_position =  self.global_position + CLIPPER_START + CLIPPER_TRANSPORT
+	clippers.dispense_slot = 0
+	
 func dispense_all(seed_packet):
 	await left_door_open()
 	_dispense_seeds(seed_packet)
@@ -134,36 +147,49 @@ func dispense_clippers():
 	left_door_close()
 
 func _dispense_seeds(seed_packet):
-	seed_packet.global_position = self.global_position + Vector2(-2, -22)
+	seed_packet.global_position = self.global_position + PACKET_START
 	seed_packet.tween_height(4, 0)
-	await seed_packet.transport(-78, 6)
+	seed_packet.dispense_slot = 2
+	await seed_packet.transport(PACKET_TRANSPORT.x, PACKET_TRANSPORT.y)
 
 func _dispense_watering_can():
 	var watering_can = watering_can_scene.instantiate()
 	self.add_sibling(watering_can)
-	watering_can.global_position = self.global_position + Vector2(0, -24)
+	watering_can.global_position = self.global_position + CAN_START
+	watering_can.dispense_slot = 1
 	watering_can.tween_height(4, 0)
-	await watering_can.transport(-60, 6)
+	await watering_can.transport(CAN_TRANSPORT.x, CAN_TRANSPORT.y)
 	
 func _dispense_clippers():
 	var clippers = clippers_scene.instantiate()
 	self.add_sibling(clippers)
-	clippers.global_position = self.global_position + Vector2(4, -19)
+	clippers.global_position = self.global_position + CLIPPER_START
+	clippers.dispense_slot = 0
 	clippers.tween_height(4, 0)
-	await clippers.transport(-40, 6)
+	await clippers.transport(CLIPPER_TRANSPORT.x, CLIPPER_TRANSPORT.y)
 
 func print_packet(seed_packet):
 	if not door_open:
 		await left_door_open()
 		door_open = true
 	seed_packet.tween_height(4, 0)
-	while packets_printing > 3:
-		await get_tree().create_timer(0.1, false).timeout
+	
 	packets_printing += 1
-	await seed_packet.transport(-10 + (-20 * packets_printing), 6)
+	var dispense_slot = 0
+	for i in range(13):
+		if not dispense_slots[i]:
+			dispense_slot = i
+			dispense_slots[i] = true
+			break
+	seed_packet.dispense_slot = dispense_slot
+		
+	await seed_packet.transport(-10 + (-21 * (dispense_slot + 1)), 6)
 	packet_printed.emit()
 	packets_printing -= 1
 
 	if packets_printing == 0:
 		door_open = false
 		left_door_close()
+
+func _on_dispense_slot_pickup(slot):
+	dispense_slots[slot] = false

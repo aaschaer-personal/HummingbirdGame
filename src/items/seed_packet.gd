@@ -34,6 +34,3 @@ func add_seeds(new_seeds):
 	seeds.append_array(new_seeds)
 	seeds.shuffle()
 	seed_count.text = str(len(seeds))
-
-func generate_starting_seeds():
-	pass

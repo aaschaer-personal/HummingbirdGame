@@ -4,6 +4,7 @@ signal motion_finished
 signal energy_quartered
 signal energy_back_to_half
 signal seeds_harvested
+signal dispense_slot_pickup
 
 @onready var body_sprite = $Animation/Body
 @onready var front_wing_sprite = $Animation/FrontWing
@@ -273,7 +274,9 @@ func pickup(item):
 			held_item = item
 			if not item is Bouquet:
 				item.set_pickup_height()
-
+			if item.dispense_slot != null:
+				dispense_slot_pickup.emit(item.dispense_slot)
+				item.dispense_slot = null
 
 func _drop_item(item):
 	item.reparent(get_parent())

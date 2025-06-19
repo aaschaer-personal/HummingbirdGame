@@ -10,6 +10,8 @@ class_name Item extends Interactable
 @export var pickup_height = 4
 @export var drop_duration = .1
 
+var dispense_slot = null
+
 func _ready():
 	disk_sprite.visible = false
 

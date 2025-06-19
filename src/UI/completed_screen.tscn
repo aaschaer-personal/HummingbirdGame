@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ph7je02sp0tm"]
+[gd_scene load_steps=4 format=3 uid="uid://ph7je02sp0tm"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_qqv46"]
 [ext_resource type="Script" path="res://src/UI/completed_screen.gd" id="2_pw7k5"]
 [ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_xtff1"]
-[ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_gp1o2"]
 
 [node name="CompletedScreen" type="NinePatchRect" groups=["completed_screen"]]
 process_mode = 3
@@ -45,24 +44,5 @@ offset_top = 3.0
 offset_right = 55.0
 offset_bottom = 31.0
 text = "Onwards!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Spacing" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "                          "
-
-[node name="StayButton" type="TextureButton" parent="HBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("3_xtff1")
-texture_pressed = ExtResource("4_gp1o2")
-
-[node name="Label" type="Label" parent="HBoxContainer/StayButton"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 3.0
-offset_right = 55.0
-offset_bottom = 31.0
-text = "Stay"
 horizontal_alignment = 1
 vertical_alignment = 1
