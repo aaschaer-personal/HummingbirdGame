@@ -5,6 +5,9 @@ var plant = null
 var wetness = 0
 var plant_scene = null
 
+func _ready():
+	plant_scene = get_tree().get_first_node_in_group("level").plant_scene
+
 func _process(delta):
 	wetness -= 1 * delta
 	if wetness < 0:
@@ -20,9 +23,6 @@ func get_player_interaction():
 
 func plant_seed(gene_dict):
 	if gene_dict != null:
-		if plant_scene == null:
-			var species = gene_dict["species"]
-			plant_scene = load("res://src/flowers/%s/%s_plant.tscn" % [species,species])
 		var new_plant = plant_scene.instantiate()
 		add_child(new_plant)
 		new_plant.genome.set_vals_from_gene_dict(gene_dict)

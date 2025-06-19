@@ -30,3 +30,12 @@
 - Higher quality birdsonts
 - Rework font
 - Various bugfixes
+
+## v0.6
+- Add level 4
+- Combine wilting and to_seed flower stages
+- Improve visitor request system
+- Refactor loading to avoid lag during levels
+- 20fps player animations
+- Animated clippers
+- Various bugfixes

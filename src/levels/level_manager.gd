@@ -107,7 +107,7 @@ func generate_starting_packet():
 	add_sibling(packet)
 	
 	var starting_seeds = []
-	if level.flower_species == "sunflower":
+	if level.level_num == 1:
 		for i in range(4):
 			starting_seeds.append(GenomeGenerator.wild("sunflower"))
 		starting_seeds[0]["max_flowers"] = 0
@@ -118,7 +118,7 @@ func generate_starting_packet():
 		starting_seeds[2]["color"] = ["Y", "Y"]
 		starting_seeds[3]["max_flowers"] = 1
 		starting_seeds[3]["color"] = ["R", "R"]
-	elif level.flower_species == "jewelweed":
+	elif level.level_num == 2:
 		for i in range(3):
 			starting_seeds.append(GenomeGenerator.wild("jewelweed"))
 		starting_seeds[0]["max_flowers"] = 1
@@ -127,7 +127,7 @@ func generate_starting_packet():
 		starting_seeds[2]["color"] = ["Y", "Y"]
 		starting_seeds[1]["max_flowers"] = 0
 		starting_seeds[1]["color"] = ["P", "P"]
-	elif level.flower_species == "lupine":
+	elif level.level_num == 3:
 		for i in range(4):
 			starting_seeds.append(GenomeGenerator.wild("lupine"))
 		starting_seeds[0]["max_flowers"] = 0
@@ -138,6 +138,15 @@ func generate_starting_packet():
 		starting_seeds[3]["red"] = ["R", "r"]
 		starting_seeds[3]["blue"] = ["b", "b"]
 		starting_seeds[3]["max_flowers"] = 1
+	elif level.level_num == 4:
+		for i in range(3):
+			starting_seeds.append(GenomeGenerator.wild("zinnia"))
+		starting_seeds[0]["max_flowers"] = 1
+		starting_seeds[0]["color"] = ["R", "W"]
+		starting_seeds[1]["max_flowers"] = 1
+		starting_seeds[1]["color"] = ["R", "Y"]
+		starting_seeds[2]["max_flowers"] = 0
+		starting_seeds[2]["color"] = ["F", "F"]
 	else:
 		assert(false)
 

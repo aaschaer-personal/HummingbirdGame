@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://byw1a5vg1eslf"]
+[gd_scene load_steps=8 format=3 uid="uid://ddttn5axd2svg"]
 
 [ext_resource type="Script" path="res://src/environment/sapling.gd" id="1_ujq8c"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="6_ab0j1"]

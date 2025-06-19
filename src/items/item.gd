@@ -6,8 +6,11 @@ class_name Item extends Interactable
 @onready var disk_shadow = $TransportDisk/ShadowGenerator
 @onready var disk_audio = $TransportDiskAudio
 
+@export var ground_height = 0
 @export var pickup_height = 4
 @export var drop_duration = .1
+
+var dispense_slot = null
 
 func _ready():
 	disk_sprite.visible = false
@@ -35,7 +38,7 @@ func drop():
 		self.global_position + Vector2(0, pickup_height),
 		drop_duration,
 	)
-	tween_height(0, drop_duration)
+	tween_height(ground_height, drop_duration)
 
 func transport(x, y):
 	disk_sprite.visible = true
@@ -60,7 +63,7 @@ func transport(x, y):
 		starting_pos + Vector2(x, y),
 		.4,
 	)
-	tween_height(0, .4)
+	tween_height(ground_height, .4)
 	await tween.finished
 	disk_sprite.visible = false
 	disk_audio.playing = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cx2rgc1smj5jc"]
+[gd_scene load_steps=82 format=3 uid="uid://bdh1gu4o641vx"]
 
 [ext_resource type="PackedScene" uid="uid://hpx1s0l0kxve" path="res://src/visitors/visitor.tscn" id="1_a5y88"]
 [ext_resource type="Texture2D" uid="uid://mfpsgak0m8a4" path="res://assets/Visitors/HouseFinch/house_finch_confused.png" id="2_0s3ps"]
@@ -552,7 +552,7 @@ db_offset = -5
 [node name="MainSprite" type="AnimatedSprite2D" parent="." index="8"]
 position = Vector2(-7, -16)
 sprite_frames = SubResource("SpriteFrames_mft4q")
-animation = &"happy_1"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("6_i7aq2")]

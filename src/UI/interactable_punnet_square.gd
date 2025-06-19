@@ -24,10 +24,10 @@ func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	if level:
 		species = level.flower_species
-		var flower_texture = load("res://assets/UI/Icons/%s.png" % species.to_lower())
+		var flower_texture = level.flower_icon_texture
 		p1_example_flower.texture = flower_texture
 		p2_example_flower.texture = flower_texture
-		var petals_texture = load("res://assets/UI/Icons/%s_petals.png" % species.to_lower())
+		var petals_texture = level.petals_icon_texture
 		p1_example_petals.texture = petals_texture
 		p2_example_petals.texture = petals_texture
 	
@@ -73,6 +73,18 @@ func _ready():
 		p2b1.select(0)
 		p2b2.select(1)
 		_on_allele_option_selected(null)
+	elif species == "zinnia":
+		for option in [p1a1, p1a2, p2a1, p2a2]:
+			option.visible = true
+			option.add_item("R")
+			option.add_item("F")
+			option.add_item("Y")
+			option.add_item("W")
+		p1a1.select(0)
+		p1a2.select(1)
+		p2a1.select(2)
+		p2a2.select(3)
+		_on_allele_option_selected(null)
 	else:
 		assert(level == null)
 
@@ -108,6 +120,15 @@ func _on_allele_option_selected(_selected):
 		g1["blue"] = [blue_map[p1b1.get_selected_id()], blue_map[p1b2.get_selected_id()]]
 		g2["red"] = [red_map[p2a1.get_selected_id()], red_map[p2a2.get_selected_id()]]
 		g2["blue"] = [blue_map[p2b1.get_selected_id()], blue_map[p2b2.get_selected_id()]]
+	elif species == "zinnia":
+		var map = {
+			0: "R",
+			1: "F",
+			2: "Y",
+			3: "W",
+		}
+		g1["color"] = [map[p1a1.get_selected_id()], map[p1a2.get_selected_id()]]
+		g2["color"] = [map[p2a1.get_selected_id()], map[p2a2.get_selected_id()]]
 	else:
 		assert(false)
 

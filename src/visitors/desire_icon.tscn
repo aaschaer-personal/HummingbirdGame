@@ -1,10 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://wwkrshqv0ueo"]
+[gd_scene load_steps=3 format=3 uid="uid://wwkrshqv0ueo"]
 
 [ext_resource type="Script" path="res://src/visitors/desire_icon.gd" id="1_wchdq"]
+[ext_resource type="Texture2D" uid="uid://d1laal0ao5a0s" path="res://assets/UI/Icons/check.png" id="4_c1lqt"]
 
-[node name="DesireIcon" type="Node2D"]
+[node name="DesireIcon" type="Control"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_wchdq")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 
 [node name="PetalSprite" type="Sprite2D" parent="."]
+
+[node name="CheckSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_c1lqt")

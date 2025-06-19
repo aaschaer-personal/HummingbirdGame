@@ -138,7 +138,7 @@ func _ready():
 		await levels.animation_finished
 		controllable = true
 
-	if level_unlocks >= 3:
+	if level_unlocks >= 4:
 		var wip_text = $WIPText
 		wip_text.visible = true
 

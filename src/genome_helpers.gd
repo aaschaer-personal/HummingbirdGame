@@ -9,6 +9,8 @@ func code_from_gene_dict(gene_dict):
 		return jewelweed_code(gene_dict["color"])
 	elif species == "lupine":
 		return lupine_code(gene_dict["red"], gene_dict["blue"])
+	elif species == "zinnia":
+		return zinnia_code(gene_dict["color"])
 	else:
 		assert(false)
 
@@ -20,6 +22,8 @@ func color_from_gene_dict(gene_dict):
 		return jewelweed_color(gene_dict["color"])
 	elif species == "lupine":
 		return lupine_color(gene_dict["red"], gene_dict["blue"])
+	elif species == "zinnia":
+		return zinnia_color(gene_dict["color"])
 	else:
 		assert(false)
 
@@ -48,13 +52,13 @@ var jewelweed_code_color_map = {
 }
 
 func jewelweed_code(color):
-	if color[0] == "R":
+	var order = {
+		"R": 0,
+		"P": 1,
+		"Y": 2,
+	}
+	if order[color[0]] < order[color[1]]:
 		return color[0] + color[1]
-	elif color[0] == "P":
-		if color[1] == "R":
-			return "RP"
-		else:
-			return color[0] + color[1]
 	else:
 		return color[1] + color[0]
 		
@@ -87,3 +91,31 @@ func lupine_code(red, blue):
 
 func lupine_color(red, blue):
 	return lupine_code_color_map[lupine_code(red, blue)]
+
+var zinnia_code_color_map = {
+	"RR": Colors.red,
+	"RF": Colors.red,
+	"RY": Colors.orange,
+	"RW": Colors.pink,
+	"FF": Colors.fushia,
+	"FY": Colors.fushia,
+	"FW": Colors.fushia,
+	"YY": Colors.yellow,
+	"YW": Colors.yellow,
+	"WW": Colors.white,
+}
+
+func zinnia_code(color):
+	var order = {
+		"R": 0,
+		"F": 1,
+		"Y": 2,
+		"W": 3,
+	}
+	if order[color[0]] < order[color[1]]:
+		return color[0] + color[1]
+	else:
+		return color[1] + color[0]
+
+func zinnia_color(color):
+	return zinnia_code_color_map[zinnia_code(color)]

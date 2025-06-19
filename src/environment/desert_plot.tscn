@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://vwc0fhdx6gim"]
+
+[ext_resource type="PackedScene" uid="uid://dctxne420bfvp" path="res://src/environment/base_plot.tscn" id="1_so653"]
+[ext_resource type="Texture2D" uid="uid://ccurhdd7va62p" path="res://assets/Environment/desert_plot_grass.png" id="2_bmhky"]
+
+[node name="Plot" instance=ExtResource("1_so653")]
+
+[node name="Grass" type="Sprite2D" parent="." index="2"]
+texture = ExtResource("2_bmhky")

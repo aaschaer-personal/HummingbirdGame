@@ -193,4 +193,4 @@ animation = &"bloomed"
 
 [node name="Petals" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_egvsl")
-animation = &"bloom"
+animation = &"bloomed"

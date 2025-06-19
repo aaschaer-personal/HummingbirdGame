@@ -5,8 +5,7 @@ extends Control
 @onready var visitor_icon = $VisitorIcon
 
 func _ready():
-	var species = get_tree().get_first_node_in_group("level").visitor_species
-	var texture = load("res://assets/UI/Icons/%s.png" % species)
+	var texture = get_tree().get_first_node_in_group("level").visitor_icon_texture
 	visitor_icon.texture = texture
 	visitor_manager.ready.connect(set_text)
 	visitor_manager.boquet_accepted.connect(set_text)

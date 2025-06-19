@@ -4,6 +4,7 @@ signal motion_finished
 signal energy_quartered
 signal energy_back_to_half
 signal seeds_harvested
+signal dispense_slot_pickup
 
 @onready var body_sprite = $Animation/Body
 @onready var front_wing_sprite = $Animation/FrontWing
@@ -42,7 +43,6 @@ var interaction_direction = null
 var held_item = null
 var drinking_flower = null
 var hovering_frame = 0
-var perching_frame = 0
 var perch_y = 0
 var facing_right = true
 var target_animation = "hovering"
@@ -91,6 +91,8 @@ func _process(delta):
 		moving_time = 0
 		if target_animation == "zooming":
 			target_animation = "hovering"
+	if energy <= 0 and target_animation in ["hovering", "zooming"]:
+		target_animation = "tired"
 
 	if drinking_flower and body_sprite.animation == "drinking":
 		if drinking_flower.stage == 1:
@@ -129,7 +131,14 @@ func _process(delta):
 	if energy <= 0:
 		energy = 0
 		drop_held_item()
-	elif energy > max_energy:
+		front_wing_sprite.play("tired")
+		back_wing_sprite.play("tired")
+		humm_player.pitch_scale = .5
+	else:
+		front_wing_sprite.play("default")
+		back_wing_sprite.play("default")
+		humm_player.pitch_scale = 1
+	if energy > max_energy:
 		energy = max_energy
 
 	_do_animation()
@@ -265,7 +274,9 @@ func pickup(item):
 			held_item = item
 			if not item is Bouquet:
 				item.set_pickup_height()
-
+			if item.dispense_slot != null:
+				dispense_slot_pickup.emit(item.dispense_slot)
+				item.dispense_slot = null
 
 func _drop_item(item):
 	item.reparent(get_parent())
@@ -301,15 +312,15 @@ func use_tool_on_flower(flower: Flower):
 		drinking_flower = null
 		target_animation = "hovering"
 
-	if flower.stage == 3 and held_item is SeedPacket:
+	if flower.stage == 2 and held_item is SeedPacket:
 		flower.harvest_seeds(held_item)
 		seeds_harvested.emit()
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
 		audio_player.stream = paper_sound
 		audio_player.play()
 	elif held_item is Clippers:
+		await held_item.clip()
 		flower.clip()
-		held_item.audio_player.play()
 
 func use_tool_on_plot(plot: Plot):
 	if held_item is SeedPacket:
@@ -360,11 +371,10 @@ func add_pollen(pollen_dict: Dictionary):
 	pollen = pollen.slice(-10)
 	pollen_sprite.visible = true
 
-func _set_wings(val: bool, sound=true):
-	front_wing_sprite.visible = val
-	back_wing_sprite.visible = val
-	if sound:
-		humm_player.playing = val
+func _set_wings(vis: bool, aud: bool):
+	front_wing_sprite.visible = vis
+	back_wing_sprite.visible = vis
+	humm_player.playing = aud
 
 func _flip_h(val: bool):
 	body_sprite.set_flip_h(val)
@@ -419,13 +429,18 @@ func _do_animation():
 
 	if turn_flip_val != null and current != "perching":
 		# save current animation frame, stop wings, and start turn
-		var duration = 0.3  # 12 frames at 40fps
+		var duration = 0.25  # 10 frames at 40fps
 		var current_frame = body_sprite.get_frame()
-		_set_wings(false, false)
+		var wing_vis = front_wing_sprite.visible
+		var wing_sound = humm_player.playing
+		_set_wings(false, true)
 		# flip all flippables
 		for flippable in flippables.get_children():
 			flippable.position *= Vector2(-1, 1)
-		_play_animation("turn")
+		if energy:
+			_play_animation("turn")
+		else:
+			_play_animation("turn_tired")
 		# halfway through the turn, turn any hold item
 		await get_tree().create_timer(duration / 2.0, false).timeout
 		if held_item:
@@ -434,8 +449,8 @@ func _do_animation():
 		# flip any item picked up after the halfway point
 		if held_item:
 			held_item.set_flip_h(turn_flip_val)
-		# start wings and restore previous animation frame
-		_set_wings(true)
+		# restore previous state
+		_set_wings(wing_vis, wing_sound)
 		facing_right = !turn_flip_val
 		_flip_h(turn_flip_val)
 		_play_animation(current)
@@ -449,6 +464,7 @@ func _do_animation():
 	if current == "hovering":
 		hovering_frame = body_sprite.get_frame()
 		if target_animation == "zooming":
+			_set_wings(false, true)
 			_play_animation("start_zooming")
 			await body_sprite.animation_finished
 			_play_animation("zooming")
@@ -458,7 +474,10 @@ func _do_animation():
 			_play_animation("drinking")
 		elif target_animation == "perching":
 			_set_wings(false, false)
-			_play_animation("start_perching")
+			if energy:
+				_play_animation("start_perching")
+			else:
+				_play_animation("start_perching_tired")
 			var tween = create_tween()
 			tween.tween_property(
 				self,
@@ -471,7 +490,9 @@ func _do_animation():
 			humm_player.playing = false
 			facing_right = null
 			_play_animation("perching")
-			_set_frame(perching_frame)
+			# intermediate frames
+			var perching_frames = [0, 2, 20, 22, 30, 32, 50, 52]
+			_set_frame(perching_frames.pick_random())
 		elif target_animation == "bathe":
 			controllable = false
 			var tween = create_tween()
@@ -479,36 +500,38 @@ func _do_animation():
 				self,
 				"position",
 				Vector2(position.x, position.y + 16),
-				2.0/10.0
+				4.0/20.0
 			)
-			_tween_height(0, 2.0/10.0)
+			_tween_height(0, 4.0/20.0)
 			_play_animation("bathe")
-			await get_tree().create_timer(2.0/10.0, false).timeout
-			_set_wings(false)
-			await get_tree().create_timer(4.0/10.0, false).timeout
+			await get_tree().create_timer(4.0/20.0, false).timeout
+			_set_wings(false, false)
+			await get_tree().create_timer(6.0/20.0, false).timeout
 			splash_particles.emitting = true
 			audio_player.set_pitch_scale(1)
 			audio_player.stream = bath_sound
 			audio_player.play()
-			await get_tree().create_timer(6.0/10.0, false).timeout
+			await get_tree().create_timer(14.0/20.0, false).timeout
 			splash_particles.emitting = false
-			await get_tree().create_timer(3.0/10.0, false).timeout
-			_set_wings(true)
+			await get_tree().create_timer(6.0/20.0, false).timeout
+			_set_wings(true, true)
 			controllable = true
 			tween = create_tween()
 			tween.tween_property(
 				self,
 				"position",
 				Vector2(position.x, position.y - 16),
-				2.0/10.0
+				4.0/20.0
 			)
-			_tween_height(15, 2.0/10.0)
+			_tween_height(15, 4.0/20.0)
 			await body_sprite.animation_finished
 			pollen = []
 			pollen_sprite.visible = false
 			
 			target_animation = "hovering"
 			_play_animation("hovering")
+		elif target_animation == "tired":
+			_play_animation("tired")
 
 	# otherwise transition to hovering either as intermediate or target
 	else:
@@ -517,11 +540,12 @@ func _do_animation():
 		elif current == "drinking":
 			_play_animation("stop_drinking")
 		elif current == "perching":
-			perching_frame = body_sprite.get_frame()
 			_play_animation("stop_perching")
 			_tween_height(15, .2)
-		await body_sprite.animation_finished
-		_set_wings(true)
+		# if the new animation isn't looping, wait for it to finish
+		if not body_sprite.sprite_frames.get_animation_loop(body_sprite.animation):
+			await body_sprite.animation_finished
+		_set_wings(true, true)
 		_play_animation("hovering")
 		_set_frame(hovering_frame)
 

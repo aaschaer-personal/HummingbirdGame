@@ -8,6 +8,7 @@ class_name Bouquet extends Node2D
 @onready var node_indexes = [2, 1, 3, 0, 4]
 @onready var flipped_node_indexes = [2, 3, 1, 4, 0]
 var flower_nodes
+var dispense_slot = null
 
 func _ready():
 	flower_nodes = get_children()

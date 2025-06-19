@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://hpx1s0l0kxve"]
+[gd_scene load_steps=8 format=3 uid="uid://hpx1s0l0kxve"]
 
 [ext_resource type="Script" path="res://src/visitors/visitor.gd" id="1_7cc7u"]
 [ext_resource type="Texture2D" uid="uid://fcdt6cc086nh" path="res://assets/Visitors/speech_bubble.png" id="6_3j6pk"]
-[ext_resource type="PackedScene" uid="uid://wwkrshqv0ueo" path="res://src/visitors/desire_icon.tscn" id="7_o3lkh"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_k8pmv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hui3"]
@@ -41,22 +40,12 @@ visible = false
 position = Vector2(39, -45)
 texture = ExtResource("6_3j6pk")
 
-[node name="DesireIconHolder" type="Node2D" parent="SpeechBubbleSprite"]
-position = Vector2(-2, -3)
-
-[node name="DesireIcon1" parent="SpeechBubbleSprite/DesireIconHolder" instance=ExtResource("7_o3lkh")]
-
-[node name="DesireIcon2" parent="SpeechBubbleSprite/DesireIconHolder" instance=ExtResource("7_o3lkh")]
-position = Vector2(12, 0)
-
-[node name="DesireIcon3" parent="SpeechBubbleSprite/DesireIconHolder" instance=ExtResource("7_o3lkh")]
-position = Vector2(-12, 0)
-
-[node name="DesireIcon4" parent="SpeechBubbleSprite/DesireIconHolder" instance=ExtResource("7_o3lkh")]
-position = Vector2(24, 0)
-
-[node name="DesireIcon5" parent="SpeechBubbleSprite/DesireIconHolder" instance=ExtResource("7_o3lkh")]
-position = Vector2(-24, 0)
+[node name="DesireIconHolder" type="HBoxContainer" parent="SpeechBubbleSprite"]
+offset_left = -24.0
+offset_top = -5.0
+offset_right = 32.0
+offset_bottom = 16.0
+alignment = 1
 
 [node name="AcceptanceArea" type="Area2D" parent="."]
 position = Vector2(8, -4)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdt3cyofvste2"]
+
+[ext_resource type="Texture2D" uid="uid://cvljpgu04lwib" path="res://assets/Cache/desert_cache_top.png" id="1_pktxm"]
+
+[node name="CacheTop" type="Sprite2D"]
+texture = ExtResource("1_pktxm")
