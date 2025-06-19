@@ -108,8 +108,7 @@ func quick_dispense_all(seed_packet):
 
 	var clippers = clippers_scene.instantiate()
 	self.add_sibling(clippers)
-	clippers.global_position =  self.global_position + Vector2(4, -23) + Vector2(-40, 8)
-
+	clippers.global_position =  self.global_position + Vector2(4, -19) + Vector2(-40, 8)
 func dispense_all(seed_packet):
 	await left_door_open()
 	_dispense_seeds(seed_packet)
@@ -149,7 +148,7 @@ func _dispense_watering_can():
 func _dispense_clippers():
 	var clippers = clippers_scene.instantiate()
 	self.add_sibling(clippers)
-	clippers.global_position = self.global_position + Vector2(4, -23)
+	clippers.global_position = self.global_position + Vector2(4, -19)
 	clippers.tween_height(4, 0)
 	await clippers.transport(-40, 6)
 
