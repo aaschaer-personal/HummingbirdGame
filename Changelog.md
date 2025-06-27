@@ -39,3 +39,8 @@
 - 20fps player animations
 - Animated clippers
 - Various bugfixes
+
+## v0.6.1
+- fix softlock on hummingbird animations getting stuck
+- fix guide exit button
+- clarify bee pollen behavior in guide

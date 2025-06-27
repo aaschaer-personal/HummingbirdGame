@@ -8,7 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_koo0c"]
 
 [node name="Guide" type="NinePatchRect"]
-offset_right = 248.0
+offset_left = 55.0
+offset_right = 303.0
 offset_bottom = 324.0
 mouse_filter = 0
 texture = ExtResource("1_8u3um")
@@ -262,7 +263,7 @@ text = "[font_size=12]
 
 * After sprouting plants don't need water but will grow and make nectar faster if kept watered.
 
-* When a flower fills up with nectar it will attract bees that will eventually pollinate it.
+* When a flower fills up with nectar it will attract bees that will eventually pollinate it with random pollen.
 
 * Flowers pollinated by bees or by you will go to seed. These seeds can be harvested with a seed packet.
 
@@ -287,7 +288,9 @@ text = "[font_size=12]
 
 * Drinking from multiple flowers will mix their pollen together on your beak. The next flower you pollinate could be pollinated by any of them.
 
-* Taking a bath will clean all pollen off your beak. Bathing regularly helps controll pollination."
+* Taking a bath will clean all pollen off your beak. Bathing regularly helps controll pollination.
+
+* If left alone, bees will pollinate flowers with random pollen."
 
 [node name="Energy" type="RichTextLabel" parent="Content"]
 visible = false

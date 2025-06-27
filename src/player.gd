@@ -399,9 +399,9 @@ func _do_animation():
 	var current = body_sprite.animation
 
 	# don't interupt non looping animations
-	if not body_sprite.sprite_frames.get_animation_loop(current):
+	if body_sprite.is_playing() and not body_sprite.sprite_frames.get_animation_loop(current):
 		return
-	
+
 	# if we were perched, immediatly flip sprite to current direction
 	if facing_right == null:
 		if velocity.x > 0:
@@ -529,7 +529,6 @@ func _do_animation():
 			pollen_sprite.visible = false
 			
 			target_animation = "hovering"
-			_play_animation("hovering")
 		elif target_animation == "tired":
 			_play_animation("tired")
 
@@ -537,13 +536,13 @@ func _do_animation():
 	else:
 		if current == "zooming":
 			_play_animation("stop_zooming")
+			await body_sprite.animation_finished
 		elif current == "drinking":
 			_play_animation("stop_drinking")
+			await body_sprite.animation_finished
 		elif current == "perching":
 			_play_animation("stop_perching")
 			_tween_height(15, .2)
-		# if the new animation isn't looping, wait for it to finish
-		if not body_sprite.sprite_frames.get_animation_loop(body_sprite.animation):
 			await body_sprite.animation_finished
 		_set_wings(true, true)
 		_play_animation("hovering")

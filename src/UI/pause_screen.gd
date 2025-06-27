@@ -52,8 +52,12 @@ func open_options():
 	options.visible = true
 
 func resume():
-	visible = false
-	get_tree().paused = false
+	if not guide.visible:
+		visible = false
+		get_tree().paused = false
+	# hacky way of dealing with overlapping buttons
+	else:
+		guide.close()
 
 func restart_level():
 	get_tree().paused = false
