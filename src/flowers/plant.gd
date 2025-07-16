@@ -65,7 +65,7 @@ func _process(delta):
 				start_new_flower()
 
 	# die if all flowers are gone
-	if stage == 2 and current_flowers == 0 and not _flowers_left_to_grow() and not dying:
+	if stage == 2 and current_flowers <= 0 and not _flowers_left_to_grow() and not dying:
 		dying = true
 		await get_tree().create_timer(0.2, false).timeout
 		sprite.play("die")
