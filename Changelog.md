@@ -44,3 +44,6 @@
 - fix softlock on hummingbird animations getting stuck
 - fix guide exit button
 - clarify bee pollen behavior in guide
+
+## v0.6.2
+- fix cutting a flower multiple times

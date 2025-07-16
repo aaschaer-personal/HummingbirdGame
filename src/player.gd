@@ -50,6 +50,7 @@ var pollen = []
 var controllable = false
 var in_motion = false
 var low_energy_singal_toggle = false
+var clipping = false
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -318,9 +319,11 @@ func use_tool_on_flower(flower: Flower):
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
 		audio_player.stream = paper_sound
 		audio_player.play()
-	elif held_item is Clippers:
+	elif held_item is Clippers and not clipping:
+		clipping = true
 		await held_item.clip()
 		flower.clip()
+		clipping = false
 
 func use_tool_on_plot(plot: Plot):
 	if held_item is SeedPacket:
