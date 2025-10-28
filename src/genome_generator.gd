@@ -12,6 +12,7 @@ var color_keys_by_species = {
 	"jewelweed": ["color"],
 	"lupine": ["red", "blue"],
 	"zinnia": ["color"],
+	"hibiscus": ["red", "other"],
 }
 
 func wild(species):
@@ -44,9 +45,17 @@ func wild(species):
 	elif species == "zinnia":
 		var options = {
 			0: ["R", "Y"],
-			1: ["F", "W"],
+			1: ["F", "w"],
 		}
 		ret["color"] = options[randi() % len(options)]
+	elif species == "hibiscus":
+		ret["red"] = ["R", "r"]
+		var options = {
+			0: ["B", "Y"],
+			1: ["B", "w"],
+			2: ["Y", "w"],
+		}
+		ret["other"] = options[randi() % len(options)]
 	else:
 		assert(false)
 

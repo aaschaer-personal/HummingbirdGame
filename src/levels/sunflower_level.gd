@@ -1,4 +1,6 @@
-extends Level
+class_name SunflowerLevel extends Level
+
+var flower_species = "sunflower"
 
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level1_cache_top.tscn")

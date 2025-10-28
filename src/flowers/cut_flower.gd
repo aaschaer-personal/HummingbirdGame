@@ -11,6 +11,7 @@ var x_offset_by_species = {
 	"jewelweed": 6,
 	"lupine": 14,
 	"zinnia": 8,
+	"hibiscus": 10,
 }
 # height, duration
 var decay_data_by_species = {
@@ -18,6 +19,7 @@ var decay_data_by_species = {
 	"jewelweed": [4, .4],
 	"lupine": [1, .3],
 	"zinnia": [2, .6],
+	"hibiscus": [4, .7],
 }
 var color: Color
 var is_decaying = false

@@ -22,14 +22,6 @@ text = "RRBB"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Flower" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 3.0
-offset_right = 20.0
-offset_bottom = 15.0
-texture = ExtResource("2_x7xev")
-
 [node name="Petals" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 8.0
@@ -37,3 +29,11 @@ offset_top = 3.0
 offset_right = 20.0
 offset_bottom = 15.0
 texture = ExtResource("3_g6rt8")
+
+[node name="Flower" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 20.0
+offset_bottom = 15.0
+texture = ExtResource("2_x7xev")

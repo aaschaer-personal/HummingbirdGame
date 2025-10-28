@@ -36,6 +36,8 @@ func _ready():
 			genetics_content.text = genetics_content.text % "* Lupines have two color genes with two alleles each for nine unique combinations. The red gene has alleles R and r, with R adding red to the flower. The blue gene has alleles B and b, with B adding blue to the flower."
 		elif level.flower_species == "zinnia":
 			genetics_content.text = genetics_content.text % "* Zinnias have one color gene with four alleles, R for red, F for Fushia, Y for yellow, and W for white. There are ten unique combinations which produce six different colors."
+		elif level.flower_species == "hibiscus":
+			genetics_content.text = genetics_content.text % "* Hibiscuses have two color genes. The red gene has alleles R and r, with R adding red to the flower. The other gene can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors."
 		else:
 			assert(level == null)
 

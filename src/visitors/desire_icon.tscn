@@ -9,9 +9,9 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_wchdq")
 
-[node name="MainSprite" type="Sprite2D" parent="."]
-
 [node name="PetalSprite" type="Sprite2D" parent="."]
+
+[node name="MainSprite" type="Sprite2D" parent="."]
 
 [node name="CheckSprite" type="Sprite2D" parent="."]
 visible = false

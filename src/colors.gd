@@ -15,8 +15,9 @@ var fushia = Color("ff00ff")
 var colors_by_species = {
 	"sunflower": [red, orange, yellow],
 	"jewelweed": [red, orange, yellow, purple],
-	"lupine": [red,  pink, blue, purple, white],
+	"lupine": [red, pink, blue, purple, white],
 	"zinnia": [red, fushia, pink, orange, yellow, white],
+	"hibiscus": [red, pink, orange, yellow, blue, purple, white]
 }
 
 func flower_colors(species):

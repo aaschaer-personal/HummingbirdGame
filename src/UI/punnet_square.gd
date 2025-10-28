@@ -10,14 +10,10 @@ func fill(gene_dict_1, gene_dict_2):
 	for child in get_children():
 		child.queue_free()
 
-	if species == "sunflower":
+	if species in ["sunflower", "jewelweed", "zinnia"]:
 		fill_one_gene(gene_dict_1, gene_dict_2)
-	elif species == "jewelweed":
-		fill_one_gene(gene_dict_1, gene_dict_2)
-	elif species == "lupine":
+	elif species in ["lupine", "hibiscus"]:
 		fill_two_gene(gene_dict_1, gene_dict_2)
-	elif species == "zinnia":
-		fill_one_gene(gene_dict_1, gene_dict_2)
 	else:
 		assert(false)
 
@@ -81,6 +77,9 @@ func fill_one_gene(gene_dict_1, gene_dict_2):
 	add_child(_make_space())
 
 func fill_two_gene(gene_dict_1, gene_dict_2):
+	var species = gene_dict_1["species"]
+	assert(gene_dict_2["species"] == species)
+	
 	columns = 6
 	var child_units = []
 	var p1_code = GenomeHelpers.code_from_gene_dict(gene_dict_1)
@@ -116,15 +115,19 @@ func fill_two_gene(gene_dict_1, gene_dict_2):
 	# child gene dicts
 	var child_gene_dicts = []
 	for i in range(16):
-		child_gene_dicts.append({"species": gene_dict_1["species"]})
+		child_gene_dicts.append({"species": species})
 
+	var other_index = "other"
+	if species == "lupine":
+		other_index = "blue"
+	
 	var child_index = 0
 	for p2_red_i in [0,1]:
-		for p2_blue_i in [0,1]:
+		for p2_other_i in [0,1]:
 			for p1_red_i in [0,1]:
-				for p1_blue_i in [0,1]:
+				for p1_other_i in [0,1]:
 					child_gene_dicts[child_index]["red"] = [p1_code[p1_red_i], p2_code[p2_red_i]]
-					child_gene_dicts[child_index]["blue"] = [p1_code[2 + p1_blue_i], p2_code[2 + p2_blue_i]]
+					child_gene_dicts[child_index][other_index] = [p1_code[2 + p1_other_i], p2_code[2 + p2_other_i]]
 					child_index += 1
 
 	# assemble

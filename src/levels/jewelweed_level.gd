@@ -1,4 +1,6 @@
-extends Level
+class_name JewelweedLevel extends Level
+
+var flower_species = "jewelweed"
 
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level2_cache_top.tscn")
