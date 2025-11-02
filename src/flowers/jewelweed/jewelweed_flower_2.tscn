@@ -608,7 +608,7 @@ position = Vector2(-11, -9)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_25wva")
-animation = &"to_seed_rustle"
+animation = &"bloom"
 autoplay = "bloom"
 
 [node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("8_ydbb0")]

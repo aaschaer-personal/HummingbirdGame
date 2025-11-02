@@ -413,10 +413,8 @@ script = ExtResource("2_f2qcu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_djkun")
-animation = &"plant_rustle"
+animation = &"seed"
 autoplay = "seed"
-frame = 3
-frame_progress = 1.0
 
 [node name="ShadowGenerator" parent="AnimatedSprite2D" index="0" instance=ExtResource("9_5dx0i")]
 object_height = 32

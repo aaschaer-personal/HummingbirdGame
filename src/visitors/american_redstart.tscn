@@ -631,8 +631,10 @@ db_offset = -5
 [node name="MainSprite" type="AnimatedSprite2D" parent="." index="8"]
 position = Vector2(-7, -16)
 sprite_frames = SubResource("SpriteFrames_mft4q")
-animation = &"happy_3"
+animation = &"landing"
 autoplay = "idle"
+frame = 18
+frame_progress = 1.0
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("10_r8r6h")]
 object_height = 32
