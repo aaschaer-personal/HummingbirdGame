@@ -13,5 +13,5 @@ var flower_icon_texture = preload("res://assets/UI/Icons/hibiscus.png")
 var petals_icon_texture = preload("res://assets/UI/Icons/hibiscus_petals.png")
 
 # visitor specific scenes
-var visitor_scene = preload("res://src/visitors/yellow_breasted_chat.tscn")
-var visitor_icon_texture = preload("res://assets/UI/Icons/yellow_breasted_chat.png")
+var visitor_scene = preload("res://src/visitors/american_redstart.tscn")
+var visitor_icon_texture = preload("res://assets/UI/Icons/american_redstart.png")
