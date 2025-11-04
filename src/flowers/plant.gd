@@ -18,8 +18,13 @@ var current_flowers = 0
 var total_flowers = 0
 var flowers = [null, null, null]
 var parent_plot: Plot
+var flipped = false
 
 func _ready():
+	if randi() % 2:
+		flipped = true
+		_flip()
+
 	var level = get_tree().get_first_node_in_group("level")
 	flower_1_scene = level.flower_1_scene
 	flower_2_scene = level.flower_2_scene
@@ -27,6 +32,9 @@ func _ready():
 	add_to_group("plants")
 	sprite.play("seed")
 	parent_plot = get_parent()
+
+func _flip():
+	sprite.flip_h = true
 
 func _process(delta):
 	# first put energy into growing
@@ -102,6 +110,8 @@ func start_new_flower():
 			flower_spawns[i].add_child(flower_instance)
 			total_flowers += 1
 			current_flowers += 1
+			if flipped:
+				flower_instance.flip()
 			return
 
 func on_flower_harvest(flower_position):

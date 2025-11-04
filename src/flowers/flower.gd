@@ -5,6 +5,7 @@ class_name Flower extends Interactable
 @onready var main_sprite = $MainSprite
 @onready var pollination_timer = $PollinationTimer
 @onready var nectar_meter = $NectarMeter
+@onready var collision_shape = $CollisionShape2D
 @onready var drinkable_area = $DrinkableArea
 @onready var rustle_audio_player = $RustleAudioPlayer
 @onready var bee_audio_player = $BeeAudioPlayer
@@ -40,6 +41,12 @@ func _ready():
 	stage = 1
 	nectar = max_nectar / (parent_plant.genome.max_flowers * 3)
 	SignalBus.flower_bloomed.emit(parent_plant.genome.flower_color)
+
+func flip():
+	main_sprite.flip_h = true
+	petal_sprite.flip_h = true
+	collision_shape.position.x *= -1
+	drinkable_area.position.x *= -1
 
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
