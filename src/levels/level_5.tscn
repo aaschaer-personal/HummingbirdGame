@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cu1hmijlk3lrc" path="res://src/levels/level.tscn" id="1_rorqn"]
 [ext_resource type="Script" path="res://src/levels/level_5.gd" id="2_raijx"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="3_4y6tt"]
-[ext_resource type="AudioStream" uid="uid://bfwmjoq2a0hni" path="res://assets/Music/Level2.ogg" id="4_7h4kg"]
+[ext_resource type="AudioStream" uid="uid://bgc35ywn0yr76" path="res://assets/Music/Level5.ogg" id="4_vv3do"]
 [ext_resource type="PackedScene" uid="uid://cd8nwio7iqgcb" path="res://src/environment/pond.tscn" id="5_81qqq"]
 [ext_resource type="PackedScene" uid="uid://8yrwu1paqh1p" path="res://src/environment/sapling_forest.tscn" id="6_x0prn"]
 [ext_resource type="PackedScene" uid="uid://b1bfbka1jk4lx" path="res://src/environment/forest_plot.tscn" id="7_ejxop"]
@@ -17,7 +17,7 @@ script = ExtResource("2_raijx")
 [node name="MusicPlayer" parent="." index="8" instance=ExtResource("3_4y6tt")]
 process_mode = 3
 position = Vector2(443, 320)
-stream = ExtResource("4_7h4kg")
+stream = ExtResource("4_vv3do")
 autoplay = true
 option = "music_volume"
 
