@@ -3,6 +3,7 @@
 ## v0.7
 - Add level 5
 - Improve visitor animations
+- Random flower orientations
 - Various bugfixes
 
 ## v0.6.2
