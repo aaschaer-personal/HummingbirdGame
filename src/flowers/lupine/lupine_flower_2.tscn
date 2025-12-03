@@ -517,25 +517,24 @@ height = 28.0
 [node name="Flower" instance=ExtResource("1_a17la")]
 
 [node name="BeeHoverPoints" type="Node2D" parent="." index="3"]
-position = Vector2(-9, 6)
 
 [node name="HoverPoint1" type="Node2D" parent="BeeHoverPoints" index="0"]
-position = Vector2(-3, -25)
+position = Vector2(-12, -19)
 
 [node name="HoverPoint2" type="Node2D" parent="BeeHoverPoints" index="1"]
-position = Vector2(4, -22)
+position = Vector2(-5, -16)
 
 [node name="HoverPoint3" type="Node2D" parent="BeeHoverPoints" index="2"]
-position = Vector2(-4, -17)
+position = Vector2(-13, -11)
 
 [node name="HoverPoint4" type="Node2D" parent="BeeHoverPoints" index="3"]
-position = Vector2(4, -13)
+position = Vector2(-5, -7)
 
 [node name="HoverPoint5" type="Node2D" parent="BeeHoverPoints" index="4"]
-position = Vector2(-4, -7)
+position = Vector2(-13, -1)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints" index="5"]
-position = Vector2(4, -2)
+position = Vector2(-5, 4)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_p87xr")

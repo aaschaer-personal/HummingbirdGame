@@ -9,6 +9,7 @@ class_name Flower extends Interactable
 @onready var drinkable_area = $DrinkableArea
 @onready var rustle_audio_player = $RustleAudioPlayer
 @onready var bee_audio_player = $BeeAudioPlayer
+@onready var bee_hover_points = $BeeHoverPoints
 @onready var bee_scene = preload("res://src/flowers/bee.tscn")
 
 var flower_position: int
@@ -47,6 +48,10 @@ func flip():
 	petal_sprite.flip_h = true
 	collision_shape.position.x *= -1
 	drinkable_area.position.x *= -1
+	nectar_meter.position.x *= -1
+	nectar_meter.position.x -= 12
+	for bee_hover_point in bee_hover_points.get_children():
+		bee_hover_point.position.x *= -1
 
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
@@ -173,7 +178,8 @@ func clip():
 		var cut_flower_instance = cut_flower_scene.instantiate()
 		get_tree().get_first_node_in_group("level").add_child(cut_flower_instance)
 		cut_flower_instance.set_color(parent_plant.genome.flower_color)
-		cut_flower_instance.set_global_position(global_position + cut_offsets[flower_position]) 
+		cut_flower_instance.set_global_position(global_position + cut_offsets[flower_position])
+		cut_flower_instance.sync_shadow_position()
 	harvest()
 
 func harvest():

@@ -111,3 +111,9 @@ func decay():
 	await item_sprite.animation_finished
 	SignalBus.cut_flower_decayed.emit()
 	queue_free()
+
+func sync_shadow_position():
+	var item_shadow_generator = $Item/ShadowGenerator
+	var petal_shadow_generator = $PetalSprite/ShadowGenerator
+	item_shadow_generator.sync_position()
+	petal_shadow_generator.sync_position()

@@ -190,11 +190,11 @@ func tutorial_sequence():
 4. Wait for the flowers to grow.
 
 """)
-	while true:
-		await SignalBus.flower_bloomed
-		if flowers_grown >= 6:
-			await remove_tutorial_text("GrowFlowers")
-			break
+		while true:
+			await SignalBus.flower_bloomed
+			if flowers_grown >= 6:
+				await remove_tutorial_text("GrowFlowers")
+				break
 
 	if Colors.orange not in colors_pollinated:
 		add_tutorial_text("OrangePollination",

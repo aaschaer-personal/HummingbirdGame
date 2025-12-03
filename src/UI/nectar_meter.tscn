@@ -5,8 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://d1l0trinlv6xy" path="res://assets/UI/nectarmeter_over.png" id="3_sydl6"]
 
 [node name="NectarMeter" type="TextureProgressBar"]
-offset_right = 40.0
-offset_bottom = 40.0
+z_index = 1
+offset_right = 12.0
+offset_bottom = 36.0
 max_value = 36.0
 fill_mode = 3
 texture_under = ExtResource("1_xy1cr")

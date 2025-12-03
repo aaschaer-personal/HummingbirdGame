@@ -595,7 +595,7 @@ position = Vector2(-4, -12)
 position = Vector2(3, -11)
 
 [node name="HoverPoint3" type="Node2D" parent="BeeHoverPoints" index="2"]
-position = Vector2(-6, -1)
+position = Vector2(-6, -2)
 
 [node name="HoverPoint4" type="Node2D" parent="BeeHoverPoints" index="3"]
 position = Vector2(5, -2)
@@ -633,10 +633,11 @@ shape = SubResource("CapsuleShape2D_v1dda")
 position = Vector2(-1, -7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
+position = Vector2(1, 0)
 shape = SubResource("CapsuleShape2D_db671")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("15_m53l3")]
 offset_left = -6.0
-offset_top = -49.0
-offset_right = 34.0
-offset_bottom = -9.0
+offset_top = -50.0
+offset_right = 6.0
+offset_bottom = -14.0

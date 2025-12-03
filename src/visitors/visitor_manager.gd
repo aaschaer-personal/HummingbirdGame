@@ -46,16 +46,15 @@ func generate_boquets(colors, count, size, max_repetitions):
 	var ret = []
 	for i in range(count):
 		while true:
+			# handle mutually exclusive colors
+			var colors_copy = colors.duplicate()
+			for j in range(len(colors_copy)):
+				if colors_copy[j] is Array:
+					colors_copy[j] = colors_copy[j][randi() % len(colors_copy[j])]
 			var bouquet = []
-
-			for j in range(size):
-				# handle mutually exclusive colors
-				var colors_copy = colors.duplicate()
-				for k in range(len(colors_copy)):
-					if colors_copy[k] is Array:
-						colors_copy[k] = colors_copy[k][randi() % len(colors_copy[k])]
+			for k in range(size):
 				while true:
-					var color = colors_copy[randi() % len(colors)]
+					var color = colors_copy[randi() % len(colors_copy)]
 					if bouquet.count(color) < max_repetitions:
 						bouquet.append(color)
 						break

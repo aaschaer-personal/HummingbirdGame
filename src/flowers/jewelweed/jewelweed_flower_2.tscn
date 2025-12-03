@@ -578,7 +578,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ta5n1"]
 radius = 7.0
-height = 18.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0dfgi"]
 radius = 2.0
@@ -604,9 +604,10 @@ position = Vector2(-9, -7)
 position = Vector2(-12, -13)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints" index="5"]
-position = Vector2(-11, -9)
+position = Vector2(-10, -9)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_25wva")
 animation = &"bloom"
 autoplay = "bloom"
@@ -626,7 +627,7 @@ object_height = 10
 height_off_ground = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
-position = Vector2(-8, -11)
+position = Vector2(-10, -11)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ta5n1")
 
@@ -637,7 +638,7 @@ position = Vector2(-11, -12)
 shape = SubResource("CapsuleShape2D_0dfgi")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("15_ekxvo")]
-offset_left = -16.0
-offset_top = -54.0
-offset_right = 24.0
-offset_bottom = -14.0
+offset_left = -17.0
+offset_top = -55.0
+offset_right = -5.0
+offset_bottom = -19.0
