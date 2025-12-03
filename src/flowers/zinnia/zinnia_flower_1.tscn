@@ -452,7 +452,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17grc"]
 radius = 6.0
-height = 20.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42fcx"]
 radius = 4.0
@@ -500,7 +500,8 @@ object_height = 10
 height_off_ground = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
-position = Vector2(0, -16)
+position = Vector2(0, -18)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_17grc")
 
 [node name="DrinkableArea" type="Area2D" parent="." index="7"]
@@ -512,6 +513,6 @@ shape = SubResource("CapsuleShape2D_42fcx")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("11_jgdrm")]
 offset_left = -6.0
-offset_top = -68.0
-offset_right = 34.0
-offset_bottom = -28.0
+offset_top = -63.0
+offset_right = 6.0
+offset_bottom = -27.0

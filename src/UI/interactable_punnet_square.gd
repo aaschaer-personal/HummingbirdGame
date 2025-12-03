@@ -79,11 +79,30 @@ func _ready():
 			option.add_item("R")
 			option.add_item("F")
 			option.add_item("Y")
-			option.add_item("W")
+			option.add_item("w")
 		p1a1.select(0)
 		p1a2.select(1)
 		p2a1.select(2)
 		p2a2.select(3)
+		_on_allele_option_selected(null)
+	elif species == "hibiscus":
+		for option in [p1a1, p1a2, p2a1, p2a2]:
+			option.visible = true
+			option.add_item("R")
+			option.add_item("r")
+		for option in [p1b1, p1b2, p2b1, p2b2]:
+			option.visible = true
+			option.add_item("B")
+			option.add_item("Y")
+			option.add_item("w")
+		p1a1.select(0)
+		p1a2.select(0)
+		p1b1.select(0)
+		p1b2.select(0)
+		p2a1.select(1)
+		p2a2.select(1)
+		p2b1.select(1)
+		p2b2.select(1)
 		_on_allele_option_selected(null)
 	else:
 		assert(level == null)
@@ -125,10 +144,25 @@ func _on_allele_option_selected(_selected):
 			0: "R",
 			1: "F",
 			2: "Y",
-			3: "W",
+			3: "w",
 		}
 		g1["color"] = [map[p1a1.get_selected_id()], map[p1a2.get_selected_id()]]
 		g2["color"] = [map[p2a1.get_selected_id()], map[p2a2.get_selected_id()]]
+	elif species == "hibiscus":
+		var red_map = {
+			0: "R",
+			1: "r",
+		}
+		var other_map = {
+			0: "B",
+			1: "Y",
+			2: "w",
+		}
+		g1["red"] = [red_map[p1a1.get_selected_id()], red_map[p1a2.get_selected_id()]]
+		g1["other"] = [other_map[p1b1.get_selected_id()], other_map[p1b2.get_selected_id()]]
+		g2["red"] = [red_map[p2a1.get_selected_id()], red_map[p2a2.get_selected_id()]]
+		g2["other"] = [other_map[p2b1.get_selected_id()], other_map[p2b2.get_selected_id()]]
+		
 	else:
 		assert(false)
 

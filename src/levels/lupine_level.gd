@@ -1,4 +1,6 @@
-extends Level
+class_name LupineLevel extends Level
+
+var flower_species = "lupine"
 
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level3_cache_top.tscn")

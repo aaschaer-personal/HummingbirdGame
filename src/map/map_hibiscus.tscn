@@ -1,0 +1,154 @@
+[gd_scene load_steps=22 format=3 uid="uid://d3dhvc1xlmtks"]
+
+[ext_resource type="Script" path="res://src/map/map_flower.gd" id="1_wspqb"]
+[ext_resource type="Texture2D" uid="uid://b1cbi0djl0c3v" path="res://assets/Map/hibiscus.png" id="2_8bk8l"]
+[ext_resource type="Texture2D" uid="uid://bg2e4718vlvbf" path="res://assets/Map/hibiscus_petals.png" id="3_ohnrv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k5pug"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(0, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsruw"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(7, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jodi"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(14, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igdb2"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(21, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oudjc"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(28, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cl7x6"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(35, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8sx8"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15bij"]
+atlas = ExtResource("3_ohnrv")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_egvsl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k5pug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsruw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jodi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igdb2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oudjc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cl7x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b8sx8")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15bij")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 10.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7wpr"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(0, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lu368"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(7, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vk2w"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(14, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5d04"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(21, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74yp1"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(28, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jprwh"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(35, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6epbl"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xorp1"]
+atlas = ExtResource("2_8bk8l")
+region = Rect2(42, 0, 7, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wvl24"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7wpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lu368")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vk2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y5d04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74yp1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jprwh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6epbl")
+}],
+"loop": false,
+"name": &"bloom",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xorp1")
+}],
+"loop": false,
+"name": &"bloomed",
+"speed": 10.0
+}]
+
+[node name="MapHibiscus" type="Node2D"]
+script = ExtResource("1_wspqb")
+
+[node name="Petals" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_egvsl")
+animation = &"bloomed"
+
+[node name="Plant" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wvl24")
+animation = &"bloomed"

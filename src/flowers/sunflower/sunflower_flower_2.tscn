@@ -517,25 +517,24 @@ height = 14.0
 [node name="Flower" instance=ExtResource("1_4jo6q")]
 
 [node name="BeeHoverPoints" type="Node2D" parent="." index="3"]
-position = Vector2(-2, 5)
 
 [node name="HoverPoint1" type="Node2D" parent="BeeHoverPoints" index="0"]
-position = Vector2(-10, -18)
+position = Vector2(-12, -13)
 
 [node name="HoverPoint2" type="Node2D" parent="BeeHoverPoints" index="1"]
-position = Vector2(-3, -19)
+position = Vector2(-5, -14)
 
 [node name="HoverPoint3" type="Node2D" parent="BeeHoverPoints" index="2"]
-position = Vector2(-7, -17)
+position = Vector2(-9, -12)
 
 [node name="HoverPoint4" type="Node2D" parent="BeeHoverPoints" index="3"]
-position = Vector2(-10, -11)
+position = Vector2(-12, -6)
 
 [node name="HoverPoint5" type="Node2D" parent="BeeHoverPoints" index="4"]
-position = Vector2(-4, -11)
+position = Vector2(-6, -6)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints" index="5"]
-position = Vector2(-7, -13)
+position = Vector2(-9, -8)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_2vrlr")
@@ -561,10 +560,10 @@ position = Vector2(-8, -10)
 shape = SubResource("CapsuleShape2D_vyg63")
 
 [node name="NectarMeter" parent="." index="7" instance=ExtResource("6_bt870")]
-offset_left = -11.0
-offset_top = -54.0
-offset_right = 29.0
-offset_bottom = -14.0
+offset_left = -14.0
+offset_top = -55.0
+offset_right = -2.0
+offset_bottom = -19.0
 
 [node name="DrinkableArea" type="Area2D" parent="." index="8"]
 position = Vector2(-8, -10)

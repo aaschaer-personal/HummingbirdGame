@@ -348,10 +348,8 @@ animations = [{
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_djkun")
-animation = &"grow"
+animation = &"seed"
 autoplay = "seed"
-frame = 12
-frame_progress = 1.0
 
 [node name="ShadowGenerator" parent="AnimatedSprite2D" index="0" instance=ExtResource("9_qkibm")]
 object_height = 32

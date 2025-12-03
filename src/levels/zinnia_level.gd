@@ -1,4 +1,6 @@
-extends Level
+class_name ZinniaLevel extends Level
+
+var flower_species = "zinnia"
 
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level4_cache_top.tscn")

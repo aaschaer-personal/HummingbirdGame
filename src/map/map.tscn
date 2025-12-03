@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://cwlks03m5fxs5"]
+[gd_scene load_steps=120 format=3 uid="uid://cwlks03m5fxs5"]
 
 [ext_resource type="Texture2D" uid="uid://cvmachil2lwep" path="res://assets/Map/map.png" id="1_hmhcj"]
 [ext_resource type="Script" path="res://src/map/map.gd" id="1_o2hyj"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://br0agnqnsrs0s" path="res://src/map/map_lupine.tscn" id="19_twa7m"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="20_q4jsa"]
 [ext_resource type="PackedScene" uid="uid://ct7hf35er0cso" path="res://src/map/map_zinnia.tscn" id="20_rayuv"]
+[ext_resource type="PackedScene" uid="uid://d3dhvc1xlmtks" path="res://src/map/map_hibiscus.tscn" id="21_obwd6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4d30o"]
 atlas = ExtResource("2_ph2jq")
@@ -1053,6 +1054,48 @@ color = Color(0.984314, 1, 0.52549, 1)
 [node name="MapZinnia10" parent="Flowers/4" instance=ExtResource("20_rayuv")]
 position = Vector2(-21, 16)
 
+[node name="5" type="Node2D" parent="Flowers"]
+position = Vector2(512, 228)
+
+[node name="MapHibiscus" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-120, 0)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapHibiscus2" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(6, 16)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapHibiscus3" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-41, 19)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapHibiscus4" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(41, -32)
+color = Color(0.909804, 0.231373, 0.231373, 1)
+
+[node name="MapHibiscus5" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-96, 5)
+color = Color(0.984314, 0.72549, 0.329412, 1)
+
+[node name="MapHibiscus6" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(25, -23)
+color = Color(0.917647, 0.678431, 0.929412, 1)
+
+[node name="MapHibiscus7" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-27, 30)
+color = Color(0.984314, 1, 0.52549, 1)
+
+[node name="MapHibiscus8" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-65, -5)
+color = Color(0.301961, 0.607843, 0.901961, 1)
+
+[node name="MapHibiscus9" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-13, 18)
+color = Color(0.658824, 0.517647, 0.952941, 1)
+
+[node name="MapHibiscus10" parent="Flowers/5" instance=ExtResource("21_obwd6")]
+position = Vector2(-65, 25)
+
 [node name="PauseScreen" parent="." instance=ExtResource("19_3wqch")]
 visible = false
 offset_right = 0.0
@@ -1060,11 +1103,11 @@ offset_bottom = 0.0
 
 [node name="WIPText" type="Label" parent="."]
 visible = false
-offset_left = 490.0
-offset_top = 240.0
-offset_right = 562.0
-offset_bottom = 282.0
-text = "Level 5
+offset_left = 557.0
+offset_top = 28.0
+offset_right = 629.0
+offset_bottom = 70.0
+text = "Level 6
 coming soon!"
 
 [node name="MusicPlayer" parent="." instance=ExtResource("20_q4jsa")]

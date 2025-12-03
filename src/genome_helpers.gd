@@ -11,6 +11,8 @@ func code_from_gene_dict(gene_dict):
 		return lupine_code(gene_dict["red"], gene_dict["blue"])
 	elif species == "zinnia":
 		return zinnia_code(gene_dict["color"])
+	elif species == "hibiscus":
+		return hibiscus_code(gene_dict["red"], gene_dict["other"])
 	else:
 		assert(false)
 
@@ -24,6 +26,8 @@ func color_from_gene_dict(gene_dict):
 		return lupine_color(gene_dict["red"], gene_dict["blue"])
 	elif species == "zinnia":
 		return zinnia_color(gene_dict["color"])
+	elif species == "hibiscus":
+		return hibiscus_color(gene_dict["red"], gene_dict["other"])
 	else:
 		assert(false)
 
@@ -96,13 +100,13 @@ var zinnia_code_color_map = {
 	"RR": Colors.red,
 	"RF": Colors.red,
 	"RY": Colors.orange,
-	"RW": Colors.pink,
+	"Rw": Colors.pink,
 	"FF": Colors.fushia,
 	"FY": Colors.fushia,
-	"FW": Colors.fushia,
+	"Fw": Colors.fushia,
 	"YY": Colors.yellow,
-	"YW": Colors.yellow,
-	"WW": Colors.white,
+	"Yw": Colors.yellow,
+	"ww": Colors.white,
 }
 
 func zinnia_code(color):
@@ -110,7 +114,7 @@ func zinnia_code(color):
 		"R": 0,
 		"F": 1,
 		"Y": 2,
-		"W": 3,
+		"w": 3,
 	}
 	if order[color[0]] < order[color[1]]:
 		return color[0] + color[1]
@@ -119,3 +123,44 @@ func zinnia_code(color):
 
 func zinnia_color(color):
 	return zinnia_code_color_map[zinnia_code(color)]
+
+var hibiscus_code_color_map = {
+	"RRBB": Colors.red,
+	"RRBY": Colors.red,
+	"RRBw": Colors.red,
+	"RRYY": Colors.red,
+	"RRYw": Colors.red,
+	"RRww": Colors.red,
+	"RrBB": Colors.purple,
+	"RrBY": Colors.purple,
+	"RrBw": Colors.purple,
+	"RrYY": Colors.orange,
+	"RrYw": Colors.orange,
+	"Rrww": Colors.pink,
+	"rrBB": Colors.blue,
+	"rrBY": Colors.blue,
+	"rrBw": Colors.blue,
+	"rrYY": Colors.yellow,
+	"rrYw": Colors.yellow,
+	"rrww": Colors.white,
+}
+
+func hibiscus_code(red, other):
+	var order = {
+		"B": 0,
+		"Y": 1,
+		"w": 2,
+	}
+	var code = ""
+	if red[0] == "R":
+		code += red[0] + red[1]
+	else:
+		code += red[1] + red[0]
+	if order[other[0]] < order[other[1]]:
+		code += other[0] + other[1]
+	else:
+		code += other[1] + other[0]
+	return code
+
+func hibiscus_color(red, other):
+	return hibiscus_code_color_map[hibiscus_code(red, other)]

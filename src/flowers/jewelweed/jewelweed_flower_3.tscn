@@ -578,7 +578,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nipny"]
 radius = 7.0
-height = 18.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qbfuf"]
 radius = 2.0
@@ -608,7 +608,7 @@ position = Vector2(11, -8)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_0qj3k")
-animation = &"to_seed_rustle"
+animation = &"bloom"
 autoplay = "bloom"
 
 [node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("8_giu4x")]
@@ -618,7 +618,7 @@ height_off_ground = 8
 [node name="MainSprite" type="AnimatedSprite2D" parent="." index="5"]
 show_behind_parent = true
 sprite_frames = SubResource("SpriteFrames_d5l1t")
-animation = &"to_seed"
+animation = &"bloom"
 autoplay = "bloom"
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("8_giu4x")]
@@ -626,7 +626,7 @@ object_height = 10
 height_off_ground = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
-position = Vector2(8, -10)
+position = Vector2(10, -10)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nipny")
 
@@ -637,7 +637,7 @@ position = Vector2(11, -10)
 shape = SubResource("CapsuleShape2D_qbfuf")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("15_c2rcs")]
-offset_left = 4.0
-offset_top = -53.0
-offset_right = 44.0
-offset_bottom = -13.0
+offset_left = 5.0
+offset_top = -54.0
+offset_right = 17.0
+offset_bottom = -18.0

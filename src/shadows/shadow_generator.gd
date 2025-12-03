@@ -20,6 +20,7 @@ func _ready():
 	else:
 		assert(false)
 	parent.visibility_changed.connect(set_visibility)
+	sync_position()
 	set_visibility()
 	shadow_canvas_group.add_child(shadow)
 	shadow.scale.y = parent.scale.y * -.5
@@ -29,7 +30,7 @@ func _notification(what):
 		if shadow != null:
 			shadow.queue_free()
 
-func _process(_delta):
+func sync_position():
 	# offset height if rotated, mostly just for bouquets
 	var rotation_offset = 0
 	if offset_rotation:
@@ -48,6 +49,9 @@ func _process(_delta):
 	shadow.flip_v = parent.flip_v
 	shadow.flip_h = parent.flip_h
 	shadow.rotation_degrees = -parent.global_rotation_degrees
+
+func _process(_delta):
+	sync_position()
 
 func play_parent_animation():
 	shadow.play(parent.animation)

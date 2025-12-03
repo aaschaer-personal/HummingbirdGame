@@ -105,51 +105,7 @@ func generate_starting_packet():
 	var packet = seed_packet_scene.instantiate()
 	packet.global_position = Vector2(-100,-100)
 	add_sibling(packet)
-	
-	var starting_seeds = []
-	if level.level_num == 1:
-		for i in range(4):
-			starting_seeds.append(GenomeGenerator.wild("sunflower"))
-		starting_seeds[0]["max_flowers"] = 0
-		starting_seeds[0]["color"] = ["Y", "Y"]
-		starting_seeds[1]["max_flowers"] = 0
-		starting_seeds[1]["color"] = ["Y", "Y"]
-		starting_seeds[2]["max_flowers"] = 1
-		starting_seeds[2]["color"] = ["Y", "Y"]
-		starting_seeds[3]["max_flowers"] = 1
-		starting_seeds[3]["color"] = ["R", "R"]
-	elif level.level_num == 2:
-		for i in range(3):
-			starting_seeds.append(GenomeGenerator.wild("jewelweed"))
-		starting_seeds[0]["max_flowers"] = 1
-		starting_seeds[0]["color"] = ["R", "R"]
-		starting_seeds[2]["max_flowers"] = 1
-		starting_seeds[2]["color"] = ["Y", "Y"]
-		starting_seeds[1]["max_flowers"] = 0
-		starting_seeds[1]["color"] = ["P", "P"]
-	elif level.level_num == 3:
-		for i in range(4):
-			starting_seeds.append(GenomeGenerator.wild("lupine"))
-		starting_seeds[0]["max_flowers"] = 0
-		starting_seeds[1]["max_flowers"] = 1
-		starting_seeds[2]["red"] = ["r", "r"]
-		starting_seeds[2]["blue"] = ["B", "B"]
-		starting_seeds[2]["max_flowers"] = 1
-		starting_seeds[3]["red"] = ["R", "r"]
-		starting_seeds[3]["blue"] = ["b", "b"]
-		starting_seeds[3]["max_flowers"] = 1
-	elif level.level_num == 4:
-		for i in range(3):
-			starting_seeds.append(GenomeGenerator.wild("zinnia"))
-		starting_seeds[0]["max_flowers"] = 1
-		starting_seeds[0]["color"] = ["R", "W"]
-		starting_seeds[1]["max_flowers"] = 1
-		starting_seeds[1]["color"] = ["R", "Y"]
-		starting_seeds[2]["max_flowers"] = 0
-		starting_seeds[2]["color"] = ["F", "F"]
-	else:
-		assert(false)
-
+	var starting_seeds = level.generate_starting_seeds()
 	starting_seeds.shuffle()
 	packet.add_seeds(starting_seeds)
 	return packet
@@ -234,11 +190,11 @@ func tutorial_sequence():
 4. Wait for the flowers to grow.
 
 """)
-	while true:
-		await SignalBus.flower_bloomed
-		if flowers_grown >= 6:
-			await remove_tutorial_text("GrowFlowers")
-			break
+		while true:
+			await SignalBus.flower_bloomed
+			if flowers_grown >= 6:
+				await remove_tutorial_text("GrowFlowers")
+				break
 
 	if Colors.orange not in colors_pollinated:
 		add_tutorial_text("OrangePollination",

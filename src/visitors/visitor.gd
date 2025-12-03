@@ -44,6 +44,7 @@ func land(visitor_spawn: VisitorSpawn):
 		flip()
 
 	global_position = spawn.spawn_point
+	shadow_generator.sync_position()
 	audio_player.stream = visitor_landing_sound
 	audio_player.play()
 
@@ -136,7 +137,7 @@ func emote_and_take_off():
 	sprite.play_backwards("landing")
 	var position_tween = create_tween()
 	var height_tween = create_tween()
-	var duration = 1.0
+	var duration = 18.0/20.0
 	position_tween.tween_property(
 		self,
 		"position",
@@ -151,7 +152,7 @@ func emote_and_take_off():
 	)
 	var bouquet = Helpers.get_only_child(hold_point)
 	bouquet.tween_height(off_screen_height, duration)
-	await sprite.animation_finished
+	await get_tree().create_timer(duration).timeout
 	spawn.visitor = null
 	visitor_manager.on_visitor_left(self)
 	queue_free()

@@ -567,6 +567,6 @@ shape = SubResource("CapsuleShape2D_42fcx")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("15_uh1f6")]
 offset_left = -6.0
-offset_top = -66.0
+offset_top = -65.0
 offset_right = 6.0
-offset_bottom = -30.0
+offset_bottom = -29.0

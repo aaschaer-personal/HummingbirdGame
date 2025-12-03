@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/levels/level_manager.tscn" id="15_8npl5"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
 
-[node name="Level2" type="Node2D" groups=["level"]]
+[node name="Level" type="Node2D" groups=["level"]]
 process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_fflhd")

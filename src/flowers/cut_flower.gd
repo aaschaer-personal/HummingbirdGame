@@ -11,6 +11,7 @@ var x_offset_by_species = {
 	"jewelweed": 6,
 	"lupine": 14,
 	"zinnia": 8,
+	"hibiscus": 10,
 }
 # height, duration
 var decay_data_by_species = {
@@ -18,6 +19,7 @@ var decay_data_by_species = {
 	"jewelweed": [4, .4],
 	"lupine": [1, .3],
 	"zinnia": [2, .6],
+	"hibiscus": [4, .7],
 }
 var color: Color
 var is_decaying = false
@@ -109,3 +111,9 @@ func decay():
 	await item_sprite.animation_finished
 	SignalBus.cut_flower_decayed.emit()
 	queue_free()
+
+func sync_shadow_position():
+	var item_shadow_generator = $Item/ShadowGenerator
+	var petal_shadow_generator = $PetalSprite/ShadowGenerator
+	item_shadow_generator.sync_position()
+	petal_shadow_generator.sync_position()

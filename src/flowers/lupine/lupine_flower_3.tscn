@@ -517,25 +517,24 @@ height = 22.0
 [node name="Flower" instance=ExtResource("1_kixsa")]
 
 [node name="BeeHoverPoints" type="Node2D" parent="." index="3"]
-position = Vector2(9, 5)
 
 [node name="HoverPoint1" type="Node2D" parent="BeeHoverPoints" index="0"]
-position = Vector2(-3, -20)
+position = Vector2(6, -15)
 
 [node name="HoverPoint2" type="Node2D" parent="BeeHoverPoints" index="1"]
-position = Vector2(4, -18)
+position = Vector2(13, -13)
 
 [node name="HoverPoint3" type="Node2D" parent="BeeHoverPoints" index="2"]
-position = Vector2(-4, -14)
+position = Vector2(5, -9)
 
 [node name="HoverPoint4" type="Node2D" parent="BeeHoverPoints" index="3"]
-position = Vector2(4, -10)
+position = Vector2(13, -5)
 
 [node name="HoverPoint5" type="Node2D" parent="BeeHoverPoints" index="4"]
-position = Vector2(-4, -7)
+position = Vector2(5, -2)
 
 [node name="HoverPoint6" type="Node2D" parent="BeeHoverPoints" index="5"]
-position = Vector2(4, -2)
+position = Vector2(13, 3)
 
 [node name="PetalSprite" type="AnimatedSprite2D" parent="." index="4"]
 sprite_frames = SubResource("SpriteFrames_p87xr")
@@ -568,7 +567,7 @@ position = Vector2(0, 9)
 shape = SubResource("CapsuleShape2D_42fcx")
 
 [node name="NectarMeter" parent="." index="8" instance=ExtResource("11_kqrah")]
-offset_left = 4.0
-offset_top = -54.0
-offset_right = 16.0
-offset_bottom = -18.0
+offset_left = 3.0
+offset_top = -55.0
+offset_right = 15.0
+offset_bottom = -19.0
