@@ -53,17 +53,3 @@
 
 ## v0.1
 - Initial version, has a functional level 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
