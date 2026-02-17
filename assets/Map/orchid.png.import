@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buj77l2ks3em1"
-path="res://.godot/imported/punnet_square_back.png-2aa80c8308b16c6dd07f335b26f92d70.ctex"
+uid="uid://b800di7h3eagl"
+path="res://.godot/imported/orchid.png-cac8dbe01d192985abb877980543d750.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/punnet_square_back.png"
-dest_files=["res://.godot/imported/punnet_square_back.png-2aa80c8308b16c6dd07f335b26f92d70.ctex"]
+source_file="res://assets/Map/orchid.png"
+dest_files=["res://.godot/imported/orchid.png-cac8dbe01d192985abb877980543d750.ctex"]
 
 [params]
 
