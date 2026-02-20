@@ -7,17 +7,19 @@ var pink = Color("eaaded")
 var orange = Color("fbb954")
 var bright_orange = Color("fb6b1d")
 var yellow =  Color("fbff86")
+var green = Color("a4e579")
 var lightest_green = Color("b7f48e")
 var blue = Color("4d9be6")
 var purple = Color("a884f3")
-var fushia = Color("ff00ff")
+var fushia = Color("dd00dd")
 
 var colors_by_species = {
 	"sunflower": [red, orange, yellow],
 	"jewelweed": [red, orange, yellow, purple],
 	"lupine": [red, pink, blue, purple, white],
 	"zinnia": [red, fushia, pink, orange, yellow, white],
-	"hibiscus": [red, pink, orange, yellow, blue, purple, white]
+	"hibiscus": [red, pink, orange, yellow, blue, purple, white],
+	"orchid": [red, fushia, pink, orange, yellow, green, blue, purple, white],
 }
 
 func flower_colors(species):

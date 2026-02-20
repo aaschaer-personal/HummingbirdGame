@@ -11,7 +11,7 @@ signal guide_opened
 @onready var restart_level_button = $PauseMenu/VBoxContainer/RestartLevelButton
 @onready var return_to_map_button = $PauseMenu/VBoxContainer/ReturnToMapButton
 @onready var quit_to_menu_button = $PauseMenu/VBoxContainer/QuitToMenuButton
-@onready var exit_button = $ExitButton
+@onready var exit_button = $PauseMenu/ExitButton
 
 func _ready():
 	resume_button.pressed.connect(resume)

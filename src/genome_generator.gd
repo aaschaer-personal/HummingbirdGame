@@ -13,6 +13,7 @@ var color_keys_by_species = {
 	"lupine": ["red", "blue"],
 	"zinnia": ["color"],
 	"hibiscus": ["red", "other"],
+	"orchid": ["red", "yellow", "blue"],
 }
 
 func wild(species):
@@ -32,30 +33,41 @@ func wild(species):
 
 	if species == "sunflower":
 		ret["color"] = ["R", "Y"]
+
 	elif species == "jewelweed":
-		var options = {
-			0: ["R", "Y"],
-			1: ["R", "P"],
-			2: ["P", "Y"],
-		}
-		ret["color"] = options[randi() % len(options)]
+		var options = ["R", "Y", "P"]
+		var a1 = options[randi() % len(options)]
+		var a2 = options[randi() % len(options)]
+		while a1 == a2:
+			a2 = options[randi() % len(options)]
+		ret["color"] = [a1, a2]
+
 	elif species == "lupine":
 		ret["red"] = ["R", "r"]
 		ret["blue"] = ["B", "b"]
+
 	elif species == "zinnia":
-		var options = {
-			0: ["R", "Y"],
-			1: ["F", "w"],
-		}
-		ret["color"] = options[randi() % len(options)]
+		var options = ["R", "Y", "F", "w"]
+		var a1 = options[randi() % len(options)]
+		var a2 = options[randi() % len(options)]
+		while a1 == a2:
+			a2 = options[randi() % len(options)]
+		ret["color"] = [a1, a2]
+
 	elif species == "hibiscus":
 		ret["red"] = ["R", "r"]
-		var options = {
-			0: ["B", "Y"],
-			1: ["B", "w"],
-			2: ["Y", "w"],
-		}
-		ret["other"] = options[randi() % len(options)]
+		var options = ["B", "Y", "w"]
+		var a1 = options[randi() % len(options)]
+		var a2 = options[randi() % len(options)]
+		while a1 == a2:
+			a2 = options[randi() % len(options)]
+		ret["other"] = [a1, a2]
+
+	elif species == "orchid":
+		ret["red"] = ["R", "r"]
+		ret["yellow"] = ["Y", "y"]
+		ret["blue"] = ["B", "b"]
+
 	else:
 		assert(false)
 

@@ -33,11 +33,13 @@ func _ready():
 		elif level.flower_species == "jewelweed":
 			genetics_content.text = genetics_content.text % "* Jewelweed has one color gene with three alleles, R for red, P for purple, and Y for yellow. There are six unique combinations which produce four different colors."
 		elif level.flower_species == "lupine":
-			genetics_content.text = genetics_content.text % "* Lupines have two color genes with two alleles each for nine unique combinations. The red gene has alleles R and r, with R adding red to the flower. The blue gene has alleles B and b, with B adding blue to the flower."
+			genetics_content.text = genetics_content.text % "* Lupines have two color genes with two alleles each for nine unique combinations. The red gene has alleles R and r, with R adding red to the flower. The blue gene has alleles B and b, with B adding blue to the flower. There are nine unique combinations that produce five different colors."
 		elif level.flower_species == "zinnia":
 			genetics_content.text = genetics_content.text % "* Zinnias have one color gene with four alleles, R for red, F for Fushia, Y for yellow, and W for white. There are ten unique combinations which produce six different colors."
 		elif level.flower_species == "hibiscus":
 			genetics_content.text = genetics_content.text % "* Hibiscuses have two color genes. The red gene has alleles R and r, with R adding red to the flower. The other gene can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors."
+		elif level.flower_species == "orchid":
+			genetics_content.text = genetics_content.text % "* Orchids have three color genes. The red gene has alleles R and r, with R adding red to the flower. The yellow gene has alleles Y and y, with Y adding blue to the flower. The blue gene has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
 		else:
 			assert(level == null)
 

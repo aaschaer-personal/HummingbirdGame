@@ -6,6 +6,7 @@ extends Node2D
 @onready var tutorial_text = $TutorialText
 @onready var flowers = $Flowers
 @onready var pause_screen = $PauseScreen
+@onready var congrats_screen = $CongratsScreen
 
 var astar
 var controllable = true
@@ -100,8 +101,9 @@ func _ready():
 		)
 
 	player.point_reached.connect(_on_point_reached)
-
 	level_unlocks = int(config.get_value("levels", "unlocks", 0))
+	# TODO: remove min when bonus levels are available)
+	level_unlocks = min(level_unlocks, 5)
 	levels.play("levels_%d" % (level_unlocks + 1))
 
 	var levels_completed = config.get_value("levels", "completed", 0)
@@ -116,7 +118,7 @@ func _ready():
 	player.global_position = level_points[last_level]
 	player.target_point = level_points[last_level]
 
-	# bloom flowers on first complete
+	# bloom flowers / say congrats on first complete
 	last_complete = config.get_value("levels", "last_complete", 0)
 	if not levels_completed & 1 << last_complete:
 		controllable = false
@@ -126,6 +128,9 @@ func _ready():
 				for flower in level_group.get_children():
 					flower.bloom_with_random_delay()
 		await get_tree().create_timer(1.5, false).timeout
+		# congrats on first complete of level 6
+		if last_complete == 6:
+			congrats_screen.open()
 		controllable = true
 
 	# unlock new levels
@@ -133,14 +138,13 @@ func _ready():
 		controllable = false
 		level_unlocks = last_complete
 		config.set_value("levels", "unlocks", level_unlocks)
-		# play level path animation
-		levels.play("level_unlocks_%d" % level_unlocks)
-		await levels.animation_finished
+		# TODO remove when bonus levels available
+		if level_unlocks == 6:
+			level_unlocks = 5
+		else:
+			levels.play("level_unlocks_%d" % level_unlocks)
+			await levels.animation_finished
 		controllable = true
-
-	if level_unlocks >= 5:
-		var wip_text = $WIPText
-		wip_text.visible = true
 
 	if levels.is_playing():
 		await levels.animation_finished

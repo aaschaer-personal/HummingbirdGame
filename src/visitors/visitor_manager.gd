@@ -22,9 +22,10 @@ var rainbow_order = {
 	Colors.pink: 2,
 	Colors.orange: 3,
 	Colors.yellow: 4,
-	Colors.blue: 5,
-	Colors.purple: 6,
-	Colors.white: 7,
+	Colors.green: 5,
+	Colors.blue: 6,
+	Colors.purple: 7,
+	Colors.white: 8,
 }
 
 func _ready():

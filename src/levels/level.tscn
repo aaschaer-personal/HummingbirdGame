@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cu1hmijlk3lrc"]
 
-[ext_resource type="Script" path="res://src/levels/level.gd" id="1_fflhd"]
+[ext_resource type="Script" uid="uid://843cit7nl465" path="res://src/levels/level.gd" id="1_fflhd"]
 [ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
 [ext_resource type="PackedScene" uid="uid://bvso7t5luq4l" path="res://src/UI/visitor_progress.tscn" id="3_ht7nh"]
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="4_7uf0a"]
@@ -40,6 +40,7 @@ offset_bottom = 24.0
 metadata/_edit_use_anchors_ = true
 
 [node name="VisitorProgress" parent="UI" instance=ExtResource("3_ht7nh")]
+layout_mode = 0
 offset_left = 564.0
 offset_right = 564.0
 

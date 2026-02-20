@@ -13,6 +13,8 @@ func code_from_gene_dict(gene_dict):
 		return zinnia_code(gene_dict["color"])
 	elif species == "hibiscus":
 		return hibiscus_code(gene_dict["red"], gene_dict["other"])
+	elif species == "orchid":
+		return orchid_code(gene_dict["red"], gene_dict["yellow"], gene_dict["blue"])
 	else:
 		assert(false)
 
@@ -28,6 +30,8 @@ func color_from_gene_dict(gene_dict):
 		return zinnia_color(gene_dict["color"])
 	elif species == "hibiscus":
 		return hibiscus_color(gene_dict["red"], gene_dict["other"])
+	elif species == "orchid":
+		return orchid_color(gene_dict["red"], gene_dict["yellow"], gene_dict["blue"])
 	else:
 		assert(false)
 
@@ -164,3 +168,55 @@ func hibiscus_code(red, other):
 
 func hibiscus_color(red, other):
 	return hibiscus_code_color_map[hibiscus_code(red, other)]
+
+var orchid_code_color_map = {
+	"RRYYBB": Colors.fushia,
+	"RRYYBb": Colors.fushia,
+	"RRYYbb": Colors.orange,
+	"RRYyBB": Colors.fushia,
+	"RRYyBb": Colors.fushia,
+	"RRYybb": Colors.orange,
+	"RRyyBB": Colors.purple,
+	"RRyyBb": Colors.purple,
+	"RRyybb": Colors.red,
+	"RrYYBB": Colors.fushia,
+	"RrYYBb": Colors.fushia,
+	"RrYYbb": Colors.orange,
+	"RrYyBB": Colors.fushia,
+	"RrYyBb": Colors.fushia,
+	"RrYybb": Colors.orange,
+	"RryyBB": Colors.purple,
+	"RryyBb": Colors.purple,
+	"Rryybb": Colors.pink,
+	"rrYYBB": Colors.green,
+	"rrYYBb": Colors.green,
+	"rrYYbb": Colors.yellow,
+	"rrYyBB": Colors.green,
+	"rrYyBb": Colors.green,
+	"rrYybb": Colors.yellow,
+	"rryyBB": Colors.blue,
+	"rryyBb": Colors.blue,
+	"rryybb": Colors.white,
+}
+
+func orchid_code(red, yellow, blue):
+	var code = ""
+	if red[0] == "R":
+		code += red[0] + red[1]
+	else:
+		code += red[1] + red[0]
+
+	if yellow[0] == "Y":
+		code += yellow[0] + yellow[1]
+	else:
+		code += yellow[1] + yellow[0]
+
+	if blue[0] == "B":
+		code += blue[0] + blue[1]
+	else:
+		code += blue[1] + blue[0]
+
+	return code
+
+func orchid_color(red, yellow, blue):
+	return orchid_code_color_map[orchid_code(red, yellow, blue)]

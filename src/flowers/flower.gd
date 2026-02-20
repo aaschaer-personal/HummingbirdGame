@@ -47,6 +47,9 @@ func flip():
 	main_sprite.flip_h = true
 	petal_sprite.flip_h = true
 	collision_shape.position.x *= -1
+	var collision_shape2 = get_node_or_null("CollisionShape2D2")
+	if collision_shape2:
+		collision_shape2.position.x *= -1
 	drinkable_area.position.x *= -1
 	nectar_meter.position.x *= -1
 	nectar_meter.position.x -= 12

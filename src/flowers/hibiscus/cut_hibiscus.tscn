@@ -232,7 +232,8 @@ animations = [{
 }]
 
 [node name="CutFlower" instance=ExtResource("1_c6rdl")]
-species = "sunflower"
+species = "hibiscus"
+ground_height = 2
 pickup_height = 13
 drop_duration = 0.2
 

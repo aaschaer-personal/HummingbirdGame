@@ -12,6 +12,7 @@ var x_offset_by_species = {
 	"lupine": 14,
 	"zinnia": 8,
 	"hibiscus": 10,
+	"orchid": 10,
 }
 # height, duration
 var decay_data_by_species = {
@@ -20,6 +21,7 @@ var decay_data_by_species = {
 	"lupine": [1, .3],
 	"zinnia": [2, .6],
 	"hibiscus": [4, .7],
+	"orchid": [6, .7],
 }
 var color: Color
 var is_decaying = false
