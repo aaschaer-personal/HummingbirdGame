@@ -8,6 +8,7 @@ signal boquet_accepted
 var bouquets = []
 var bouquet_num = 0
 var bouquets_done = 0
+var visitors_done = 0
 var done = false
 var visitors_unlocked = false
 
@@ -89,9 +90,12 @@ func on_visitor_left(visitor):
 	await visitor.tree_exited
 	visitor.spawn.visitor = null
 	num_visitors -= 1
-	visitor_left.emit()
-	if timer.is_stopped():
+	visitors_done += 1
+	if visitors_done == len(bouquets):
+		done = true
+	elif timer.is_stopped():
 		timer.start(5)
+	visitor_left.emit()
 
 func _on_timeout():
 	if bouquet_num < len(bouquets):
@@ -107,5 +111,4 @@ func finish_bouquet():
 	bouquets_done += 1
 	boquet_accepted.emit()
 	if bouquets_done == len(bouquets):
-		done = true
 		timer.stop()
