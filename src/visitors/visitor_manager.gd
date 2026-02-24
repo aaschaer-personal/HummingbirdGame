@@ -66,7 +66,7 @@ func generate_boquets(colors, count, size, max_repetitions):
 						bouquet.append(color)
 						break
 			bouquet.sort_custom(_color_compare)
-			if not abort and bouquet not in ret:
+			if (not abort) and (bouquet not in ret) and (bouquet not in bouquets):
 				ret.append(bouquet)
 				break
 	return ret
