@@ -33,17 +33,6 @@ func _ready():
 		restart_level_button.visible = false
 		return_to_map_button.visible = false
 
-# reset guide visibility on any Esc press
-func _input(event):
-	if event.is_action_released("Esc"):
-		if guide.visible or options.visible:
-			guide.visible = false
-			options.visible = false
-		else:
-			visible = false
-			await get_tree().create_timer(0.01).timeout
-			get_tree().paused = false
-
 func open_guide():
 	guide.visible = true
 	guide_opened.emit()

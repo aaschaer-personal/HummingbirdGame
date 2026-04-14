@@ -91,4 +91,3 @@ self_modulate = Color(0, 0, 0, 0.196078)
 z_index = -1
 
 [node name="InputLogic" parent="." instance=ExtResource("18_dnpum")]
-process_mode = 1
