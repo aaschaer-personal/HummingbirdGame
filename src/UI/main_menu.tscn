@@ -23,7 +23,7 @@ offset_left = 6.0
 offset_top = 342.0
 offset_right = 31.0
 offset_bottom = 354.0
-text = "v0.7.1"
+text = "v0.8"
 
 [node name="VBoxContainer" type="HFlowContainer" parent="."]
 layout_mode = 0
@@ -54,8 +54,7 @@ offset_top = 3.0
 offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
-text = "Play
-"
+text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -81,12 +80,11 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/CreditsButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 3.0
+offset_top = 5.0
 offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24
-text = "Credits
-"
+text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -97,7 +95,7 @@ texture_normal = ExtResource("3_vkfmv")
 [node name="Label" type="Label" parent="VBoxContainer/QuitButton"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 3.0
+offset_top = 5.0
 offset_right = 207.0
 offset_bottom = 34.0
 theme_override_font_sizes/font_size = 24

@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.8
+- Add level 6
+- Rework bouquet generation
+- Various bugfixes
+
 ## v0.7
 - Add level 5
 - Improve visitor animations

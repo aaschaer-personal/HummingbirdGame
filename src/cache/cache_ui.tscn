@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cs510j1wjh4d4"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_rkfuj"]
-[ext_resource type="Script" path="res://src/cache/cache_ui.gd" id="2_qwleh"]
+[ext_resource type="Script" uid="uid://itcj6ar2s250" path="res://src/cache/cache_ui.gd" id="2_qwleh"]
 [ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="3_ee8d3"]
 [ext_resource type="Texture2D" uid="uid://75l460ljiinq" path="res://assets/Items/BagIcons/square.png" id="4_3mfcs"]
 [ext_resource type="Texture2D" uid="uid://bvl2r6lhosyi3" path="res://assets/Items/BagIcons/circle.png" id="5_5vsi6"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c6kk8khgnvcqq" path="res://assets/Items/seed_packet.png" id="12_fl5pr"]
 
 [node name="CacheUI" type="NinePatchRect" groups=["cache_ui"]]
+process_mode = 2
 offset_right = 240.0
 offset_bottom = 205.0
 texture = ExtResource("1_rkfuj")
@@ -65,26 +66,19 @@ offset_top = 68.0
 offset_right = 152.0
 offset_bottom = 93.0
 toggle_mode = false
-item_count = 7
 selected = 0
-popup/item_0/text = ""
+item_count = 7
 popup/item_0/id = 0
-popup/item_1/text = ""
 popup/item_1/icon = ExtResource("4_3mfcs")
 popup/item_1/id = 1
-popup/item_2/text = ""
 popup/item_2/icon = ExtResource("5_5vsi6")
 popup/item_2/id = 2
-popup/item_3/text = ""
 popup/item_3/icon = ExtResource("6_iuoa5")
 popup/item_3/id = 3
-popup/item_4/text = ""
 popup/item_4/icon = ExtResource("7_u7rg1")
 popup/item_4/id = 4
-popup/item_5/text = ""
 popup/item_5/icon = ExtResource("8_wvnqs")
 popup/item_5/id = 5
-popup/item_6/text = ""
 popup/item_6/icon = ExtResource("9_6vera")
 popup/item_6/id = 6
 

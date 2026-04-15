@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dwdwrfqw5jpww"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
-[ext_resource type="Script" path="res://src/UI/guide.gd" id="2_ab0ib"]
+[ext_resource type="Script" uid="uid://bfcdwh2a0qff7" path="res://src/UI/guide.gd" id="2_ab0ib"]
 [ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_se2j2"]
 [ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
 [ext_resource type="PackedScene" uid="uid://mgqh0bucfav0" path="res://src/UI/interactable_punnet_square.tscn" id="5_7trbm"]
@@ -9,7 +9,7 @@
 
 [node name="Guide" type="NinePatchRect"]
 offset_left = 55.0
-offset_right = 303.0
+offset_right = 400.0
 offset_bottom = 324.0
 mouse_filter = 0
 texture = ExtResource("1_8u3um")
@@ -185,10 +185,10 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Controls" type="RichTextLabel" parent="Content"]
-layout_mode = 2
-offset_left = 4.0
+layout_mode = 0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -205,9 +205,9 @@ text = "[font_size=12]
 [node name="UsingItems" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -249,9 +249,9 @@ text = "[font_size=12]
 [node name="GrowingFlowers" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -272,9 +272,9 @@ text = "[font_size=12]
 [node name="NectarAndPollen" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -295,9 +295,9 @@ text = "[font_size=12]
 [node name="Energy" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -314,9 +314,9 @@ text = "[font_size=12]
 [node name="Visitors" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -334,9 +334,9 @@ text = "[font_size=12]
 [node name="PrintingPackets" type="RichTextLabel" parent="Content"]
 visible = false
 layout_mode = 0
-offset_left = 4.0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -352,10 +352,10 @@ text = "[font_size=12]
 
 [node name="Genetics" type="RichTextLabel" parent="Content"]
 visible = false
-layout_mode = 2
-offset_left = 4.0
+layout_mode = 0
+offset_left = 6.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
 bbcode_enabled = true
 text = "[font_size=12]
@@ -371,34 +371,38 @@ text = "[font_size=12]
 
 * Inbred flowers will produce fewer seeds. Letting bees pollinate your flowers can help reduce inbreeding."
 
-[node name="PunnetSquare" type="Control" parent="Content"]
+[node name="PunnetSquare" type="ScrollContainer" parent="Content"]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="InteractablePunnetSquare" parent="Content/PunnetSquare" instance=ExtResource("5_7trbm")]
-offset_left = 57.0
-offset_top = 90.0
-offset_right = 57.0
-offset_bottom = 90.0
-
-[node name="Text" type="RichTextLabel" parent="Content/PunnetSquare"]
 layout_mode = 0
-offset_left = 4.0
+offset_left = 7.0
 offset_top = 2.0
-offset_right = 244.0
+offset_right = 343.0
 offset_bottom = 322.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/PunnetSquare"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="Content/PunnetSquare/VBoxContainer"]
+layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
 text = "[font_size=12]
 [font_size=24][center]Punnet Square[/center][font_size=12]
 
-* Set the alleles for each parent to see possible outcomes of crossing them."
+* Set the alleles for each parent to see possible outcomes of crossing them.
+[font_size=1] "
+fit_content = true
+scroll_active = false
+
+[node name="InteractablePunnetSquare" parent="Content/PunnetSquare/VBoxContainer" instance=ExtResource("5_7trbm")]
+layout_mode = 2
 
 [node name="ExitButton" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 239.0
-offset_right = 248.0
+offset_left = 336.0
+offset_right = 345.0
 offset_bottom = 10.0
 texture_normal = ExtResource("6_koo0c")

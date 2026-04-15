@@ -1,5 +1,6 @@
 extends Node
 
+@warning_ignore_start("unused_signal")
 signal flower_bloomed
 signal cut_flower_decayed
 signal plant_died

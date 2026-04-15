@@ -1,6 +1,7 @@
 class_name Plot extends Interactable
 
 @onready var dirt_sprite = $Dirt
+@export var wetness_shading = 0
 var plant = null
 var wetness = 0
 var plant_scene = null
@@ -12,7 +13,7 @@ func _process(delta):
 	wetness -= 1 * delta
 	if wetness < 0:
 		wetness = 0
-	var shade = 60 / (wetness + 60)
+	var shade = 60.0 / (wetness + wetness_shading + 60)
 	dirt_sprite.modulate = Color(shade, shade, shade)
 
 func is_interactable():

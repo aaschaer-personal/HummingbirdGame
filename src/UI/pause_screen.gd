@@ -11,7 +11,7 @@ signal guide_opened
 @onready var restart_level_button = $PauseMenu/VBoxContainer/RestartLevelButton
 @onready var return_to_map_button = $PauseMenu/VBoxContainer/ReturnToMapButton
 @onready var quit_to_menu_button = $PauseMenu/VBoxContainer/QuitToMenuButton
-@onready var exit_button = $ExitButton
+@onready var exit_button = $PauseMenu/ExitButton
 
 func _ready():
 	resume_button.pressed.connect(resume)
@@ -32,17 +32,6 @@ func _ready():
 		guide_button.visible = false
 		restart_level_button.visible = false
 		return_to_map_button.visible = false
-
-# reset guide visibility on any Esc press
-func _input(event):
-	if event.is_action_released("Esc"):
-		if guide.visible or options.visible:
-			guide.visible = false
-			options.visible = false
-		else:
-			visible = false
-			await get_tree().create_timer(0.01).timeout
-			get_tree().paused = false
 
 func open_guide():
 	guide.visible = true

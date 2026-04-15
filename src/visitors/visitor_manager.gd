@@ -8,6 +8,7 @@ signal boquet_accepted
 var bouquets = []
 var bouquet_num = 0
 var bouquets_done = 0
+var visitors_done = 0
 var done = false
 var visitors_unlocked = false
 
@@ -22,9 +23,10 @@ var rainbow_order = {
 	Colors.pink: 2,
 	Colors.orange: 3,
 	Colors.yellow: 4,
-	Colors.blue: 5,
-	Colors.purple: 6,
-	Colors.white: 7,
+	Colors.green: 5,
+	Colors.blue: 6,
+	Colors.purple: 7,
+	Colors.white: 8,
 }
 
 func _ready():
@@ -64,7 +66,7 @@ func generate_boquets(colors, count, size, max_repetitions):
 						bouquet.append(color)
 						break
 			bouquet.sort_custom(_color_compare)
-			if not abort and bouquet not in ret:
+			if (not abort) and (bouquet not in ret) and (bouquet not in bouquets):
 				ret.append(bouquet)
 				break
 	return ret
@@ -88,9 +90,12 @@ func on_visitor_left(visitor):
 	await visitor.tree_exited
 	visitor.spawn.visitor = null
 	num_visitors -= 1
-	visitor_left.emit()
-	if timer.is_stopped():
+	visitors_done += 1
+	if visitors_done == len(bouquets):
+		done = true
+	elif timer.is_stopped():
 		timer.start(5)
+	visitor_left.emit()
 
 func _on_timeout():
 	if bouquet_num < len(bouquets):
@@ -106,5 +111,4 @@ func finish_bouquet():
 	bouquets_done += 1
 	boquet_accepted.emit()
 	if bouquets_done == len(bouquets):
-		done = true
 		timer.stop()

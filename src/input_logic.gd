@@ -8,14 +8,20 @@ extends Node2D
 func _ready():
 	randomize()
 
-# esc to exit cache ui or pause
+# esc to exit uis or pause
 func _input(event):
 	if event.is_action_released("Esc"):
 		if cache_ui.visible:
 			cache_ui.close()
-		else:
+		elif pause_screen.guide.visible:
+			pause_screen.guide.visible = false
+		elif pause_screen.options.visible:
+			pause_screen.options.visible = false
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+		elif not pause_screen.visible:
 			pause_screen.visible = true
-			await get_tree().create_timer(0.01).timeout
 			get_tree().paused = true
 
 # global clicking logic
