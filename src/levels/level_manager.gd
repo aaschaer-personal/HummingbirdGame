@@ -10,6 +10,7 @@ extends Node2D
 @onready var failure_screen = get_tree().get_first_node_in_group("failure_screen")
 @onready var visitor_manager = get_tree().get_first_node_in_group("visitor_manager")
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
+@onready var control_text_scene = preload("res://src/UI/control_text.tscn")
 
 var water_explained = false
 var energy_explained = false
@@ -82,12 +83,12 @@ func _on_energy_quartered():
 		add_tutorial_text("Energy",
 		"""Restore your energy:
 
-1. Perch on the sapling to stop energy loss and restore up to a third of your energy.
+1. Perch on the sapling (left click or %interact) to stop energy loss and restore up to a third of your energy.
 2. Drink nectar from flowers.
 
 """)
-	await player.energy_back_to_half
-	await remove_tutorial_text("Energy")
+		await player.energy_back_to_half
+		await remove_tutorial_text("Energy")
 
 func _on_watering_can_emptied():
 	if not water_explained:
@@ -95,7 +96,7 @@ func _on_watering_can_emptied():
 		add_tutorial_text("Water",
 		"""Refill the watering can:
 
-1. Interact with the pond while holding the watering can.
+Interact with the pond (click or %interact) while holding the watering can.
 
 """)
 	await SignalBus.watering_can_refilled
@@ -139,29 +140,17 @@ func cinematic_intro_sequence():
 	player.controllable = true
 	await cache.dispense_all(generate_starting_packet())
 
-func add_tutorial_text(text_name, text):
-	var rtl = RichTextLabel.new()
-	rtl.name = text_name
-	rtl.text = text
-	rtl.fit_content = true
-	rtl.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	rtl.modulate = Color.TRANSPARENT
-	tutorial_container.add_child(rtl)
-	var tween = create_tween()
-	tween.tween_property(
-		rtl, "modulate", Color.WHITE, .2
-	)
-	await tween.finished
+func add_tutorial_text(text_name: String, template: String):
+	var tutorial_text = control_text_scene.instantiate()
+	tutorial_text.name = text_name
+	tutorial_text.set_template(template)
+	tutorial_container.add_child(tutorial_text)
+	tutorial_text.fade_in()
 
 func remove_tutorial_text(text_name):
-	for rtl in tutorial_container.get_children():
-		if rtl.name == text_name:
-			var tween = create_tween()
-			tween.tween_property(
-				rtl, "modulate", Color.TRANSPARENT, .2
-			)
-			await tween.finished
-			rtl.queue_free()
+	for tutorial_text in tutorial_container.get_children():
+		if tutorial_text.name == text_name:
+			await tutorial_text.fade_out()
 			break
 
 func tutorial_sequence():
@@ -171,9 +160,9 @@ func tutorial_sequence():
 	add_tutorial_text("Guide",
 """Open the guide:
 
-1. Press Esc to open the pause menu.
+1. Press %pause to open the pause menu.
 2. Click on Guide.
-3. Close with Esc.
+3. Close with %exit_menu.
 4. Reference back as needed!
 
 """)
@@ -184,12 +173,16 @@ func tutorial_sequence():
 		add_tutorial_text("GrowFlowers",
 """Grow four sunflower plants:
 
-1. Plant seeds by picking up a seed packet then interacting with bare soil.
-2. Drop the seed packet.
-3. Water the seeds by picking up the watering can then flying over them.
-4. Wait for the flowers to grow.
+1. Pick up a seed packet (click or %interact).
+2. Plant seeds in bare soil (click or %interact while holding a seed packet).
+3. Drop the seed packet (right click or %drop).
+4. Pick up the watering can (click or %interact).
+5. Water seeds (move while holding watering can).
+6. Drop the watering can (right click or %drop).
+7. Wait for the flowers to grow.
 
 """)
+		
 		while true:
 			await SignalBus.flower_bloomed
 			if flowers_grown >= 6:
@@ -200,9 +193,9 @@ func tutorial_sequence():
 		add_tutorial_text("OrangePollination",
 	"""Cross-pollinate for an orange sunflower:
 
-1. Take a bath if there is any pollen on your beak.
-2. Drink from a red or yellow sunflower.
-3. Drink from the other collor sunflower.
+1. If there is any pollen on your beak, take a bath in the pond (click or %interact).
+2. Drink from a red or yellow sunflower (click or %interact).
+3. Drink from the other collor sunflower (click or %interact).
 
 """)
 		while true:
@@ -215,7 +208,7 @@ func tutorial_sequence():
 		add_tutorial_text("PrintPacket",
 """Print a new seed packet:
 
-1. Interact with the cache (the machine that provided your tools and starting seeds).
+1. Open the cache (click or %interact).
 2. Select a color, icon, and/or icon color.
 3. Press print.
 
@@ -225,10 +218,11 @@ func tutorial_sequence():
 
 	if not seeds_harvested:
 		add_tutorial_text("HarvestSeeds",
-"""Harvest seeds:
+"""Harvest orange sunflower seeds:
 
 1. Wait for the cross pollinated flower to go to seed.
-2. While holding a seed packet interact with the flower.
+2. Pick up a seed packet (click or %interact).
+3. Harvest the seeds (click or %interact while holding a seed packet).
 
 """)
 		await player.seeds_harvested
@@ -252,8 +246,10 @@ func tutorial_sequence():
 		add_tutorial_text("SatisfyVisitor",
 """Satisfy a visitor:
 
-1. While holding the clipers interact with a flower the visitor wants to cut it.
-2. Pick up the cut flower and bring it to the visitor.
+1. Grow a flower the visitor wants.
+2. Cut the flower (click or %interact while holding clippers).
+3. Pick up the cut flower (click or %interact).
+4. Deliver the flower to the vistitor (click %interact while holding the flower).
 
 """)
 		await visitor_manager.visitor_left
@@ -262,6 +258,6 @@ func tutorial_sequence():
 	add_tutorial_text("FinishLevel",
 """Finish the level:
 
-1. Satisfy five visitors in total to finish the level.
+Satisfy five visitors in total to finish the level.
 
 """)

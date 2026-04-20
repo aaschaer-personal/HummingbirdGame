@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwdwrfqw5jpww"]
+[gd_scene load_steps=8 format=3 uid="uid://dwdwrfqw5jpww"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
 [ext_resource type="Script" uid="uid://bfcdwh2a0qff7" path="res://src/UI/guide.gd" id="2_ab0ib"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
 [ext_resource type="PackedScene" uid="uid://mgqh0bucfav0" path="res://src/UI/interactable_punnet_square.tscn" id="5_7trbm"]
 [ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_koo0c"]
+[ext_resource type="PackedScene" uid="uid://bfxri5oqab5ij" path="res://src/UI/control_text.tscn" id="6_rfbbp"]
 
 [node name="Guide" type="NinePatchRect"]
 offset_left = 55.0
@@ -184,23 +185,23 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Controls" type="RichTextLabel" parent="Content"]
+[node name="Controls" parent="Content" instance=ExtResource("6_rfbbp")]
 layout_mode = 0
 offset_left = 6.0
-offset_top = 2.0
 offset_right = 343.0
 offset_bottom = 322.0
-bbcode_enabled = true
 text = "[font_size=12]
 [font_size=24][center]Controls[/center][font_size=12]
 
-* Press ESC to pause, unpause, and close windows.
+* Press %pause to pause, unpause, and exit menus.
 
-* Move around with WASD or by clicking on a destination.
+* Move around with %up %left %down %right or by clicking on a destination.
 
-* Interact with objects by left clicking on them, or by moving close to them and pressing E.
+* Interact with objects by left clicking on them, or by moving close to them and pressing %interact.
 
-* Drop held items by right clicking or pressing Q."
+* Drop held items by right clicking or pressing %drop.
+
+* Controls can be remapped in the Options menu."
 
 [node name="UsingItems" type="RichTextLabel" parent="Content"]
 visible = false

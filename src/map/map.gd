@@ -181,7 +181,7 @@ func _input(_event):
 				target_level = possible_target
 				_set_intermediate_target()
 
-	if Input.is_action_just_released("Esc"):
+	if Input.is_action_just_released("exit_menu"):
 		pause_screen.visible = true
 		get_tree().paused = true
 		await get_tree().create_timer(0.01).timeout

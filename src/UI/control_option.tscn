@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://b70ghk26hmrtq"]
+
+[ext_resource type="Script" uid="uid://b2qypk2qf0mjm" path="res://src/UI/control_option.gd" id="1_jayfw"]
+
+[node name="ControlOption" type="HSplitContainer"]
+split_offset = 60
+dragging_enabled = false
+dragger_visibility = 1
+script = ExtResource("1_jayfw")
+
+[node name="ActionLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Action:"
+horizontal_alignment = 2
+
+[node name="KeyButton" type="Button" parent="."]
+custom_minimum_size = Vector2(50, 21)
+layout_mode = 2

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfxri5oqab5ij"]
+
+[ext_resource type="Script" uid="uid://bschnuweq0gff" path="res://src/UI/control_text.gd" id="1_qjffp"]
+
+[node name="ControlText" type="RichTextLabel"]
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("1_qjffp")

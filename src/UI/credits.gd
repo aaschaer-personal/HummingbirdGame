@@ -6,7 +6,7 @@ func _ready():
 	exit_button.pressed.connect(close)
 	
 func _input(event):
-	if event.is_action_released("Esc"):
+	if event.is_action_released("exit_menu"):
 		close()
 	
 func close():
