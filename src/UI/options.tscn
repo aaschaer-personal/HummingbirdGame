@@ -106,18 +106,46 @@ horizontal_alignment = 2
 [node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/ShowTutorial"]
 layout_mode = 2
 
-[node name="QuickStart" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="SkipIntros" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/QuickStart"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/SkipIntros"]
 layout_mode = 2
 text = "Skip Intros:   "
 horizontal_alignment = 2
 
-[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/QuickStart"]
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/SkipIntros"]
+layout_mode = 2
+
+[node name="LabelColors" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+split_offset = 80
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/LabelColors"]
+layout_mode = 2
+text = "Label Colors:   "
+horizontal_alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/LabelColors"]
+layout_mode = 2
+
+[node name="ShowGenes" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+split_offset = 80
+dragging_enabled = false
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/ShowGenes"]
+layout_mode = 2
+text = "Show Genes:   "
+horizontal_alignment = 2
+
+[node name="CheckBox" type="CheckBox" parent="ScrollContainer/VBoxContainer/ShowGenes"]
 layout_mode = 2
 
 [node name="HSeperator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]

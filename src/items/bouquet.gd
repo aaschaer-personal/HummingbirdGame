@@ -1,5 +1,7 @@
 class_name Bouquet extends Node2D
 
+@onready var color_label = $ColorLabel
+@onready var options = get_tree().get_first_node_in_group("options")
 @onready var node_positions = [
 	Vector2(0, 0), Vector2(-2, -2), Vector2(-2, 2),
 	Vector2(-4, -4), Vector2(-4, 4),
@@ -9,9 +11,13 @@ class_name Bouquet extends Node2D
 @onready var flipped_node_indexes = [2, 3, 1, 4, 0]
 var flower_nodes
 var dispense_slot = null
+var is_player_held
 
 func _ready():
 	flower_nodes = get_children()
+	options.label_colors_changed.connect(set_color_label_visibility)
+	is_player_held = get_parent().get_parent().get_parent() is Player
+	set_color_label_visibility(Config.get_option("label_colors"))
 
 func add_flower(flower):
 	for flower_node in flower_nodes:
@@ -21,7 +27,8 @@ func add_flower(flower):
 			flower.position = Vector2.ZERO
 			flower.rotation_degrees = 0
 			flower.set_pickup_height()
-			return
+			break
+	set_color_label()
 
 func get_flowers():
 	var flowers = []
@@ -51,3 +58,12 @@ func set_flip_h(val):
 func tween_height(target: int, duration: float):
 	for flower in get_flowers():
 		flower.tween_height(target, duration)
+
+func set_color_label():
+	var colors = []
+	for flower in get_flowers():
+		colors.append(flower.color)
+	color_label.text = Colors.label_text_from_color_list(colors)
+
+func set_color_label_visibility(toggle_value):
+	color_label.visible = toggle_value and is_player_held

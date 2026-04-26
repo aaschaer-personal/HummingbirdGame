@@ -1,13 +1,17 @@
 extends NinePatchRect
 
 signal volume_changed
+signal label_colors_changed
+signal show_genes_changed
 signal controls_changed
 
 @onready var confirm_button = $ConfirmButton
 @onready var music_volume = $ScrollContainer/VBoxContainer/MusicVolume/HSlider
 @onready var effects_volume = $ScrollContainer/VBoxContainer/EffectsVolume/HSlider
 @onready var show_tutorial = $ScrollContainer/VBoxContainer/ShowTutorial/CheckBox
-@onready var quick_start = $ScrollContainer/VBoxContainer/QuickStart/CheckBox
+@onready var skip_intros = $ScrollContainer/VBoxContainer/SkipIntros/CheckBox
+@onready var label_colors = $ScrollContainer/VBoxContainer/LabelColors/CheckBox
+@onready var show_genes = $ScrollContainer/VBoxContainer/ShowGenes/CheckBox
 @onready var controls = $ScrollContainer/VBoxContainer/Controls
 @onready var exit_button = $ExitButton
 
@@ -17,12 +21,14 @@ var ignore_next_pause = false
 var config
 
 func _ready():
-	config = Config.get_config()
-	music_volume.value = config.get_value("options", "music_volume", 50)
-	effects_volume.value = config.get_value("options", "effects_volume", 50)
-	show_tutorial.button_pressed = config.get_value("options", "show_tutorial", true)
-	quick_start.button_pressed = config.get_value("options", "quick_start", false)
+	music_volume.value = Config.get_option("music_volume")
+	effects_volume.value = Config.get_option("effects_volume")
+	show_tutorial.button_pressed = Config.get_option("show_tutorial")
+	skip_intros.button_pressed = Config.get_option("skip_intros")
+	label_colors.button_pressed = Config.get_option("label_colors")
+	show_genes.button_pressed = Config.get_option("show_genes")
 
+	config = Config.get_config()
 	for action in config.get_section_keys("controls"):
 		var event = config.get_value("controls", action, null)
 		if event:
@@ -32,6 +38,9 @@ func _ready():
 
 	music_volume.value_changed.connect(emit_music_volume_changed)
 	effects_volume.value_changed.connect(emit_effects_volume_changed)
+	label_colors.toggled.connect(label_colors_changed.emit)
+	show_genes.toggled.connect(show_genes_changed.emit)
+	
 	confirm_button.pressed.connect(confirm)
 	exit_button.pressed.connect(close)
 	for control in controls.get_children():
@@ -41,7 +50,9 @@ func confirm():
 	config.set_value("options", "music_volume", music_volume.value)
 	config.set_value("options", "effects_volume", effects_volume.value)
 	config.set_value("options", "show_tutorial", show_tutorial.button_pressed)
-	config.set_value("options", "quick_start", quick_start.button_pressed)
+	config.set_value("options", "skip_intros", skip_intros.button_pressed)
+	config.set_value("options", "label_colors", label_colors.button_pressed)
+	config.set_value("options", "show_genes", show_genes.button_pressed)
 	Config.save_config()
 	close()
 
@@ -56,6 +67,11 @@ func emit_effects_volume_changed(value):
 	volume_changed.emit("effects_volume", value)
 
 func close():
+	# signal with the config value in case nothing was saved
+	volume_changed.emit("music_volume", Config.get_option("music_volume"))
+	volume_changed.emit("effects_volume", Config.get_option("effects_volume"))
+	label_colors_changed.emit(Config.get_option("label_colors"))
+	show_genes_changed.emit(Config.get_option("show_genes"))
 	visible = false
 
 func _input(event):

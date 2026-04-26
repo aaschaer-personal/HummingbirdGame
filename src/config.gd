@@ -3,6 +3,19 @@ extends Node
 var config
 var path = "user://gamedata.cfg"
 
+var defaults = {
+	"music_volume": 50,
+	"effects_volume": 50,
+	"show_tutorial": true,
+	"skip_intros": false,
+	"label_colors": false,
+	"show_genes": false,
+}
+
+func get_option(value: String):
+	config = get_config()
+	return config.get_value("options", value, defaults[value])
+
 func get_config():
 	if not config:
 		config = ConfigFile.new()
@@ -10,4 +23,4 @@ func get_config():
 	return config
 
 func save_config():
-	config.save(path)
+	get_config().save(path)

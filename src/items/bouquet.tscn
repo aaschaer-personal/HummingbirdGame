@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yjwuo2ut5r1c"]
 
-[ext_resource type="Script" path="res://src/items/bouquet.gd" id="1_otk1k"]
+[ext_resource type="Script" uid="uid://fr3qiugytomu" path="res://src/items/bouquet.gd" id="1_otk1k"]
 
 [node name="Bouquet" type="Node2D"]
 script = ExtResource("1_otk1k")
@@ -22,3 +22,13 @@ rotation = -0.254899
 [node name="FlowerNode5" type="Node2D" parent="."]
 position = Vector2(-4, 2)
 rotation = 0.314767
+
+[node name="ColorLabel" type="Label" parent="."]
+z_index = 1
+offset_left = -36.0
+offset_top = 6.0
+offset_right = 36.0
+offset_bottom = 51.0
+text = "Orange Fushia Purple Green Yellow"
+horizontal_alignment = 1
+autowrap_mode = 2

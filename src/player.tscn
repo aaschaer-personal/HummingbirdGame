@@ -1,6 +1,6 @@
 [gd_scene load_steps=477 format=3 uid="uid://dijrw38nqguom"]
 
-[ext_resource type="Script" path="res://src/player.gd" id="1_j4oqv"]
+[ext_resource type="Script" uid="uid://dorl8gugxxhgu" path="res://src/player.gd" id="1_j4oqv"]
 [ext_resource type="Texture2D" uid="uid://s1d4ow6e0qhr" path="res://assets/Hummingbird/back_wing.png" id="2_5bhmb"]
 [ext_resource type="Texture2D" uid="uid://duif438picect" path="res://assets/Hummingbird/drinking.png" id="3_4i2hr"]
 [ext_resource type="Texture2D" uid="uid://bd8krstcarvps" path="res://assets/Hummingbird/back_wing_tired.png" id="3_6p6fh"]

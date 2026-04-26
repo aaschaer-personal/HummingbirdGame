@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bthpcl3gbouwc"]
 
-[ext_resource type="Script" path="res://src/flowers/cut_flower.gd" id="1_3umnu"]
+[ext_resource type="Script" uid="uid://uh7heog5jqkf" path="res://src/flowers/cut_flower.gd" id="1_3umnu"]
 [ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="2_bivbc"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="2_v0oe7"]
 
@@ -15,3 +15,12 @@ script = ExtResource("1_3umnu")
 
 [node name="TransportDiskAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_bivbc")
+
+[node name="ColorLabel" type="Label" parent="."]
+visible = false
+z_index = 1
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = -7.0
+text = "Orange"
+horizontal_alignment = 1

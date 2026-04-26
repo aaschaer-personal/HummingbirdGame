@@ -112,11 +112,11 @@ func generate_starting_packet():
 	return packet
 
 func main():
-	if config.get_value("options", "quick_start", false):
+	if Config.get_option("skip_intros"):
 		await quick_intro_sequence()
 	else:
 		await cinematic_intro_sequence()
-	if level.level_num == 1 and config.get_value("options", "show_tutorial", true):
+	if level.level_num == 1 and Config.get_option("show_tutorial"):
 		tutorial_sequence()
 	else:
 		water_explained = true

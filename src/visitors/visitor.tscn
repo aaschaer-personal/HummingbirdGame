@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://hpx1s0l0kxve"]
+[gd_scene load_steps=9 format=3 uid="uid://hpx1s0l0kxve"]
 
-[ext_resource type="Script" path="res://src/visitors/visitor.gd" id="1_7cc7u"]
-[ext_resource type="Texture2D" uid="uid://fcdt6cc086nh" path="res://assets/Visitors/speech_bubble.png" id="6_3j6pk"]
+[ext_resource type="Script" uid="uid://x05spfcrcao6" path="res://src/visitors/visitor.gd" id="1_7cc7u"]
+[ext_resource type="Texture2D" uid="uid://ljcp7bnsusxf" path="res://assets/Visitors/icon_speech_bubble.png" id="2_bq07r"]
+[ext_resource type="Texture2D" uid="uid://dlglel8bba1jr" path="res://assets/Visitors/text_speech_bubble.png" id="3_bq07r"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_k8pmv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hui3"]
@@ -9,8 +10,8 @@ radius = 14.9868
 height = 59.4497
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tddpl"]
-radius = 17.0
-height = 74.0
+radius = 16.0
+height = 116.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rcl1j"]
 radius = 23.0
@@ -28,24 +29,44 @@ rotation = 0.855106
 shape = SubResource("CapsuleShape2D_5hui3")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(40, -50)
+position = Vector2(20, -52)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_tddpl")
 
 [node name="HoldPoint" type="Node2D" parent="."]
 position = Vector2(0, -3)
 
-[node name="SpeechBubbleSprite" type="Sprite2D" parent="."]
+[node name="Desires" type="Node2D" parent="."]
 visible = false
-position = Vector2(39, -45)
-texture = ExtResource("6_3j6pk")
+position = Vector2(20, -29)
 
-[node name="DesireIconHolder" type="HBoxContainer" parent="SpeechBubbleSprite"]
-offset_left = -24.0
-offset_top = -5.0
-offset_right = 32.0
-offset_bottom = 16.0
+[node name="IconSpeechBubble" type="Sprite2D" parent="Desires"]
+position = Vector2(19, -18)
+texture = ExtResource("2_bq07r")
+
+[node name="DesireIconHolder" type="HBoxContainer" parent="Desires/IconSpeechBubble"]
+offset_left = -27.0
+offset_top = -4.0
+offset_right = 33.0
+offset_bottom = 20.0
+theme_override_constants/separation = 5
 alignment = 1
+
+[node name="TextSpeechBubble" type="Sprite2D" parent="Desires"]
+visible = false
+position = Vector2(1, -20)
+texture = ExtResource("3_bq07r")
+
+[node name="DesireText" type="Label" parent="Desires/TextSpeechBubble"]
+modulate = Color(0, 0, 0, 1)
+offset_left = -49.0
+offset_top = -18.0
+offset_right = 49.0
+offset_bottom = 11.0
+text = "Orange Purple Fushia Green Yellow"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="AcceptanceArea" type="Area2D" parent="."]
 position = Vector2(8, -4)
@@ -55,9 +76,9 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_rcl1j")
 
 [node name="Collision" type="StaticBody2D" parent="."]
+position = Vector2(5, -20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-position = Vector2(5, -20)
 rotation = 1.57362
 shape = SubResource("CapsuleShape2D_cb84g")
 disabled = true

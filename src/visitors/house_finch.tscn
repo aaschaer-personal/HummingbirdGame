@@ -610,6 +610,7 @@ position = Vector2(-7, -16)
 sprite_frames = SubResource("SpriteFrames_mft4q")
 animation = &"landing"
 autoplay = "idle"
+flip_h = true
 
 [node name="ShadowGenerator" parent="MainSprite" index="0" instance=ExtResource("6_i7aq2")]
 object_height = 32

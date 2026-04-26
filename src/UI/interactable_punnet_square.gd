@@ -2,9 +2,11 @@ extends Control
 
 @onready var punnet_square = $PunnetContainer/PunnetSquare
 @onready var p1_example_flower = $P1/Example/Flower
-@onready var p2_example_flower = $P2/Example/Flower
 @onready var p1_example_petals = $P1/Example/Petals
+@onready var p1_example_color_label = $P1/Example/ColorLabel
+@onready var p2_example_flower = $P2/Example/Flower
 @onready var p2_example_petals = $P2/Example/Petals
+@onready var p2_example_color_label = $P2/Example/ColorLabel
 @onready var p1a1 = $P1/A1
 @onready var p1a2 = $P1/A2
 @onready var p1b1 = $P1/B1
@@ -22,6 +24,9 @@ var species
 
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
+	var options = get_tree().get_first_node_in_group("options")
+	options.label_colors_changed.connect(set_color_label_visibility)
+	set_color_label_visibility(Config.get_option("label_colors"))
 	if level:
 		species = level.flower_species
 		var flower_texture = level.flower_icon_texture
@@ -214,6 +219,14 @@ func _on_allele_option_selected(_selected):
 	else:
 		assert(false)
 
-	p1_example_petals.modulate = GenomeHelpers.color_from_gene_dict(g1)
-	p2_example_petals.modulate = GenomeHelpers.color_from_gene_dict(g2)
+	var p1_color = GenomeHelpers.color_from_gene_dict(g1)
+	p1_example_petals.modulate = p1_color
+	p1_example_color_label.text = Colors.color_name(p1_color)
+	var p2_color = GenomeHelpers.color_from_gene_dict(g2)
+	p2_example_petals.modulate = p2_color
+	p2_example_color_label.text = Colors.color_name(p2_color)
 	punnet_square.fill(g1, g2)
+
+func set_color_label_visibility(toggle_value):
+	p1_example_color_label.visible = toggle_value
+	p2_example_color_label.visible = toggle_value

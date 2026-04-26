@@ -71,6 +71,15 @@ offset_right = 36.0
 offset_bottom = 36.0
 expand_mode = 2
 
+[node name="ColorLabel" type="Label" parent="P1/Example"]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 1.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Orange"
+horizontal_alignment = 1
+
 [node name="X" type="Label" parent="."]
 layout_mode = 2
 text = "   X"
@@ -137,6 +146,15 @@ layout_mode = 0
 offset_right = 36.0
 offset_bottom = 36.0
 expand_mode = 2
+
+[node name="ColorLabel" type="Label" parent="P2/Example"]
+layout_mode = 0
+offset_top = -12.0
+offset_right = 40.0
+offset_bottom = 1.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Orange"
+horizontal_alignment = 1
 
 [node name="PunnetContainer" type="HBoxContainer" parent="."]
 layout_mode = 2

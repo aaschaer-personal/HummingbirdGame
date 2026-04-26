@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cmt6vh85eyrpy"]
 
-[ext_resource type="Script" path="res://src/flowers/plant.gd" id="1_objam"]
+[ext_resource type="Script" uid="uid://buhtwkk4r2l6h" path="res://src/flowers/plant.gd" id="1_objam"]
 [ext_resource type="PackedScene" uid="uid://do5d23t7cxf21" path="res://src/genome.tscn" id="2_gpur2"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="3_4e3qo"]
 [ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="4_2g0ho"]
@@ -30,3 +30,36 @@ position = Vector2(0, -15)
 [node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("3_4e3qo")]
 stream = ExtResource("4_2g0ho")
 max_polyphony = 2
+
+[node name="OldLabel" type="Label" parent="."]
+visible = false
+z_index = 1
+offset_left = -18.0
+offset_top = -74.0
+offset_right = 18.0
+offset_bottom = -45.0
+text = "FOO
+BAR"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Labels" type="VBoxContainer" parent="."]
+visible = false
+z_index = 1
+offset_left = -18.0
+offset_top = -74.0
+offset_right = 18.0
+offset_bottom = -44.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="ColorLabel" type="Label" parent="Labels"]
+layout_mode = 2
+text = "Orange"
+horizontal_alignment = 1
+
+[node name="GeneLabel" type="Label" parent="Labels"]
+layout_mode = 2
+text = "AABBCC"
+horizontal_alignment = 1

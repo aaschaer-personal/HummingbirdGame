@@ -12,16 +12,6 @@ texture = ExtResource("1_63cp8")
 stretch_mode = 2
 script = ExtResource("1_4tu0l")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 23.0
-offset_right = 38.0
-offset_bottom = 36.0
-text = "RRyyBB"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Petals" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 11.0
@@ -38,3 +28,25 @@ offset_right = 29.0
 offset_bottom = 22.0
 texture = ExtResource("2_x7xev")
 expand_mode = 2
+
+[node name="GeneLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 23.0
+offset_right = 38.0
+offset_bottom = 36.0
+text = "RRyyBB"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorLabel" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 40.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Orange"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -259,6 +259,7 @@ func pickup(item):
 	if energy > 0:
 		if item is CutFlower:
 			item.decay_timer.stop()
+			item.color_label.visible = false
 			if held_item is Bouquet:
 				held_item.add_flower(item)
 				held_item.set_flip_h(body_sprite.flip_h)

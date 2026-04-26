@@ -6,6 +6,7 @@
 
 [node name="CompletedScreen" type="NinePatchRect" groups=["completed_screen"]]
 process_mode = 3
+z_index = 2
 offset_right = 320.0
 offset_bottom = 180.0
 texture = ExtResource("1_qqv46")

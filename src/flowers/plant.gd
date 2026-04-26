@@ -7,6 +7,10 @@ class_name Plant extends Area2D
 @onready var flower_3_spawn = $FlowerSpawn3
 @onready var genome = $Genome
 @onready var audio_player = $OptionAwareAudioPlayer
+@onready var labels = $Labels
+@onready var color_label = $Labels/ColorLabel
+@onready var gene_label = $Labels/GeneLabel
+@onready var options = get_tree().get_first_node_in_group("options")
 
 var flower_1_scene = null
 var flower_2_scene = null
@@ -32,6 +36,8 @@ func _ready():
 	add_to_group("plants")
 	sprite.play("seed")
 	parent_plot = get_parent()
+	options.label_colors_changed.connect(_on_label_colors_changed)
+	options.show_genes_changed.connect(_on_show_genes_changed)
 
 func _flip():
 	sprite.flip_h = true
@@ -68,6 +74,8 @@ func _process(delta):
 			sprite.play("grow")
 			await sprite.animation_finished
 			stage = 2
+			initialize_labels()
+			labels.visible = true
 		elif stage == 2:
 			while _flowers_left_to_grow():
 				start_new_flower()
@@ -75,6 +83,7 @@ func _process(delta):
 	# die if all flowers are gone
 	if stage == 2 and current_flowers <= 0 and not _flowers_left_to_grow() and not dying:
 		dying = true
+		labels.visible = false
 		await get_tree().create_timer(0.2, false).timeout
 		sprite.play("die")
 		await sprite.animation_finished
@@ -117,3 +126,16 @@ func start_new_flower():
 func on_flower_harvest(flower_position):
 	current_flowers -= 1
 	flowers[flower_position] = null
+
+func initialize_labels():
+	var color = GenomeHelpers.color_from_gene_dict(genome.gene_dict)
+	color_label.text = Colors.color_name(color)
+	gene_label.text = GenomeHelpers.code_from_gene_dict(genome.gene_dict)
+	color_label.visible = Config.get_option("label_colors")
+	gene_label.visible = Config.get_option("show_genes")
+
+func _on_label_colors_changed(toggle_value):
+	color_label.visible = toggle_value
+
+func _on_show_genes_changed(toggle_value):
+	gene_label.visible = toggle_value
