@@ -51,6 +51,7 @@ var controllable = false
 var in_motion = false
 var low_energy_singal_toggle = false
 var clipping = false
+var energy_loss_rate = 1
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -64,6 +65,9 @@ func _ready():
 		_on_interaction_area_entered.bind(drinking_area))
 	landing_area.area_entered.connect(
 		_on_interaction_area_entered.bind(landing_area))
+	set_energy_loss_rate(Config.get_option("energy_loss"))
+	var options = get_tree().get_first_node_in_group("options")
+	options.energy_loss_changed.connect(set_energy_loss_rate)
 
 func _input(event):
 	if controllable:
@@ -120,7 +124,7 @@ func _process(delta):
 		rate = max(rate, 0)
 		energy += rate * delta
 	else:
-		energy -= 1 * delta
+		energy -= 1 * energy_loss_rate * delta
 
 	if not low_energy_singal_toggle and energy <= (max_energy / 4.0):
 			energy_quartered.emit()
@@ -574,3 +578,6 @@ func _tween_height(target_height: int, duration: float):
 		target_height,
 		duration,
 	)
+
+func set_energy_loss_rate(value):
+	energy_loss_rate = value

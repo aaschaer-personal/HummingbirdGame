@@ -67,6 +67,7 @@ offset_right = 480.0
 offset_bottom = 270.0
 
 [node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
+visible = false
 layout_mode = 0
 offset_left = 463.0
 offset_top = 43.0

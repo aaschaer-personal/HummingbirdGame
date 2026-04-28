@@ -21,10 +21,10 @@ var flowers_grown = 0
 var colors_grown = {}
 var colors_pollinated = {}
 var BRIEF_PAUSE = .5
-var config
 
 func _ready():
-	config = Config.get_config()
+	var options = get_tree().get_first_node_in_group("options")
+	options.show_tutorial_changed.connect(set_tutorial_visibility)
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
 	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
@@ -116,7 +116,8 @@ func main():
 		await quick_intro_sequence()
 	else:
 		await cinematic_intro_sequence()
-	if level.level_num == 1 and Config.get_option("show_tutorial"):
+	if level.level_num == 1:
+		set_tutorial_visibility(Config.get_option("show_tutorial"))
 		tutorial_sequence()
 	else:
 		water_explained = true
@@ -261,3 +262,6 @@ func tutorial_sequence():
 Satisfy five visitors in total to finish the level.
 
 """)
+
+func set_tutorial_visibility(toggle_value):
+	tutorial_container.visible = toggle_value

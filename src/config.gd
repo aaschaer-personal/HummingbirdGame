@@ -10,6 +10,8 @@ var defaults = {
 	"skip_intros": false,
 	"label_colors": false,
 	"show_genes": false,
+	"disable_bees": false,
+	"energy_loss": 1.0,
 }
 
 func get_option(value: String):

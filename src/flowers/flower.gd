@@ -22,6 +22,7 @@ var seeds = []
 var bee: Bee = null
 var manualy_pollinated = false
 var cut_flower_scene = null
+var disable_bees
 
 var cut_offsets = {
 	0: Vector2(0,0),
@@ -32,6 +33,9 @@ var cut_offsets = {
 func _ready():
 	cut_flower_scene = get_tree().get_first_node_in_group("level").cut_flower_scene
 
+	var options = get_tree().get_first_node_in_group("options")
+	options.disable_bees_changed.connect(set_disable_bees)
+	set_disable_bees(Config.get_option("disable_bees"))
 	pollination_timer.timeout.connect(_go_to_seed)
 	body_entered.connect(_on_body_entered)
 	nectar_meter.max_value = max_nectar
@@ -65,9 +69,9 @@ func receive_nutrients(amount: float):
 		nectar += amount * .75
 		if nectar >= max_nectar:
 			nectar = max_nectar
-			if pollination_timer.is_stopped():
+			if pollination_timer.is_stopped() and not disable_bees:
 				pollination_timer.start(20)
-			if not bee:
+			if not bee and not disable_bees:
 				var new_bee = bee_scene.instantiate()
 				add_child(new_bee)
 				bee = new_bee
@@ -188,3 +192,13 @@ func clip():
 func harvest():
 	parent_plant.on_flower_harvest(flower_position)
 	queue_free()
+
+func set_disable_bees(toggle_value):
+	print(toggle_value)
+	disable_bees = toggle_value
+	if toggle_value:
+		pollination_timer.stop()
+		if bee:
+			bee.queue_free()
+			bee = null
+			bee_audio_player.stop()
