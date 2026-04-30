@@ -6,11 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="4_7uf0a"]
 [ext_resource type="PackedScene" uid="uid://byrltxfllybww" path="res://src/UI/failure_screen.tscn" id="5_yaipp"]
 [ext_resource type="PackedScene" uid="uid://ph7je02sp0tm" path="res://src/UI/completed_screen.tscn" id="6_m4ebb"]
+[ext_resource type="PackedScene" uid="uid://ss18ep1gaqd7" path="res://src/UI/intro_screen.tscn" id="7_mhwal"]
 [ext_resource type="PackedScene" uid="uid://dijrw38nqguom" path="res://src/player.tscn" id="8_j54jp"]
 [ext_resource type="PackedScene" uid="uid://ov3l2hi8x4rl" path="res://src/environment/wind.tscn" id="11_xf04e"]
 [ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
-[ext_resource type="PackedScene" uid="uid://blb2i3d2koyfn" path="res://src/levels/level_manager.tscn" id="15_8npl5"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
 
 [node name="Level" type="Node2D" groups=["level"]]
@@ -75,6 +75,14 @@ offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
 
+[node name="IntroScreen" parent="UI" instance=ExtResource("7_mhwal")]
+visible = false
+layout_mode = 0
+offset_left = 160.0
+offset_top = 90.0
+offset_right = 480.0
+offset_bottom = 270.0
+
 [node name="Player" parent="." instance=ExtResource("8_j54jp")]
 position = Vector2(62, 201)
 
@@ -84,8 +92,6 @@ position = Vector2(62, 201)
 position = Vector2(320, 82)
 
 [node name="VisitorManager" parent="." groups=["customer_manager"] instance=ExtResource("14_alqih")]
-
-[node name="LevelManager" parent="." instance=ExtResource("15_8npl5")]
 
 [node name="ShadowCanvasGroup" type="CanvasGroup" parent="." groups=["shadow_canvas_group"]]
 self_modulate = Color(0, 0, 0, 0.196078)

@@ -1,23 +1,28 @@
 extends HibiscusLevel
 
-var level_num = 5
 
-# colors, count, size, max_repetitions
-var easy_colors = [Colors.red,  Colors.white]
-var medium_colors = [Colors.purple, Colors.orange, Colors.pink,]
-var hard_colors = [Colors.blue, Colors.yellow]
+func _ready():
+	level_num = 5
+	level_intro_text = """Welcome to the Hibiscus cache!
+This test is a bit unique with different numbers of alleles across two color genes. Take note that if the red gene is RR the flower will be red regardless of the other color gene!
 
-var bouquet_recipes = [
-	[easy_colors, 1, 2, 1],
-	[[easy_colors, medium_colors], 2, 2, 1],
-	[[easy_colors, easy_colors, medium_colors], 1, 3, 2],
-	[[easy_colors, medium_colors, medium_colors], 1, 3, 2],
-	[[easy_colors, easy_colors, hard_colors], 1, 3, 2],
-	[[easy_colors, medium_colors, hard_colors], 1, 3, 2],
-	["hibiscus", 4, 4, 3],
-	[[easy_colors, medium_colors, medium_colors, hard_colors, hard_colors], 3, 5, 2],
-	[medium_colors + hard_colors, 1, 5, 1],
-]
+Your starting seeds' color genes are RRYY, RrBw, and rrww."""
+	var easy_colors = [Colors.red,  Colors.white]
+	var medium_colors = [Colors.purple, Colors.orange, Colors.pink,]
+	var hard_colors = [Colors.blue, Colors.yellow]
+	# colors, count, size, max_repetitions
+	bouquet_recipes = [
+		[easy_colors, 1, 2, 1],
+		[[easy_colors, medium_colors], 2, 2, 1],
+		[[easy_colors, easy_colors, medium_colors], 1, 3, 2],
+		[[easy_colors, medium_colors, medium_colors], 1, 3, 2],
+		[[easy_colors, easy_colors, hard_colors], 1, 3, 2],
+		[[easy_colors, medium_colors, hard_colors], 1, 3, 2],
+		["hibiscus", 4, 4, 3],
+		[[easy_colors, medium_colors, medium_colors, hard_colors, hard_colors], 3, 5, 2],
+		[medium_colors + hard_colors, 1, 5, 1],
+	]
+	super()
 
 func generate_starting_seeds():
 	var starting_seeds = []

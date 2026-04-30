@@ -1,24 +1,29 @@
 extends OrchidLevel
 
-var level_num = 6
 
-var easy_colors = [Colors.fushia, Colors.yellow, Colors.white]
-var medium_colors = [Colors.orange, Colors.blue, Colors.purple]
-var hard_colors = [Colors.red, Colors.pink, Colors.green]
+func _ready():
+	level_num = 6
+	level_intro_text = """Welcome to the Orchid cache!
+Prove you can handle crossing three different color genes to complete the final test of the Journey!
 
-# colors, count, size, max_repetitions
-var bouquet_recipes = [
-	[easy_colors, 2, 2, 2],
-	[[easy_colors, easy_colors, medium_colors], 2, 3, 1],
-	[[easy_colors, medium_colors, medium_colors], 1, 3, 1],
-	[medium_colors, 1, 3, 1],
-	[[easy_colors, easy_colors, hard_colors, hard_colors], 3, 4, 2],
-	[[medium_colors, medium_colors, hard_colors, hard_colors], 3, 4, 2],
-	[hard_colors, 1, 3, 1],
-	["orchid", 1, 4, 1],
-	["orchid", 3, 5, 2],
-	[[medium_colors, medium_colors, hard_colors, hard_colors, hard_colors], 1, 5, 1],
-]
+Your starting seeds' color genes are RrYyBb, RRyyBB, rrYYbb, and rryybb."""
+	var easy_colors = [Colors.fushia, Colors.yellow, Colors.white]
+	var medium_colors = [Colors.orange, Colors.blue, Colors.purple]
+	var hard_colors = [Colors.red, Colors.pink, Colors.green]
+	# colors, count, size, max_repetitions
+	bouquet_recipes = [
+		[easy_colors, 2, 2, 2],
+		[[easy_colors, easy_colors, medium_colors], 2, 3, 1],
+		[[easy_colors, medium_colors, medium_colors], 1, 3, 1],
+		[medium_colors, 1, 3, 1],
+		[[easy_colors, easy_colors, hard_colors, hard_colors], 3, 4, 2],
+		[[medium_colors, medium_colors, hard_colors, hard_colors], 3, 4, 2],
+		[hard_colors, 1, 3, 1],
+		["orchid", 1, 4, 1],
+		["orchid", 3, 5, 2],
+		[[medium_colors, medium_colors, hard_colors, hard_colors, hard_colors], 1, 5, 1],
+	]
+	super()
 
 func generate_starting_seeds():
 	var starting_seeds = []

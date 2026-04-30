@@ -194,7 +194,6 @@ func harvest():
 	queue_free()
 
 func set_disable_bees(toggle_value):
-	print(toggle_value)
 	disable_bees = toggle_value
 	if toggle_value:
 		pollination_timer.stop()
