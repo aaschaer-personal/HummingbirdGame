@@ -45,8 +45,8 @@ var drinking_flower = null
 var hovering_frame = 0
 var perch_y = 0
 var facing_right = true
-var target_animation = "hovering"
-var pollen = []
+var target_animation = "hoveringa"
+var pollen: Array[Dictionary] = []
 var controllable = false
 var in_motion = false
 var low_energy_singal_toggle = false
@@ -374,9 +374,13 @@ func transfer_seeds(to_packet):
 	if held_item is SeedPacket:
 		to_packet.add_seeds(held_item.remove_all_seeds())
 
-func add_pollen(pollen_dict: Dictionary):
-	pollen.append(pollen_dict)
-	pollen = pollen.slice(-10)
+func add_pollen(pollen_arr: Array[Dictionary]):
+	assert(len(pollen_arr) == 8)
+	# cap pollen at 16 so last flower is at least 50% of pollen
+	if len(pollen) > 8:
+		pollen.resize(8)
+	pollen += pollen_arr
+	pollen.shuffle()
 	pollen_sprite.visible = true
 
 func _set_wings(vis: bool, aud: bool):

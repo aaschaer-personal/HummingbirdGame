@@ -1,7 +1,5 @@
 class_name SunflowerLevel extends Level
 
-var flower_species = "sunflower"
-
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level1_cache_top.tscn")
 var plant_scene = preload("res://src/flowers/sunflower/sunflower_plant.tscn")
@@ -15,3 +13,7 @@ var petals_icon_texture = preload("res://assets/UI/Icons/sunflower_petals.png")
 # visitor specific scenes
 var visitor_scene = preload("res://src/visitors/house_finch.tscn")
 var visitor_icon_texture = preload("res://assets/UI/Icons/house_finch.png")
+
+func _ready():
+	flower_species = "sunflower"
+	super()

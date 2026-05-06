@@ -1,7 +1,5 @@
 class_name OrchidLevel extends Level
 
-var flower_species = "orchid"
-
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level2_cache_top.tscn")
 var plant_scene = preload("res://src/flowers/orchid/orchid_plant.tscn")
@@ -15,3 +13,7 @@ var petals_icon_texture = preload("res://assets/UI/Icons/orchid_petals.png")
 # visitor specific scenes
 var visitor_scene = preload("res://src/visitors/painted_bunting.tscn")
 var visitor_icon_texture = preload("res://assets/UI/Icons/painted_bunting.png")
+
+func _ready():
+	flower_species = "orchid"
+	super()

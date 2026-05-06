@@ -1,7 +1,5 @@
 class_name HibiscusLevel extends Level
 
-var flower_species = "hibiscus"
-
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level2_cache_top.tscn")
 var plant_scene = preload("res://src/flowers/hibiscus/hibiscus_plant.tscn")
@@ -15,3 +13,7 @@ var petals_icon_texture = preload("res://assets/UI/Icons/hibiscus_petals.png")
 # visitor specific scenes
 var visitor_scene = preload("res://src/visitors/american_redstart.tscn")
 var visitor_icon_texture = preload("res://assets/UI/Icons/american_redstart.png")
+
+func _ready():
+	flower_species = "hibiscus"
+	super()

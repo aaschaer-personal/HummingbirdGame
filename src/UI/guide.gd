@@ -28,6 +28,7 @@ func _ready():
 	exit_button.pressed.connect(close)
 	
 	if level:
+		await level.ready
 		if level.flower_species == "sunflower":
 			genetics_content.text = genetics_content.text % "* Sunflowers have one color gene with two alleles, R for red and Y for yellow. This means there are three unique combinations RR, RY, and YY that produce red, orange, and yellow flowers."
 		elif level.flower_species == "jewelweed":

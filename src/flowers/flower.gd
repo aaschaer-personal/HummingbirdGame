@@ -17,7 +17,7 @@ var nectar: float = 0.0
 var max_nectar: float = 30.0
 var stage: int = 0
 var seed_growth: float = 0.0
-var pollen = []
+var pollen: Array[Dictionary] = []
 var seeds = []
 var bee: Bee = null
 var manualy_pollinated = false
@@ -133,28 +133,20 @@ func get_interaction_area():
 	else:
 		return self
 
-func _pick_pollen():
-	pollen.shuffle()
-	for potential in pollen:
-		if potential["species"] == parent_plant.genome.species:
-			return potential
-
 func generate_seeds():
 	for i in range(parent_plant.genome.seed_num):
-		var pollen_gene_dict = _pick_pollen()
+		var pollen_gene_dict = pollen.pop_back()
 		if not pollen_gene_dict:
-			pollen_gene_dict = GenomeGenerator.wild(
-				parent_plant.genome.species)
-		var new_seed = GenomeGenerator.gene_dict_from_gamete_dicts(
-			GenomeGenerator.gamete_dict_from_gene_dict(
-				pollen_gene_dict),
-			GenomeGenerator.gamete_dict_from_gene_dict(
-				parent_plant.genome.gene_dict)
+			pollen_gene_dict = GenomeGenerator.wild_gene_dict(parent_plant.genome.species)
+
+		var new_seed = GenomeGenerator.offspring_from_parent_genome_dicts(
+			pollen_gene_dict,
+			parent_plant.genome.gene_dict,
 		)
-		if new_seed["species"] == "sunflower":
-			SignalBus.flower_pollinated.emit(
-				GenomeHelpers.color_from_gene_dict(new_seed)
-			)
+
+		SignalBus.flower_pollinated.emit(
+			GenomeHelpers.color_from_gene_dict(new_seed)
+		)
 		seeds.append(new_seed)
 
 func harvest_seeds(seed_packet):
@@ -174,11 +166,19 @@ func drink(delta):
 
 func finish_drink():
 	nectar_meter.visible = false
-	pollen = player.pollen.duplicate()
+
+	if (not pollen) and player.pollen:
+		for i in range(4):
+			pollen.append(player.pollen.pop_back())
+
 	if stage == 1 and pollen:
 		manualy_pollinated = true
 		pollination_timer.start(1)
-	player.add_pollen(parent_plant.genome.gene_dict)
+
+	var new_pollen: Array[Dictionary] = []
+	for i in range(8):
+		new_pollen.append(parent_plant.genome.gene_dict)
+	player.add_pollen(new_pollen)
 
 func clip():
 	if stage == 1:
@@ -196,8 +196,9 @@ func harvest():
 func set_disable_bees(toggle_value):
 	disable_bees = toggle_value
 	if toggle_value:
-		pollination_timer.stop()
 		if bee:
 			bee.queue_free()
 			bee = null
 			bee_audio_player.stop()
+		if not manualy_pollinated:
+			pollination_timer.stop()

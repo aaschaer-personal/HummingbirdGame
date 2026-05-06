@@ -28,25 +28,25 @@ Your starting seeds' color genes are RrYyBb, RRyyBB, rrYYbb, and rryybb."""
 func generate_starting_seeds():
 	var starting_seeds = []
 	for i in range(4):
-		starting_seeds.append(GenomeGenerator.wild("orchid"))
+		starting_seeds.append(GenomeGenerator.wild_gene_dict("orchid"))
 	starting_seeds[0]["red"] = ["R", "r"]
 	starting_seeds[0]["blue"] = ["B", "b"]
 	starting_seeds[0]["yellow"] = ["Y", "y"]
-	starting_seeds[0]["max_flowers"] = 1
+	starting_seeds[0]["max_flowers"] = [1, 0]
 
 	starting_seeds[1]["red"] = ["r", "r"]
 	starting_seeds[1]["blue"] = ["b", "b"]
 	starting_seeds[1]["yellow"] = ["y", "y"]
-	starting_seeds[1]["max_flowers"] = 1
+	starting_seeds[1]["max_flowers"] = [1, 0]
 
 	starting_seeds[2]["red"] = ["R", "R"]
 	starting_seeds[2]["blue"] = ["B", "B"]
 	starting_seeds[2]["yellow"] = ["y", "y"]
-	starting_seeds[2]["max_flowers"] = 0
+	starting_seeds[2]["max_flowers"] = [0, 0]
 
 	starting_seeds[3]["red"] = ["r", "r"]
 	starting_seeds[3]["blue"] = ["b", "b"]
 	starting_seeds[3]["yellow"] = ["Y", "Y"]
-	starting_seeds[3]["max_flowers"] = 1
+	starting_seeds[3]["max_flowers"] = [1, 0]
 
 	return starting_seeds

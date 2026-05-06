@@ -27,14 +27,14 @@ Your starting seeds' color genes are RRYY, RrBw, and rrww."""
 func generate_starting_seeds():
 	var starting_seeds = []
 	for i in range(3):
-		starting_seeds.append(GenomeGenerator.wild("hibiscus"))
-	starting_seeds[0]["max_flowers"] = 1
+		starting_seeds.append(GenomeGenerator.wild_gene_dict("hibiscus"))
+	starting_seeds[0]["max_flowers"] = [1, 0]
 	starting_seeds[0]["red"] = ["R", "R"]
 	starting_seeds[0]["other"] = ["Y", "Y"]
-	starting_seeds[1]["max_flowers"] = 1
+	starting_seeds[1]["max_flowers"] = [1, 0]
 	starting_seeds[1]["red"] = ["R", "r"]
 	starting_seeds[1]["other"] = ["B", "w"]
-	starting_seeds[2]["max_flowers"] = 1
+	starting_seeds[2]["max_flowers"] = [1, 0]
 	starting_seeds[2]["red"] = ["r", "r"]
 	starting_seeds[2]["other"] = ["w", "w"]
 	return starting_seeds

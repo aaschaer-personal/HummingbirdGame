@@ -1,11 +1,8 @@
 # autoloaded as GenomeGenerator
 extends Node
 
-var int_keys = [
-	"max_flowers",
-	"growth_factor_1",
-	"growth_factor_2",
-]
+var next_gene_storage: Dictionary = {}
+var inbreeding_counter = 0
 
 var color_keys_by_species = {
 	"sunflower": ["color"],
@@ -16,20 +13,17 @@ var color_keys_by_species = {
 	"orchid": ["red", "yellow", "blue"],
 }
 
-func wild(species):
+func get_next_inbreeding():
+	var ret = [inbreeding_counter, inbreeding_counter + 1]
+	inbreeding_counter += 2
+	return ret
+
+func wild_gene_dict(species: String) -> Dictionary:
 	var ret = {
 		"species": species
 	}
-	for key in int_keys:
-		# 25% chance of 0, 50% chance of 1, 25% chance of 2
-		ret[key] = randi() % 2 + randi() % 2
-
-	# pick 4 unique inbreeding alleles
-	ret["inbreeding"] = []
-	while (ret["inbreeding"].size() < 4):
-		var allele = randi() % 100
-		if allele not in ret["inbreeding"]:
-			ret["inbreeding"].append(allele)
+	ret["max_flowers"] = [1, 1]
+	ret["inbreeding"] = get_next_inbreeding()
 
 	if species == "sunflower":
 		ret["color"] = ["R", "Y"]
@@ -73,38 +67,37 @@ func wild(species):
 
 	return ret
 
-func _pick_int_copy(dominant_count):
-	if dominant_count == 2:
-		return 1
-	elif dominant_count == 0:
-		return 0
-	else:
-		return randi() % 2
+func initialize_next_gene_storage(species: String):
+	next_gene_storage = {"max_flowers": {}}
+	for color_key in color_keys_by_species[species]:
+		next_gene_storage[color_key] = {}
 
-func gamete_dict_from_gene_dict(gene_dict):
-	var species = gene_dict["species"]
-	var ret = {
-		"species": species,
-	}
-	for key in int_keys:
-		ret[key] = _pick_int_copy(gene_dict[key])
-	for key in color_keys_by_species[species]:
-		ret[key] = gene_dict[key][randi() % 2]
-	ret["inbreeding"] = []
-	ret["inbreeding"].append(gene_dict["inbreeding"][randi() % 2])
-	ret["inbreeding"].append(gene_dict["inbreeding"][2 + randi() % 2])
-	return ret
+func _get_offspring_gene(gene, p1, p2):
+	var pa = [p1[gene], p2[gene]]
+	pa.sort()
+	var key = str(pa)
+	if key not in next_gene_storage[gene].keys() or next_gene_storage[gene][key] == []:
+		next_gene_storage[gene][key] = [
+			[pa[0][0], pa[1][0]],
+			[pa[0][0], pa[1][1]],
+			[pa[0][1], pa[1][0]],
+			[pa[0][1], pa[1][1]],
+		]
+		next_gene_storage[gene][key].shuffle()
+	return next_gene_storage[gene][key].pop_back()
 
-func gene_dict_from_gamete_dicts(gamete_1, gamete_2):
-	var species = gamete_1["species"]
-	if gamete_2["species"] != species:
-		return null
-	var ret = {
-		"species": species,
-	}
-	for key in int_keys:
-		ret[key] = gamete_1[key] + gamete_2[key]
-	for key in color_keys_by_species[species]:
-		ret[key] = [gamete_1[key], gamete_2[key]]
-	ret["inbreeding"] = gamete_1["inbreeding"] + gamete_2["inbreeding"]
-	return ret
+func offspring_from_parent_genome_dicts(p1: Dictionary, p2: Dictionary):
+	var species = p1["species"]
+	var offspring = {"species": species}
+	var keys = ["max_flowers"] + color_keys_by_species[species]
+	for key in keys:
+		offspring[key] = _get_offspring_gene(key, p1, p2)
+
+	var p1i = p1["inbreeding"].duplicate()
+	var p2i = p2["inbreeding"].duplicate()
+	for i in [p1i, p2i]:
+		if len(i) > 2:
+			i.shuffle()
+			i.resize(2)
+	offspring["inbreeding"] = p1i + p2i
+	return offspring

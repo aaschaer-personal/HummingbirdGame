@@ -26,14 +26,14 @@ func main():
 func generate_starting_seeds():
 	var starting_seeds = []
 	for i in range(4):
-		starting_seeds.append(GenomeGenerator.wild("sunflower"))
-	starting_seeds[0]["max_flowers"] = 0
+		starting_seeds.append(GenomeGenerator.wild_gene_dict("sunflower"))
+	starting_seeds[0]["max_flowers"] = [0, 0]
 	starting_seeds[0]["color"] = ["Y", "Y"]
-	starting_seeds[1]["max_flowers"] = 0
+	starting_seeds[1]["max_flowers"] = [0, 0]
 	starting_seeds[1]["color"] = ["Y", "Y"]
-	starting_seeds[2]["max_flowers"] = 1
+	starting_seeds[2]["max_flowers"] = [1, 0]
 	starting_seeds[2]["color"] = ["Y", "Y"]
-	starting_seeds[3]["max_flowers"] = 1
+	starting_seeds[3]["max_flowers"] = [1, 0]
 	starting_seeds[3]["color"] = ["R", "R"]
 	return starting_seeds
 

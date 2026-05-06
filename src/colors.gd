@@ -46,10 +46,10 @@ var rainbow_order = {
 	white: 8,
 }
 
-func flower_colors(species):
+func flower_colors(species: String):
 	return colors_by_species[species]
 
-func color_name(color):
+func color_name(color: Color):
 	return color_names[color]
 
 func label_text_from_color_list(colors):

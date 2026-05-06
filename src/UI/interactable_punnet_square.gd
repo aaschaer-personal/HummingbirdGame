@@ -28,6 +28,7 @@ func _ready():
 	options.label_colors_changed.connect(set_color_label_visibility)
 	set_color_label_visibility(Config.get_option("label_colors"))
 	if level:
+		await level.ready
 		species = level.flower_species
 		var flower_texture = level.flower_icon_texture
 		p1_example_flower.texture = flower_texture

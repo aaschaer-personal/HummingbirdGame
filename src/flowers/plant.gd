@@ -5,11 +5,11 @@ class_name Plant extends Area2D
 @onready var flower_1_spawn = $FlowerSpawn1
 @onready var flower_2_spawn = $FlowerSpawn2
 @onready var flower_3_spawn = $FlowerSpawn3
-@onready var genome = $Genome
 @onready var audio_player = $OptionAwareAudioPlayer
 @onready var labels = $Labels
 @onready var color_label = $Labels/ColorLabel
 @onready var gene_label = $Labels/GeneLabel
+@onready var genome = $ParsedGenome
 @onready var options = get_tree().get_first_node_in_group("options")
 
 var flower_1_scene = null
@@ -38,6 +38,7 @@ func _ready():
 	parent_plot = get_parent()
 	options.label_colors_changed.connect(_on_label_colors_changed)
 	options.show_genes_changed.connect(_on_show_genes_changed)
+	
 
 func _flip():
 	sprite.flip_h = true

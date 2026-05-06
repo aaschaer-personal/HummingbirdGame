@@ -25,6 +25,7 @@ var BRIEF_PAUSE = .5
 var level_num
 var level_intro_text
 var bouquet_recipes
+var flower_species
 
 func generate_starting_seeds():
 	pass
@@ -39,6 +40,8 @@ func _ready():
 	visitor_manager.visitor_left.connect(_on_visitor_left)
 	player.seeds_harvested.connect(_on_seeds_harvested)
 	visitor_manager.initialize_bouquets(bouquet_recipes)
+	GenomeGenerator.initialize_next_gene_storage(flower_species)
+
 	main.call_deferred()
 
 func _failure_check():
