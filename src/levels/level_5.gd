@@ -4,7 +4,7 @@ extends HibiscusLevel
 func _ready():
 	level_num = 5
 	level_intro_text = """Welcome to the Hibiscus cache!
-This test is a bit unique with different numbers of alleles across two color genes. Take note that if the red gene is RR the flower will be red regardless of the other color gene!
+This test is a bit unique with different numbers of alleles across two color loci. Take note that if the red locus is RR the flower will be red regardless of the other locus!
 
 Your starting seeds' color genes are RRYY, RrBw, and rrww."""
 	var easy_colors = [Colors.red,  Colors.white]

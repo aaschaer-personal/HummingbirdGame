@@ -33,11 +33,19 @@ func _ready():
 	var options = get_tree().get_first_node_in_group("options")
 	options.label_colors_changed.connect(_on_label_colors_changed)
 	start_decay_timer()
-	fall_over()
 
-func fall_over():
-	# fall over, starting from vertical
-	rotation_degrees = -90
+func fall(left):
+	# even using sync_shadow_position, first frame is out of position
+	# idk why, but this looks good enough
+	skip_shadow_frame()
+	if left:
+		item_shadow.shadow.visible = false
+		petal_shadow.shadow.visible = false
+		rotation_degrees = 90
+		set_flip_h(true)
+	else:
+		rotation_degrees = -90
+	sync_shadow_position()
 	var tween = create_tween()
 	tween.tween_property(
 		self,
@@ -127,10 +135,12 @@ func decay():
 	queue_free()
 
 func sync_shadow_position():
-	var item_shadow_generator = $Item/ShadowGenerator
-	var petal_shadow_generator = $PetalSprite/ShadowGenerator
-	item_shadow_generator.sync_position()
-	petal_shadow_generator.sync_position()
+	item_shadow.sync_position()
+	petal_shadow.sync_position()
+
+func skip_shadow_frame():
+	item_shadow.skip_frame()
+	petal_shadow.skip_frame()
 
 func _on_label_colors_changed(toggle_value):
 	if is_interactable():

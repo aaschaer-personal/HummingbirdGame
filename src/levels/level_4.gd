@@ -4,7 +4,7 @@ extends ZinniaLevel
 func _ready():
 	level_num = 4
 	level_intro_text = """Welcome to the Zinnia cache!
-Here we test your mastery of a single gene with 4 different alleles that combine into six different colors.
+Here we test your mastery of a single locus with four different alleles that combine into six different colors.
 
 Your starting seeds' color genes are RY, Rw, and FF."""
 	# colors, count, size, max_repetitions

@@ -4,7 +4,7 @@ extends LupineLevel
 func _ready():
 	level_num = 3
 	level_intro_text = """Welcome to the Lupine cache!
-Here you will have your first experience with multiple color genes. Each gene combines independently, so the possible outcomes of a cross have expanded significantly.
+Here you will have your first experience with multiple color loci. Each locus combines independently, so the possible outcomes of a cross have expanded significantly.
 
 Your starting seeds' color genes are RrBb (2), Rrbb, and rrBB."""
 	# colors, count, size, max_repetitions

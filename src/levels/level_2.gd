@@ -4,7 +4,7 @@ extends JewelweedLevel
 func _ready():
 	level_num = 2
 	level_intro_text = """Welcome to the Jewelweed cache!
-Here we expand on the basics by adding another color, purple. Take note that purple is dominant over yellow, with both PP and PY resulting in purple flowers.
+Here we expand on the basics by adding another color allele, P for purple. Take note that purple is dominant over yellow, with both PP and PY resulting in purple flowers.
 
 Your starting seeds' color genes are RR, YY, and PP."""
 	# colors, count, size, max_repetitions

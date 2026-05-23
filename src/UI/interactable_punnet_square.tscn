@@ -72,6 +72,7 @@ offset_bottom = 36.0
 expand_mode = 2
 
 [node name="ColorLabel" type="Label" parent="P1/Example"]
+visible = false
 layout_mode = 0
 offset_top = -12.0
 offset_right = 40.0
@@ -148,6 +149,7 @@ offset_bottom = 36.0
 expand_mode = 2
 
 [node name="ColorLabel" type="Label" parent="P2/Example"]
+visible = false
 layout_mode = 0
 offset_top = -12.0
 offset_right = 40.0

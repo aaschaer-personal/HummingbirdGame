@@ -97,10 +97,10 @@ func tutorial_sequence():
 		add_tutorial_text("GrowFlowers",
 """Grow four sunflower plants:
 
-1. Pick up a seed packet (click or %interact).
-2. Plant seeds in bare soil (click or %interact while holding a seed packet).
+1. Pick up a seed packet (left click or %interact).
+2. Plant seeds in bare soil (left click or %interact while holding a seed packet).
 3. Drop the seed packet (right click or %drop).
-4. Pick up the watering can (click or %interact).
+4. Pick up the watering can (left click or %interact).
 5. Water seeds (move while holding watering can).
 6. Drop the watering can (right click or %drop).
 7. Wait for the flowers to grow.
@@ -117,9 +117,9 @@ func tutorial_sequence():
 		add_tutorial_text("OrangePollination",
 	"""Cross-pollinate for an orange sunflower:
 
-1. If there is any pollen on your beak, take a bath in the pond (click or %interact).
-2. Drink from a red or yellow sunflower (click or %interact).
-3. Drink from the other collor sunflower (click or %interact).
+1. If there is any pollen on your beak, take a bath in the pond (left click or %interact).
+2. Drink from a red or yellow sunflower (left click or %interact).
+3. Drink from the other collor sunflower (left click or %interact).
 
 """)
 		while true:

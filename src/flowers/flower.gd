@@ -187,6 +187,15 @@ func clip():
 		cut_flower_instance.set_color(parent_plant.genome.flower_color)
 		cut_flower_instance.set_global_position(global_position + cut_offsets[flower_position])
 		cut_flower_instance.sync_shadow_position()
+		# 1 is top, fall opposite of player
+		if flower_position == 0:
+			cut_flower_instance.fall(player.global_position.x > global_position.x)
+		# left if not flipped
+		elif flower_position == 1:
+			cut_flower_instance.fall(not parent_plant.flipped)
+		# right if not flipped
+		elif flower_position == 2:
+			cut_flower_instance.fall(parent_plant.flipped)
 	harvest()
 
 func harvest():

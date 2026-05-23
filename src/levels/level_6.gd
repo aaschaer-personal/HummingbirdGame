@@ -4,7 +4,7 @@ extends OrchidLevel
 func _ready():
 	level_num = 6
 	level_intro_text = """Welcome to the Orchid cache!
-Prove you can handle crossing three different color genes to complete the final test of the Journey!
+Prove you can handle three different color loci to complete the final test of the Journey!
 
 Your starting seeds' color genes are RrYyBb, RRyyBB, rrYYbb, and rryybb."""
 	var easy_colors = [Colors.fushia, Colors.yellow, Colors.white]
