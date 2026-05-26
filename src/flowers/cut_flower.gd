@@ -28,6 +28,7 @@ var color: Color
 var is_decaying = false
 
 func _ready():
+	super()
 	add_to_group("cut_flowers")
 	decay_timer.timeout.connect(decay)
 	var options = get_tree().get_first_node_in_group("options")
@@ -88,11 +89,13 @@ func set_flip_h(val: bool):
 		item_sprite.position.x = x_offset * -1
 		petal_sprite.position.x = x_offset * -1
 		collision_shape.position.x = x_offset * -1
+		arrow.position.x = x_offset * -1
 		color_label.position.x = -40
 	else:
 		item_sprite.position.x = x_offset
 		petal_sprite.position.x = x_offset
 		collision_shape.position.x = x_offset
+		arrow.position.x = x_offset
 		color_label.position.x = 0
 
 func set_pickup_height():

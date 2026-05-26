@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://54ivqkg17xxg"]
+[gd_scene load_steps=17 format=3 uid="uid://54ivqkg17xxg"]
 
 [ext_resource type="Texture2D" uid="uid://bs1lxybc8qv2e" path="res://assets/Items/watering_can.png" id="1_rsdxe"]
 [ext_resource type="Script" uid="uid://c5or0p6fw8gak" path="res://src/items/watering_can.gd" id="1_y64fi"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="9_8083b"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_ptpi4"]
 [ext_resource type="AudioStream" uid="uid://dmbeuwnj72j0g" path="res://assets/Sounds/watering.ogg" id="10_bpakl"]
+[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="11_a440u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
 radius = 9.0
@@ -89,3 +90,8 @@ stream = ExtResource("9_8083b")
 stream = ExtResource("10_bpakl")
 panning_strength = 5.0
 db_offset = 1
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -17)
+texture = ExtResource("11_a440u")

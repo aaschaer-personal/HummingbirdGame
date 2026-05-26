@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd8nwio7iqgcb"]
+[gd_scene load_steps=6 format=3 uid="uid://cd8nwio7iqgcb"]
 
-[ext_resource type="Script" path="res://src/environment/pond.gd" id="1_emykl"]
+[ext_resource type="Script" uid="uid://tdytjm0s81tp" path="res://src/environment/pond.gd" id="1_emykl"]
 [ext_resource type="Texture2D" uid="uid://cj0ehfbgwxbws" path="res://assets/Environment/pond.png" id="2_e5sv8"]
+[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="3_n0nfn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f07n3"]
 radius = 18.9724
@@ -30,3 +31,8 @@ shape = SubResource("CapsuleShape2D_f07n3")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SplashZone"]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_br4wb")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -28)
+texture = ExtResource("3_n0nfn")

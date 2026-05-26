@@ -1,5 +1,7 @@
 class_name Item extends Interactable
 
+@warning_ignore("unused_signal")
+
 @onready var item_sprite = $Item
 @onready var disk_sprite = $TransportDisk
 @onready var item_shadow = $Item/ShadowGenerator
@@ -13,6 +15,7 @@ class_name Item extends Interactable
 var dispense_slot = null
 
 func _ready():
+	super()
 	disk_sprite.visible = false
 
 func is_interactable():

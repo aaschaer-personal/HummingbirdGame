@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://hpx1s0l0kxve"]
+[gd_scene load_steps=10 format=3 uid="uid://hpx1s0l0kxve"]
 
 [ext_resource type="Script" uid="uid://x05spfcrcao6" path="res://src/visitors/visitor.gd" id="1_7cc7u"]
 [ext_resource type="Texture2D" uid="uid://ljcp7bnsusxf" path="res://assets/Visitors/icon_speech_bubble.png" id="2_bq07r"]
 [ext_resource type="Texture2D" uid="uid://dlglel8bba1jr" path="res://assets/Visitors/text_speech_bubble.png" id="3_bq07r"]
+[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="5_lithb"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_k8pmv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5hui3"]
@@ -20,7 +21,7 @@ height = 68.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cb84g"]
 height = 34.0
 
-[node name="Visitor" type="Area2D"]
+[node name="Visitor" type="Area2D" groups=["visitors"]]
 script = ExtResource("1_7cc7u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -87,3 +88,7 @@ disabled = true
 db_offset = -5
 
 [node name="SongPlayers" type="Node2D" parent="."]
+
+[node name="Arrow" type="Sprite2D" parent="."]
+position = Vector2(-6, -44)
+texture = ExtResource("5_lithb")

@@ -28,6 +28,7 @@ var spawn = null
 
 
 func _ready():
+	super()
 	visitor_manager = get_tree().get_nodes_in_group("visitor_manager")[0]
 	visitor_bouquet = bouquet_scene.instantiate()
 	hold_point.add_child(visitor_bouquet)

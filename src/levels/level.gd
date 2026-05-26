@@ -14,11 +14,13 @@ class_name Level extends Node
 var water_explained = false
 var energy_explained = false
 var packet_printed = false
-var seeds_harvested = false
+var orange_seeds_harvested = false
+var flower_accepted = false
 var visitor_left = false
 var flowers_grown = 0
 var colors_grown = {}
 var colors_pollinated = {}
+var starting_packet = null
 var BRIEF_PAUSE = .5
 
 # abstract
@@ -35,10 +37,10 @@ func _ready():
 	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
 	SignalBus.cut_flower_decayed.connect(_failure_check)
-	SignalBus.flower_accepted.connect(_failure_check)
+	SignalBus.flower_accepted.connect(_on_flower_accepted)
 	cache.packet_printed.connect(_on_packet_printed)
 	visitor_manager.visitor_left.connect(_on_visitor_left)
-	player.seeds_harvested.connect(_on_seeds_harvested)
+	SignalBus.orange_seeds_harvested.connect(_on_orange_seeds_harvested)
 	visitor_manager.initialize_bouquets(bouquet_recipes)
 	GenomeGenerator.initialize_next_gene_storage(flower_species)
 
@@ -57,6 +59,10 @@ func _failure_check():
 		if cut_flower.is_in_play():
 			return
 	failure_screen.open()
+
+func _on_flower_accepted():
+	flower_accepted = true
+	_failure_check()
 
 func _on_visitor_left():
 	visitor_left = true
@@ -81,8 +87,8 @@ func _on_flower_pollinated(color):
 func _on_packet_printed():
 	packet_printed = true
 	
-func _on_seeds_harvested():
-	seeds_harvested = true
+func _on_orange_seeds_harvested():
+	orange_seeds_harvested = true
 
 func main():
 	if Config.get_option("skip_intros"):
@@ -91,13 +97,13 @@ func main():
 		await cinematic_intro_sequence()
 
 func generate_starting_packet():
-	var packet = seed_packet_scene.instantiate()
-	packet.global_position = Vector2(-100,-100)
-	add_child(packet)
+	starting_packet = seed_packet_scene.instantiate()
+	starting_packet.global_position = Vector2(-100,-100)
+	add_child(starting_packet)
 	var starting_seeds = generate_starting_seeds()
 	starting_seeds.shuffle()
-	packet.add_seeds(starting_seeds)
-	return packet
+	starting_packet.add_seeds(starting_seeds)
+	return starting_packet
 
 func quick_intro_sequence():
 	cache.quick_raise()

@@ -124,12 +124,12 @@ func start_new_flower():
 				flower_instance.flip()
 			return
 
-func on_flower_harvest(flower_position):
+func on_flower_removed(flower_position):
 	current_flowers -= 1
 	flowers[flower_position] = null
 
 func initialize_labels():
-	var color = GenomeHelpers.color_from_gene_dict(genome.gene_dict)
+	var color = genome.flower_color
 	color_label.text = Colors.color_name(color)
 	gene_label.text = GenomeHelpers.code_from_gene_dict(genome.gene_dict)
 	color_label.visible = Config.get_option("label_colors")

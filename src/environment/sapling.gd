@@ -8,6 +8,7 @@ class_name Sapling extends Interactable
 @export var is_horizontal = true
 
 func _ready():
+	super()
 	top_rustle_zone.body_entered.connect(top_rustle)
 	bottom_rustle_zone.body_entered.connect(bottom_rustle)
 

@@ -23,6 +23,7 @@ var bee: Bee = null
 var manualy_pollinated = false
 var cut_flower_scene = null
 var disable_bees
+var color
 
 var cut_offsets = {
 	0: Vector2(0,0),
@@ -31,6 +32,7 @@ var cut_offsets = {
 }
 
 func _ready():
+	super()
 	cut_flower_scene = get_tree().get_first_node_in_group("level").cut_flower_scene
 
 	var options = get_tree().get_first_node_in_group("options")
@@ -40,12 +42,17 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	nectar_meter.max_value = max_nectar
 	nectar_meter.visible = false
-	petal_sprite.modulate = parent_plant.genome.flower_color
+	color = parent_plant.genome.flower_color
+	if color == Colors.yellow:
+		add_to_group("yellow_flowers")
+	elif color == Colors.red:
+		add_to_group("red_flowers")
+	petal_sprite.modulate = color
 	_play_animation("bloom")
 	await main_sprite.animation_finished
 	stage = 1
 	nectar = max_nectar / (parent_plant.genome.max_flowers * 3)
-	SignalBus.flower_bloomed.emit(parent_plant.genome.flower_color)
+	SignalBus.flower_bloomed.emit(color)
 
 func flip():
 	main_sprite.flip_h = true
@@ -59,6 +66,8 @@ func flip():
 	nectar_meter.position.x -= 12
 	for bee_hover_point in bee_hover_points.get_children():
 		bee_hover_point.position.x *= -1
+	if arrow:
+		arrow.position.x *= -1
 
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
@@ -107,6 +116,10 @@ func _go_to_seed():
 		bee_audio_player.stop()
 	nectar = 0
 	stage = 2
+	if parent_plant.genome.species == "sunflower":
+		for gene_dict in seeds:
+			if GenomeHelpers.color_from_gene_dict(gene_dict) == Colors.orange:
+				add_to_group("orange_seeds")
 
 func is_interactable():
 	return (
@@ -151,7 +164,11 @@ func generate_seeds():
 
 func harvest_seeds(seed_packet):
 	seed_packet.add_seeds(seeds)
-	harvest()
+	for gene_dict in seeds:
+		if GenomeHelpers.color_from_gene_dict(gene_dict) == Colors.orange:
+			SignalBus.orange_seeds_harvested.emit()
+			break
+	remove()
 
 func drink(delta):
 	pollination_timer.stop()
@@ -184,7 +201,9 @@ func clip():
 	if stage == 1:
 		var cut_flower_instance = cut_flower_scene.instantiate()
 		get_tree().get_first_node_in_group("level").add_child(cut_flower_instance)
-		cut_flower_instance.set_color(parent_plant.genome.flower_color)
+		if color == Colors.yellow:
+			cut_flower_instance.add_to_group("cut_yellow_flowers")
+		cut_flower_instance.set_color(color)
 		cut_flower_instance.set_global_position(global_position + cut_offsets[flower_position])
 		cut_flower_instance.sync_shadow_position()
 		# 1 is top, fall opposite of player
@@ -196,10 +215,11 @@ func clip():
 		# right if not flipped
 		elif flower_position == 2:
 			cut_flower_instance.fall(parent_plant.flipped)
-	harvest()
+	SignalBus.flower_cut.emit()
+	remove()
 
-func harvest():
-	parent_plant.on_flower_harvest(flower_position)
+func remove():
+	parent_plant.on_flower_removed(flower_position)
 	queue_free()
 
 func set_disable_bees(toggle_value):
