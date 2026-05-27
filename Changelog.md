@@ -1,7 +1,7 @@
 # Changelog
 
 ## v0.9
-- Control rempping
+- Control remapping
 - Accessibility and difficulty options
 - Rework guide and tutorial
 - Adjust level 5 starting genes
