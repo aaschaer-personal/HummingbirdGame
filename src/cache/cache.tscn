@@ -762,7 +762,6 @@ shape = SubResource("RectangleShape2D_d8ecx")
 
 [node name="CacheUI" parent="." instance=ExtResource("2_fvinh")]
 visible = false
-z_index = 1
 offset_left = -112.0
 offset_top = -21.0
 offset_right = 128.0

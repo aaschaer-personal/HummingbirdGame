@@ -14,6 +14,10 @@ config/name="HummingbirdGame"
 run/main_scene="res://src/splash_screen.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[audio]
+
+general/default_playback_type.web=0
+
 [autoload]
 
 GenomeGenerator="*res://src/genome_generator.gd"
