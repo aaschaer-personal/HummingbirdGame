@@ -109,9 +109,9 @@ func tutorial_sequence():
 2. Plant seeds in bare soil (left click or %interact while holding a seed packet).
 3. Drop the seed packet (right click or %drop).
 4. Pick up the watering can (left click or %interact).
-5. Water seeds (move while holding watering can).
+5. Water seeds (move while holding the watering can).
 6. Drop the watering can (right click or %drop).
-7. Wait for the flowers to grow.
+7. Wait for the flowers to grow and bloom.
 
 """)
 		while flowers_grown < 6:
@@ -175,10 +175,10 @@ func tutorial_sequence():
 """Satisfy a visitor:
 
 1. Pick up clippers (left click or %interact)
-2. Cut a yellow flower (left click or %interact while holding clippers).
+2. Cut a yellow flower (left click or %interact while holding the clippers).
 4. Drop the clippers (right click or %drop)
 3. Pick up the cut flower (left click or %interact).
-3. Deliver the flower to the vistitor (left click %interact while holding the flower).
+3. Deliver the flower to the vistitor (left click %interact while holding a flower).
 
 """)
 		while not flower_accepted:
@@ -235,11 +235,12 @@ func tutorial_sequence():
 
 	if Colors.orange not in colors_pollinated:
 		add_tutorial_text("OrangePollination",
-	"""Cross-pollinate for an orange sunflower:
+"""Cross-pollinate for an orange sunflower:
 
 1. If there is any pollen on your beak, take a bath in the pond (left click or %interact).
-2. Drink from a red or yellow sunflower to get its pollen on your beak (left click or %interact).
+2. Drink from a sunflower to get its pollen on your beak (left click or %interact).
 3. Drink from the other color sunflower to pollinate it (left click or %interact).
+4. Wait for the pollinated sunflower to go to seed.
 
 """)
 		# if player has pollen, arrow over pond until bathed
@@ -312,9 +313,8 @@ func tutorial_sequence():
 		add_tutorial_text("HarvestSeeds",
 """Harvest orange sunflower seeds:
 
-1. Wait for the cross-pollinated flower to go to seed.
-2. Pick up the new seed packet (left click or %interact).
-3. Harvest the seeds (left click or %interact while holding a seed packet).
+1. Pick up the new seed packet (left click or %interact).
+2. Harvest seeds from the flower gone to seed (left click or %interact while holding a seed packet).
 
 """)
 		while not orange_seeds_harvested:
@@ -347,7 +347,7 @@ func tutorial_sequence():
 """Grow an orange sunflower:
 
 1. Plant one of the cross-pollinated seeds.
-2. Water them and wait for the flower to grow.
+2. Water and wait for the flower to grow and bloom.
 
 """)
 		while not Colors.orange in colors_grown:
@@ -412,6 +412,8 @@ func tutorial_sequence():
 							plot.set_arrow_main_visibility(false)
 			# wait for bloom
 			else:
+				for plot in get_tree().get_nodes_in_group("plot"):
+					plot.set_arrow_main_visibility(false)
 				await get_tree().create_timer(0.1, false).timeout
 		await remove_tutorial_text("OrangeGrow")
 
