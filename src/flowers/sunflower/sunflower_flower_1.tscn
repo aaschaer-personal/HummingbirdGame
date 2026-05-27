@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://qsrtb72hub0g"]
+[gd_scene load_steps=81 format=3 uid="uid://qsrtb72hub0g"]
 
 [ext_resource type="PackedScene" uid="uid://5rcf7awoltde" path="res://src/flowers/flower.tscn" id="1_43p25"]
 [ext_resource type="Texture2D" uid="uid://du41deyxtp6ui" path="res://assets/Flowers/Sunflower/sunflower_bloom_petals_1.png" id="2_qq8ba"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cqb6sw1os0edt" path="res://assets/Flowers/Sunflower/sunflower_bloom_rustle_1.png" id="10_itf1b"]
 [ext_resource type="PackedScene" uid="uid://nxry5ro62he1" path="res://src/UI/nectar_meter.tscn" id="11_jgdrm"]
 [ext_resource type="Texture2D" uid="uid://bj8koqhcpcu83" path="res://assets/Flowers/Sunflower/sunflower_to_seed_1.png" id="11_mur4x"]
+[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="12_ik6ko"]
 [ext_resource type="Texture2D" uid="uid://ckoq7opaid43g" path="res://assets/Flowers/Sunflower/sunflower_to_seed_rustle_1.png" id="12_mfgpv"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="14_bm55q"]
 
@@ -570,3 +571,8 @@ offset_left = -6.0
 offset_top = -70.0
 offset_right = 6.0
 offset_bottom = -34.0
+
+[node name="Arrow" type="Sprite2D" parent="." index="9"]
+visible = false
+position = Vector2(0, -44)
+texture = ExtResource("12_ik6ko")

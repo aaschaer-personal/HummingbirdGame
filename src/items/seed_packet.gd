@@ -5,6 +5,7 @@ class_name SeedPacket extends Item
 var seeds = []
 
 func _ready():
+	super()
 	add_to_group("seed_packets")
 	seed_count.text = "0"
 

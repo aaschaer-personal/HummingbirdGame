@@ -59,3 +59,8 @@ func play_parent_animation():
 
 func set_visibility():
 	shadow.visible = parent.visible
+
+func skip_frame():
+	shadow.visible = false
+	await get_tree().create_timer(1.0/60, false).timeout
+	set_visibility.call_deferred()

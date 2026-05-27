@@ -1,10 +1,51 @@
 extends Node
 
 @warning_ignore_start("unused_signal")
+signal item_picked_up
+signal item_dropped
+signal seed_planted
+signal seed_removed
+signal plot_watered
 signal flower_bloomed
+signal flower_cut
 signal cut_flower_decayed
 signal plant_died
 signal flower_pollinated
 signal watering_can_emptied
 signal watering_can_refilled
 signal flower_accepted
+signal orange_seeds_harvested
+
+# multi signals
+signal seed_planted_removed_or_item_dropped
+signal item_picked_up_or_seed_removed
+signal plot_watered_seed_removed_or_item_dropped
+signal flower_cut_or_item_dropped
+signal item_picked_up_or_flower_decayed
+signal flower_accepted_or_item_dropped
+signal orange_seeds_harvested_or_flower_cut
+
+func _ready():
+	# seed_planted_removed_or_item_dropped
+	seed_planted.connect(seed_planted_removed_or_item_dropped.emit)
+	seed_removed.connect(seed_planted_removed_or_item_dropped.emit)
+	item_dropped.connect(seed_planted_removed_or_item_dropped.emit)
+	# item_picked_up_or_seed_removed
+	item_picked_up.connect(item_picked_up_or_seed_removed.emit)
+	seed_removed.connect(item_picked_up_or_seed_removed.emit)
+	# plot_watered_seed_removed_or_item_dropped
+	plot_watered.connect(plot_watered_seed_removed_or_item_dropped.emit)
+	seed_removed.connect(plot_watered_seed_removed_or_item_dropped.emit)
+	item_dropped.connect(plot_watered_seed_removed_or_item_dropped.emit)
+	# flower_cut_or_item_dropped
+	flower_cut.connect(flower_cut_or_item_dropped.emit)
+	item_dropped.connect(flower_cut_or_item_dropped.emit)
+	# item_picked_up_or_flower_decayed
+	item_picked_up.connect(item_picked_up_or_flower_decayed.emit)
+	cut_flower_decayed.connect(item_picked_up_or_flower_decayed.emit)
+	# flower_accepted_or_item_dropped
+	flower_accepted.connect(flower_accepted_or_item_dropped.emit)
+	item_dropped.connect(flower_accepted_or_item_dropped.emit)
+	# orange_seeds_harvested_or_flower_cut
+	orange_seeds_harvested.connect(orange_seeds_harvested_or_flower_cut.emit)
+	flower_cut.connect(orange_seeds_harvested_or_flower_cut.emit)

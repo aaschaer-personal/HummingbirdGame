@@ -37,11 +37,11 @@ func set_flip_h(val):
 	item_sprite.set_flip_h(val)
 	if not val:
 		item_sprite.rotation_degrees = 25
-		water_particles.position = Vector2(10,0)
+		water_particles.position = Vector2(11,2)
 		water_zone.position = Vector2(9,20)
 	else:
 		item_sprite.rotation_degrees = -25
-		water_particles.position = Vector2(-10,0)
+		water_particles.position = Vector2(-11,2)
 		water_zone.position = Vector2(-9,20)
 
 func refill():

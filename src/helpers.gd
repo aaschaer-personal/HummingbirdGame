@@ -26,3 +26,12 @@ func point_in_area(point: Vector2, area: Area2D):
 				return true
 		
 		return false
+
+func get_event_name(event: InputEvent) -> String:
+	name = OS.get_keycode_string(event.physical_keycode)
+	if name == "Escape":
+		name = "Esc"
+	return name
+
+func get_action_event_name(action: String):
+	return get_event_name(InputMap.action_get_events(action)[0])

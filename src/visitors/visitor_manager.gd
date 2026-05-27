@@ -3,6 +3,7 @@ class_name VisitorManager extends Node2D
 signal visitor_arrived(desired_bouquet_colors)
 signal visitor_left
 signal boquet_accepted
+signal bouquets_initialized
 
 @onready var timer = $Timer
 var bouquets = []
@@ -17,30 +18,21 @@ var num_visitors = 0
 var max_visitors: int
 var visitor_scene: Resource
 
-var rainbow_order = {
-	Colors.red: 0,
-	Colors.fushia: 1,
-	Colors.pink: 2,
-	Colors.orange: 3,
-	Colors.yellow: 4,
-	Colors.green: 5,
-	Colors.blue: 6,
-	Colors.purple: 7,
-	Colors.white: 8,
-}
-
 func _ready():
 	var level = get_tree().get_first_node_in_group("level")
 	visitor_spawns = get_tree().get_nodes_in_group("visitor_spawns")
 	max_visitors = len(visitor_spawns)
 	visitor_scene = level.visitor_scene
-	for recipe in level.bouquet_recipes:
-		for bouquet in callv("generate_boquets", recipe):
-			bouquets.append(bouquet)
 	timer.timeout.connect(_on_timeout)
 
+func initialize_bouquets(bouquet_recipes):
+	for recipe in bouquet_recipes:
+		for bouquet in callv("generate_boquets", recipe):
+			bouquets.append(bouquet)
+	bouquets_initialized.emit()
+
 func _color_compare(color1, color2):
-	return rainbow_order[color1] < rainbow_order[color2]
+	return Colors.rainbow_order[color1] < Colors.rainbow_order[color2]
 
 func generate_boquets(colors, count, size, max_repetitions):
 	if colors is String:

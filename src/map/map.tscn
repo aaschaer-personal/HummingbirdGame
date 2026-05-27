@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=4 uid="uid://cwlks03m5fxs5"]
+[gd_scene load_steps=122 format=4 uid="uid://cwlks03m5fxs5"]
 
 [ext_resource type="Texture2D" uid="uid://cvmachil2lwep" path="res://assets/Map/map.png" id="1_hmhcj"]
 [ext_resource type="Script" uid="uid://f6gjvk0581yy" path="res://src/map/map.gd" id="1_o2hyj"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cl2aa0r4t28bu" path="res://assets/Map/level_6.png" id="11_o5q2x"]
 [ext_resource type="Texture2D" uid="uid://xx6fdgmqg1t2" path="res://assets/Map/level_6_unlock.png" id="12_2fq7k"]
 [ext_resource type="PackedScene" uid="uid://cjcx1de7vtgpx" path="res://src/map/map_player.tscn" id="16_qvnws"]
+[ext_resource type="PackedScene" uid="uid://bfxri5oqab5ij" path="res://src/UI/control_text.tscn" id="17_2wpyj"]
 [ext_resource type="PackedScene" uid="uid://dmtpyvohvlyr1" path="res://src/map/map_jewelweed.tscn" id="18_2snvb"]
 [ext_resource type="PackedScene" uid="uid://cuysebhfwii7x" path="res://src/map/map_sunflower.tscn" id="18_a26im"]
 [ext_resource type="PackedScene" uid="uid://db3qo575rdolk" path="res://src/UI/pause_screen.tscn" id="19_3wqch"]
@@ -848,14 +849,14 @@ position = Vector2(614, 48)
 shape = SubResource("CircleShape2D_0g0tj")
 one_way_collision_margin = 5.0
 
-[node name="TutorialText" type="Label" parent="."]
-modulate = Color(0, 0, 0, 0)
+[node name="TutorialText" parent="." instance=ExtResource("17_2wpyj")]
+modulate = Color(1, 1, 1, 0)
 offset_left = 288.0
 offset_top = 17.0
 offset_right = 508.0
 offset_bottom = 68.0
-text = "* Move with WASD or by clicking on a level
-* E or Double Click to enter level
+text = "* Move with %up %left %down %right or by clicking on a level
+* %interact or Double Click to enter level
 "
 
 [node name="Flowers" type="Node2D" parent="."]

@@ -7,7 +7,7 @@ extends Control
 func _ready():
 	var texture = get_tree().get_first_node_in_group("level").visitor_icon_texture
 	visitor_icon.texture = texture
-	visitor_manager.ready.connect(set_text)
+	visitor_manager.bouquets_initialized.connect(set_text)
 	visitor_manager.boquet_accepted.connect(set_text)
 
 func set_text():

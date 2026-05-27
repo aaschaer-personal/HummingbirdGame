@@ -2,8 +2,10 @@ class_name Player extends CharacterBody2D
 
 signal motion_finished
 signal energy_quartered
+signal energy_to_third_or_perch
 signal energy_back_to_half
-signal seeds_harvested
+signal bath_started
+signal drink_or_bath
 signal dispense_slot_pickup
 
 @onready var body_sprite = $Animation/Body
@@ -45,12 +47,13 @@ var drinking_flower = null
 var hovering_frame = 0
 var perch_y = 0
 var facing_right = true
-var target_animation = "hovering"
-var pollen = []
+var target_animation = "hoveringa"
+var pollen: Array[Dictionary] = []
 var controllable = false
 var in_motion = false
-var low_energy_singal_toggle = false
+var low_energy_singal_state = 0
 var clipping = false
+var energy_loss_rate = 1
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -64,6 +67,9 @@ func _ready():
 		_on_interaction_area_entered.bind(drinking_area))
 	landing_area.area_entered.connect(
 		_on_interaction_area_entered.bind(landing_area))
+	set_energy_loss_rate(Config.get_option("energy_loss"))
+	var options = get_tree().get_first_node_in_group("options")
+	options.energy_loss_changed.connect(set_energy_loss_rate)
 
 func _input(event):
 	if controllable:
@@ -120,14 +126,17 @@ func _process(delta):
 		rate = max(rate, 0)
 		energy += rate * delta
 	else:
-		energy -= 1 * delta
+		energy -= 1 * energy_loss_rate * delta
 
-	if not low_energy_singal_toggle and energy <= (max_energy / 4.0):
+	if low_energy_singal_state == 0  and energy <= (max_energy / 4.0):
 			energy_quartered.emit()
-			low_energy_singal_toggle = true
-	elif low_energy_singal_toggle and energy >= (max_energy / 2.0):
+			low_energy_singal_state = 1
+	elif low_energy_singal_state == 1  and energy >= (max_energy / 3.0):
+			energy_to_third_or_perch.emit()
+			low_energy_singal_state = 2
+	elif low_energy_singal_state == 2  and energy >= (max_energy / 2.0):
 			energy_back_to_half.emit()
-			low_energy_singal_toggle = false
+			low_energy_singal_state = 3
 
 	if energy <= 0:
 		energy = 0
@@ -259,9 +268,11 @@ func pickup(item):
 	if energy > 0:
 		if item is CutFlower:
 			item.decay_timer.stop()
+			item.color_label.visible = false
 			if held_item is Bouquet:
 				held_item.add_flower(item)
 				held_item.set_flip_h(body_sprite.flip_h)
+				SignalBus.item_picked_up.emit()
 			elif held_item == null:
 				var new_bouquet = bouquet_scene.instantiate()
 				hold_point.add_child(new_bouquet)
@@ -278,6 +289,7 @@ func pickup(item):
 			if item.dispense_slot != null:
 				dispense_slot_pickup.emit(item.dispense_slot)
 				item.dispense_slot = null
+			SignalBus.item_picked_up.emit()
 
 func _drop_item(item):
 	item.reparent(get_parent())
@@ -294,6 +306,7 @@ func drop_held_item():
 		else:
 			_drop_item(held_item)
 			held_item = null
+		SignalBus.item_dropped.emit()
 
 func remove_held_item():
 	var ret = held_item
@@ -304,6 +317,7 @@ func start_drink(flower: Flower):
 	if drinking_flower != null and drinking_flower != flower:
 		drinking_flower.finish_drink()
 	drinking_flower = flower
+	drink_or_bath.emit()
 	target_animation = "drinking"
 	
 func use_tool_on_flower(flower: Flower):
@@ -315,7 +329,6 @@ func use_tool_on_flower(flower: Flower):
 
 	if flower.stage == 2 and held_item is SeedPacket:
 		flower.harvest_seeds(held_item)
-		seeds_harvested.emit()
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
 		audio_player.stream = paper_sound
 		audio_player.play()
@@ -335,10 +348,12 @@ func use_tool_on_plot(plot: Plot):
 				audio_player.stream = dirt_sound
 				audio_player.play()
 		elif plot.plant.stage == 0:
-			held_item.add_seeds([plot.remove_seed()])
-			audio_player.set_pitch_scale(randf_range(.9, 1.1))
-			audio_player.stream = paper_sound
-			audio_player.play()
+			var removed_seed = plot.remove_seed()
+			if removed_seed != null:
+				held_item.add_seeds([removed_seed])
+				audio_player.set_pitch_scale(randf_range(.9, 1.1))
+				audio_player.stream = paper_sound
+				audio_player.play()
 
 func open_cache_ui(ui: CacheUI):
 	if held_item == null or held_item is SeedPacket:
@@ -347,6 +362,7 @@ func open_cache_ui(ui: CacheUI):
 func start_perch(perch_zone: Area2D):
 	perch_y = perch_zone.global_position.y
 	target_animation = "perching"
+	energy_to_third_or_perch.emit()
 
 func give_bouquet(visitor: Visitor):
 	if held_item is Bouquet:
@@ -356,6 +372,7 @@ func give_bouquet(visitor: Visitor):
 
 func bathe(_pond):
 	if held_item == null:
+		bath_started.emit()
 		target_animation = "bathe"
 		# pollen is cleared post animation
 		
@@ -369,9 +386,13 @@ func transfer_seeds(to_packet):
 	if held_item is SeedPacket:
 		to_packet.add_seeds(held_item.remove_all_seeds())
 
-func add_pollen(pollen_dict: Dictionary):
-	pollen.append(pollen_dict)
-	pollen = pollen.slice(-10)
+func add_pollen(pollen_arr: Array[Dictionary]):
+	assert(len(pollen_arr) == 8)
+	# cap pollen at 16 so last flower is at least 50% of pollen
+	if len(pollen) > 8:
+		pollen.resize(8)
+	pollen += pollen_arr
+	pollen.shuffle()
 	pollen_sprite.visible = true
 
 func _set_wings(vis: bool, aud: bool):
@@ -530,6 +551,7 @@ func _do_animation():
 			await body_sprite.animation_finished
 			pollen = []
 			pollen_sprite.visible = false
+			drink_or_bath.emit()
 			
 			target_animation = "hovering"
 		elif target_animation == "tired":
@@ -573,3 +595,6 @@ func _tween_height(target_height: int, duration: float):
 		target_height,
 		duration,
 	)
+
+func set_energy_loss_rate(value):
+	energy_loss_rate = value

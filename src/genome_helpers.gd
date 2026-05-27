@@ -18,7 +18,7 @@ func code_from_gene_dict(gene_dict):
 	else:
 		assert(false)
 
-func color_from_gene_dict(gene_dict):
+func color_from_gene_dict(gene_dict: Dictionary):
 	var species = gene_dict["species"]
 	if species == "sunflower":
 		return sunflower_color(gene_dict["color"])

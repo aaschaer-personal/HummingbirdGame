@@ -1,7 +1,5 @@
 class_name JewelweedLevel extends Level
 
-var flower_species = "jewelweed"
-
 # flower specific scenes
 var cache_top_scene = preload("res://src/cache/level2_cache_top.tscn")
 var plant_scene = preload("res://src/flowers/jewelweed/jewelweed_plant.tscn")
@@ -15,3 +13,7 @@ var petals_icon_texture = preload("res://assets/UI/Icons/jewelweed_petals.png")
 # visitor specific scenes
 var visitor_scene = preload("res://src/visitors/tufted_titmouse.tscn")
 var visitor_icon_texture = preload("res://assets/UI/Icons/tufted_titmouse.png")
+
+func _ready():
+	flower_species = "jewelweed"
+	super()

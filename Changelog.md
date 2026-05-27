@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.9
+- Control remapping
+- Accessibility and difficulty options
+- Rework guide and tutorial
+- Adjust level 5 starting genes
+- Various bugfixes
+
 ## v0.8
 - Add level 6
 - Rework bouquet generation

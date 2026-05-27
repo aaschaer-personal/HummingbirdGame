@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wwkrshqv0ueo"]
 
-[ext_resource type="Script" path="res://src/visitors/desire_icon.gd" id="1_wchdq"]
+[ext_resource type="Script" uid="uid://dipden8ope3ls" path="res://src/visitors/desire_icon.gd" id="1_wchdq"]
 [ext_resource type="Texture2D" uid="uid://d1laal0ao5a0s" path="res://assets/UI/Icons/check.png" id="4_c1lqt"]
 
 [node name="DesireIcon" type="Control"]

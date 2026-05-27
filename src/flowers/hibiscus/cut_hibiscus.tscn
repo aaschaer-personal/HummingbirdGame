@@ -259,3 +259,6 @@ autoplay = "default"
 [node name="ShadowGenerator" parent="Item" index="0" instance=ExtResource("4_j8kuh")]
 object_height = 2
 offset_rotation = true
+
+[node name="Label" parent="." index="6"]
+visible = false

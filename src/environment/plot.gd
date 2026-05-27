@@ -7,6 +7,7 @@ var wetness = 0
 var plant_scene = null
 
 func _ready():
+	super()
 	plant_scene = get_tree().get_first_node_in_group("level").plant_scene
 
 func _process(delta):
@@ -28,16 +29,19 @@ func plant_seed(gene_dict):
 		add_child(new_plant)
 		new_plant.genome.set_vals_from_gene_dict(gene_dict)
 		plant = new_plant
+		SignalBus.seed_planted.emit()
 
 func remove_seed():
-	if plant.stage == 0:		
+	if plant.stage == 0 and plant.sprite.animation != "sprout":
 		var seed_genome = plant.genome.gene_dict
 		plant.queue_free()
 		plant = null
+		SignalBus.seed_removed.emit()
 		return seed_genome
 
 func water(delta):
 	await get_tree().create_timer(0.5, false).timeout
+	SignalBus.plot_watered.emit()
 	wetness += delta * 80
 	if wetness >= 40:
 		wetness = 40

@@ -4,6 +4,7 @@ class_name CutFlower extends Item
 @onready var petal_shadow = $PetalSprite/ShadowGenerator
 @onready var collision_shape = $CollisionShape2D
 @onready var decay_timer = $DecayTimer
+@onready var color_label = $ColorLabel
 @export var species: String
 
 var x_offset_by_species = {
@@ -27,12 +28,25 @@ var color: Color
 var is_decaying = false
 
 func _ready():
+	super()
 	add_to_group("cut_flowers")
 	decay_timer.timeout.connect(decay)
+	var options = get_tree().get_first_node_in_group("options")
+	options.label_colors_changed.connect(_on_label_colors_changed)
 	start_decay_timer()
-	
-	# fall over, starting from vertical
-	rotation_degrees = -90
+
+func fall(left):
+	# even using sync_shadow_position, first frame is out of position
+	# idk why, but this looks good enough
+	skip_shadow_frame()
+	if left:
+		item_shadow.shadow.visible = false
+		petal_shadow.shadow.visible = false
+		rotation_degrees = 90
+		set_flip_h(true)
+	else:
+		rotation_degrees = -90
+	sync_shadow_position()
 	var tween = create_tween()
 	tween.tween_property(
 		self,
@@ -40,6 +54,8 @@ func _ready():
 		0,
 		.1,
 	)
+	await tween.finished
+	color_label.visible = Config.get_option("label_colors")
 
 func is_in_play():
 	# for level_manager._failure_check
@@ -63,6 +79,7 @@ func is_interactable():
 func set_color(new_color: Color):
 	petal_sprite.modulate = new_color
 	color = new_color
+	color_label.text = Colors.color_name(new_color)
 
 func set_flip_h(val: bool):
 	item_sprite.set_flip_h(val)
@@ -72,10 +89,14 @@ func set_flip_h(val: bool):
 		item_sprite.position.x = x_offset * -1
 		petal_sprite.position.x = x_offset * -1
 		collision_shape.position.x = x_offset * -1
+		arrow.position.x = x_offset * -1
+		color_label.position.x = -40
 	else:
 		item_sprite.position.x = x_offset
 		petal_sprite.position.x = x_offset
 		collision_shape.position.x = x_offset
+		arrow.position.x = x_offset
+		color_label.position.x = 0
 
 func set_pickup_height():
 	item_shadow.height_off_ground = pickup_height
@@ -83,6 +104,7 @@ func set_pickup_height():
 
 func drop():
 	super()
+	color_label.visible = Config.get_option("label_colors")
 	var angle_tween = create_tween()
 	angle_tween.tween_property(
 		self,
@@ -106,6 +128,7 @@ func start_decay_timer():
 
 func decay():
 	is_decaying = true
+	color_label.visible = false
 	item_sprite.play("decay")
 	petal_sprite.play("decay")
 	var data = decay_data_by_species[species]
@@ -115,7 +138,13 @@ func decay():
 	queue_free()
 
 func sync_shadow_position():
-	var item_shadow_generator = $Item/ShadowGenerator
-	var petal_shadow_generator = $PetalSprite/ShadowGenerator
-	item_shadow_generator.sync_position()
-	petal_shadow_generator.sync_position()
+	item_shadow.sync_position()
+	petal_shadow.sync_position()
+
+func skip_shadow_frame():
+	item_shadow.skip_frame()
+	petal_shadow.skip_frame()
+
+func _on_label_colors_changed(toggle_value):
+	if is_interactable():
+		color_label.visible = toggle_value

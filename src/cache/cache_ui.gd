@@ -17,8 +17,9 @@ var packets_remaining = 10
 var colors = []
 
 func _ready():
-	var flower_species = get_tree().get_first_node_in_group("level").flower_species
-	colors.append_array(Colors.flower_colors(flower_species))
+	var level = get_tree().get_first_node_in_group("level")
+	await level.ready
+	colors.append_array(Colors.flower_colors(level.flower_species))
 	if Colors.white not in colors:
 		colors.append(Colors.white)
 	for color in colors:

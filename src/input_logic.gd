@@ -3,26 +3,63 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var pause_screen = get_tree().get_first_node_in_group("pause_screen")
 @onready var cache_ui = get_tree().get_first_node_in_group("cache_ui")
+@onready var intro_screen = get_tree().get_first_node_in_group("intro_screen")
 @onready var click_started_area = null
 
 func _ready():
 	randomize()
 
-# esc to exit uis or pause
 func _input(event):
-	if event.is_action_released("Esc"):
-		if cache_ui.visible:
+	# pause and exit_menu both default to esc	
+	if event.is_action_released("pause") and event.is_action_released("exit_menu"):
+		if pause_screen.options.ignore_next_exit:
+			pause_screen.options.ignore_next_exit = false
+		elif pause_screen.options.ignore_next_pause:
+			pause_screen.options.ignore_next_pause = false
+		elif cache_ui.visible:
 			cache_ui.close()
+		elif intro_screen.visible:
+			intro_screen.close()
 		elif pause_screen.guide.visible:
 			pause_screen.guide.visible = false
 		elif pause_screen.options.visible:
-			pause_screen.options.visible = false
+			pause_screen.options.close()
 		elif pause_screen.visible:
 			pause_screen.visible = false
 			get_tree().paused = false
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
+
+	elif event.is_action_released("exit_menu"):
+		if pause_screen.options.ignore_next_exit:
+			pause_screen.options.ignore_next_exit = false
+		elif pause_screen.guide.visible:
+			pause_screen.guide.visible = false
+		elif pause_screen.options.visible:
+			pause_screen.options.close()
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+		elif intro_screen.visible:
+			intro_screen.close()
+		elif cache_ui.visible:
+			cache_ui.close()
+
+	elif event.is_action_released("pause"):
+		if pause_screen.options.ignore_next_pause:
+			pause_screen.options.ignore_next_pause = false
+		# don't overlap menus
+		elif cache_ui.visible or intro_screen.visible:
+			pass
+		elif not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true
+		else:
+			pause_screen.guide.visible = false
+			pause_screen.options.visible = false
+			pause_screen.visible = false
+			get_tree().paused = false
 
 # global clicking logic
 func _unhandled_input(event):
