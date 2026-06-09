@@ -37,12 +37,13 @@ func _ready():
 	energy_loss.value = Config.get_option("energy_loss") * 50
 
 	config = Config.get_config()
-	for action in config.get_section_keys("controls"):
-		var event = config.get_value("controls", action, null)
-		if event:
-			InputMap.action_erase_events(action)
-			InputMap.action_add_event(action, event)
-			controls_changed.emit(action, event)
+	if config.has_section("controls"):
+		for action in config.get_section_keys("controls"):
+			var event = config.get_value("controls", action, null)
+			if event:
+				InputMap.action_erase_events(action)
+				InputMap.action_add_event(action, event)
+				controls_changed.emit(action, event)
 
 	music_volume.value_changed.connect(emit_music_volume_changed)
 	effects_volume.value_changed.connect(emit_effects_volume_changed)
