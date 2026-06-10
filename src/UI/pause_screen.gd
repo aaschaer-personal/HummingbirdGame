@@ -1,11 +1,14 @@
 class_name PauseScreen extends ColorRect
 
 signal guide_opened
+signal punnet_square_opened
 
 @onready var pause_menu = $PauseMenu
+@onready var punnet_square = $PunnetSquare
 @onready var guide = $Guide
 @onready var options = $Options
 @onready var resume_button = $PauseMenu/VBoxContainer/ResumeButton
+@onready var punnet_square_button = $PauseMenu/VBoxContainer/PunnetSquareButton
 @onready var guide_button = $PauseMenu/VBoxContainer/GuideButton
 @onready var options_button = $PauseMenu/VBoxContainer/OptionsButton
 @onready var restart_level_button = $PauseMenu/VBoxContainer/RestartLevelButton
@@ -16,6 +19,7 @@ signal guide_opened
 func _ready():
 	resume_button.pressed.connect(resume)
 	exit_button.pressed.connect(resume)
+	punnet_square_button.pressed.connect(open_punnet_square)
 	guide_button.pressed.connect(open_guide)
 	options_button.pressed.connect(open_options)
 	restart_level_button.pressed.connect(restart_level)
@@ -29,6 +33,7 @@ func _ready():
 
 	# hide level specific buttons
 	if not get_parent().get_parent() is Level:
+		punnet_square_button.visible = false
 		guide_button.visible = false
 		restart_level_button.visible = false
 		return_to_map_button.visible = false
@@ -36,6 +41,10 @@ func _ready():
 func open_guide():
 	guide.visible = true
 	guide_opened.emit()
+	
+func open_punnet_square():
+	punnet_square.visible = true
+	punnet_square_opened.emit()
 	
 func open_options():
 	options.visible = true

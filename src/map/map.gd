@@ -162,7 +162,7 @@ func _set_intermediate_target():
 	if not player.moving or intermediate_target_level == last_level:
 		player.target_point = level_points[intermediate_target_level]
 
-func _input(_event):
+func _input(event):
 	if controllable:
 		var direction = null
 		if Input.is_action_just_released("left"):
@@ -174,17 +174,41 @@ func _input(_event):
 		elif Input.is_action_just_released("down"):
 			direction = "down"
 		elif Input.is_action_just_released("interact"):
-			enter_level(last_level)
+			if not get_tree().paused:
+				enter_level(last_level)
 		if direction:
 			var possible_target = level_graph[intermediate_target_level].get(direction)
 			if possible_target and (level_unlocks == 6 or possible_target <= level_unlocks + 1):
 				target_level = possible_target
 				_set_intermediate_target()
 
-	if Input.is_action_just_released("exit_menu"):
-		pause_screen.visible = true
-		get_tree().paused = true
-		await get_tree().create_timer(0.01).timeout
+	# pause and exit_menu both default to esc
+	if event.is_action_released("pause") and event.is_action_released("exit_menu"):
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+		elif not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true
+
+	elif event.is_action_released("exit_menu"):
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+	
+	elif event.is_action_released("pause"):
+		if pause_screen.visible:
+			pause_screen.visible = false
+			if pause_screen.options.visible:
+				pause_screen.options.close()
+			get_tree().paused = false
+		else:
+			pause_screen.visible = true
+			get_tree().paused = true
 
 func _on_input_event(_viewport, event, _shape, level_num):
 	if controllable and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

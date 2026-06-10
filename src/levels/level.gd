@@ -14,6 +14,7 @@ class_name Level extends Node
 var water_explained = false
 var energy_explained = false
 var packet_printed = false
+var punnet_square_opened = false
 var orange_seeds_harvested = false
 var flower_accepted = false
 var visitor_left = false
@@ -43,6 +44,7 @@ func _ready():
 	SignalBus.orange_seeds_harvested.connect(_on_orange_seeds_harvested)
 	visitor_manager.initialize_bouquets(bouquet_recipes)
 	GenomeGenerator.initialize_next_gene_storage(flower_species)
+	pause_screen.punnet_square_opened.connect(_on_punnet_square_opened)
 
 	main.call_deferred()
 
@@ -89,6 +91,9 @@ func _on_packet_printed():
 	
 func _on_orange_seeds_harvested():
 	orange_seeds_harvested = true
+
+func _on_punnet_square_opened():
+	punnet_square_opened = true
 
 func main():
 	if Config.get_option("skip_intros"):

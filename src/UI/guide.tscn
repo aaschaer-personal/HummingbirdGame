@@ -1,10 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://dwdwrfqw5jpww"]
+[gd_scene load_steps=36 format=3 uid="uid://dwdwrfqw5jpww"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
 [ext_resource type="Script" uid="uid://bfcdwh2a0qff7" path="res://src/UI/guide.gd" id="2_ab0ib"]
 [ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_se2j2"]
 [ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
-[ext_resource type="PackedScene" uid="uid://mgqh0bucfav0" path="res://src/UI/interactable_punnet_square.tscn" id="5_7trbm"]
 [ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_koo0c"]
 [ext_resource type="Texture2D" uid="uid://bp65x7b6xqpyb" path="res://assets/UI/GuideImages/plant_seed.png" id="6_l8288"]
 [ext_resource type="PackedScene" uid="uid://bfxri5oqab5ij" path="res://src/UI/control_text.tscn" id="6_rfbbp"]
@@ -40,8 +39,7 @@
 [node name="Guide" type="NinePatchRect"]
 offset_left = 55.0
 offset_right = 400.0
-offset_bottom = 324.0
-mouse_filter = 0
+offset_bottom = 328.0
 texture = ExtResource("1_8u3um")
 region_rect = Rect2(1, 1, 22, 22)
 patch_margin_left = 6
@@ -175,27 +173,10 @@ text = "Genetics"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PunnetSquare" type="TextureButton" parent="Tabs"]
-layout_mode = 2
-toggle_mode = true
-texture_normal = ExtResource("3_se2j2")
-texture_disabled = ExtResource("4_2koyi")
-
-[node name="Label" type="Label" parent="Tabs/PunnetSquare"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 55.0
-offset_bottom = 31.0
-text = "Punnet
-Square"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Content" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_left = 5.0
-offset_top = 9.0
+offset_top = 10.0
 offset_right = 343.0
 offset_bottom = 322.0
 horizontal_scroll_mode = 0
@@ -213,6 +194,8 @@ text = "[font_size=12]
 * Interact with objects by left clicking on them, or by moving close to them and pressing %interact.
 
 * Drop held items by right clicking or pressing %drop.
+
+* %punnet_square is a shortcut for opening the punnet square menu for seeing the possible outcomes of a cross.
 
 * Controls can be remapped in the Options menu."
 
@@ -730,28 +713,6 @@ fit_content = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
-
-[node name="PunnetSquare" type="VBoxContainer" parent="Content"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-alignment = 1
-
-[node name="Text" type="RichTextLabel" parent="Content/PunnetSquare"]
-layout_mode = 2
-mouse_filter = 2
-bbcode_enabled = true
-text = "[font_size=12]
-[font_size=24][center]Punnet Square[/center][font_size=12]
-
-* Set the alleles for each parent to see possible outcomes of crossing them.
-[font_size=1] "
-fit_content = true
-scroll_active = false
-
-[node name="InteractablePunnetSquare" parent="Content/PunnetSquare" instance=ExtResource("5_7trbm")]
-layout_mode = 2
 
 [node name="ExitButton" type="TextureButton" parent="."]
 layout_mode = 0

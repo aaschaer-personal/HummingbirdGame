@@ -10,7 +10,6 @@ extends NinePatchRect
 @onready var visitors_tab = $Tabs/Visitors
 @onready var printing_packets_tab = $Tabs/PrintingPackets
 @onready var genetics_tab = $Tabs/Genetics
-@onready var punnet_square_tab = $Tabs/PunnetSquare
 @onready var species_details = $Content/Genetics/SpeciesDetails
 @onready var example_punnet_square = $Content/Genetics/CrossContainer/PunnetSquare
 @onready var exit_button = $ExitButton
@@ -23,7 +22,6 @@ func _ready():
 	visitors_tab.pressed.connect(toggle.bind("Visitors"))
 	printing_packets_tab.pressed.connect(toggle.bind("PrintingPackets"))
 	genetics_tab.pressed.connect(toggle.bind("Genetics"))
-	punnet_square_tab.pressed.connect(toggle.bind("PunnetSquare"))
 	exit_button.pressed.connect(close)
 	var options = get_tree().get_first_node_in_group("options")
 	options.label_colors_changed.connect(set_color_labels)

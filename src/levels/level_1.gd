@@ -95,7 +95,7 @@ func tutorial_sequence():
 2. Click on Guide.
 3. Read the controls.
 4. Close with %exit_menu.
-5. Reference back as needed!
+5. Reference guide sections as needed!
 
 """)
 	await pause_screen.guide_opened
@@ -237,12 +237,17 @@ func tutorial_sequence():
 		add_tutorial_text("OrangePollination",
 """Cross-pollinate for an orange sunflower:
 
-1. If there is any pollen on your beak, take a bath in the pond (left click or %interact).
-2. Drink from a sunflower to get its pollen on your beak (left click or %interact).
-3. Drink from the other color sunflower to pollinate it (left click or %interact).
-4. Wait for the pollinated sunflower to go to seed.
+1. Open the Punnet square to see the outcome of crossing red and yellow sunflowers (%punnet_square or pause and click on Punnet Square)
+2. If there is any pollen on your beak, take a bath in the pond (left click or %interact).
+3. Drink from a sunflower to get its pollen on your beak (left click or %interact).
+4. Drink from the other color sunflower to pollinate it (left click or %interact).
+5. Wait for the pollinated sunflower to go to seed.
 
 """)
+		# wait for punnet square
+		if not punnet_square_opened:
+			await pause_screen.punnet_square_opened
+		
 		# if player has pollen, arrow over pond until bathed
 		if player.pollen:
 			var pond = $Pond

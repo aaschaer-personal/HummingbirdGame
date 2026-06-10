@@ -745,7 +745,7 @@ loop = true
 loop_offset = 8.0
 
 [node name="Map" type="Node2D"]
-process_mode = 1
+process_mode = 3
 script = ExtResource("1_o2hyj")
 
 [node name="Map" type="Sprite2D" parent="."]
@@ -759,6 +759,7 @@ sprite_frames = SubResource("SpriteFrames_engak")
 animation = &"levels_7"
 
 [node name="MapPlayer" parent="." instance=ExtResource("16_qvnws")]
+process_mode = 1
 z_index = 2
 
 [node name="LevelAreas" type="Node2D" parent="."]

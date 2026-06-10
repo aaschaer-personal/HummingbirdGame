@@ -10,16 +10,14 @@ func _ready():
 	randomize()
 
 func _input(event):
-	# pause and exit_menu both default to esc	
+	# pause and exit_menu both default to esc
 	if event.is_action_released("pause") and event.is_action_released("exit_menu"):
-		if pause_screen.options.ignore_next_exit:
-			pause_screen.options.ignore_next_exit = false
-		elif pause_screen.options.ignore_next_pause:
-			pause_screen.options.ignore_next_pause = false
-		elif cache_ui.visible:
+		if cache_ui.visible:
 			cache_ui.close()
 		elif intro_screen.visible:
 			intro_screen.close()
+		elif pause_screen.punnet_square.visible:
+			pause_screen.punnet_square.visible = false
 		elif pause_screen.guide.visible:
 			pause_screen.guide.visible = false
 		elif pause_screen.options.visible:
@@ -32,8 +30,8 @@ func _input(event):
 			get_tree().paused = true
 
 	elif event.is_action_released("exit_menu"):
-		if pause_screen.options.ignore_next_exit:
-			pause_screen.options.ignore_next_exit = false
+		if pause_screen.punnet_square.visible:
+			pause_screen.punnet_square.visible = false
 		elif pause_screen.guide.visible:
 			pause_screen.guide.visible = false
 		elif pause_screen.options.visible:
@@ -47,19 +45,28 @@ func _input(event):
 			cache_ui.close()
 
 	elif event.is_action_released("pause"):
-		if pause_screen.options.ignore_next_pause:
-			pause_screen.options.ignore_next_pause = false
 		# don't overlap menus
-		elif cache_ui.visible or intro_screen.visible:
+		if cache_ui.visible or intro_screen.visible:
 			pass
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
 		else:
 			pause_screen.guide.visible = false
-			pause_screen.options.visible = false
 			pause_screen.visible = false
+			if pause_screen.options.visible:
+				pause_screen.options.close()
 			get_tree().paused = false
+			
+	elif event.is_action_released("punnet_square"):
+		# don't overlap menus
+		if cache_ui.visible or intro_screen.visible:
+			pass
+		else:
+			var punnet_open = pause_screen.punnet_square.visible
+			get_tree().paused = not punnet_open
+			pause_screen.visible = not punnet_open
+			pause_screen.punnet_square.visible = not punnet_open
 
 # global clicking logic
 func _unhandled_input(event):
