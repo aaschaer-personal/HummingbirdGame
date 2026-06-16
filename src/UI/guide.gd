@@ -55,11 +55,12 @@ func toggle(tab_name):
 			if not tab.disabled:
 				tab.disabled = true
 				Helpers.get_only_child(tab).position += Vector2(0,1)
+				content.scroll_vertical = 0
 		else:
 			if tab.disabled:
 				tab.disabled = false
 				Helpers.get_only_child(tab).position += Vector2(0,-1)
-				
+
 	for blob in content.get_children():
 			blob.visible = blob.name == tab_name
 
