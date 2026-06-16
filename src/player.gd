@@ -122,9 +122,10 @@ func _process(delta):
 		audio_player.stop()
 
 	if body_sprite.animation == "perching":
-		var rate = (-0.2 * energy) + 6
-		rate = max(rate, 0)
-		energy += rate * delta
+		if energy < max_energy / 3.0:
+			var rate = (-0.1 * energy) + 10
+			rate = max(rate, 0)
+			energy += rate * delta
 	else:
 		energy -= 1 * energy_loss_rate * delta
 
