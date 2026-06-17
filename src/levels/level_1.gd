@@ -233,7 +233,7 @@ func tutorial_sequence():
 			await visitor_manager.visitor_left
 		await remove_tutorial_text("SatisfyVisitor")
 
-	if Colors.orange not in colors_pollinated:
+	if not orange_seeds_polinated:
 		add_tutorial_text("OrangePollination",
 """Cross-pollinate for an orange sunflower:
 
@@ -257,7 +257,7 @@ func tutorial_sequence():
 			await player.drink_or_bath
 
 		# arrow over flowers that the player doesn't have pollen for
-		while Colors.orange not in colors_pollinated:
+		while not orange_seeds_polinated:
 			var red_drink = false
 			var yellow_drink = false
 			for gene_dict in player.pollen:
@@ -294,7 +294,7 @@ func tutorial_sequence():
 		for flower in get_tree().get_nodes_in_group("yellow_flowers"):
 			flower.set_arrow_main_visibility(false)
 
-		while Colors.orange not in colors_pollinated:
+		while not orange_seeds_polinated:
 			await SignalBus.flower_pollinated
 		await remove_tutorial_text("OrangePollination")
 
@@ -370,10 +370,16 @@ func tutorial_sequence():
 				# arrow over orange packet if not held
 				var orange_packet
 				for seed_packet in get_tree().get_nodes_in_group("seed_packets"):
-					for genome_dict in seed_packet.seeds:
-						if GenomeHelpers.color_from_gene_dict(genome_dict) == Colors.orange:
-							orange_packet = seed_packet
-							break
+					for packet_seed in seed_packet.seeds:
+						# seed is either an Array of two gene dicts or one gene dict
+						if packet_seed is Array:
+							if GenomeHelpers.orange_parents(packet_seed):
+								orange_packet = seed_packet
+								break
+						else:
+							if GenomeHelpers.color_from_gene_dict(packet_seed) == Colors.orange:
+								orange_packet = seed_packet
+								break
 				if player.held_item != orange_packet:
 					orange_packet.set_arrow_main_visibility(true)
 					await SignalBus.item_picked_up

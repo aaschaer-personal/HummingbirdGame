@@ -220,3 +220,11 @@ func orchid_code(red, yellow, blue):
 
 func orchid_color(red, yellow, blue):
 	return orchid_code_color_map[orchid_code(red, yellow, blue)]
+
+func orange_parents(parent_gene_dicts):
+	if parent_gene_dicts[0]["species"] == "sunflower":
+		var p1_genes = parent_gene_dicts[0]["color"]
+		var p2_genes = parent_gene_dicts[1]["color"]
+		var red = "R" in p1_genes or "R" in p2_genes
+		var yellow = "Y" in p1_genes or "Y" in p2_genes
+		return red and yellow

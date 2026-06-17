@@ -28,6 +28,12 @@ func remove_all_seeds():
 
 func remove_seed():
 	var removed_seed = seeds.pop_back()
+	# seed is either an Array of two gene dicts or one gene dict
+	if removed_seed is Array:
+		# generate at planting time to guarantee an even spread
+		removed_seed = GenomeGenerator.offspring_from_parent_genome_dicts(
+			removed_seed[0], removed_seed[1]
+		)
 	seed_count.text = str(len(seeds))
 	return removed_seed
 

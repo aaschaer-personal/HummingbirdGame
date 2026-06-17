@@ -117,8 +117,8 @@ func _go_to_seed():
 	nectar = 0
 	stage = 2
 	if parent_plant.genome.species == "sunflower":
-		for gene_dict in seeds:
-			if GenomeHelpers.color_from_gene_dict(gene_dict) == Colors.orange:
+		for parent_gene_dicts in seeds:
+			if GenomeHelpers.orange_parents(parent_gene_dicts):
 				add_to_group("orange_seeds")
 
 func is_interactable():
@@ -150,22 +150,22 @@ func generate_seeds():
 	for i in range(parent_plant.genome.seed_num):
 		var pollen_gene_dict = pollen.pop_back()
 		if not pollen_gene_dict:
-			pollen_gene_dict = GenomeGenerator.wild_gene_dict(parent_plant.genome.species)
-
-		var new_seed = GenomeGenerator.offspring_from_parent_genome_dicts(
+			pollen_gene_dict = GenomeGenerator.wild_gene_dict(
+				parent_plant.genome.species
+			)
+		# 2 element array of parent genome dicts to
+		# generate child at planting time
+		var new_seed = [
 			pollen_gene_dict,
 			parent_plant.genome.gene_dict,
-		)
-
-		SignalBus.flower_pollinated.emit(
-			GenomeHelpers.color_from_gene_dict(new_seed)
-		)
+		]
+		SignalBus.flower_pollinated.emit(new_seed)
 		seeds.append(new_seed)
 
 func harvest_seeds(seed_packet):
 	seed_packet.add_seeds(seeds)
-	for gene_dict in seeds:
-		if GenomeHelpers.color_from_gene_dict(gene_dict) == Colors.orange:
+	for parent_gene_dicts in seeds:
+		if GenomeHelpers.orange_parents(parent_gene_dicts):
 			SignalBus.orange_seeds_harvested.emit()
 			break
 	remove()

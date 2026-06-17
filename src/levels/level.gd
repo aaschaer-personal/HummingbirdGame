@@ -15,12 +15,12 @@ var water_explained = false
 var energy_explained = false
 var packet_printed = false
 var punnet_square_opened = false
+var orange_seeds_polinated = false
 var orange_seeds_harvested = false
 var flower_accepted = false
 var visitor_left = false
 var flowers_grown = 0
 var colors_grown = {}
-var colors_pollinated = {}
 var starting_packet = null
 var BRIEF_PAUSE = .5
 
@@ -83,8 +83,9 @@ func _on_flower_bloomed(color):
 		visitor_manager.visitors_unlocked = true
 		visitor_manager.timer.start(1)
 
-func _on_flower_pollinated(color):
-	colors_pollinated[color] = true
+func _on_flower_pollinated(parent_gene_dicts):
+	if GenomeHelpers.orange_parents(parent_gene_dicts):
+		orange_seeds_polinated = true
 
 func _on_packet_printed():
 	packet_printed = true
