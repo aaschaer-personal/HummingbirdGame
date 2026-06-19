@@ -2,6 +2,7 @@ class_name Level extends Node
 
 @onready var player = $Player
 @onready var cache = $Cache
+@onready var drop_point = $DropPoint
 @onready var visitor_manager = $VisitorManager
 @onready var intro_scene = $UI/IntroScreen
 @onready var completed_screen = $UI/CompletedScreen

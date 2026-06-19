@@ -97,8 +97,6 @@ func _input(event):
 		# map anything that can be mapped other than mouse press
 		elif event.is_action_type():
 			var action = control_awaiting_input.name
-			
-			# await get_tree().create_timer(0.1, false).timeout
 			accept_event()
 			InputMap.action_erase_events(action)
 			InputMap.action_add_event(action, event)

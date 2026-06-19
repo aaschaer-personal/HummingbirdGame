@@ -45,7 +45,7 @@ func _on_energy_quartered():
 		add_tutorial_text("Energy",
 		"""Restore your energy:
 
-1. Perch on the sapling (left click or %interact) to stop energy loss and restore up to a third of your energy.
+1. Perch on the sapling (click or %interact) to stop energy loss and restore up to a third of your energy.
 2. Drink nectar from flowers.
 
 """)
@@ -62,7 +62,7 @@ func _on_watering_can_emptied():
 		add_tutorial_text("Water",
 		"""Refill the watering can:
 
-Interact with the pond (left click or %interact) while holding the watering can.
+Interact with the pond (click or %interact) while holding the watering can.
 
 """)
 	var pond = $Pond
@@ -105,11 +105,11 @@ func tutorial_sequence():
 		add_tutorial_text("GrowFlowers",
 """Grow four sunflower plants:
 
-1. Pick up a seed packet (left click or %interact).
-2. Plant seeds in bare soil (left click or %interact while holding a seed packet).
-3. Pick up the watering can (left click or %interact).
+1. Pick up a seed packet (click or %interact).
+2. Plant seeds in bare soil (click or %interact while holding a seed packet).
+3. Pick up the watering can (click or %interact).
 4. Water seeds (move while holding the watering can).
-5. Drop the watering can (right click or %drop).
+5. Drop the watering can (double click or %drop).
 6. Wait for the flowers to grow and bloom.
 
 """)
@@ -173,10 +173,10 @@ func tutorial_sequence():
 		add_tutorial_text("SatisfyVisitor",
 """Satisfy a visitor:
 
-1. Pick up clippers (left click or %interact)
-2. Cut a yellow flower (left click or %interact while holding the clippers).
-3. Pick up the cut flower (left click or %interact).
-4. Deliver the flower to the vistitor (left click %interact while holding a flower).
+1. Pick up clippers (click or %interact)
+2. Cut a yellow flower (click or %interact while holding the clippers).
+3. Pick up the cut flower (click or %interact).
+4. Deliver the flower to the vistitor (click or %interact while holding a flower).
 
 """)
 		while not flower_accepted:
@@ -236,9 +236,9 @@ func tutorial_sequence():
 """Cross-pollinate for an orange sunflower:
 
 1. Open the Punnet square to see the outcome of crossing red and yellow sunflowers (%punnet_square or pause and click on Punnet Square)
-2. If there is any pollen on your beak, take a bath in the pond (left click or %interact while not holding anything).
-3. Drink from a sunflower to get its pollen on your beak (left click or %interact).
-4. Drink from the other color sunflower to pollinate it (left click or %interact).
+2. If there is any pollen on your beak, take a bath in the pond (click or %interact while not holding anything).
+3. Drink from a sunflower to get its pollen on your beak (click or %interact).
+4. Drink from the other color sunflower to pollinate it (click or %interact).
 5. Wait for the pollinated sunflower to go to seed.
 
 """)
@@ -300,7 +300,7 @@ func tutorial_sequence():
 		add_tutorial_text("PrintPacket",
 """Print a new seed packet:
 
-1. Open the cache menu (left click or %interact).
+1. Open the cache menu (click or %interact).
 2. Select a color, icon, and/or icon color.
 3. Press print.
 
@@ -316,8 +316,8 @@ func tutorial_sequence():
 		add_tutorial_text("HarvestSeeds",
 """Harvest orange sunflower seeds:
 
-1. Pick up the new seed packet (left click or %interact).
-2. Harvest seeds from the flower gone to seed (left click or %interact while holding a seed packet).
+1. Pick up the new seed packet (click or %interact).
+2. Harvest seeds from the flower gone to seed (click or %interact while holding a seed packet).
 
 """)
 		while not orange_seeds_harvested:

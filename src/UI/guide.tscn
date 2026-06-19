@@ -192,7 +192,7 @@ text = "[font_size=12]
 
 * Interact with objects by left clicking on them, or by moving close to them and pressing %interact.
 
-* Drop held items by right clicking or pressing %drop.
+* Drop held items by double clicking where you want to drop them or pressing %drop.
 
 * %punnet_square is a shortcut for opening the punnet square menu for seeing the possible outcomes of cross-pollination.
 

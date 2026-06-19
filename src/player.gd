@@ -54,6 +54,7 @@ var in_motion = false
 var low_energy_singal_state = 0
 var clipping = false
 var energy_loss_rate = 1
+var level
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -70,6 +71,7 @@ func _ready():
 	set_energy_loss_rate(Config.get_option("energy_loss"))
 	var options = get_tree().get_first_node_in_group("options")
 	options.energy_loss_changed.connect(set_energy_loss_rate)
+	level = get_tree().get_first_node_in_group("level")
 
 func _input(event):
 	if controllable:
@@ -79,8 +81,17 @@ func _input(event):
 		elif Input.is_action_just_released("drop"):
 			drop_held_item()
 				
-		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-			drop_held_item()
+		elif event is InputEventMouseButton and event.double_click:
+			level.drop_point.global_position = event.position
+			# wait for area to move
+			await get_tree().create_timer(0.1, false).timeout
+			set_interaction_target(
+				"_drop_item_at_point",
+				null,
+				pickup_area,
+				level.drop_point,
+				event.position,
+			)
 
 func _process(delta):
 	if velocity:
@@ -303,6 +314,9 @@ func pickup(item):
 func _drop_item(item):
 	item.reparent(get_parent())
 	item.drop()
+
+func _drop_item_at_point(_point):
+	drop_held_item()
 
 func drop_held_item():
 	if held_item:
