@@ -70,11 +70,9 @@ func is_in_play():
 func is_interactable():
 	if is_decaying or !get_parent() is Level:
 		return false
-
-	return player.held_item == null or (
-		player.held_item is Bouquet
-		and player.held_item.get_flowers().size() < 5
-	)
+	if player.held_item is Bouquet and player.held_item.get_flowers().size() >= 5:
+		return false
+	return true
 
 func set_color(new_color: Color):
 	petal_sprite.modulate = new_color

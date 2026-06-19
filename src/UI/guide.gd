@@ -45,7 +45,7 @@ func _ready():
 		elif level.flower_species == "hibiscus":
 			species_details.text = "* Hibiscuses have two color loci. The red locus has alleles R and r, with R adding red to the flower. The other locus can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors."
 		elif level.flower_species == "orchid":
-			species_details.text = "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding blue to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
+			species_details.text = "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding yellow to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
 		else:
 			assert(level == null)
 

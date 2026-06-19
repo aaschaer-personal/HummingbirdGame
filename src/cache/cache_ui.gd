@@ -13,7 +13,7 @@ class_name CacheUI extends Control
 @onready var packet_scene = preload("res://src/items/seed_packet.tscn")
 
 var packets_toggled = true
-var packets_remaining = 10
+var packets_remaining = 11
 var colors = []
 
 func _ready():

@@ -107,11 +107,10 @@ func tutorial_sequence():
 
 1. Pick up a seed packet (left click or %interact).
 2. Plant seeds in bare soil (left click or %interact while holding a seed packet).
-3. Drop the seed packet (right click or %drop).
-4. Pick up the watering can (left click or %interact).
-5. Water seeds (move while holding the watering can).
-6. Drop the watering can (right click or %drop).
-7. Wait for the flowers to grow and bloom.
+3. Pick up the watering can (left click or %interact).
+4. Water seeds (move while holding the watering can).
+5. Drop the watering can (right click or %drop).
+6. Wait for the flowers to grow and bloom.
 
 """)
 		while flowers_grown < 6:
@@ -176,9 +175,8 @@ func tutorial_sequence():
 
 1. Pick up clippers (left click or %interact)
 2. Cut a yellow flower (left click or %interact while holding the clippers).
-4. Drop the clippers (right click or %drop)
 3. Pick up the cut flower (left click or %interact).
-3. Deliver the flower to the vistitor (left click %interact while holding a flower).
+4. Deliver the flower to the vistitor (left click %interact while holding a flower).
 
 """)
 		while not flower_accepted:
@@ -238,7 +236,7 @@ func tutorial_sequence():
 """Cross-pollinate for an orange sunflower:
 
 1. Open the Punnet square to see the outcome of crossing red and yellow sunflowers (%punnet_square or pause and click on Punnet Square)
-2. If there is any pollen on your beak, take a bath in the pond (left click or %interact).
+2. If there is any pollen on your beak, take a bath in the pond (left click or %interact while not holding anything).
 3. Drink from a sunflower to get its pollen on your beak (left click or %interact).
 4. Drink from the other color sunflower to pollinate it (left click or %interact).
 5. Wait for the pollinated sunflower to go to seed.

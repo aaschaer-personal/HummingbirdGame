@@ -23,8 +23,8 @@ var CAN_TRANSPORT = Vector2(-55, 6)
 var CLIPPER_START = Vector2(4, -19)
 var CLIPPER_TRANSPORT = Vector2(-36, 6)
 
-# 3 initial slots plus up to 10 printed packets
-var dispense_slots = [true, true, true, false, false, false, false, false, false, false, false, false, false]
+# 3 initial slots plus up to 12 printed packets
+var dispense_slots = [true, true, true, false, false, false, false, false, false, false, false, false, false, false]
 var packets_printing = 0
 var door_open = false
 var top
@@ -54,7 +54,7 @@ func sync_frames():
 	top.position = Vector2(0,top_positions[frame])
 
 func is_interactable():
-	return player.held_item == null or player.held_item is SeedPacket
+	return true
 
 func get_player_interaction():
 	return "open_cache_ui"
@@ -179,7 +179,7 @@ func print_packet(seed_packet):
 	
 	packets_printing += 1
 	var dispense_slot = 0
-	for i in range(13):
+	for i in range(14):
 		if not dispense_slots[i]:
 			dispense_slot = i
 			dispense_slots[i] = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dwdwrfqw5jpww"]
+[gd_scene load_steps=35 format=3 uid="uid://dwdwrfqw5jpww"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_8u3um"]
 [ext_resource type="Script" uid="uid://bfcdwh2a0qff7" path="res://src/UI/guide.gd" id="2_ab0ib"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bfxri5oqab5ij" path="res://src/UI/control_text.tscn" id="6_rfbbp"]
 [ext_resource type="Texture2D" uid="uid://btnte1wveab17" path="res://assets/UI/GuideImages/unplant_seed.png" id="7_nasn2"]
 [ext_resource type="Texture2D" uid="uid://cvs7gjei4mlmy" path="res://assets/UI/GuideImages/harvest_seeds.png" id="8_b4fix"]
-[ext_resource type="Texture2D" uid="uid://dkl0or3bkgxwn" path="res://assets/UI/GuideImages/combine_seeds.png" id="9_oar6k"]
 [ext_resource type="Texture2D" uid="uid://371wd5qks8fh" path="res://assets/UI/GuideImages/water_soil.png" id="10_jedyy"]
 [ext_resource type="Texture2D" uid="uid://cr35nivkyfqnd" path="res://assets/UI/GuideImages/refill_can.png" id="11_edoxw"]
 [ext_resource type="Texture2D" uid="uid://btshcbenbp4ix" path="res://assets/UI/GuideImages/clip_seeds.png" id="12_7hv5o"]
@@ -195,7 +194,7 @@ text = "[font_size=12]
 
 * Drop held items by right clicking or pressing %drop.
 
-* %punnet_square is a shortcut for opening the punnet square menu for seeing the possible outcomes of a cross.
+* %punnet_square is a shortcut for opening the punnet square menu for seeing the possible outcomes of cross-pollination.
 
 * Controls can be remapped in the Options menu."
 
@@ -212,7 +211,7 @@ layout_mode = 2
 text = "[font_size=12]
 [font_size=24][center]Using Items[/center][font_size=12]
 
-* While not holding anything, interact with an item to pick it up. (left click or %interact to interact with something)
+* Interact with an item to pick it up. (left click or %interact to interact with something)
 
 
 * While holding a seed packet:
@@ -256,27 +255,12 @@ size_flags_vertical = 4
 texture = ExtResource("8_b4fix")
 stretch_mode = 2
 
-[node name="Text4" type="RichTextLabel" parent="Content/UsingItems"]
-clip_contents = false
-custom_minimum_size = Vector2(330, 0)
-layout_mode = 2
-text = "     * Interact with another seed packet to add all seeds from the
-        held packet."
-fit_content = true
-
-[node name="CombineSeeds" type="TextureRect" parent="Content/UsingItems"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("9_oar6k")
-stretch_mode = 2
-
 [node name="HSeparator" type="HSeparator" parent="Content/UsingItems"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Text5" type="RichTextLabel" parent="Content/UsingItems"]
+[node name="Text4" type="RichTextLabel" parent="Content/UsingItems"]
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
@@ -292,7 +276,7 @@ size_flags_vertical = 4
 texture = ExtResource("10_jedyy")
 stretch_mode = 2
 
-[node name="Text6" type="RichTextLabel" parent="Content/UsingItems"]
+[node name="Text5" type="RichTextLabel" parent="Content/UsingItems"]
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
@@ -311,7 +295,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="Text7" type="RichTextLabel" parent="Content/UsingItems"]
+[node name="Text6" type="RichTextLabel" parent="Content/UsingItems"]
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
@@ -328,7 +312,7 @@ size_flags_vertical = 4
 texture = ExtResource("12_fq7vi")
 stretch_mode = 2
 
-[node name="Text8" type="RichTextLabel" parent="Content/UsingItems"]
+[node name="Text7" type="RichTextLabel" parent="Content/UsingItems"]
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
@@ -622,7 +606,7 @@ text = "* Select a color, a pattern, and a pattern color, then press print to pr
 
 * Using multiple packets can help keep seeds organized.
 
-* There is only enough paper to print ten additional packets."
+* There is only enough paper to print a totlal of twelve packets."
 fit_content = true
 
 [node name="HSeparator" type="HSeparator" parent="Content/PrintingPackets"]
