@@ -83,6 +83,7 @@ offset_right = 480.0
 offset_bottom = 270.0
 
 [node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
+process_mode = 1
 layout_mode = 0
 offset_left = 430.0
 offset_top = 10.0
@@ -109,7 +110,7 @@ process_mode = 1
 process_mode = 1
 position = Vector2(320, 82)
 
-[node name="DropPoint" type="Area2D" parent="."]
+[node name="DropPoint" type="Area2D" parent="." groups=["drop_point"]]
 process_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPoint"]

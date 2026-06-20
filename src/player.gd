@@ -73,26 +73,6 @@ func _ready():
 	options.energy_loss_changed.connect(set_energy_loss_rate)
 	level = get_tree().get_first_node_in_group("level")
 
-func _input(event):
-	if controllable:
-		if Input.is_action_just_released("interact"):
-			interact_with_nearest_target()
-		
-		elif Input.is_action_just_released("drop"):
-			drop_held_item()
-				
-		elif event is InputEventMouseButton and event.double_click:
-			level.drop_point.global_position = event.position
-			# wait for area to move
-			await get_tree().create_timer(0.1, false).timeout
-			set_interaction_target(
-				"_drop_item_at_point",
-				null,
-				pickup_area,
-				level.drop_point,
-				event.position,
-			)
-
 func _process(delta):
 	if velocity:
 		if drinking_flower:

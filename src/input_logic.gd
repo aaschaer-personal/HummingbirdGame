@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
+@onready var drop_point = get_tree().get_first_node_in_group("drop_point")
 @onready var pause_screen = get_tree().get_first_node_in_group("pause_screen")
 @onready var pause_button = get_tree().get_first_node_in_group("pause_button")
 @onready var cache_ui = get_tree().get_first_node_in_group("cache_ui")
@@ -11,8 +12,14 @@ func _ready():
 	randomize()
 
 func _input(event):
+	if event.is_action_released("interact") and player.controllable:
+		player.interact_with_nearest_target()
+
+	elif event.is_action_released("drop") and player.controllable:
+		player.drop_held_item()
+
 	# pause and exit_menu both default to esc
-	if event.is_action_released("pause") and event.is_action_released("exit_menu"):
+	elif event.is_action_released("pause") and event.is_action_released("exit_menu"):
 		if cache_ui.visible:
 			cache_ui.close()
 		elif intro_screen.visible:
@@ -67,7 +74,10 @@ func _input(event):
 			var punnet_open = pause_screen.punnet_square.visible
 			get_tree().paused = not punnet_open
 			pause_screen.visible = not punnet_open
-			pause_screen.punnet_square.visible = not punnet_open
+			if not punnet_open:
+				pause_screen.open_punnet_square()
+			else:
+				pause_screen.punnet_square.visible = false
 
 # global clicking logic
 func _unhandled_input(event):
@@ -101,6 +111,18 @@ func _unhandled_input(event):
 
 		if event.is_pressed():
 			click_started_area = selected
+			# iteraction takes priority over dropping
+			if not selected and event.double_click:
+				drop_point.global_position = event.position
+				# wait for area to move
+				await get_tree().create_timer(0.1, false).timeout
+				player.set_interaction_target(
+					"_drop_item_at_point",
+					null,
+					player.pickup_area,
+					drop_point,
+					event.position,
+				)
 		elif event.is_released():
 			if click_started_area != null and click_started_area == selected:
 				click_started_area.on_selected(event.position)
