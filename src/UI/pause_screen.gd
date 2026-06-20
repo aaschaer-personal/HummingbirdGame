@@ -53,6 +53,7 @@ func resume():
 	if not guide.visible:
 		visible = false
 		get_tree().paused = false
+		
 	# hacky way of dealing with overlapping buttons
 	else:
 		guide.close()

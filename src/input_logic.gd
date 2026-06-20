@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var pause_screen = get_tree().get_first_node_in_group("pause_screen")
+@onready var pause_button = get_tree().get_first_node_in_group("pause_button")
 @onready var cache_ui = get_tree().get_first_node_in_group("cache_ui")
 @onready var intro_screen = get_tree().get_first_node_in_group("intro_screen")
 @onready var click_started_area = null

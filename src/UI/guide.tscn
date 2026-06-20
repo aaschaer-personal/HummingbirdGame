@@ -188,9 +188,9 @@ text = "[font_size=12]
 
 * Press %pause to pause, unpause, and exit menus.
 
-* Move around with %up %left %down %right or by left clicking on a destination.
+* Move around with %up %left %down %right or by clicking on a destination.
 
-* Interact with objects by left clicking on them, or by moving close to them and pressing %interact.
+* Interact with objects by clicking on them, or by moving close to them and pressing %interact.
 
 * Drop held items by double clicking where you want to drop them or pressing %drop.
 
@@ -211,7 +211,7 @@ layout_mode = 2
 text = "[font_size=12]
 [font_size=24][center]Using Items[/center][font_size=12]
 
-* Interact with an item to pick it up. (left click or %interact to interact with something)
+* Interact with an item to pick it up. (click or %interact to interact with something)
 
 
 * While holding a seed packet:
@@ -373,7 +373,7 @@ stretch_mode = 2
 [node name="Text3" parent="Content/GrowingFlowers" instance=ExtResource("6_rfbbp")]
 clip_contents = false
 layout_mode = 2
-text = "* Interact with an individual flower (left click or %interact) to drink energy restoring nectar and get its pollen on your beak."
+text = "* Interact with an individual flower (click or %interact) to drink energy restoring nectar and get its pollen on your beak."
 
 [node name="Drink" type="TextureRect" parent="Content/GrowingFlowers"]
 layout_mode = 2
@@ -406,7 +406,7 @@ fit_content = true
 [node name="Text6" parent="Content/GrowingFlowers" instance=ExtResource("6_rfbbp")]
 clip_contents = false
 layout_mode = 2
-text = "* Interact with a body of water (left click or %interact) to take a bath and clean off all pollen. Bathing regularly helps you control what pollen is used in pollination.
+text = "* Interact with a body of water (click or %interact) to take a bath and clean off all pollen. Bathing regularly helps you control what pollen is used in pollination.
 "
 
 [node name="Bathing" type="TextureRect" parent="Content/GrowingFlowers"]
@@ -533,7 +533,7 @@ stretch_mode = 2
 [node name="Text2" parent="Content/Visitors" instance=ExtResource("6_rfbbp")]
 clip_contents = false
 layout_mode = 2
-text = "* Cut a flower of a matching color with clippers, pick it up, and interact with a visitor (left click or %interact) to deliver it."
+text = "* Cut a flower of a matching color with clippers, pick it up, and interact with a visitor (click or %interact) to deliver it."
 
 [node name="DeliverFlower" type="TextureRect" parent="Content/Visitors"]
 layout_mode = 2
@@ -589,7 +589,7 @@ layout_mode = 2
 text = "[font_size=12]
 [font_size=24][center]Printing Packets[/center][font_size=12]
 
-* Interacting with the cache (left click or %interact) opens it's packet printing menu."
+* Interacting with the cache (click or %interact) opens it's packet printing menu."
 
 [node name="Cache" type="TextureRect" parent="Content/PrintingPackets"]
 layout_mode = 2

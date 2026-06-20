@@ -91,7 +91,7 @@ func tutorial_sequence():
 	add_tutorial_text("Guide",
 """Open the guide to read controls:
 
-1. Press %pause to open the pause menu.
+1. Click the Pause button or press %pause to open the pause menu.
 2. Click on Guide.
 3. Read the controls.
 4. Close with %exit_menu.

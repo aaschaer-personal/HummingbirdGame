@@ -4,10 +4,11 @@ class_name Level extends Node
 @onready var cache = $Cache
 @onready var drop_point = $DropPoint
 @onready var visitor_manager = $VisitorManager
-@onready var intro_scene = $UI/IntroScreen
+@onready var intro_screen = $UI/IntroScreen
 @onready var completed_screen = $UI/CompletedScreen
 @onready var tutorial_container = $UI/TutorialContainer
 @onready var pause_screen = $UI/PauseScreen
+@onready var pause_button = $UI/PauseButton
 @onready var failure_screen = $UI/FailureScreen
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 @onready var control_text_scene = preload("res://src/UI/control_text.tscn")
@@ -46,8 +47,13 @@ func _ready():
 	visitor_manager.initialize_bouquets(bouquet_recipes)
 	GenomeGenerator.initialize_next_gene_storage(flower_species)
 	pause_screen.punnet_square_opened.connect(_on_punnet_square_opened)
-
+	pause_button.toggled.connect(_on_pause_button_toggled)
 	main.call_deferred()
+
+func _process(_delta):
+	var paused = get_tree().paused
+	if pause_button.button_pressed != paused:
+		pause_button.set_pressed_no_signal(paused)
 
 func _failure_check():
 	if visitor_manager.done:
@@ -97,6 +103,21 @@ func _on_orange_seeds_harvested():
 func _on_punnet_square_opened():
 	punnet_square_opened = true
 
+func _on_pause_button_toggled(toggle_on):
+	if toggle_on:
+		# don't overlap menus
+		if cache.cache_ui.visible or intro_screen.visible:
+			pause_button.toggled = false
+		elif not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true
+	else:
+		pause_screen.guide.visible = false
+		pause_screen.visible = false
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		get_tree().paused = false
+
 func main():
 	if Config.get_option("skip_intros"):
 		await quick_intro_sequence()
@@ -127,7 +148,7 @@ func cinematic_intro_sequence():
 	player.controllable = false
 	await move_player_on_screen()
 	await cache.raise()
-	intro_scene.text.text = level_intro_text
-	intro_scene.open()
+	intro_screen.text.text = level_intro_text
+	intro_screen.open()
 	player.controllable = true
 	await cache.dispense_all(generate_starting_packet())
