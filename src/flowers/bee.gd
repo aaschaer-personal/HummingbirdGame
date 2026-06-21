@@ -31,6 +31,7 @@ func hover_then_fly():
 	fly_then_hover()
 
 func fly_away():
+	SignalBus.bee_flew_away.emit()
 	active = false
 	var flight_vector = Vector2(-10, -20)
 	if bool(randi() % 2):

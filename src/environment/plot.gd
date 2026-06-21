@@ -7,7 +7,6 @@ var wetness = 0
 var plant_scene = null
 
 func _ready():
-	super()
 	plant_scene = get_tree().get_first_node_in_group("level").plant_scene
 
 func _process(delta):

@@ -1,6 +1,5 @@
 class_name Cache extends Interactable
 
-signal print_started
 signal packet_printed
 
 @onready var front = $Front
@@ -31,7 +30,6 @@ var top
 var top_positions = [0,0,0,0,0,0,-1,-3,-5,-8,-11,-14,-17,-19,-20]
 
 func _ready():
-	super()
 	front.frame_changed.connect(sync_frames)
 	var top_scene = get_tree().get_first_node_in_group("level").cache_top_scene
 	while top_scene == null:
@@ -171,7 +169,7 @@ func _dispense_clippers():
 	await clippers.transport(CLIPPER_TRANSPORT.x, CLIPPER_TRANSPORT.y)
 
 func print_packet(seed_packet):
-	print_started.emit()
+	SignalBus.print_started.emit()
 	if not door_open:
 		await left_door_open()
 		door_open = true

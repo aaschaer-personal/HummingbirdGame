@@ -1,8 +1,5 @@
 class_name PauseScreen extends ColorRect
 
-signal guide_opened
-signal punnet_square_opened
-
 @onready var pause_menu = $PauseMenu
 @onready var punnet_square = $PunnetSquare
 @onready var guide = $Guide
@@ -40,11 +37,11 @@ func _ready():
 
 func open_guide():
 	guide.visible = true
-	guide_opened.emit()
+	SignalBus.guide_opened.emit()
 	
 func open_punnet_square():
 	punnet_square.visible = true
-	punnet_square_opened.emit()
+	SignalBus.punnet_square_opened.emit()
 	
 func open_options():
 	options.visible = true
@@ -53,6 +50,7 @@ func resume():
 	if not guide.visible:
 		visible = false
 		get_tree().paused = false
+		SignalBus.unpaused.emit()
 		
 	# hacky way of dealing with overlapping buttons
 	else:

@@ -13,12 +13,6 @@ class_name Level extends Node
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 @onready var control_text_scene = preload("res://src/UI/control_text.tscn")
 
-var water_explained = false
-var energy_explained = false
-var packet_printed = false
-var punnet_square_opened = false
-var orange_seeds_polinated = false
-var orange_seeds_harvested = false
 var flower_accepted = false
 var visitor_left = false
 var flowers_grown = 0
@@ -37,23 +31,18 @@ func generate_starting_seeds():
 
 func _ready():
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
-	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
 	SignalBus.cut_flower_decayed.connect(_failure_check)
 	SignalBus.flower_accepted.connect(_on_flower_accepted)
-	cache.packet_printed.connect(_on_packet_printed)
 	visitor_manager.visitor_left.connect(_on_visitor_left)
-	SignalBus.orange_seeds_harvested.connect(_on_orange_seeds_harvested)
 	visitor_manager.initialize_bouquets(bouquet_recipes)
 	GenomeGenerator.initialize_next_gene_storage(flower_species)
-	pause_screen.punnet_square_opened.connect(_on_punnet_square_opened)
 	pause_button.toggled.connect(_on_pause_button_toggled)
+	SignalBus.paused_or_unpaused.connect(_on_paused_or_unpaused)
 	main.call_deferred()
 
-func _process(_delta):
-	var paused = get_tree().paused
-	if pause_button.button_pressed != paused:
-		pause_button.set_pressed_no_signal(paused)
+func _on_paused_or_unpaused():
+	pause_button.set_pressed_no_signal(get_tree().paused)
 
 func _failure_check():
 	if visitor_manager.done:
@@ -90,19 +79,6 @@ func _on_flower_bloomed(color):
 		visitor_manager.visitors_unlocked = true
 		visitor_manager.timer.start(1)
 
-func _on_flower_pollinated(parent_gene_dicts):
-	if GenomeHelpers.orange_parents(parent_gene_dicts):
-		orange_seeds_polinated = true
-
-func _on_packet_printed():
-	packet_printed = true
-	
-func _on_orange_seeds_harvested():
-	orange_seeds_harvested = true
-
-func _on_punnet_square_opened():
-	punnet_square_opened = true
-
 func _on_pause_button_toggled(toggle_on):
 	if toggle_on:
 		# don't overlap menus
@@ -111,12 +87,14 @@ func _on_pause_button_toggled(toggle_on):
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
+			SignalBus.paused.emit()
 	else:
 		pause_screen.guide.visible = false
 		pause_screen.visible = false
 		if pause_screen.options.visible:
 			pause_screen.options.close()
 		get_tree().paused = false
+		SignalBus.unpaused.emit()
 
 func main():
 	if Config.get_option("skip_intros"):

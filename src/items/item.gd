@@ -15,7 +15,7 @@ class_name Item extends Interactable
 var dispense_slot = null
 
 func _ready():
-	super()
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	disk_sprite.visible = false
 
 func is_interactable():

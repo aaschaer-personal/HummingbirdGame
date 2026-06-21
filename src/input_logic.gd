@@ -33,9 +33,11 @@ func _input(event):
 		elif pause_screen.visible:
 			pause_screen.visible = false
 			get_tree().paused = false
+			SignalBus.unpaused.emit()
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
+			SignalBus.paused.emit()
 
 	elif event.is_action_released("exit_menu"):
 		if pause_screen.punnet_square.visible:
@@ -47,6 +49,7 @@ func _input(event):
 		elif pause_screen.visible:
 			pause_screen.visible = false
 			get_tree().paused = false
+			SignalBus.unpaused.emit()
 		elif intro_screen.visible:
 			intro_screen.close()
 		elif cache_ui.visible:
@@ -59,13 +62,15 @@ func _input(event):
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
+			SignalBus.paused.emit()
 		else:
 			pause_screen.guide.visible = false
 			pause_screen.visible = false
 			if pause_screen.options.visible:
 				pause_screen.options.close()
 			get_tree().paused = false
-			
+			SignalBus.unpaused.emit()
+
 	elif event.is_action_released("punnet_square"):
 		# don't overlap menus
 		if cache_ui.visible or intro_screen.visible:
@@ -76,8 +81,10 @@ func _input(event):
 			pause_screen.visible = not punnet_open
 			if not punnet_open:
 				pause_screen.open_punnet_square()
+				SignalBus.paused.emit()
 			else:
 				pause_screen.punnet_square.visible = false
+				SignalBus.unpaused.emit()
 
 # global clicking logic
 func _unhandled_input(event):

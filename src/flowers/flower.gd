@@ -32,7 +32,6 @@ var cut_offsets = {
 }
 
 func _ready():
-	super()
 	cut_flower_scene = get_tree().get_first_node_in_group("level").cut_flower_scene
 
 	var options = get_tree().get_first_node_in_group("options")
@@ -66,8 +65,8 @@ func flip():
 	nectar_meter.position.x -= 12
 	for bee_hover_point in bee_hover_points.get_children():
 		bee_hover_point.position.x *= -1
-	if arrow:
-		arrow.position.x *= -1
+	if has_node("TutorialArrow"):
+		get_node("TutorialArrow").position.x *= -1
 
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
@@ -84,6 +83,7 @@ func receive_nutrients(amount: float):
 				var new_bee = bee_scene.instantiate()
 				add_child(new_bee)
 				bee = new_bee
+				SignalBus.bee_arrived.emit(bee)
 				bee_audio_player.play()
 		else:
 			if not pollination_timer.is_stopped() and not manualy_pollinated:

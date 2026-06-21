@@ -27,21 +27,27 @@ position = Vector2(321, 212)
 position = Vector2(183, 317)
 
 [node name="Plot1" parent="." index="10" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(240, 210)
 
 [node name="Plot2" parent="." index="11" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(265, 170)
 
 [node name="Plot3" parent="." index="12" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(320, 145)
 
 [node name="Plot4" parent="." index="13" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(320, 274)
 
 [node name="Plot5" parent="." index="14" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(375, 250)
 
 [node name="Plot6" parent="." index="15" instance=ExtResource("7_ewyk6")]
+process_mode = 0
 position = Vector2(400, 210)
 
 [node name="Grass" type="Sprite2D" parent="." index="16"]

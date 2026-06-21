@@ -5,6 +5,7 @@ class_name CutFlower extends Item
 @onready var collision_shape = $CollisionShape2D
 @onready var decay_timer = $DecayTimer
 @onready var color_label = $ColorLabel
+@onready var tutorial_arrow = $TutorialArrow
 @export var species: String
 
 var x_offset_by_species = {
@@ -87,13 +88,13 @@ func set_flip_h(val: bool):
 		item_sprite.position.x = x_offset * -1
 		petal_sprite.position.x = x_offset * -1
 		collision_shape.position.x = x_offset * -1
-		arrow.position.x = x_offset * -1
+		tutorial_arrow.position.x = x_offset * -1
 		color_label.position.x = -40
 	else:
 		item_sprite.position.x = x_offset
 		petal_sprite.position.x = x_offset
 		collision_shape.position.x = x_offset
-		arrow.position.x = x_offset
+		tutorial_arrow.position.x = x_offset
 		color_label.position.x = 0
 
 func set_pickup_height():

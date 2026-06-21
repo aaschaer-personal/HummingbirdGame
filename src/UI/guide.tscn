@@ -434,7 +434,7 @@ stretch_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
-text = "* When a flower completely fills with nectar it will attract bees. If left alone these bees will pollinate the flower with pollen from outside the area."
+text = "* When a flower completely fills with nectar it will attract bees. If left alone these bees will pollinate the flower with random pollen."
 fit_content = true
 
 [node name="Bees" type="TextureRect" parent="Content/GrowingFlowers"]

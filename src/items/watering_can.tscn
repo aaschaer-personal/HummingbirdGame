@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="9_8083b"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="9_ptpi4"]
 [ext_resource type="AudioStream" uid="uid://dmbeuwnj72j0g" path="res://assets/Sounds/watering.ogg" id="10_bpakl"]
-[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="11_a440u"]
+[ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="11_a440u"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
 radius = 9.0
@@ -91,7 +91,6 @@ stream = ExtResource("10_bpakl")
 panning_strength = 5.0
 db_offset = 1
 
-[node name="Arrow" type="Sprite2D" parent="."]
+[node name="TutorialArrow" parent="." instance=ExtResource("11_a440u")]
 visible = false
 position = Vector2(0, -17)
-texture = ExtResource("11_a440u")

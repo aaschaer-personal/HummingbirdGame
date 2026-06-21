@@ -1,5 +1,15 @@
 extends SunflowerLevel
 
+var water_explained = false
+var energy_explained = false
+var bees_explained = false
+var print_started = false
+var packet_printed = false
+var guide_opened = false
+var punnet_square_opened = false
+var orange_seeds_polinated = false
+var orange_seeds_harvested = false
+
 func _ready():
 	level_num = 1
 	level_intro_text = """Welcome to the Sunflower cache, the first cache of the Journey!
@@ -13,8 +23,16 @@ Here, we teach the basics of growing and crossing flowers."""
 ]
 	super()
 
+	# tutorial signals
+	SignalBus.guide_opened.connect(_on_guide_opened)
+	SignalBus.punnet_square_opened.connect(_on_punnet_square_opened)
+	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
+	SignalBus.print_started.connect(_on_print_started)
+	cache.packet_printed.connect(_on_packet_printed)
+	SignalBus.orange_seeds_harvested.connect(_on_orange_seeds_harvested)
 	SignalBus.watering_can_emptied.connect(_on_watering_can_emptied)
 	player.energy_quartered.connect(_on_energy_quartered)
+	SignalBus.bee_arrived.connect(_on_bee_arrived)
 	var options = get_tree().get_first_node_in_group("options")
 	options.show_tutorial_changed.connect(set_tutorial_visibility)
 
@@ -39,6 +57,25 @@ func generate_starting_seeds():
 
 # Tutorial logic
 
+func _on_print_started():
+	print_started = true
+
+func _on_packet_printed():
+	packet_printed = true
+
+func _on_orange_seeds_harvested():
+	orange_seeds_harvested = true
+
+func _on_punnet_square_opened():
+	punnet_square_opened = true
+	
+func _on_guide_opened():
+	guide_opened = true
+
+func _on_flower_pollinated(parent_gene_dicts):
+	if GenomeHelpers.orange_parents(parent_gene_dicts):
+		orange_seeds_polinated = true
+
 func _on_energy_quartered():
 	if not energy_explained:
 		energy_explained = true
@@ -49,10 +86,10 @@ func _on_energy_quartered():
 2. Drink nectar from flowers.
 
 """)
-		var sapling = $Sapling
-		sapling.set_arrow_side_visibility(true)
+		var sapling_arrow = $Sapling/TutorialArrow
+		sapling_arrow.set_side_visibility(true)
 		await player.energy_to_third_or_perch
-		sapling.set_arrow_side_visibility(false)
+		sapling_arrow.set_side_visibility(false)
 		await player.energy_back_to_half
 		await remove_tutorial_text("Energy")
 
@@ -65,11 +102,31 @@ func _on_watering_can_emptied():
 Interact with the pond (click or %interact) while holding the watering can.
 
 """)
-	var pond = $Pond
-	pond.set_arrow_side_visibility(true)
+	var pond_arrow = $Pond/TutorialArrow
+	pond_arrow.set_side_visibility(true)
 	await SignalBus.watering_can_refilled
-	pond.set_arrow_side_visibility(false)
+	pond_arrow.set_side_visibility(false)
 	await remove_tutorial_text("Water")
+
+func _on_bee_arrived(bee):
+	if not bees_explained:
+		bees_explained = true
+		add_tutorial_text("Bees",
+		"""(Optional) Shoo off a bee:
+
+1. Drink from the flower (click or %interact) to shoo off the bee.
+
+If left alone, the bee will pollinate the flower with random pollen.
+""")
+		var flower = bee.get_parent()
+		var flower_arrow = flower.get_node("TutorialArrow")
+		flower_arrow.set_side_visibility(true)
+		while flower.bee:
+			await SignalBus.bee_flew_away
+			# wait for flower.bee to be null
+			await get_tree().create_timer(0.1, false).timeout
+		flower_arrow.set_side_visibility(false)
+		await remove_tutorial_text("Bees")
 
 func add_tutorial_text(text_name: String, template: String):
 	var tutorial_text = control_text_scene.instantiate()
@@ -98,7 +155,17 @@ func tutorial_sequence():
 5. Reference guide sections as needed!
 
 """)
-	await pause_screen.guide_opened
+	var pause_button_arrow = pause_button.get_node("TutorialArrow")
+	var guide_button_arrow = pause_screen.guide_button.get_node("TutorialArrow")
+	while not guide_opened:
+		var paused = pause_screen.visible
+		pause_button_arrow.set_main_visibility(!paused)
+		guide_button_arrow.set_main_visibility(paused)
+		await SignalBus.paused_unpaused_or_guide_opened
+		# wait for guide_opened to be set
+		await get_tree().create_timer(0.1, true).timeout
+	pause_button_arrow.set_main_visibility(false)
+	guide_button_arrow.set_main_visibility(false)
 	await remove_tutorial_text("Guide")
 
 	if flowers_grown < 6:
@@ -116,7 +183,9 @@ func tutorial_sequence():
 		while flowers_grown < 6:
 			var seeds_planted = 0
 			var seeds_watered = 0
-			var watering_can = get_tree().get_first_node_in_group("watering_can")
+			var watering_can =  get_tree().get_first_node_in_group("watering_can")
+			var watering_can_arrow = watering_can.get_node("TutorialArrow")
+			var starting_packet_arrow = starting_packet.get_node("TutorialArrow")
 			for plot in get_tree().get_nodes_in_group("plot"):
 				if plot.plant:
 					seeds_planted += 1
@@ -124,46 +193,46 @@ func tutorial_sequence():
 						seeds_watered += 1
 
 			if seeds_planted < 4:
-				watering_can.set_arrow_main_visibility(false)
+				watering_can_arrow.set_main_visibility(false)
 				# arrow over starting packet if not held
 				if player.held_item != starting_packet:
-					starting_packet.set_arrow_main_visibility(true)
+					starting_packet_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up
 					if player.held_item == starting_packet:
-						starting_packet.set_arrow_main_visibility(false)
+						starting_packet_arrow.set_main_visibility(false)
 					continue
 				# arrow over empty plots
 				else:
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if not plot.plant:
-							plot.set_arrow_main_visibility(true)
+							plot.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.seed_planted_removed_or_item_dropped
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if plot.plant or player.held_item != starting_packet:
-							plot.set_arrow_main_visibility(false)
+							plot.get_node("TutorialArrow").set_main_visibility(false)
 					continue
 			elif seeds_watered < 4:
 				for plot in get_tree().get_nodes_in_group("plot"):
 					if not plot.plant:
-						plot.set_arrow_main_visibility(false)
+						plot.get_node("TutorialArrow").set_main_visibility(false)
 				# arrow over watering can if not held
 				if player.held_item != watering_can:
-					watering_can.set_arrow_main_visibility(true)
+					watering_can_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up_or_seed_removed
 					if player.held_item == watering_can:
-						watering_can.set_arrow_main_visibility(false)
+						watering_can_arrow.set_main_visibility(false)
 					continue
 				# arrow over plots until watered
 				else:
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if plot.plant and (plot.wetness < 10 and plot.plant.stage == 0):
-							plot.set_arrow_main_visibility(true)
+							plot.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.plot_watered_seed_removed_or_item_dropped
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if player.held_item != watering_can:
-							plot.set_arrow_main_visibility(false)
+							plot.get_node("TutorialArrow").set_main_visibility(false)
 						elif plot.plant and (plot.wetness > 10 or plot.plant.stage > 0):
-							plot.set_arrow_main_visibility(false)
+							plot.get_node("TutorialArrow").set_main_visibility(false)
 			# wait for blooms
 			else:
 				await get_tree().create_timer(0.1, false).timeout
@@ -181,25 +250,27 @@ func tutorial_sequence():
 """)
 		while not flower_accepted:
 			var clippers = get_tree().get_first_node_in_group("clippers")
+			var clippers_arrow = clippers.get_node("TutorialArrow")
 			var cut_yellow_flower = get_tree().get_first_node_in_group("cut_yellow_flowers")
 			if not cut_yellow_flower or cut_yellow_flower.is_decaying:
 				# arrow over clippers if no flower cut and player not holding them
 				if player.held_item != clippers:
-					clippers.set_arrow_main_visibility(true)
+					clippers_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up
 					if player.held_item == clippers:
-						clippers.set_arrow_main_visibility(false)
+						clippers_arrow.set_main_visibility(false)
 					continue
 				# arrow over flower if no flower cut and player holding clippers
 				else:
 					for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-						flower.set_arrow_main_visibility(true)
+						flower.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.flower_cut_or_item_dropped
 					for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-						flower.set_arrow_main_visibility(false)
+						flower.get_node("TutorialArrow").set_main_visibility(false)
 					continue
 			else:
-				clippers.set_arrow_main_visibility(false)
+				var cut_yellow_flower_arrow = cut_yellow_flower.get_node("TutorialArrow")
+				clippers_arrow.set_main_visibility(false)
 				# arrow over cut flower if player not holding it
 				var holding_yellow_flower = false
 				if player.held_item is Bouquet:
@@ -208,7 +279,7 @@ func tutorial_sequence():
 							holding_yellow_flower = true
 							break
 				if not holding_yellow_flower:
-					cut_yellow_flower.set_arrow_main_visibility(true)
+					cut_yellow_flower_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up_or_flower_decayed
 					if player.held_item is Bouquet:
 						for flower in player.held_item.get_flowers():
@@ -216,14 +287,15 @@ func tutorial_sequence():
 								holding_yellow_flower = true
 								break
 					if holding_yellow_flower or cut_yellow_flower.is_decaying:
-						cut_yellow_flower.set_arrow_main_visibility(false)
+						cut_yellow_flower_arrow.set_main_visibility(false)
 					continue
 				# arrow over visitor if player holding cut flower
 				else:
 					var visitor = get_tree().get_first_node_in_group("visitors")
-					visitor.set_arrow_main_visibility(true)
+					var visitor_arrow = visitor.get_node("TutorialArrow")
+					visitor_arrow.set_main_visibility(true)
 					await SignalBus.flower_accepted_or_item_dropped
-					visitor.set_arrow_main_visibility(false)
+					visitor_arrow.set_main_visibility(false)
 					# brief wait to make sure level.flower_accepted is updated
 					await get_tree().create_timer(0.1, false).timeout
 					continue
@@ -243,15 +315,23 @@ func tutorial_sequence():
 
 """)
 		# wait for punnet square
-		if not punnet_square_opened:
-			await pause_screen.punnet_square_opened
-		
+		var punnet_square_button_arrow = pause_screen.punnet_square_button.get_node("TutorialArrow")
+		while not punnet_square_opened:
+			var paused = pause_screen.visible
+			pause_button_arrow.set_main_visibility(!paused)
+			punnet_square_button_arrow.set_main_visibility(paused)
+			await SignalBus.paused_unpaused_or_punnet_square_opened
+			# wait for punnet_square_opened to be set
+			await get_tree().create_timer(0.1, true).timeout
+		pause_button_arrow.set_main_visibility(false)
+		punnet_square_button_arrow.set_main_visibility(false)
+
 		# if player has pollen, arrow over pond until bathed
 		if player.pollen:
-			var pond = $Pond
-			pond.set_arrow_main_visibility(true)
+			var pond_arrow = $Pond/TutorialArrow
+			pond_arrow.set_main_visibility(true)
 			await player.bath_started
-			pond.set_arrow_main_visibility(false)
+			pond_arrow.set_main_visibility(false)
 			await player.drink_or_bath
 
 		# arrow over flowers that the player doesn't have pollen for
@@ -267,10 +347,10 @@ func tutorial_sequence():
 
 			if not red_drink:
 				for flower in get_tree().get_nodes_in_group("red_flowers"):
-					flower.set_arrow_main_visibility(true)
+					flower.get_node("TutorialArrow").set_main_visibility(true)
 			if not yellow_drink:
 				for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-					flower.set_arrow_main_visibility(true)
+					flower.get_node("TutorialArrow").set_main_visibility(true)
 			if yellow_drink and red_drink:
 					break
 
@@ -279,18 +359,18 @@ func tutorial_sequence():
 				if player.drinking_flower.color == Colors.red:
 					red_drink = true
 					for flower in get_tree().get_nodes_in_group("red_flowers"):
-						flower.set_arrow_main_visibility(false)
+						flower.get_node("TutorialArrow").set_main_visibility(false)
 				elif player.drinking_flower.color == Colors.yellow:
 					yellow_drink = true
 					for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-						flower.set_arrow_main_visibility(false)
+						flower.get_node("TutorialArrow").set_main_visibility(false)
 				if yellow_drink and red_drink:
 					break
 
 		for flower in get_tree().get_nodes_in_group("red_flowers"):
-			flower.set_arrow_main_visibility(false)
+			flower.get_node("TutorialArrow").set_main_visibility(false)
 		for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-			flower.set_arrow_main_visibility(false)
+			flower.get_node("TutorialArrow").set_main_visibility(false)
 
 		while not orange_seeds_polinated:
 			await SignalBus.flower_pollinated
@@ -305,12 +385,20 @@ func tutorial_sequence():
 3. Press print.
 
 """)
-		# arrow over cache until used
-		cache.set_arrow_main_visibility(true)
-		await cache.print_started
-		cache.set_arrow_main_visibility(false)
-		await cache.packet_printed
-		await remove_tutorial_text("PrintPacket")
+		var cache_arrow = cache.get_node("TutorialArrow")
+		var print_arrow = cache.cache_ui.print_button.get_node("TutorialArrow")
+		while not print_started:
+			var ui_visible = cache.cache_ui.visible
+			cache_arrow.set_main_visibility(!ui_visible)
+			print_arrow.set_main_visibility(ui_visible)
+			await SignalBus.cache_opened_closed_or_print_started
+			# wait for packet_printed to be set
+			await get_tree().create_timer(0.1, true).timeout
+		cache_arrow.set_main_visibility(false)
+		print_arrow.set_main_visibility(false)
+		
+		if not packet_printed:
+			await cache.packet_printed
 
 	if not orange_seeds_harvested:
 		add_tutorial_text("HarvestSeeds",
@@ -328,21 +416,22 @@ func tutorial_sequence():
 					if seed_packet != starting_packet:
 						new_seed_packet = seed_packet
 						break
-				new_seed_packet.set_arrow_main_visibility(true)
+				var new_seed_packet_arrow = new_seed_packet.get_node("TutorialArrow")
+				new_seed_packet_arrow.set_main_visibility(true)
 				await SignalBus.item_picked_up
 				if player.held_item is SeedPacket:
-					new_seed_packet.set_arrow_main_visibility(false)
+					new_seed_packet_arrow.set_main_visibility(false)
 				continue
 			else:
 				# arrow on orange seeds until they are harvested or cut
 				var orange_seeds = get_tree().get_first_node_in_group("orange_seeds")
 				if orange_seeds:
-					orange_seeds.set_arrow_main_visibility(true)
+					orange_seeds.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.orange_seeds_harvested_or_flower_cut
 					# brief wait to make sure level.orange_seeds_harvested is updated
 					await get_tree().create_timer(0.1, false).timeout
 		for seed_packet in get_tree().get_nodes_in_group("seed_packets"):
-			seed_packet.set_arrow_main_visibility(false)
+			seed_packet.get_node("TutorialArrow").set_main_visibility(false)
 		await remove_tutorial_text("HarvestSeeds")
 
 	if not Colors.orange in colors_grown:
@@ -357,6 +446,7 @@ func tutorial_sequence():
 			var orange_seeds_planted = 0
 			var orange_seeds_watered = 0
 			var watering_can = get_tree().get_first_node_in_group("watering_can")
+			var watering_can_arrow = watering_can.get_node("TutorialArrow")
 			for plot in get_tree().get_nodes_in_group("plot"):
 				if plot.plant and plot.plant.genome.flower_color == Colors.orange:
 					orange_seeds_planted += 1
@@ -364,7 +454,7 @@ func tutorial_sequence():
 						orange_seeds_watered += 1
 
 			if orange_seeds_planted < 1:
-				watering_can.set_arrow_main_visibility(false)
+				watering_can_arrow.set_main_visibility(false)
 				# arrow over orange packet if not held
 				var orange_packet
 				for seed_packet in get_tree().get_nodes_in_group("seed_packets"):
@@ -378,51 +468,53 @@ func tutorial_sequence():
 							if GenomeHelpers.color_from_gene_dict(packet_seed) == Colors.orange:
 								orange_packet = seed_packet
 								break
+				var orange_packet_arrow = orange_packet.get_node("TutorialArrow")
 				if player.held_item != orange_packet:
-					orange_packet.set_arrow_main_visibility(true)
+					orange_packet_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up
 					if player.held_item == orange_packet:
-						orange_packet.set_arrow_main_visibility(false)
+						orange_packet_arrow.set_main_visibility(false)
 					continue
 				# arrow over empty plots
 				else:
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if not plot.plant:
-							plot.set_arrow_main_visibility(true)
+							plot.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.seed_planted_removed_or_item_dropped
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if plot.plant or not player.held_item is SeedPacket:
-							plot.set_arrow_main_visibility(false)
+							plot.get_node("TutorialArrow").set_main_visibility(false)
 					continue
 
 			elif orange_seeds_watered < 1:
 				for plot in get_tree().get_nodes_in_group("plot"):
 					if not plot.plant:
-						plot.set_arrow_main_visibility(false)
+						plot.get_node("TutorialArrow").set_main_visibility(false)
 				for seed_packet in get_tree().get_nodes_in_group("seed_packets"):
-					seed_packet.set_arrow_main_visibility(false)
+					seed_packet.get_node("TutorialArrow").set_main_visibility(false)
 				# arrow over watering can if not held
 				if player.held_item != watering_can:
-					watering_can.set_arrow_main_visibility(true)
+					watering_can_arrow.set_main_visibility(true)
 					await SignalBus.item_picked_up_or_seed_removed
 					if player.held_item == watering_can:
-						watering_can.set_arrow_main_visibility(false)
+						watering_can_arrow.set_main_visibility(false)
 					continue
 				# arrow over orange seed until watered
 				else:
 					for plot in get_tree().get_nodes_in_group("plot"):
 						if plot.plant and plot.plant.genome.flower_color == Colors.orange and (plot.wetness < 10 and plot.plant.stage == 0):
-							plot.set_arrow_main_visibility(true)
+							plot.get_node("TutorialArrow").set_main_visibility(true)
 					await SignalBus.plot_watered_seed_removed_or_item_dropped
 					for plot in get_tree().get_nodes_in_group("plot"):
+						var plot_arrow = plot.get_node("TutorialArrow")
 						if player.held_item != watering_can:
-							plot.set_arrow_main_visibility(false)
+							plot_arrow.set_main_visibility(false)
 						elif plot.plant and (plot.wetness > 10 or plot.plant.stage > 0):
-							plot.set_arrow_main_visibility(false)
+							plot_arrow.set_main_visibility(false)
 			# wait for bloom
 			else:
 				for plot in get_tree().get_nodes_in_group("plot"):
-					plot.set_arrow_main_visibility(false)
+					plot.get_node("TutorialArrow").set_main_visibility(false)
 				await get_tree().create_timer(0.1, false).timeout
 		await remove_tutorial_text("OrangeGrow")
 
