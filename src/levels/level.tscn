@@ -90,15 +90,6 @@ offset_top = 90.0
 offset_right = 480.0
 offset_bottom = 270.0
 
-[node name="TutorialContainer" type="VBoxContainer" parent="UI" groups=["tutorial_container"]]
-process_mode = 1
-layout_mode = 0
-offset_left = 430.0
-offset_top = 10.0
-offset_right = 638.0
-offset_bottom = 360.0
-mouse_filter = 2
-
 [node name="IntroScreen" parent="UI" instance=ExtResource("7_mhwal")]
 visible = false
 layout_mode = 0
@@ -106,6 +97,21 @@ offset_left = 160.0
 offset_top = 90.0
 offset_right = 480.0
 offset_bottom = 270.0
+
+[node name="TutorialScroll" type="ScrollContainer" parent="UI"]
+clip_contents = false
+layout_mode = 0
+offset_left = 430.0
+offset_top = 10.0
+offset_right = 640.0
+offset_bottom = 360.0
+horizontal_scroll_mode = 0
+
+[node name="TutorialContainer" type="VBoxContainer" parent="UI/TutorialScroll" groups=["tutorial_container"]]
+process_mode = 1
+custom_minimum_size = Vector2(202, 0)
+layout_mode = 2
+mouse_filter = 2
 
 [node name="Player" parent="." instance=ExtResource("8_j54jp")]
 process_mode = 1
@@ -125,7 +131,6 @@ process_mode = 1
 shape = SubResource("CircleShape2D_du6bw")
 
 [node name="VisitorManager" parent="." groups=["customer_manager"] instance=ExtResource("14_alqih")]
-process_mode = 1
 
 [node name="ShadowCanvasGroup" type="CanvasGroup" parent="." groups=["shadow_canvas_group"]]
 process_mode = 1

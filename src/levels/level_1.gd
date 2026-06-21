@@ -114,9 +114,8 @@ func _on_bee_arrived(bee):
 		add_tutorial_text("Bees",
 		"""(Optional) Shoo off a bee:
 
-1. Drink from the flower (click or %interact) to shoo off the bee.
+Drink from the flower (click or %interact) to shoo off the bee. If left alone, the bee will pollinate the flower with random pollen.
 
-If left alone, the bee will pollinate the flower with random pollen.
 """)
 		var flower = bee.get_parent()
 		var flower_arrow = flower.get_node("TutorialArrow")

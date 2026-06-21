@@ -6,7 +6,7 @@ class_name Level extends Node
 @onready var visitor_manager = $VisitorManager
 @onready var intro_screen = $UI/IntroScreen
 @onready var completed_screen = $UI/CompletedScreen
-@onready var tutorial_container = $UI/TutorialContainer
+@onready var tutorial_container = $UI/TutorialScroll/TutorialContainer
 @onready var pause_screen = $UI/PauseScreen
 @onready var pause_button = $UI/PauseButton
 @onready var failure_screen = $UI/FailureScreen
