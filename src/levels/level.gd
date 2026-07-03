@@ -80,11 +80,11 @@ func _on_flower_bloomed(color):
 		visitor_manager.timer.start(1)
 
 func _on_pause_button_toggled(toggle_on):
-	if toggle_on:
-		# don't overlap menus
-		if cache.cache_ui.visible or intro_screen.visible:
-			pause_button.toggled = false
-		elif not pause_screen.visible:
+	# don't overlap or override menus
+	if cache.cache_ui.visible or intro_screen.visible:
+		pause_button.set_pressed_no_signal(not toggle_on)
+	elif toggle_on:
+		if not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
 			SignalBus.paused.emit()

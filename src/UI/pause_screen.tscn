@@ -27,6 +27,7 @@ script = ExtResource("1_a0n6x")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="PauseMenu" type="NinePatchRect" parent="."]
 layout_mode = 0

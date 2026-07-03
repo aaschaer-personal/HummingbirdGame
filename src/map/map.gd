@@ -5,6 +5,7 @@ extends Node2D
 @onready var level_areas = $LevelAreas
 @onready var tutorial_text = $TutorialText
 @onready var flowers = $Flowers
+@onready var pause_button = $PauseButton
 @onready var pause_screen = $PauseScreen
 @onready var congrats_screen = $CongratsScreen
 @onready var double_click_timer = $DoubleClickTimer
@@ -85,6 +86,9 @@ var level_graph =  {
 }
 
 func _ready():
+	pause_button.toggled.connect(_on_pause_button_toggled)
+	SignalBus.paused_or_unpaused.connect(_on_paused_or_unpaused)
+
 	for level in level_points:
 		point_levels[level_points[level]] = level
 	
@@ -190,9 +194,11 @@ func _input(event):
 		elif pause_screen.visible:
 			pause_screen.visible = false
 			get_tree().paused = false
+			SignalBus.unpaused.emit()
 		elif not pause_screen.visible:
 			pause_screen.visible = true
 			get_tree().paused = true
+			SignalBus.paused.emit()
 
 	elif event.is_action_released("exit_menu"):
 		if pause_screen.options.visible:
@@ -244,3 +250,18 @@ func enter_level(level_num):
 		Config.save_config()
 		var level = load("res://src/levels/level_%d.tscn" % level_num)
 		get_tree().change_scene_to_packed(level)
+
+func _on_pause_button_toggled(toggle_on):
+	if toggle_on:
+		pause_screen.visible = true
+		get_tree().paused = true
+		SignalBus.paused.emit()
+	else:
+		pause_screen.visible = false
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		get_tree().paused = false
+		SignalBus.unpaused.emit()
+
+func _on_paused_or_unpaused():
+	pause_button.set_pressed_no_signal(get_tree().paused)

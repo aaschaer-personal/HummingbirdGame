@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cu1hmijlk3lrc"]
+[gd_scene load_steps=17 format=3 uid="uid://cu1hmijlk3lrc"]
 
 [ext_resource type="Script" uid="uid://843cit7nl465" path="res://src/levels/level.gd" id="1_fflhd"]
 [ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
@@ -15,8 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
-
-[sub_resource type="GDScript" id="GDScript_nrsx4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_du6bw"]
 radius = 3.0
@@ -45,7 +43,6 @@ offset_bottom = 37.0
 toggle_mode = true
 texture_normal = ExtResource("2_mhwal")
 texture_pressed = ExtResource("3_rgvsn")
-script = SubResource("GDScript_nrsx4")
 
 [node name="TutorialArrow" parent="UI/PauseButton" instance=ExtResource("4_ayr0s")]
 position = Vector2(21, 42)
