@@ -6,7 +6,9 @@ extends Node2D
 @onready var pause_button = get_tree().get_first_node_in_group("pause_button")
 @onready var cache_ui = get_tree().get_first_node_in_group("cache_ui")
 @onready var intro_screen = get_tree().get_first_node_in_group("intro_screen")
-@onready var click_started_area = null
+@onready var double_click_timer = $DoubleClickTimer
+
+var click_started = false
 
 func _ready():
 	randomize()
@@ -88,7 +90,26 @@ func _input(event):
 
 # global clicking logic
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	var click = false
+	var double_click = false
+	if player.controllable:
+		if event is InputEventMouse:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					click_started = true
+				elif click_started:
+					click = true
+					click_started = false
+					if double_click_timer.is_stopped():
+						double_click_timer.start()
+					else:
+						double_click_timer.stop()
+						double_click = true
+			# any mouse movement stops click
+			else:
+				click_started = false
+
+	if click:
 		var point = PhysicsPointQueryParameters2D.new()
 		point.position = event.position
 		point.collide_with_bodies = false
@@ -102,37 +123,31 @@ func _unhandled_input(event):
 				continue
 			elif area is Interactable and area.is_interactable():
 				clickables.append(area)
-
+		# prioritize portable items to prevent them getting stuck
 		for area in clickables:
-			# always pick the same area as when the click started
-			if area == click_started_area:
+			if area is Item:
 				selected = area
 				break
-			# prioritize portable items to prevent them getting stuck
-			elif area is Item:
-				selected = area
-				break
-
 		if selected == null and clickables:
 			selected = clickables[0]
 
-		if event.is_pressed():
-			click_started_area = selected
-			# iteraction takes priority over dropping
-			if not selected and event.double_click:
-				drop_point.global_position = event.position
-				# wait for area to move
-				await get_tree().create_timer(0.1, false).timeout
-				player.set_interaction_target(
+		# if theres a selected clickable, it takes priority
+		if selected:
+			selected.on_selected(event.position)
+
+		# if its a double click, move and drop
+		elif double_click:
+			drop_point.global_position = event.position
+			# wait for area to move
+			await get_tree().create_timer(0.1, false).timeout
+			player.set_interaction_target(
 					"_drop_item_at_point",
 					null,
 					player.pickup_area,
 					drop_point,
 					event.position,
-				)
-		elif event.is_released():
-			if click_started_area != null and click_started_area == selected:
-				click_started_area.on_selected(event.position)
-			else:
-				player.move_to_point(event.position)
-			click_started_area = null
+			)
+
+		# otherwise move
+		else:
+			player.move_to_point(event.position)

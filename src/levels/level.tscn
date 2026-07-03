@@ -140,3 +140,7 @@ self_modulate = Color(0, 0, 0, 0.196078)
 z_index = -1
 
 [node name="InputLogic" parent="." instance=ExtResource("18_dnpum")]
+
+[node name="DoubleClickTimer" type="Timer" parent="InputLogic"]
+wait_time = 0.25
+one_shot = true

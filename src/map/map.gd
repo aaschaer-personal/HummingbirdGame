@@ -7,6 +7,7 @@ extends Node2D
 @onready var flowers = $Flowers
 @onready var pause_screen = $PauseScreen
 @onready var congrats_screen = $CongratsScreen
+@onready var double_click_timer = $DoubleClickTimer
 
 var astar
 var controllable = true
@@ -15,8 +16,8 @@ var last_level
 var last_complete
 var target_level
 var intermediate_target_level
-var awaiting_double_click_release = false
 var config
+var click_started = false
 
 var level_points = {
 	1: Vector2(45, 60),
@@ -97,7 +98,7 @@ func _ready():
 	config = Config.get_config()
 	for area in level_areas.get_children():
 		area.input_event.connect(
-			_on_input_event.bind(int(str(area.name)))
+			_on_level_input_event.bind(int(str(area.name)))
 		)
 
 	player.point_reached.connect(_on_point_reached)
@@ -210,16 +211,27 @@ func _input(event):
 			pause_screen.visible = true
 			get_tree().paused = true
 
-func _on_input_event(_viewport, event, _shape, level_num):
-	if controllable and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			if level_unlocks == 6 or level_num <= level_unlocks + 1:
-				target_level = level_num
-				_set_intermediate_target()
-			awaiting_double_click_release = event.double_click
-		else:
-			if awaiting_double_click_release:
-				enter_level(level_num)
+func _on_level_input_event(_viewport, event, _shape, level_num):
+	if controllable:
+		if event is InputEventMouse:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					click_started = true
+				elif click_started:
+					click_started = false
+					if double_click_timer.is_stopped():
+						double_click_timer.start()
+						# single click sets target level
+						if level_unlocks == 6 or level_num <= level_unlocks + 1:
+							target_level = level_num
+							_set_intermediate_target()
+					else:
+						double_click_timer.stop()
+						# double click enters level
+						enter_level(level_num)
+			# any mouse movement stops click
+			else:
+				click_started = false
 
 func _on_point_reached():
 	last_level = point_levels[player.global_position]

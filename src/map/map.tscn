@@ -1173,3 +1173,7 @@ process_mode = 3
 stream = SubResource("AudioStreamOggVorbis_cteyn")
 autoplay = true
 option = "music_volume"
+
+[node name="DoubleClickTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
