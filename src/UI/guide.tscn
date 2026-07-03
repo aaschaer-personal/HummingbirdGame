@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bfcdwh2a0qff7" path="res://src/UI/guide.gd" id="2_ab0ib"]
 [ext_resource type="Texture2D" uid="uid://bf6ryvmu0v32n" path="res://assets/UI/tab.png" id="3_se2j2"]
 [ext_resource type="Texture2D" uid="uid://cp01475tsih2i" path="res://assets/UI/tab_pressed.png" id="4_2koyi"]
-[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="6_koo0c"]
 [ext_resource type="Texture2D" uid="uid://bp65x7b6xqpyb" path="res://assets/UI/GuideImages/plant_seed.png" id="6_l8288"]
 [ext_resource type="PackedScene" uid="uid://bfxri5oqab5ij" path="res://src/UI/control_text.tscn" id="6_rfbbp"]
 [ext_resource type="Texture2D" uid="uid://btnte1wveab17" path="res://assets/UI/GuideImages/unplant_seed.png" id="7_nasn2"]
@@ -34,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://c8nitocvwy0bm" path="res://assets/UI/GuideImages/gene_flowers_labeled.png" id="31_8voly"]
 [ext_resource type="Texture2D" uid="uid://ck5y26dbriwrt" path="res://assets/UI/GuideImages/cross.png" id="32_x30xr"]
 [ext_resource type="Texture2D" uid="uid://c6pgv63gyrl1u" path="res://assets/UI/GuideImages/cross_labeled.png" id="33_8iemu"]
+[ext_resource type="PackedScene" uid="uid://yqhuf4y5iyv8" path="res://src/UI/exit_button.tscn" id="34_8voly"]
 
 [node name="Guide" type="NinePatchRect"]
 offset_left = 55.0
@@ -698,9 +698,7 @@ modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="ExitButton" type="TextureButton" parent="."]
+[node name="ExitButton" parent="." instance=ExtResource("34_8voly")]
 layout_mode = 0
-offset_left = 336.0
+offset_left = 328.0
 offset_right = 345.0
-offset_bottom = 10.0
-texture_normal = ExtResource("6_koo0c")

@@ -33,6 +33,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseButton" type="TextureButton" parent="UI" groups=["pause_button"]]
@@ -105,6 +106,7 @@ offset_left = 430.0
 offset_top = 10.0
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 horizontal_scroll_mode = 0
 
 [node name="TutorialContainer" type="VBoxContainer" parent="UI/TutorialScroll" groups=["tutorial_container"]]

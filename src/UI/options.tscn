@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_oddd3"]
 [ext_resource type="PackedScene" uid="uid://b70ghk26hmrtq" path="res://src/UI/control_option.tscn" id="3_vnubb"]
 [ext_resource type="Texture2D" uid="uid://g2c7rikx7bu" path="res://assets/UI/grey_button.png" id="4_aqb4u"]
-[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_wocj4"]
+[ext_resource type="PackedScene" uid="uid://yqhuf4y5iyv8" path="res://src/UI/exit_button.tscn" id="6_aqb4u"]
 
 [node name="Options" type="NinePatchRect" groups=["options"]]
 offset_right = 248.0
@@ -309,9 +309,7 @@ text = "Confirm
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="TextureButton" parent="."]
+[node name="ExitButton" parent="." instance=ExtResource("6_aqb4u")]
 layout_mode = 0
-offset_left = 239.0
+offset_left = 231.0
 offset_right = 248.0
-offset_bottom = 10.0
-texture_normal = ExtResource("4_wocj4")

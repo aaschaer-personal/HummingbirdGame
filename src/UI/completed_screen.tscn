@@ -32,6 +32,7 @@ layout_mode = 0
 offset_top = 118.0
 offset_right = 319.0
 offset_bottom = 163.0
+mouse_filter = 2
 alignment = 1
 
 [node name="OnwardsButton" type="TextureButton" parent="HBoxContainer"]
