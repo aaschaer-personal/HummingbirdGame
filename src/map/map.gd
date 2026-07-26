@@ -89,6 +89,12 @@ func _ready():
 	pause_button.toggled.connect(_on_pause_button_toggled)
 	SignalBus.paused_or_unpaused.connect(_on_paused_or_unpaused)
 
+	# increase collision size on mobile
+	if Helpers.is_mobile():
+		for area in level_areas.get_children():
+			var shape = area.get_children()[0]
+			shape.scale = Vector2(1.5, 1.5)
+
 	for level in level_points:
 		point_levels[level_points[level]] = level
 	

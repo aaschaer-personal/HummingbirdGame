@@ -813,7 +813,7 @@ shape = SubResource("CircleShape2D_0g0tj")
 one_way_collision_margin = 5.0
 
 [node name="7" type="Area2D" parent="LevelAreas"]
-position = Vector2(60, 134)
+position = Vector2(61, 134)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelAreas/7"]
 shape = SubResource("CircleShape2D_0g0tj")
