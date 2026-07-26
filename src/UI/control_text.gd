@@ -7,7 +7,8 @@ var template
 var actions = []
 
 func _ready():
-	options.controls_changed.connect(_on_controls_changed)
+	if options:
+		options.controls_changed.connect(_on_controls_changed)
 	if not template:
 		template = text
 		parse_actions()
