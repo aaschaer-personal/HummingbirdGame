@@ -40,6 +40,7 @@ horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
 [node name="Sound" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -72,7 +73,7 @@ tick_count = 3
 layout_mode = 0
 offset_right = 134.0
 offset_bottom = 18.0
-text = "0%             50%          100%"
+text = "0%               50%         100%"
 vertical_alignment = 1
 
 [node name="EffectsVolume" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
@@ -96,7 +97,7 @@ tick_count = 3
 layout_mode = 0
 offset_right = 134.0
 offset_bottom = 19.0
-text = "0%             50%          100%"
+text = "0%               50%         100%"
 vertical_alignment = 1
 
 [node name="HSeperator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
@@ -211,7 +212,7 @@ tick_count = 3
 layout_mode = 0
 offset_right = 133.0
 offset_bottom = 17.0
-text = "0                 1                2"
+text = "0                    1                   2"
 vertical_alignment = 1
 
 [node name="HSeperator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]

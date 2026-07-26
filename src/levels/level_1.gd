@@ -127,9 +127,10 @@ Drink from the flower (click or %interact) to shoo off the bee. If left alone, t
 		flower_arrow.set_side_visibility(false)
 		await remove_tutorial_text("Bees")
 
-func add_tutorial_text(text_name: String, template: String):
+func add_tutorial_text(text_name: String, template: String, mobile_text: String = ""):
 	var tutorial_text = control_text_scene.instantiate()
 	tutorial_text.name = text_name
+	tutorial_text.mobile_text = mobile_text
 	tutorial_text.set_template(template)
 	tutorial_container.add_child(tutorial_text)
 	tutorial_text.fade_in()
@@ -153,7 +154,16 @@ func tutorial_sequence():
 4. Close with %exit_menu.
 5. Reference guide sections as needed!
 
-""")
+""",
+"""Open the guide to read controls:
+
+1. Tap the Pause button to open the pause menu.
+2. Tap on Guide.
+3. Read the controls.
+4. Reference guide sections as needed!
+
+"""
+)
 	var pause_button_arrow = pause_button.get_node("TutorialArrow")
 	var guide_button_arrow = pause_screen.guide_button.get_node("TutorialArrow")
 	while not guide_opened:
@@ -178,7 +188,18 @@ func tutorial_sequence():
 5. Drop the watering can (double click or %drop).
 6. Wait for the flowers to grow and bloom.
 
-""")
+""",
+"""Grow four sunflower plants:
+
+1. Pick up a seed packet (tap).
+2. Plant seeds in bare soil (tap while holding a seed packet).
+3. Pick up the watering can (tap).
+4. Water seeds (move while holding the watering can).
+5. Drop the watering can (double tap).
+6. Wait for the flowers to grow and bloom.
+
+"""
+)
 		while flowers_grown < 6:
 			var seeds_planted = 0
 			var seeds_watered = 0
@@ -312,6 +333,15 @@ func tutorial_sequence():
 4. Drink from the other color sunflower to pollinate it (click or %interact).
 5. Wait for the pollinated sunflower to go to seed.
 
+""",
+"""Cross-pollinate for an orange sunflower:
+
+1. Open the Punnet square to see the outcome of crossing red and yellow sunflowers (pause and click on Punnet Square)
+2. If there is any pollen on your beak, take a bath in the pond (tap while not holding anything).
+3. Drink from a sunflower to get its pollen on your beak (tap).
+4. Drink from the other color sunflower to pollinate it (tap).
+5. Wait for the pollinated sunflower to go to seed.
+
 """)
 		# wait for punnet square
 		var punnet_square_button_arrow = pause_screen.punnet_square_button.get_node("TutorialArrow")
@@ -398,6 +428,7 @@ func tutorial_sequence():
 		
 		if not packet_printed:
 			await cache.packet_printed
+		await remove_tutorial_text("PrintPacket")
 
 	if not orange_seeds_harvested:
 		add_tutorial_text("HarvestSeeds",

@@ -197,6 +197,14 @@ text = "[font_size=12]
 * %punnet_square is a shortcut for opening the punnet square menu for seeing the possible outcomes of cross-pollination.
 
 * Controls can be remapped in the Options menu."
+mobile_text = "[font_size=12]
+[font_size=24][center]Controls[/center][font_size=12]
+
+* Move around by tapping on a destination.
+
+* Interact with objects by tapping on them.
+
+* Drop held items by double tapping where you want to drop them."
 
 [node name="UsingItems" type="VBoxContainer" parent="Content"]
 visible = false
@@ -491,7 +499,7 @@ stretch_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
-text = "* Perching on a sapling will prevent energy loss and slowly restore up to 1/3 of your energy."
+text = "* Perching on a sapling will prevent energy loss and restore up to 1/3 of your energy."
 fit_content = true
 
 [node name="Perch" type="TextureRect" parent="Content/Energy"]

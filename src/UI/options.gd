@@ -34,6 +34,13 @@ func _ready():
 	disable_bees.button_pressed = Config.get_option("disable_bees")
 	energy_loss.value = Config.get_option("energy_loss") * 50
 
+	if Helpers.is_mobile():
+		controls.visible = false
+		var label = $ScrollContainer/VBoxContainer/ControlsLabel
+		label.visible = false
+		var seperator5 = $ScrollContainer/VBoxContainer/HSeperator5
+		seperator5.visible = false
+
 	config = Config.get_config()
 	if config.has_section("controls"):
 		for action in config.get_section_keys("controls"):

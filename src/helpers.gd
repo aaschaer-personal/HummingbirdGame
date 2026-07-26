@@ -1,5 +1,7 @@
 extends Node
 
+var _is_mobile = null
+
 func set_parent(node, new_parent):
 	var old_parent = node.get_parent()
 	if old_parent:
@@ -35,3 +37,8 @@ func get_event_name(event: InputEvent) -> String:
 
 func get_action_event_name(action: String):
 	return get_event_name(InputMap.action_get_events(action)[0])
+
+func is_mobile():
+	if _is_mobile == null:
+		_is_mobile = OS.has_feature("web_android") or OS.has_feature("web_ios")
+	return _is_mobile

@@ -861,8 +861,10 @@ offset_top = 17.0
 offset_right = 508.0
 offset_bottom = 68.0
 text = "* Move with %up %left %down %right or by clicking on a level
-* %interact or Double Click to enter level
+* %interact or double click to enter level
 "
+mobile_text = "* Move by tapping on a level
+* Double tap to enter level"
 
 [node name="Flowers" type="Node2D" parent="."]
 z_index = 1
