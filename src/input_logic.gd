@@ -6,9 +6,10 @@ extends Node2D
 @onready var pause_button = get_tree().get_first_node_in_group("pause_button")
 @onready var cache_ui = get_tree().get_first_node_in_group("cache_ui")
 @onready var intro_screen = get_tree().get_first_node_in_group("intro_screen")
+@onready var click_timer = $ClickTimer
 @onready var double_click_timer = $DoubleClickTimer
 
-var click_started = false
+var click_point
 
 func _ready():
 	randomize()
@@ -96,22 +97,20 @@ func _unhandled_input(event):
 		if event is InputEventMouse:
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
-					click_started = true
-				elif click_started:
+					click_timer.start()
+					click_point = event.position
+				elif not click_timer.is_stopped():
 					click = true
-					click_started = false
+					click_timer.stop()
 					if double_click_timer.is_stopped():
 						double_click_timer.start()
 					else:
 						double_click_timer.stop()
 						double_click = true
-			# any mouse movement stops click
-			else:
-				click_started = false
 
 	if click:
 		var point = PhysicsPointQueryParameters2D.new()
-		point.position = event.position
+		point.position = click_point
 		point.collide_with_bodies = false
 		point.collide_with_areas = true
 		var overlapping_areas = get_world_2d().direct_space_state.intersect_point(point)

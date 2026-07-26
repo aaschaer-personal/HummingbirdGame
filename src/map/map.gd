@@ -8,6 +8,7 @@ extends Node2D
 @onready var pause_button = $PauseButton
 @onready var pause_screen = $PauseScreen
 @onready var congrats_screen = $CongratsScreen
+@onready var click_timer = $ClickTimer
 @onready var double_click_timer = $DoubleClickTimer
 
 var astar
@@ -18,7 +19,9 @@ var last_complete
 var target_level
 var intermediate_target_level
 var config
+var enter_on_reach = false
 var click_started = false
+var click_level = 0
 
 var level_points = {
 	1: Vector2(45, 60),
@@ -188,6 +191,7 @@ func _input(event):
 			if not get_tree().paused:
 				enter_level(last_level)
 		if direction:
+			enter_on_reach = false
 			var possible_target = level_graph[intermediate_target_level].get(direction)
 			if possible_target and (level_unlocks == 6 or possible_target <= level_unlocks + 1):
 				target_level = possible_target
@@ -224,31 +228,41 @@ func _input(event):
 			get_tree().paused = true
 
 func _on_level_input_event(_viewport, event, _shape, level_num):
+	var click = false
+	var double_click = false
 	if controllable:
 		if event is InputEventMouse:
 			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 				if event.pressed:
-					click_started = true
-				elif click_started:
-					click_started = false
+					click_timer.start()
+					click_level = level_num
+				elif not click_timer.is_stopped():
+					click = true
+					click_timer.stop()
 					if double_click_timer.is_stopped():
 						double_click_timer.start()
-						# single click sets target level
-						if level_unlocks == 6 or level_num <= level_unlocks + 1:
-							target_level = level_num
-							_set_intermediate_target()
 					else:
 						double_click_timer.stop()
-						# double click enters level
-						enter_level(level_num)
-			# any mouse movement stops click
-			else:
-				click_started = false
+						double_click = true
+
+		# any click moves to level
+		if click and (level_unlocks == 6 or click_level <= level_unlocks + 1):
+			target_level = click_level
+			_set_intermediate_target()
+			enter_on_reach = false
+
+		# double click enters level
+		if double_click:
+			enter_level(click_level)
+			enter_on_reach = true
 
 func _on_point_reached():
 	last_level = point_levels[player.global_position]
 	config.set_value("levels", "last", last_level)
-	if last_level != target_level:
+	if last_level == target_level:
+		if enter_on_reach:
+			enter_level(last_level)
+	else:
 		_set_intermediate_target()
 
 func enter_level(level_num):
