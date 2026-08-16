@@ -54,6 +54,7 @@ var in_motion = false
 var low_energy_singal_state = 0
 var clipping = false
 var energy_loss_rate = 1
+var level
 
 @onready var interaction_point_marker = $IPM
 @onready var target_point_marker = $TPM
@@ -70,17 +71,7 @@ func _ready():
 	set_energy_loss_rate(Config.get_option("energy_loss"))
 	var options = get_tree().get_first_node_in_group("options")
 	options.energy_loss_changed.connect(set_energy_loss_rate)
-
-func _input(event):
-	if controllable:
-		if Input.is_action_just_released("interact"):
-			interact_with_nearest_target()
-		
-		elif Input.is_action_just_released("drop"):
-			drop_held_item()
-				
-		elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-			drop_held_item()
+	level = get_tree().get_first_node_in_group("level")
 
 func _process(delta):
 	if velocity:
@@ -122,9 +113,10 @@ func _process(delta):
 		audio_player.stop()
 
 	if body_sprite.animation == "perching":
-		var rate = (-0.2 * energy) + 6
-		rate = max(rate, 0)
-		energy += rate * delta
+		if energy < max_energy / 3.0:
+			var rate = (-0.1 * energy) + 10
+			rate = max(rate, 0)
+			energy += rate * delta
 	else:
 		energy -= 1 * energy_loss_rate * delta
 
@@ -266,6 +258,14 @@ func _on_interaction_area_entered(entering_area, our_area):
 
 func pickup(item):
 	if energy > 0:
+
+		# drop any currently held item unless adding flower to bouqeut
+		if held_item != null and not (
+			item is CutFlower and held_item is Bouquet
+		):
+			drop_held_item()
+
+		# add flower to bouquet
 		if item is CutFlower:
 			item.decay_timer.stop()
 			item.color_label.visible = false
@@ -273,27 +273,30 @@ func pickup(item):
 				held_item.add_flower(item)
 				held_item.set_flip_h(body_sprite.flip_h)
 				SignalBus.item_picked_up.emit()
+				return
 			elif held_item == null:
 				var new_bouquet = bouquet_scene.instantiate()
 				hold_point.add_child(new_bouquet)
 				new_bouquet.add_flower(item)
 				item = new_bouquet
 
-		if held_item == null:
-			item.reparent(hold_point)
-			item.global_position = hold_point.global_position
-			item.set_flip_h(body_sprite.flip_h)
-			held_item = item
-			if not item is Bouquet:
-				item.set_pickup_height()
-			if item.dispense_slot != null:
-				dispense_slot_pickup.emit(item.dispense_slot)
-				item.dispense_slot = null
-			SignalBus.item_picked_up.emit()
+		item.reparent(hold_point)
+		item.global_position = hold_point.global_position
+		item.set_flip_h(body_sprite.flip_h)
+		held_item = item
+		if not item is Bouquet:
+			item.set_pickup_height()
+		if item.dispense_slot != null:
+			dispense_slot_pickup.emit(item.dispense_slot)
+			item.dispense_slot = null
+		SignalBus.item_picked_up.emit()
 
 func _drop_item(item):
 	item.reparent(get_parent())
 	item.drop()
+
+func _drop_item_at_point(_point):
+	drop_held_item()
 
 func drop_held_item():
 	if held_item:
@@ -356,8 +359,7 @@ func use_tool_on_plot(plot: Plot):
 				audio_player.play()
 
 func open_cache_ui(ui: CacheUI):
-	if held_item == null or held_item is SeedPacket:
-		ui.open()
+	ui.open()
 
 func start_perch(perch_zone: Area2D):
 	perch_y = perch_zone.global_position.y
@@ -381,10 +383,6 @@ func refill_can(_pond):
 		held_item.refill()
 		audio_player.stream = refill_sound
 		audio_player.play()
-
-func transfer_seeds(to_packet):
-	if held_item is SeedPacket:
-		to_packet.add_seeds(held_item.remove_all_seeds())
 
 func add_pollen(pollen_arr: Array[Dictionary]):
 	assert(len(pollen_arr) == 8)

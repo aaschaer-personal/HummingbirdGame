@@ -1,6 +1,5 @@
 class_name Cache extends Interactable
 
-signal print_started
 signal packet_printed
 
 @onready var front = $Front
@@ -23,15 +22,14 @@ var CAN_TRANSPORT = Vector2(-55, 6)
 var CLIPPER_START = Vector2(4, -19)
 var CLIPPER_TRANSPORT = Vector2(-36, 6)
 
-# 3 initial slots plus up to 10 printed packets
-var dispense_slots = [true, true, true, false, false, false, false, false, false, false, false, false, false]
+# 3 initial slots plus up to 12 printed packets
+var dispense_slots = [true, true, true, false, false, false, false, false, false, false, false, false, false, false]
 var packets_printing = 0
 var door_open = false
 var top
 var top_positions = [0,0,0,0,0,0,-1,-3,-5,-8,-11,-14,-17,-19,-20]
 
 func _ready():
-	super()
 	front.frame_changed.connect(sync_frames)
 	var top_scene = get_tree().get_first_node_in_group("level").cache_top_scene
 	while top_scene == null:
@@ -54,7 +52,7 @@ func sync_frames():
 	top.position = Vector2(0,top_positions[frame])
 
 func is_interactable():
-	return player.held_item == null or player.held_item is SeedPacket
+	return true
 
 func get_player_interaction():
 	return "open_cache_ui"
@@ -171,7 +169,7 @@ func _dispense_clippers():
 	await clippers.transport(CLIPPER_TRANSPORT.x, CLIPPER_TRANSPORT.y)
 
 func print_packet(seed_packet):
-	print_started.emit()
+	SignalBus.print_started.emit()
 	if not door_open:
 		await left_door_open()
 		door_open = true
@@ -179,7 +177,7 @@ func print_packet(seed_packet):
 	
 	packets_printing += 1
 	var dispense_slot = 0
-	for i in range(13):
+	for i in range(14):
 		if not dispense_slots[i]:
 			dispense_slot = i
 			dispense_slots[i] = true

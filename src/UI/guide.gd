@@ -10,7 +10,6 @@ extends NinePatchRect
 @onready var visitors_tab = $Tabs/Visitors
 @onready var printing_packets_tab = $Tabs/PrintingPackets
 @onready var genetics_tab = $Tabs/Genetics
-@onready var punnet_square_tab = $Tabs/PunnetSquare
 @onready var species_details = $Content/Genetics/SpeciesDetails
 @onready var example_punnet_square = $Content/Genetics/CrossContainer/PunnetSquare
 @onready var exit_button = $ExitButton
@@ -23,7 +22,6 @@ func _ready():
 	visitors_tab.pressed.connect(toggle.bind("Visitors"))
 	printing_packets_tab.pressed.connect(toggle.bind("PrintingPackets"))
 	genetics_tab.pressed.connect(toggle.bind("Genetics"))
-	punnet_square_tab.pressed.connect(toggle.bind("PunnetSquare"))
 	exit_button.pressed.connect(close)
 	var options = get_tree().get_first_node_in_group("options")
 	options.label_colors_changed.connect(set_color_labels)
@@ -47,7 +45,7 @@ func _ready():
 		elif level.flower_species == "hibiscus":
 			species_details.text = "* Hibiscuses have two color loci. The red locus has alleles R and r, with R adding red to the flower. The other locus can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors."
 		elif level.flower_species == "orchid":
-			species_details.text = "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding blue to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
+			species_details.text = "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding yellow to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
 		else:
 			assert(level == null)
 
@@ -57,11 +55,12 @@ func toggle(tab_name):
 			if not tab.disabled:
 				tab.disabled = true
 				Helpers.get_only_child(tab).position += Vector2(0,1)
+				content.scroll_vertical = 0
 		else:
 			if tab.disabled:
 				tab.disabled = false
 				Helpers.get_only_child(tab).position += Vector2(0,-1)
-				
+
 	for blob in content.get_children():
 			blob.visible = blob.name == tab_name
 

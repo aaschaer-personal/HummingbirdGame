@@ -2,24 +2,21 @@ class_name Level extends Node
 
 @onready var player = $Player
 @onready var cache = $Cache
+@onready var drop_point = $DropPoint
 @onready var visitor_manager = $VisitorManager
-@onready var intro_scene = $UI/IntroScreen
+@onready var intro_screen = $UI/IntroScreen
 @onready var completed_screen = $UI/CompletedScreen
-@onready var tutorial_container = $UI/TutorialContainer
+@onready var tutorial_container = $UI/TutorialScroll/TutorialContainer
 @onready var pause_screen = $UI/PauseScreen
+@onready var pause_button = $UI/PauseButton
 @onready var failure_screen = $UI/FailureScreen
 @onready var seed_packet_scene = preload("res://src/items/seed_packet.tscn")
 @onready var control_text_scene = preload("res://src/UI/control_text.tscn")
 
-var water_explained = false
-var energy_explained = false
-var packet_printed = false
-var orange_seeds_harvested = false
 var flower_accepted = false
 var visitor_left = false
 var flowers_grown = 0
 var colors_grown = {}
-var colors_pollinated = {}
 var starting_packet = null
 var BRIEF_PAUSE = .5
 
@@ -34,17 +31,18 @@ func generate_starting_seeds():
 
 func _ready():
 	SignalBus.flower_bloomed.connect(_on_flower_bloomed)
-	SignalBus.flower_pollinated.connect(_on_flower_pollinated)
 	SignalBus.plant_died.connect(_failure_check)
 	SignalBus.cut_flower_decayed.connect(_failure_check)
 	SignalBus.flower_accepted.connect(_on_flower_accepted)
-	cache.packet_printed.connect(_on_packet_printed)
 	visitor_manager.visitor_left.connect(_on_visitor_left)
-	SignalBus.orange_seeds_harvested.connect(_on_orange_seeds_harvested)
 	visitor_manager.initialize_bouquets(bouquet_recipes)
 	GenomeGenerator.initialize_next_gene_storage(flower_species)
-
+	pause_button.toggled.connect(_on_pause_button_toggled)
+	SignalBus.paused_or_unpaused.connect(_on_paused_or_unpaused)
 	main.call_deferred()
+
+func _on_paused_or_unpaused():
+	pause_button.set_pressed_no_signal(get_tree().paused)
 
 func _failure_check():
 	if visitor_manager.done:
@@ -81,14 +79,22 @@ func _on_flower_bloomed(color):
 		visitor_manager.visitors_unlocked = true
 		visitor_manager.timer.start(1)
 
-func _on_flower_pollinated(color):
-	colors_pollinated[color] = true
-
-func _on_packet_printed():
-	packet_printed = true
-	
-func _on_orange_seeds_harvested():
-	orange_seeds_harvested = true
+func _on_pause_button_toggled(toggle_on):
+	# don't overlap or override menus
+	if cache.cache_ui.visible or intro_screen.visible:
+		pause_button.set_pressed_no_signal(not toggle_on)
+	elif toggle_on:
+		if not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true
+			SignalBus.paused.emit()
+	else:
+		pause_screen.guide.visible = false
+		pause_screen.visible = false
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		get_tree().paused = false
+		SignalBus.unpaused.emit()
 
 func main():
 	if Config.get_option("skip_intros"):
@@ -120,7 +126,7 @@ func cinematic_intro_sequence():
 	player.controllable = false
 	await move_player_on_screen()
 	await cache.raise()
-	intro_scene.text.text = level_intro_text
-	intro_scene.open()
+	intro_screen.text.text = level_intro_text
+	intro_screen.open()
 	player.controllable = true
 	await cache.dispense_all(generate_starting_packet())

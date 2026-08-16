@@ -30,4 +30,5 @@ func open_credits():
 
 func quit():
 	visible = false
+	JavaScriptBridge.eval("window.close()")
 	get_tree().quit()

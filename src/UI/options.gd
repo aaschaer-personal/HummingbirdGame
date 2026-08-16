@@ -22,8 +22,6 @@ signal controls_changed
 @onready var reset_defaults_button = $ScrollContainer/VBoxContainer/ResetDefaultsButton
 
 var control_awaiting_input = null
-var ignore_next_exit = false
-var ignore_next_pause = false
 var config
 
 func _ready():
@@ -35,6 +33,13 @@ func _ready():
 	show_genes.button_pressed = Config.get_option("show_genes")
 	disable_bees.button_pressed = Config.get_option("disable_bees")
 	energy_loss.value = Config.get_option("energy_loss") * 50
+
+	if Helpers.is_mobile():
+		controls.visible = false
+		var label = $ScrollContainer/VBoxContainer/ControlsLabel
+		label.visible = false
+		var seperator5 = $ScrollContainer/VBoxContainer/HSeperator5
+		seperator5.visible = false
 
 	config = Config.get_config()
 	if config.has_section("controls"):
@@ -93,35 +98,29 @@ func close():
 
 func _input(event):
 	if control_awaiting_input:
-		# ignore mouse movement
-		if event is InputEventMouseMotion:
+		# ignore mouse movement and initial press
+		if event is InputEventMouseMotion or not event.is_released():
 			pass
 		# map anything that can be mapped other than mouse press
-		elif event.is_action_type() and not event is InputEventMouseButton:
+		elif event.is_action_type():
 			var action = control_awaiting_input.name
+			accept_event()
 			InputMap.action_erase_events(action)
 			InputMap.action_add_event(action, event)
 			control_awaiting_input.set_key_label()
 			control_awaiting_input = null
 			config.set_value("controls", action, event)
 			controls_changed.emit(action, event)
-			# don't exit/unpause from releasing the new button
-			if action == "exit_menu":
-				ignore_next_exit = true
-			if action == "pause":
-				ignore_next_pause = true
+
 		# reset on an any other inputs
 		else:
 			control_awaiting_input.set_key_label()
 			control_awaiting_input = null
 
-	# close if not being controlled by level input_logic
+	# close if not being controlled by level or map logic
 	elif event.is_action_released("exit_menu"):
 		if not get_parent() is PauseScreen:
-			if ignore_next_exit:
-				ignore_next_exit = false
-			else:
-				close()
+			close()
 
 func reset_defaults():
 	music_volume.value = Config.defaults["music_volume"]

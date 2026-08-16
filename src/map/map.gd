@@ -5,8 +5,11 @@ extends Node2D
 @onready var level_areas = $LevelAreas
 @onready var tutorial_text = $TutorialText
 @onready var flowers = $Flowers
+@onready var pause_button = $PauseButton
 @onready var pause_screen = $PauseScreen
 @onready var congrats_screen = $CongratsScreen
+@onready var click_timer = $ClickTimer
+@onready var double_click_timer = $DoubleClickTimer
 
 var astar
 var controllable = true
@@ -15,8 +18,10 @@ var last_level
 var last_complete
 var target_level
 var intermediate_target_level
-var awaiting_double_click_release = false
 var config
+var enter_on_reach = false
+var click_started = false
+var click_level = 0
 
 var level_points = {
 	1: Vector2(45, 60),
@@ -84,6 +89,15 @@ var level_graph =  {
 }
 
 func _ready():
+	pause_button.toggled.connect(_on_pause_button_toggled)
+	SignalBus.paused_or_unpaused.connect(_on_paused_or_unpaused)
+
+	# increase collision size on mobile
+	if Helpers.is_mobile():
+		for area in level_areas.get_children():
+			var shape = area.get_children()[0]
+			shape.scale = Vector2(1.5, 1.5)
+
 	for level in level_points:
 		point_levels[level_points[level]] = level
 	
@@ -97,7 +111,7 @@ func _ready():
 	config = Config.get_config()
 	for area in level_areas.get_children():
 		area.input_event.connect(
-			_on_input_event.bind(int(str(area.name)))
+			_on_level_input_event.bind(int(str(area.name)))
 		)
 
 	player.point_reached.connect(_on_point_reached)
@@ -162,7 +176,7 @@ func _set_intermediate_target():
 	if not player.moving or intermediate_target_level == last_level:
 		player.target_point = level_points[intermediate_target_level]
 
-func _input(_event):
+func _input(event):
 	if controllable:
 		var direction = null
 		if Input.is_action_just_released("left"):
@@ -174,33 +188,81 @@ func _input(_event):
 		elif Input.is_action_just_released("down"):
 			direction = "down"
 		elif Input.is_action_just_released("interact"):
-			enter_level(last_level)
+			if not get_tree().paused:
+				enter_level(last_level)
 		if direction:
+			enter_on_reach = false
 			var possible_target = level_graph[intermediate_target_level].get(direction)
 			if possible_target and (level_unlocks == 6 or possible_target <= level_unlocks + 1):
 				target_level = possible_target
 				_set_intermediate_target()
 
-	if Input.is_action_just_released("exit_menu"):
-		pause_screen.visible = true
-		get_tree().paused = true
-		await get_tree().create_timer(0.01).timeout
+	# pause and exit_menu both default to esc
+	if event.is_action_released("pause") and event.is_action_released("exit_menu"):
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+			SignalBus.unpaused.emit()
+		elif not pause_screen.visible:
+			pause_screen.visible = true
+			get_tree().paused = true
+			SignalBus.paused.emit()
 
-func _on_input_event(_viewport, event, _shape, level_num):
-	if controllable and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			if level_unlocks == 6 or level_num <= level_unlocks + 1:
-				target_level = level_num
-				_set_intermediate_target()
-			awaiting_double_click_release = event.double_click
+	elif event.is_action_released("exit_menu"):
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		elif pause_screen.visible:
+			pause_screen.visible = false
+			get_tree().paused = false
+	
+	elif event.is_action_released("pause"):
+		if pause_screen.visible:
+			pause_screen.visible = false
+			if pause_screen.options.visible:
+				pause_screen.options.close()
+			get_tree().paused = false
 		else:
-			if awaiting_double_click_release:
-				enter_level(level_num)
+			pause_screen.visible = true
+			get_tree().paused = true
+
+func _on_level_input_event(_viewport, event, _shape, level_num):
+	var click = false
+	var double_click = false
+	if controllable:
+		if event is InputEventMouse:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+				if event.pressed:
+					click_timer.start()
+					click_level = level_num
+				elif not click_timer.is_stopped():
+					click = true
+					click_timer.stop()
+					if double_click_timer.is_stopped():
+						double_click_timer.start()
+					else:
+						double_click_timer.stop()
+						double_click = true
+
+		# any click moves to level
+		if click and (level_unlocks == 6 or click_level <= level_unlocks + 1):
+			target_level = click_level
+			_set_intermediate_target()
+			enter_on_reach = false
+
+		# double click enters level
+		if double_click:
+			enter_level(click_level)
+			enter_on_reach = true
 
 func _on_point_reached():
 	last_level = point_levels[player.global_position]
 	config.set_value("levels", "last", last_level)
-	if last_level != target_level:
+	if last_level == target_level:
+		if enter_on_reach:
+			enter_level(last_level)
+	else:
 		_set_intermediate_target()
 
 func enter_level(level_num):
@@ -208,3 +270,18 @@ func enter_level(level_num):
 		Config.save_config()
 		var level = load("res://src/levels/level_%d.tscn" % level_num)
 		get_tree().change_scene_to_packed(level)
+
+func _on_pause_button_toggled(toggle_on):
+	if toggle_on:
+		pause_screen.visible = true
+		get_tree().paused = true
+		SignalBus.paused.emit()
+	else:
+		pause_screen.visible = false
+		if pause_screen.options.visible:
+			pause_screen.options.close()
+		get_tree().paused = false
+		SignalBus.unpaused.emit()
+
+func _on_paused_or_unpaused():
+	pause_button.set_pressed_no_signal(get_tree().paused)

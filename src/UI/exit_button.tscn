@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://yqhuf4y5iyv8"]
+
+[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="1_o1rp8"]
+[ext_resource type="Texture2D" uid="uid://ci1duvcl823jd" path="res://assets/UI/x_button_pressed.png" id="2_a3i5n"]
+
+[node name="ExitButton" type="TextureButton"]
+process_mode = 3
+offset_right = 17.0
+offset_bottom = 18.0
+texture_normal = ExtResource("1_o1rp8")
+texture_pressed = ExtResource("2_a3i5n")

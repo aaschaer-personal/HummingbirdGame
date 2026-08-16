@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccbx5cj7fi15w"]
+
+[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="1_k8jmy"]
+[ext_resource type="Script" uid="uid://0jn5lp0e5bnb" path="res://src/UI/tutorial_arrow.gd" id="2_dkt5t"]
+
+[node name="TutorialArrow" type="Sprite2D"]
+process_mode = 3
+texture = ExtResource("1_k8jmy")
+script = ExtResource("2_dkt5t")

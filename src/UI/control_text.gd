@@ -1,12 +1,14 @@
 extends RichTextLabel
 
+@export_multiline var mobile_text: String
 @onready var options = get_tree().get_first_node_in_group("options")
 
 var template
 var actions = []
 
 func _ready():
-	options.controls_changed.connect(_on_controls_changed)
+	if options:
+		options.controls_changed.connect(_on_controls_changed)
 	if not template:
 		template = text
 		parse_actions()
@@ -25,8 +27,18 @@ func set_template(new_template: String):
 
 func fill():
 	text = template
-	for action in actions:
-		text = text.replace("%" + action, Helpers.get_action_event_name(action))
+	if Helpers.is_mobile():
+		if mobile_text:
+			text = mobile_text
+			return
+		text = text.replace("click or %interact", "tap")
+		text = text.replace("clicking", "tapping")
+		text = text.replace("Clicking", "Tapping")
+		text = text.replace("click", "tap")
+		text = text.replace("Click", "Tap")
+	else:
+		for action in actions:
+			text = text.replace("%" + action, Helpers.get_action_event_name(action))
 
 func fade_in():
 	modulate = Color.TRANSPARENT

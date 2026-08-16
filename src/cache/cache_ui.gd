@@ -13,7 +13,7 @@ class_name CacheUI extends Control
 @onready var packet_scene = preload("res://src/items/seed_packet.tscn")
 
 var packets_toggled = true
-var packets_remaining = 10
+var packets_remaining = 11
 var colors = []
 
 func _ready():
@@ -38,10 +38,12 @@ func _ready():
 func open():
 	get_tree().paused = true
 	visible = true
+	SignalBus.cache_opened.emit()
 
 func close():
 	get_tree().paused = false
 	visible = false
+	SignalBus.cache_closed.emit()
 
 func _on_packet_option_selected(_selected):
 	var packet_color = colors[packet_color_option.get_selected_id()]

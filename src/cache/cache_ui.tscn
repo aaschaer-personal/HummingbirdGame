@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cs510j1wjh4d4"]
+[gd_scene load_steps=14 format=3 uid="uid://cs510j1wjh4d4"]
 
 [ext_resource type="Texture2D" uid="uid://dboc2q5ry8sqm" path="res://assets/UI/cache_ui_frame.png" id="1_rkfuj"]
 [ext_resource type="Script" uid="uid://itcj6ar2s250" path="res://src/cache/cache_ui.gd" id="2_qwleh"]
-[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="3_ee8d3"]
+[ext_resource type="PackedScene" uid="uid://yqhuf4y5iyv8" path="res://src/UI/exit_button.tscn" id="3_xx7ep"]
 [ext_resource type="Texture2D" uid="uid://75l460ljiinq" path="res://assets/Items/BagIcons/square.png" id="4_3mfcs"]
 [ext_resource type="Texture2D" uid="uid://bvl2r6lhosyi3" path="res://assets/Items/BagIcons/circle.png" id="5_5vsi6"]
 [ext_resource type="Texture2D" uid="uid://b7q6ty34ufyr8" path="res://assets/Items/BagIcons/triangle.png" id="6_iuoa5"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bs6fc6w7ycy5i" path="res://assets/UI/green_button.png" id="10_a1iop"]
 [ext_resource type="Texture2D" uid="uid://g2c7rikx7bu" path="res://assets/UI/grey_button.png" id="11_23f6r"]
 [ext_resource type="Texture2D" uid="uid://c6kk8khgnvcqq" path="res://assets/Items/seed_packet.png" id="12_fl5pr"]
+[ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="12_xx7ep"]
 
 [node name="CacheUI" type="NinePatchRect" groups=["cache_ui"]]
 process_mode = 2
@@ -26,6 +27,11 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 script = ExtResource("2_qwleh")
 
+[node name="ExitButton" parent="." instance=ExtResource("3_xx7ep")]
+layout_mode = 0
+offset_left = 223.0
+offset_right = 240.0
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 0
 offset_left = 2.0
@@ -35,13 +41,6 @@ offset_bottom = 43.0
 theme_override_font_sizes/font_size = 16
 text = "Packet Printing"
 horizontal_alignment = 1
-
-[node name="ExitButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 231.0
-offset_right = 240.0
-offset_bottom = 10.0
-texture_normal = ExtResource("3_ee8d3")
 
 [node name="PacketColorOption" type="OptionButton" parent="."]
 layout_mode = 0
@@ -125,6 +124,11 @@ offset_bottom = 31.0
 text = "Print"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TutorialArrow" parent="PrintButton" instance=ExtResource("12_xx7ep")]
+visible = false
+position = Vector2(-14, 16)
+rotation = -1.5707964
 
 [node name="PacketPreview" type="Sprite2D" parent="."]
 position = Vector2(120, 127)

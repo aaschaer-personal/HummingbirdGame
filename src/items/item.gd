@@ -15,11 +15,11 @@ class_name Item extends Interactable
 var dispense_slot = null
 
 func _ready():
-	super()
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	disk_sprite.visible = false
 
 func is_interactable():
-	return !disk_sprite.visible and get_parent() is Level and player.held_item == null
+	return !disk_sprite.visible and get_parent() is Level
 
 func get_player_interaction():
 	return "pickup"

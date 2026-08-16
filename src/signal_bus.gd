@@ -15,6 +15,15 @@ signal watering_can_emptied
 signal watering_can_refilled
 signal flower_accepted
 signal orange_seeds_harvested
+signal bee_arrived
+signal bee_flew_away
+signal paused
+signal unpaused
+signal guide_opened
+signal punnet_square_opened
+signal cache_opened
+signal cache_closed
+signal print_started
 
 # multi signals
 signal seed_planted_removed_or_item_dropped
@@ -24,6 +33,10 @@ signal flower_cut_or_item_dropped
 signal item_picked_up_or_flower_decayed
 signal flower_accepted_or_item_dropped
 signal orange_seeds_harvested_or_flower_cut
+signal paused_or_unpaused
+signal paused_unpaused_or_guide_opened
+signal paused_unpaused_or_punnet_square_opened
+signal cache_opened_closed_or_print_started
 
 func _ready():
 	# seed_planted_removed_or_item_dropped
@@ -49,3 +62,18 @@ func _ready():
 	# orange_seeds_harvested_or_flower_cut
 	orange_seeds_harvested.connect(orange_seeds_harvested_or_flower_cut.emit)
 	flower_cut.connect(orange_seeds_harvested_or_flower_cut.emit)
+	# paused_or_unpaused
+	paused.connect(paused_or_unpaused.emit)
+	unpaused.connect(paused_or_unpaused.emit)
+	# paused_unpaused_or_guide_opened
+	paused.connect(paused_unpaused_or_guide_opened.emit)
+	unpaused.connect(paused_unpaused_or_guide_opened.emit)
+	guide_opened.connect(paused_unpaused_or_guide_opened.emit)
+	# paused_unpaused_or_punnet_square_opened
+	paused.connect(paused_unpaused_or_punnet_square_opened.emit)
+	unpaused.connect(paused_unpaused_or_punnet_square_opened.emit)
+	punnet_square_opened.connect(paused_unpaused_or_punnet_square_opened.emit)
+	# cache_opened_closed_or_print_started
+	cache_opened.connect(cache_opened_closed_or_print_started.emit)
+	cache_closed.connect(cache_opened_closed_or_print_started.emit)
+	print_started.connect(cache_opened_closed_or_print_started.emit)

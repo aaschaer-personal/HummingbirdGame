@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dt3c8d80ohesk" path="res://assets/Flowers/Sunflower/sunflower_bloom_rustle_2.png" id="10_1mi1e"]
 [ext_resource type="Texture2D" uid="uid://dkffgyhduot6a" path="res://assets/Flowers/Sunflower/sunflower_to_seed_2.png" id="11_nku7b"]
 [ext_resource type="Texture2D" uid="uid://80a2uhljj0nk" path="res://assets/Flowers/Sunflower/sunflower_to_seed_rustle_2.png" id="12_ipn7b"]
-[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="12_x6ybx"]
+[ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="12_x6ybx"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="14_01lla"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcffv"]
@@ -572,6 +572,6 @@ position = Vector2(-8, -10)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
 shape = SubResource("CapsuleShape2D_w4e74")
 
-[node name="Arrow" type="Sprite2D" parent="." index="9"]
+[node name="TutorialArrow" parent="." index="9" instance=ExtResource("12_x6ybx")]
+visible = false
 position = Vector2(-8, -29)
-texture = ExtResource("12_x6ybx")

@@ -9,8 +9,9 @@ dragger_visibility = 1
 script = ExtResource("1_jayfw")
 
 [node name="ActionLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
-text = "Action:"
+text = "Exit Menu"
 horizontal_alignment = 2
 
 [node name="KeyButton" type="Button" parent="."]

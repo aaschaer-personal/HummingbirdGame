@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://uh7heog5jqkf" path="res://src/flowers/cut_flower.gd" id="1_3umnu"]
 [ext_resource type="AudioStream" uid="uid://dircmtyt3bfx8" path="res://assets/Sounds/levitate.wav" id="2_bivbc"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="2_v0oe7"]
-[ext_resource type="Texture2D" uid="uid://d00vharvd32sq" path="res://assets/UI/arrow.png" id="4_noscy"]
+[ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="4_noscy"]
 
 [node name="CutFlower" type="Area2D"]
 script = ExtResource("1_3umnu")
@@ -26,7 +26,6 @@ offset_bottom = -7.0
 text = "Orange"
 horizontal_alignment = 1
 
-[node name="Arrow" type="Sprite2D" parent="."]
+[node name="TutorialArrow" parent="." instance=ExtResource("4_noscy")]
 visible = false
 position = Vector2(13, -20)
-texture = ExtResource("4_noscy")

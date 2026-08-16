@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://oaclqqj6ocrp" path="res://assets/UI/long_grey_button.png" id="3_oddd3"]
 [ext_resource type="PackedScene" uid="uid://b70ghk26hmrtq" path="res://src/UI/control_option.tscn" id="3_vnubb"]
 [ext_resource type="Texture2D" uid="uid://g2c7rikx7bu" path="res://assets/UI/grey_button.png" id="4_aqb4u"]
-[ext_resource type="Texture2D" uid="uid://b7b3skyc0ob2e" path="res://assets/UI/x_button.png" id="4_wocj4"]
+[ext_resource type="PackedScene" uid="uid://yqhuf4y5iyv8" path="res://src/UI/exit_button.tscn" id="6_aqb4u"]
 
 [node name="Options" type="NinePatchRect" groups=["options"]]
 offset_right = 248.0
-offset_bottom = 324.0
+offset_bottom = 328.0
 mouse_filter = 0
 texture = ExtResource("1_8cfm1")
 region_rect = Rect2(1, 1, 22, 22)
@@ -34,13 +34,13 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = 8.0
 offset_top = 39.0
-offset_right = 238.0
-offset_bottom = 264.0
+offset_right = 242.0
+offset_bottom = 270.0
 horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
 theme_override_constants/separation = 2
 
 [node name="Sound" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -66,6 +66,15 @@ horizontal_alignment = 2
 [node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/MusicVolume"]
 layout_mode = 2
 value = 50.0
+scrollable = false
+tick_count = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/MusicVolume/HSlider"]
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 18.0
+text = "0%               50%         100%"
+vertical_alignment = 1
 
 [node name="EffectsVolume" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -81,6 +90,15 @@ horizontal_alignment = 2
 [node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/EffectsVolume"]
 layout_mode = 2
 value = 50.0
+scrollable = false
+tick_count = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/EffectsVolume/HSlider"]
+layout_mode = 0
+offset_right = 134.0
+offset_bottom = 19.0
+text = "0%               50%         100%"
+vertical_alignment = 1
 
 [node name="HSeperator2" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -97,6 +115,7 @@ layout_mode = 2
 
 [node name="ShowTutorial" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Show tutorial in first level"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -111,6 +130,7 @@ layout_mode = 2
 
 [node name="SkipIntros" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Skip level intro sequences and text"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -125,6 +145,8 @@ layout_mode = 2
 
 [node name="LabelColors" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Add text labels to flowers and replace
+visitor requests with text"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -139,6 +161,7 @@ layout_mode = 2
 
 [node name="ShowGenes" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Add color gene labels to grown flowers"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -153,6 +176,8 @@ layout_mode = 2
 
 [node name="DisableBees" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Prevent bees from appearing and
+pollinating flowers"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -167,6 +192,7 @@ layout_mode = 2
 
 [node name="EnergyLoss" type="HSplitContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Adjust the rate of energy loss"
 split_offset = 80
 dragging_enabled = false
 dragger_visibility = 1
@@ -179,6 +205,15 @@ horizontal_alignment = 2
 [node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/EnergyLoss"]
 layout_mode = 2
 value = 50.0
+scrollable = false
+tick_count = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/EnergyLoss/HSlider"]
+layout_mode = 0
+offset_right = 133.0
+offset_bottom = 17.0
+text = "0                    1                   2"
+vertical_alignment = 1
 
 [node name="HSeperator4" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -199,27 +234,41 @@ columns = 2
 
 [node name="up" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Move up"
 
 [node name="left" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Move left"
 
 [node name="down" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Move down"
 
 [node name="right" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Move right"
 
 [node name="interact" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Interact with the nearest interactable
+entity or enter a level on the map screen"
 
 [node name="drop" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Drop a held item"
 
 [node name="exit_menu" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Close an open menu or interface"
 
 [node name="pause" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
 layout_mode = 2
+tooltip_text = "Pause/unpause the game and open/
+close the pause menu"
+
+[node name="punnet_square" parent="ScrollContainer/VBoxContainer/Controls" instance=ExtResource("3_vnubb")]
+layout_mode = 2
+tooltip_text = "Shortcut to the Punnet Square interface"
 
 [node name="HSeperator6" type="HSeparator" parent="ScrollContainer/VBoxContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -228,15 +277,15 @@ theme_override_constants/separation = 12
 
 [node name="ResetDefaultsButton" type="TextureButton" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 texture_normal = ExtResource("4_aqb4u")
-stretch_mode = 3
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/ResetDefaultsButton"]
 layout_mode = 0
-offset_left = -6.0
-offset_top = 2.0
-offset_right = 221.0
-offset_bottom = 31.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 30.0
 text = "Reset
 Defaults"
 horizontal_alignment = 1
@@ -244,9 +293,9 @@ horizontal_alignment = 1
 [node name="ConfirmButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 20.0
-offset_top = 271.0
+offset_top = 279.0
 offset_right = 228.0
-offset_bottom = 307.0
+offset_bottom = 315.0
 texture_normal = ExtResource("3_oddd3")
 
 [node name="Label" type="Label" parent="ConfirmButton"]
@@ -261,9 +310,7 @@ text = "Confirm
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExitButton" type="TextureButton" parent="."]
+[node name="ExitButton" parent="." instance=ExtResource("6_aqb4u")]
 layout_mode = 0
-offset_left = 239.0
+offset_left = 231.0
 offset_right = 248.0
-offset_bottom = 10.0
-texture_normal = ExtResource("4_wocj4")
