@@ -10,7 +10,7 @@ class_name CutFlower extends Item
 
 var x_offset_by_species = {
 	"sunflower": 12,
-	"jewelweed": 6,
+	"jewelweed": 5,
 	"lupine": 14,
 	"zinnia": 8,
 	"hibiscus": 10,
@@ -21,7 +21,7 @@ var decay_data_by_species = {
 	"sunflower": [4, .6],
 	"jewelweed": [4, .4],
 	"lupine": [1, .3],
-	"zinnia": [2, .6],
+	"zinnia": [4, .6],
 	"hibiscus": [4, .7],
 	"orchid": [6, .7],
 }

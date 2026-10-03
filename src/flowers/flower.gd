@@ -5,7 +5,8 @@ class_name Flower extends Interactable
 @onready var main_sprite = $MainSprite
 @onready var pollination_timer = $PollinationTimer
 @onready var nectar_meter = $NectarMeter
-@onready var collision_shape = $CollisionShape2D
+@onready var bloom_collision_shape = $BloomCollisionShape
+@onready var seed_collision_shape = $SeedCollisionShape
 @onready var drinkable_area = $DrinkableArea
 @onready var rustle_audio_player = $RustleAudioPlayer
 @onready var bee_audio_player = $BeeAudioPlayer
@@ -47,8 +48,7 @@ func _ready():
 	elif color == Colors.red:
 		add_to_group("red_flowers")
 	petal_sprite.modulate = color
-	_play_animation("bloom")
-	await main_sprite.animation_finished
+	await _play_animation("bloom")
 	stage = 1
 	nectar = max_nectar / (parent_plant.genome.max_flowers * 3)
 	SignalBus.flower_bloomed.emit(color)
@@ -56,10 +56,11 @@ func _ready():
 func flip():
 	main_sprite.flip_h = true
 	petal_sprite.flip_h = true
-	collision_shape.position.x *= -1
-	var collision_shape2 = get_node_or_null("CollisionShape2D2")
-	if collision_shape2:
-		collision_shape2.position.x *= -1
+	bloom_collision_shape.position.x *= -1
+	seed_collision_shape.position.x *= -1
+	var bloom_collision_shape2 = get_node_or_null("BloomCollisionShape2")
+	if bloom_collision_shape2:
+		bloom_collision_shape2.position.x *= -1
 	drinkable_area.position.x *= -1
 	nectar_meter.position.x *= -1
 	nectar_meter.position.x -= 12
@@ -71,6 +72,7 @@ func flip():
 func _play_animation(animation_name):
 	main_sprite.play(animation_name)
 	petal_sprite.play(animation_name)
+	await main_sprite.animation_finished
 
 func receive_nutrients(amount: float):
 	if stage == 1:
@@ -109,12 +111,14 @@ func rustle():
 func _go_to_seed():
 	pollination_timer.stop()
 	generate_seeds()
-	await _play_animation("to_seed")
 	if bee:
 		bee.fly_away()
 		bee = null
 		bee_audio_player.stop()
 	nectar = 0
+	await _play_animation("to_seed")
+	bloom_collision_shape.disabled = true
+	seed_collision_shape.disabled = false
 	stage = 2
 	if parent_plant.genome.species == "sunflower":
 		for parent_gene_dicts in seeds:
@@ -122,11 +126,14 @@ func _go_to_seed():
 				add_to_group("orange_seeds")
 
 func is_interactable():
-	return (
-		(stage == 1 and not player.held_item is Clippers)
-		or (stage == 2 and player.held_item is SeedPacket)
-		or (stage > 0 and player.held_item is Clippers)
-	)
+	# don't interupt non rustle animations
+	if main_sprite.is_playing() and "rustle" not in main_sprite.animation:
+		return false
+	if stage == 1:
+		return true
+	if stage == 2 and (player.held_item is SeedPacket or player.held_item is Clippers):
+		return true
+	return false
 
 func get_player_interaction():
 	if stage == 1 and not player.held_item is Clippers:

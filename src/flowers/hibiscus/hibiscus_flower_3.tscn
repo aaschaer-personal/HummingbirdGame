@@ -589,11 +589,16 @@ rotation = 2.35619
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
 shape = SubResource("CapsuleShape2D_vpral")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="7"]
+[node name="BloomCollisionShape" type="CollisionShape2D" parent="." index="7"]
 position = Vector2(10, -6)
 shape = SubResource("CapsuleShape2D_8p8om")
 
-[node name="NectarMeter" parent="." index="8" instance=ExtResource("11_c0q5m")]
+[node name="SeedCollisionShape" type="CollisionShape2D" parent="." index="8"]
+position = Vector2(10, -6)
+shape = SubResource("CapsuleShape2D_8p8om")
+disabled = true
+
+[node name="NectarMeter" parent="." index="9" instance=ExtResource("11_c0q5m")]
 offset_left = 4.0
 offset_top = -52.0
 offset_right = 16.0

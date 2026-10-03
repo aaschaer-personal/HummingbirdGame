@@ -508,16 +508,16 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vpral"]
-radius = 6.0
-height = 16.0
+radius = 3.0
+height = 8.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8p8om"]
-radius = 6.0
-height = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovb5w"]
+radius = 8.0
 
 [node name="Flower" instance=ExtResource("1_odmqw")]
 
 [node name="BeeHoverPoints" type="Node2D" parent="." index="3"]
+position = Vector2(0, 1)
 
 [node name="HoverPoint1" type="Node2D" parent="BeeHoverPoints" index="0"]
 position = Vector2(6, -17)
@@ -557,21 +557,26 @@ object_height = 10
 height_off_ground = 8
 
 [node name="DrinkableArea" type="Area2D" parent="." index="6"]
-position = Vector2(9, -12)
+position = Vector2(9, -11)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
 shape = SubResource("CapsuleShape2D_vpral")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="7"]
-position = Vector2(8, -12)
-shape = SubResource("CapsuleShape2D_8p8om")
+[node name="BloomCollisionShape" type="CollisionShape2D" parent="." index="7"]
+position = Vector2(9, -11)
+shape = SubResource("CircleShape2D_ovb5w")
 
-[node name="NectarMeter" parent="." index="8" instance=ExtResource("6_ux2w3")]
+[node name="SeedCollisionShape" type="CollisionShape2D" parent="." index="8"]
+position = Vector2(9, -9)
+shape = SubResource("CircleShape2D_ovb5w")
+disabled = true
+
+[node name="NectarMeter" parent="." index="9" instance=ExtResource("6_ux2w3")]
 offset_left = 3.0
-offset_top = -57.0
+offset_top = -56.0
 offset_right = 15.0
-offset_bottom = -21.0
+offset_bottom = -20.0
 
-[node name="TutorialArrow" parent="." index="9" instance=ExtResource("13_yrlnv")]
+[node name="TutorialArrow" parent="." index="10" instance=ExtResource("13_yrlnv")]
 visible = false
-position = Vector2(9, -31)
+position = Vector2(9, -30)

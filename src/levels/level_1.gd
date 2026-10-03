@@ -120,11 +120,12 @@ Drink from the flower (click or %interact) to shoo off the bee. If left alone, t
 		var flower = bee.get_parent()
 		var flower_arrow = flower.get_node("TutorialArrow")
 		flower_arrow.set_side_visibility(true)
-		while flower.bee:
+		while flower and flower.bee:
 			await SignalBus.bee_flew_away
 			# wait for flower.bee to be null
 			await get_tree().create_timer(0.1, false).timeout
-		flower_arrow.set_side_visibility(false)
+		if flower_arrow:
+			flower_arrow.set_side_visibility(false)
 		await remove_tutorial_text("Bees")
 
 func add_tutorial_text(text_name: String, template: String, mobile_text: String = ""):
