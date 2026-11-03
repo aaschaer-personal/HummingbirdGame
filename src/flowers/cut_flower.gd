@@ -102,15 +102,9 @@ func set_pickup_height():
 	petal_shadow.height_off_ground = pickup_height
 
 func drop():
-	super()
+	rotation_degrees = 0
 	color_label.visible = Config.get_option("label_colors")
-	var angle_tween = create_tween()
-	angle_tween.tween_property(
-		self,
-		"rotation_degrees",
-		0,
-		drop_duration,
-	)
+	super()
 
 func tween_height(target: int, duration: float):
 	super(target, duration)

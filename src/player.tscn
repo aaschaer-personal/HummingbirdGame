@@ -3358,6 +3358,8 @@ position = Vector2(-5, -14)
 [node name="InteractionArea" type="Area2D" parent="Flippables"]
 visible = false
 position = Vector2(5, -6)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippables/InteractionArea"]
 position = Vector2(0, -11)
@@ -3379,6 +3381,8 @@ shape = SubResource("CapsuleShape2D_omi07")
 
 [node name="PickupArea" type="Area2D" parent="Flippables"]
 position = Vector2(-5, 0)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flippables/PickupArea"]
 shape = SubResource("RectangleShape2D_nnlp5")
@@ -3398,8 +3402,9 @@ offset_right = 2.0
 offset_bottom = 2.0
 
 [node name="InteractionRadius" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, -26)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRadius"]
 shape = SubResource("CircleShape2D_ebf05")

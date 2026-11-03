@@ -1,5 +1,6 @@
-class_name Flower extends Interactable
+class_name Flower extends Area2D
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var parent_plant = get_parent().get_parent()
 @onready var petal_sprite = $PetalSprite
 @onready var main_sprite = $MainSprite
@@ -152,6 +153,9 @@ func get_interaction_area():
 		return drinkable_area
 	else:
 		return self
+
+func get_interaction_point(_point):
+	return get_interaction_area().global_position
 
 func generate_seeds():
 	for i in range(parent_plant.genome.seed_num):

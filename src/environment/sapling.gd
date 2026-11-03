@@ -1,5 +1,6 @@
-class_name Sapling extends Interactable
+class_name Sapling extends Area2D
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var perch_zone = $PerchZone
 @onready var top_rustle_zone = $TopRustleZone
 @onready var bottom_rustle_zone = $BottomRustleZone
@@ -25,6 +26,9 @@ func get_player_interaction_area():
 	
 func get_interaction_area():
 	return perch_zone
+
+func get_interaction_point(_point):
+	return perch_zone.global_position
 
 func rustle_sound():
 	audio_player.set_pitch_scale(randf_range(.9, 1.1))

@@ -1,5 +1,6 @@
-class_name Plot extends Interactable
+class_name Plot extends Area2D
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var dirt_sprite = $Dirt
 @export var wetness_shading = 0
 var plant = null

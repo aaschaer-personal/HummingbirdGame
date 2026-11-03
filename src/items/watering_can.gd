@@ -4,7 +4,9 @@ class_name WateringCan extends Item
 @onready var water_zone = $WaterZone
 @onready var water_meter = $WaterMeter
 @onready var audio_player = $OptionAwareAudioPlayer
+@onready var collision = $CollisionShape2D
 var water_amount = 20
+var collision_x = 2
 
 func _physics_process(delta):
 	if player.held_item == self:
@@ -39,10 +41,12 @@ func set_flip_h(val):
 		item_sprite.rotation_degrees = 25
 		water_particles.position = Vector2(11,2)
 		water_zone.position = Vector2(9,20)
+		collision.position.x = collision_x
 	else:
 		item_sprite.rotation_degrees = -25
 		water_particles.position = Vector2(-11,2)
 		water_zone.position = Vector2(-9,20)
+		collision.position.x = -collision_x
 
 func refill():
 	water_amount = 20

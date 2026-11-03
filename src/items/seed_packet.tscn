@@ -8,11 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="5_7hhrt"]
 [ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="8_cr7pc"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wsjay"]
-radius = 8.99999
-height = 22.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tiogk"]
+size = Vector2(15.999954, 18.999975)
 
-[node name="SeedPacket" type="Area2D" groups=["seed_packets"]]
+[node name="SeedPacket" type="RigidBody2D" groups=["seed_packets"]]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
 script = ExtResource("1_yc81b")
 
 [node name="TransportDisk" type="Sprite2D" parent="."]
@@ -24,9 +28,9 @@ texture = ExtResource("3_x7iob")
 [node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("3_pqw5o")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
-rotation = 3.14397
-shape = SubResource("CapsuleShape2D_wsjay")
+position = Vector2(-0.0011886358, 5.500011)
+rotation = -3.1392152
+shape = SubResource("RectangleShape2D_tiogk")
 
 [node name="SeedCount" type="Label" parent="."]
 offset_left = 6.0

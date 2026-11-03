@@ -111,7 +111,7 @@ func _unhandled_input(event):
 	if click:
 		var point = PhysicsPointQueryParameters2D.new()
 		point.position = click_point
-		point.collide_with_bodies = false
+		point.collide_with_bodies = true
 		point.collide_with_areas = true
 		var overlapping_areas = get_world_2d().direct_space_state.intersect_point(point)
 		var clickables = []
@@ -120,7 +120,7 @@ func _unhandled_input(event):
 			area = area.collider
 			if area == player.held_item:
 				continue
-			elif area is Interactable and area.is_interactable():
+			elif area.has_method("is_interactable") and area.is_interactable():
 				clickables.append(area)
 		# prioritize portable items to prevent them getting stuck
 		for area in clickables:
@@ -132,20 +132,15 @@ func _unhandled_input(event):
 
 		# if theres a selected clickable, it takes priority
 		if selected:
-			selected.on_selected(event.position)
+			player.set_interaction_target(selected, event.position)
 
 		# if its a double click, move and drop
 		elif double_click:
 			drop_point.global_position = event.position
 			# wait for area to move
 			await get_tree().create_timer(0.1, false).timeout
-			player.set_interaction_target(
-					"_drop_item_at_point",
-					null,
-					player.pickup_area,
-					drop_point,
-					event.position,
-			)
+			# Node2D uses all default target behaviors including move_to_point
+			player.set_interaction_target(Node2D.new(), event.position)
 
 		# otherwise move
 		else:

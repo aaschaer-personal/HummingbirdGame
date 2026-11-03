@@ -5,14 +5,16 @@
 [ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="3_n0nfn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f07n3"]
-radius = 18.9724
-height = 65.983
+radius = 15.018839
+height = 64.028915
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_br4wb"]
 radius = 5.0
-height = 26.0
+height = 12.0
 
-[node name="Pond" type="Area2D"]
+[node name="Pond" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_emykl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,6 +26,7 @@ texture = ExtResource("2_e5sv8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)
 rotation = 1.54809
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CapsuleShape2D_f07n3")
 
 [node name="SplashZone" type="Area2D" parent="."]

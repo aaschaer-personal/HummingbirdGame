@@ -62,7 +62,11 @@ var level
 func _ready():
 	general_interaction_area.area_entered.connect(
 		_on_interaction_area_entered.bind(general_interaction_area))
+	general_interaction_area.body_entered.connect(
+		_on_interaction_area_entered.bind(general_interaction_area))
 	pickup_area.area_entered.connect(
+		_on_interaction_area_entered.bind(pickup_area))
+	pickup_area.body_entered.connect(
 		_on_interaction_area_entered.bind(pickup_area))
 	drinking_area.area_entered.connect(
 		_on_interaction_area_entered.bind(drinking_area))
@@ -173,17 +177,22 @@ func _physics_process(delta):
 func interact_with_nearest_target():
 	var nearest_target = null
 	var best_distance = null
-	
-	for potential_target in interaction_radius.get_overlapping_areas():
-		if potential_target is Interactable and potential_target.is_interactable():
-			var distance = potential_target.get_player_interaction_area().global_position.distance_to(
-				potential_target.get_interaction_area().global_position)
+	for potential_target in interaction_radius.get_overlapping_areas() + interaction_radius.get_overlapping_bodies():
+		if potential_target.has_method("is_interactable") and potential_target.is_interactable():
+			var potential_player_interaction_area = general_interaction_area
+			if potential_target.has_method("get_player_interaction_area"):
+				potential_player_interaction_area = potential_target.get_player_interaction_area()
+			var potential_interaction_area = potential_target
+			if potential_target.has_method("get_interaction_area"):
+				potential_interaction_area = potential_target.get_interaction_area()
+			var distance = potential_player_interaction_area.global_position.distance_to(
+				potential_interaction_area.global_position)
 			if best_distance == null or distance < best_distance:
 				best_distance = distance
 				nearest_target = potential_target
 
 	if nearest_target != null:
-		nearest_target.on_selected(nearest_target.global_position)
+		set_interaction_target(nearest_target, nearest_target.global_position)
 
 func move_to_point(new_target_point, overide_controllable=false):
 	if controllable or overide_controllable:
@@ -192,15 +201,30 @@ func move_to_point(new_target_point, overide_controllable=false):
 		interaction_position = Vector2.ZERO
 
 func set_interaction_target(
-	new_interaction,
-	new_target,
-	new_interaction_area,
-	new_target_area,
-	new_target_point,
+	interactable,
+	point,
 ):
 	if controllable:
+		# get interaction info from interactable's duck typing methods
 		_unset_interaction_target()
-		if new_interaction_area.overlaps_area(new_target_area):
+		var new_interaction = "_drop_item_at_point"
+		if interactable.has_method("get_player_interaction"):
+			new_interaction = interactable.get_player_interaction()
+		var new_target = interactable
+		if interactable.has_method("get_interaction_target"):
+			new_target = interactable.get_interaction_target()
+		var new_interaction_area = general_interaction_area
+		if interactable.has_method("get_player_interaction_area"):
+			new_interaction_area = interactable.get_player_interaction_area()
+		var new_target_area = interactable
+		if interactable.has_method("get_interaction_area"):
+			new_target_area = interactable.get_interaction_area()
+		var new_target_point = point
+		if interactable.has_method("get_interaction_point"):
+			new_target_point = interactable.get_interaction_point(point)
+
+		# if we're already there, do the thing, otherwise set up targeting
+		if new_interaction_area.overlaps_area(new_target_area) or new_interaction_area.overlaps_body(new_target_area):
 			call(new_interaction, new_target)
 		else:
 			interaction = new_interaction
@@ -223,7 +247,7 @@ func set_interaction_target(
 			var right_x_distance = abs(right_point.x - target_point.x)
 			var left_x_distance = abs(left_point.x - target_point.x)
 
-			# for smaller x distances pick the closer interaction point
+			# for smaller x distances pick the closer interaction direction
 			if min(right_x_distance, left_x_distance) < base_speed / 5.0:
 				if right_distance < left_distance:
 					interaction_position = right_position
@@ -258,12 +282,15 @@ func _on_interaction_area_entered(entering_area, our_area):
 
 func pickup(item):
 	if energy > 0:
-
 		# drop any currently held item unless adding flower to bouqeut
 		if held_item != null and not (
 			item is CutFlower and held_item is Bouquet
 		):
 			drop_held_item()
+
+		# remove collision with grounded items
+		item.set_collision_layer_value(2, false)
+		item.set_collision_mask_value(2, false)
 
 		# add flower to bouquet
 		if item is CutFlower:
