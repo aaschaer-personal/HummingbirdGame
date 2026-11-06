@@ -86,12 +86,13 @@ func receive_nutrients(amount: float):
 				var new_bee = bee_scene.instantiate()
 				add_child(new_bee)
 				bee = new_bee
-				SignalBus.bee_arrived.emit(bee)
+				SignalBus.bee_arrived.emit()
 				bee_audio_player.play()
 		else:
 			if not pollination_timer.is_stopped() and not manualy_pollinated:
 				pollination_timer.stop()
 			if bee:
+				SignalBus.bee_shooed.emit()
 				bee.fly_away()
 				bee = null
 				bee_audio_player.stop()
