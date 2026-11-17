@@ -1,4 +1,4 @@
-[gd_scene load_steps=477 format=3 uid="uid://dijrw38nqguom"]
+[gd_scene load_steps=499 format=3 uid="uid://dijrw38nqguom"]
 
 [ext_resource type="Script" uid="uid://dorl8gugxxhgu" path="res://src/player.gd" id="1_j4oqv"]
 [ext_resource type="Texture2D" uid="uid://s1d4ow6e0qhr" path="res://assets/Hummingbird/back_wing.png" id="2_5bhmb"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://b1nhymw27thds" path="res://assets/Hummingbird/Pollen/tired.png" id="21_ny8i4"]
 [ext_resource type="PackedScene" uid="uid://i58uq73wyw2g" path="res://src/option_aware_audio_player.tscn" id="21_vdxad"]
 [ext_resource type="Texture2D" uid="uid://bgh8hscmggi2j" path="res://assets/Hummingbird/front_wing_tired.png" id="22_6rtxi"]
+[ext_resource type="Texture2D" uid="uid://ct8ll34cd52li" path="res://assets/Hummingbird/pollen_ring.png" id="24_jo1vc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gem0f"]
 atlas = ExtResource("2_5bhmb")
@@ -241,115 +242,115 @@ region = Rect2(96, 0, 48, 48)
 atlas = ExtResource("3_4i2hr")
 region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s74yy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wihxi"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_huern"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4huw0"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bts8a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_atx3q"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tls2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_d28pn"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ahka5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hj6y"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(192, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ayts"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3eag"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k2rya"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxrqa"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(288, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2k64"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6c26"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(336, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g4e6i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmutw"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(384, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c4s7s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uuf1"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(432, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gguhy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_undrb"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(480, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gx1o6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hg2y"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(528, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nqm84"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_evmln"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(576, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_asl8l"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipv0d"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(624, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1licu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe344"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(672, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ebsmy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jnrl"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(720, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kwhd"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_itnut"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(768, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4ur6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v38tr"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(816, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m4nsl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi1e3"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(864, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_604ma"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_02xbv"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(912, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aadpi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_35xdo"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(960, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wyn10"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rp2e"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1008, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_78f7i"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rdcjo"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1056, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_juovu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6iaar"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1104, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ucie0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mook"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1152, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i2q0k"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jat8"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1200, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5bdih"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_am7v0"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1248, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8a8y3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv5d3"]
 atlas = ExtResource("4_dbvvx")
 region = Rect2(1296, 0, 48, 48)
 
@@ -1066,91 +1067,91 @@ animations = [{
 "speed": 20.0
 }, {
 "frames": [{
-"duration": 8.0,
-"texture": SubResource("AtlasTexture_s74yy")
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wihxi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_huern")
+"texture": SubResource("AtlasTexture_4huw0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bts8a")
+"texture": SubResource("AtlasTexture_atx3q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4tls2")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_ahka5")
+"texture": SubResource("AtlasTexture_d28pn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0ayts")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_k2rya")
+"texture": SubResource("AtlasTexture_2hj6y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s2k64")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_g4e6i")
+"texture": SubResource("AtlasTexture_m3eag")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c4s7s")
+"texture": SubResource("AtlasTexture_fxrqa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gguhy")
+"texture": SubResource("AtlasTexture_u6c26")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gx1o6")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_nqm84")
+"texture": SubResource("AtlasTexture_xmutw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_asl8l")
-}, {
-"duration": 8.0,
-"texture": SubResource("AtlasTexture_1licu")
+"texture": SubResource("AtlasTexture_2uuf1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ebsmy")
+"texture": SubResource("AtlasTexture_undrb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6kwhd")
+"texture": SubResource("AtlasTexture_5hg2y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h4ur6")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_m4nsl")
+"texture": SubResource("AtlasTexture_evmln")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_604ma")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_aadpi")
+"texture": SubResource("AtlasTexture_ipv0d")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wyn10")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_78f7i")
+"texture": SubResource("AtlasTexture_fe344")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_juovu")
+"texture": SubResource("AtlasTexture_6jnrl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ucie0")
+"texture": SubResource("AtlasTexture_itnut")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i2q0k")
-}, {
-"duration": 4.0,
-"texture": SubResource("AtlasTexture_5bdih")
+"texture": SubResource("AtlasTexture_v38tr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8a8y3")
+"texture": SubResource("AtlasTexture_qi1e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02xbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35xdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rp2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rdcjo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6iaar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mook")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jat8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_am7v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv5d3")
 }],
-"loop": true,
+"loop": false,
 "name": &"hovering",
 "speed": 20.0
 }, {
@@ -2347,37 +2348,53 @@ region = Rect2(768, 0, 48, 48)
 atlas = ExtResource("18_hctfd")
 region = Rect2(816, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mppyu"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jouj7"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fxfka"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr7q6"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1r4p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajvfd"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ngqq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxmr1"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fg6r3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_no1v1"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(192, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tcyfj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tya23"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4p8sy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s8n5"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(288, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n53ox"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jviv6"]
 atlas = ExtResource("21_ny8i4")
 region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b8fb7"]
+atlas = ExtResource("21_ny8i4")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fclfs"]
+atlas = ExtResource("21_ny8i4")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgxq3"]
+atlas = ExtResource("21_ny8i4")
+region = Rect2(480, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2e23k"]
+atlas = ExtResource("21_ny8i4")
+region = Rect2(528, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_faltv"]
 atlas = ExtResource("19_e2grt")
@@ -3066,28 +3083,40 @@ animations = [{
 }, {
 "frames": [{
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_mppyu")
+"texture": SubResource("AtlasTexture_jouj7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fxfka")
+"texture": SubResource("AtlasTexture_jr7q6")
 }, {
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_k1r4p")
+"texture": SubResource("AtlasTexture_ajvfd")
 }, {
 "duration": 5.0,
-"texture": SubResource("AtlasTexture_4ngqq")
+"texture": SubResource("AtlasTexture_oxmr1")
 }, {
 "duration": 5.0,
-"texture": SubResource("AtlasTexture_fg6r3")
+"texture": SubResource("AtlasTexture_no1v1")
 }, {
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_tcyfj")
+"texture": SubResource("AtlasTexture_tya23")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4p8sy")
+"texture": SubResource("AtlasTexture_7s8n5")
 }, {
 "duration": 2.0,
-"texture": SubResource("AtlasTexture_n53ox")
+"texture": SubResource("AtlasTexture_jviv6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_b8fb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fclfs")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_sgxq3")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_2e23k")
 }],
 "loop": true,
 "name": &"tired",
@@ -3279,6 +3308,1081 @@ initial_velocity_max = 80.0
 gravity = Vector3(0, 98, 0)
 color_ramp = SubResource("GradientTexture1D_npgn2")
 
+[sub_resource type="Animation" id="Animation_4huw0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hovering"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hovering"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Pollen:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Body:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_atx3q"]
+resource_name = "bathe"
+length = 1.600005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(1, 2), Vector2(2, 5), Vector2(2, 8), Vector2(2, 11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bathe"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bathe"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 31]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 31]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/PollenRing:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.45),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_u6c26"]
+resource_name = "drinking"
+length = 0.450005
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1, 11)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"drinking"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"drinking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_wihxi"]
+resource_name = "hovering"
+length = 3.300005
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.05, 1.6, 1.65, 2.65, 2.7, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(-1, -1), Vector2(-2, -2), Vector2(-1, -1), Vector2(0, 0), Vector2(-1, 1), Vector2(-1, 2), Vector2(-1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hovering"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"hovering"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.45, 0.5, 0.55, 0.75, 0.8, 1, 1.05, 1.25, 1.3, 1.35, 1.4, 1.6, 1.65, 2.05, 2.1, 2.15, 2.2, 2.4, 2.45, 2.65, 2.7, 2.9, 2.95, 3, 3.05, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.45, 0.5, 0.55, 0.75, 0.8, 1, 1.05, 1.25, 1.3, 1.35, 1.4, 1.6, 1.65, 2.05, 2.1, 2.15, 2.2, 2.4, 2.45, 2.65, 2.7, 2.9, 2.95, 3, 3.05, 3.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_xmutw"]
+resource_name = "perching"
+length = 12.200006
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.4, 2.45, 2.5, 2.55, 2.6, 2.65, 2.7, 2.75, 2.8, 2.85, 2.9, 2.95, 3, 3.05, 3.1, 3.15, 3.2, 3.25, 5.7, 5.75, 5.8, 5.85, 5.9, 5.95, 6, 6.05, 8.5, 8.55, 8.6, 8.65, 8.7, 8.75, 8.8, 8.85, 8.9, 8.95, 9, 9.05, 9.1, 9.15, 9.2, 9.25, 9.3, 9.35, 11.8, 11.85, 11.9, 11.95, 12, 12.05, 12.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-17, 6), Vector2(-15, 6), Vector2(-13, 6), Vector2(-12, 4), Vector2(-10, 4), Vector2(-9, 4), Vector2(-9, 6), Vector2(-11, 6), Vector2(-10, 5), Vector2(-10, 3), Vector2(-9, 6), Vector2(-11, 6), Vector2(-9, 6), Vector2(-9, 4), Vector2(-10, 4), Vector2(-12, 4), Vector2(-13, 6), Vector2(-15, 6), Vector2(-17, 6), Vector2(-14, 6), Vector2(-12, 5), Vector2(-14, 6), Vector2(-17, 6), Vector2(-21, 6), Vector2(-24, 6), Vector2(-21, 6), Vector2(-17, 6), Vector2(-20, 6), Vector2(-21, 6), Vector2(-24, 6), Vector2(-25, 4), Vector2(-26, 4), Vector2(-26, 6), Vector2(-24, 6), Vector2(-26, 6), Vector2(-26, 4), Vector2(-26, 6), Vector2(-24, 6), Vector2(-26, 6), Vector2(-26, 4), Vector2(-25, 4), Vector2(-24, 6), Vector2(-21, 6), Vector2(-20, 6), Vector2(-17, 6), Vector2(-21, 6), Vector2(-23, 5), Vector2(-21, 6), Vector2(-17, 6), Vector2(-14, 6), Vector2(-12, 5), Vector2(-14, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"perching"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"perching"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.15, 1.2, 1.25, 2.4, 2.45, 3.25, 3.3, 4.45, 4.5, 4.55, 5.7, 5.75, 6.05, 6.1, 7.25, 7.3, 7.35, 8.5, 8.55, 9.35, 9.4, 10.55, 10.6, 10.65, 11.8, 11.85, 12.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 0, 1, 2, 2, 3, 19, 20, 20, 21, 22, 22, 23, 29, 30, 30, 31, 32, 32, 33, 49, 50, 50, 51, 52, 52, 53, 59]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.15, 1.2, 1.25, 2.4, 2.45, 3.25, 3.3, 4.45, 4.5, 4.55, 5.7, 5.75, 6.05, 6.1, 7.25, 7.3, 7.35, 8.5, 8.55, 9.35, 9.4, 10.55, 10.6, 10.65, 11.8, 11.85, 12.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 0, 1, 2, 2, 3, 19, 20, 20, 21, 22, 22, 23, 29, 30, 30, 31, 32, 32, 33, 49, 50, 50, 51, 52, 52, 53, 59]
+}
+
+[sub_resource type="Animation" id="Animation_2uuf1"]
+resource_name = "start_drinking"
+length = 0.150005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 4), Vector2(0, 5), Vector2(1, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_drinking"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_drinking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_undrb"]
+resource_name = "start_perching"
+length = 0.15000251
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, 5), Vector2(-12, 5), Vector2(-17, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_perching"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_perching"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5hg2y"]
+resource_name = "start_perching_tired"
+length = 0.15000251
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, 5), Vector2(-12, 5), Vector2(-17, 6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_perching_tired"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_perching_tired"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_d28pn"]
+resource_name = "start_zooming"
+length = 0.30000502
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 1), Vector2(0, 2), Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_zooming"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"start_zooming"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 5]
+}
+
+[sub_resource type="Animation" id="Animation_evmln"]
+resource_name = "stop_drinking"
+length = 0.150005
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 8), Vector2(0, 5), Vector2(0, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_drinking"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_drinking"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 2, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ipv0d"]
+resource_name = "stop_perching"
+length = 0.15000251
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(-17, 6), Vector2(-12, 6), Vector2(-7, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_perching"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_perching"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_2hj6y"]
+resource_name = "stop_zooming"
+length = 0.45000252
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.125, 0.175),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 3), Vector2(0, 2), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_zooming"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"stop_zooming"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.425),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 17]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.425),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 17]
+}
+
+[sub_resource type="Animation" id="Animation_c78en"]
+resource_name = "tired"
+length = 1.500005
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"tired"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"tired"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.25, 0.5, 0.75, 0.85, 0.9, 1, 1.1, 1.15, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.25, 0.5, 0.75, 0.85, 0.9, 1, 1.1, 1.15, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_m3eag"]
+resource_name = "turn"
+length = 0.2500025
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, 5), Vector2(-12, 5), Vector2(-17, 6), Vector2(-23, 5), Vector2(-28, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"turn"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"turn"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.225),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.225),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+
+[sub_resource type="Animation" id="Animation_fe344"]
+resource_name = "turn_tired"
+length = 0.2500025
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, 5), Vector2(-12, 5), Vector2(-17, 6), Vector2(-23, 5), Vector2(-28, 5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"turn_tired"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"turn_tired"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.225),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.225),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 9]
+}
+
+[sub_resource type="Animation" id="Animation_fxrqa"]
+resource_name = "zooming"
+length = 0.2000025
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/PollenRing/PollenRingSprite:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Body:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"zooming"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Pollen:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"zooming"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Body:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = false
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.175),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Pollen:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = false
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.175),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_atx3q"]
+_data = {
+&"RESET": SubResource("Animation_4huw0"),
+&"bathe": SubResource("Animation_atx3q"),
+&"drinking": SubResource("Animation_u6c26"),
+&"hovering": SubResource("Animation_wihxi"),
+&"perching": SubResource("Animation_xmutw"),
+&"start_drinking": SubResource("Animation_2uuf1"),
+&"start_perching": SubResource("Animation_undrb"),
+&"start_perching_tired": SubResource("Animation_5hg2y"),
+&"start_zooming": SubResource("Animation_d28pn"),
+&"stop_drinking": SubResource("Animation_evmln"),
+&"stop_perching": SubResource("Animation_ipv0d"),
+&"stop_zooming": SubResource("Animation_2hj6y"),
+&"tired": SubResource("Animation_c78en"),
+&"turn": SubResource("Animation_m3eag"),
+&"turn_tired": SubResource("Animation_fe344"),
+&"zooming": SubResource("Animation_fxrqa")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tlfay"]
 radius = 6.32456
 
@@ -3301,48 +4405,60 @@ size = Vector2(4.875, 2)
 radius = 59.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+position = Vector2(27, -5)
 motion_mode = 1
 script = ExtResource("1_j4oqv")
 
-[node name="Animation" type="Node2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
 position = Vector2(0, -26)
 
-[node name="BackWing" type="AnimatedSprite2D" parent="Animation"]
+[node name="BackWing" type="AnimatedSprite2D" parent="Sprites"]
 sprite_frames = SubResource("SpriteFrames_82mtl")
 autoplay = "default"
 
-[node name="ShadowGenerator" parent="Animation/BackWing" instance=ExtResource("11_u3ina")]
+[node name="ShadowGenerator" parent="Sprites/BackWing" instance=ExtResource("11_u3ina")]
 object_height = 20
 height_off_ground = 15
 
-[node name="Body" type="AnimatedSprite2D" parent="Animation"]
+[node name="Body" type="AnimatedSprite2D" parent="Sprites"]
 sprite_frames = SubResource("SpriteFrames_kuglu")
 animation = &"hovering"
-autoplay = "hovering"
 
-[node name="ShadowGenerator" parent="Animation/Body" instance=ExtResource("11_u3ina")]
+[node name="ShadowGenerator" parent="Sprites/Body" instance=ExtResource("11_u3ina")]
 object_height = 20
 height_off_ground = 15
 
-[node name="Pollen" type="AnimatedSprite2D" parent="Animation"]
+[node name="Pollen" type="AnimatedSprite2D" parent="Sprites"]
 visible = false
 sprite_frames = SubResource("SpriteFrames_2l22o")
 animation = &"hovering"
-autoplay = "hovering"
 
-[node name="FrontWing" type="AnimatedSprite2D" parent="Animation"]
+[node name="FrontWing" type="AnimatedSprite2D" parent="Sprites"]
 sprite_frames = SubResource("SpriteFrames_3grsh")
 autoplay = "default"
 
-[node name="ShadowGenerator" parent="Animation/FrontWing" instance=ExtResource("11_u3ina")]
+[node name="ShadowGenerator" parent="Sprites/FrontWing" instance=ExtResource("11_u3ina")]
 object_height = 20
 height_off_ground = 15
 
-[node name="SplashParticles" type="GPUParticles2D" parent="Animation"]
+[node name="SplashParticles" type="GPUParticles2D" parent="Sprites"]
 position = Vector2(-4, 8)
 emitting = false
 amount = 40
 process_material = SubResource("ParticleProcessMaterial_kxfph")
+
+[node name="PollenRing" type="Node2D" parent="Sprites"]
+visible = false
+position = Vector2(18, -6)
+
+[node name="PollenRingSprite" type="Sprite2D" parent="Sprites/PollenRing"]
+texture = ExtResource("24_jo1vc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_atx3q")
+}
+autoplay = "hovering"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -3402,11 +4518,13 @@ offset_right = 2.0
 offset_bottom = 2.0
 
 [node name="InteractionRadius" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -26)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRadius"]
+position = Vector2(-1, 0)
 shape = SubResource("CircleShape2D_ebf05")
 
 [node name="OptionAwareAudioPlayer" parent="." instance=ExtResource("21_vdxad")]

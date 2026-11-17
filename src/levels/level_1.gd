@@ -366,11 +366,13 @@ func tutorial_sequence():
 
 		# if player has pollen, arrow over pond until bathed
 		if player.pollen:
+			player.pollen_ring.visible = true
 			var pond_arrow = $Pond/TutorialArrow
 			pond_arrow.set_main_visibility(true)
 			await player.bath_started
 			pond_arrow.set_main_visibility(false)
-			await player.drink_or_bath
+			await player.drink_or_bath_or_pollen_added
+		player.pollen_ring.visible = false
 
 		# arrow over flowers that the player doesn't have pollen for
 		while not orange_seeds_polinated:
@@ -382,33 +384,28 @@ func tutorial_sequence():
 					red_drink = true
 				elif color == Colors.yellow:
 					yellow_drink = true
-
-			if not red_drink:
-				for flower in get_tree().get_nodes_in_group("red_flowers"):
-					flower.get_node("TutorialArrow").set_main_visibility(true)
-			if not yellow_drink:
-				for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-					flower.get_node("TutorialArrow").set_main_visibility(true)
-			if yellow_drink and red_drink:
-					break
-
-			await player.drink_or_bath
 			if player.drinking_flower:
 				if player.drinking_flower.color == Colors.red:
 					red_drink = true
-					for flower in get_tree().get_nodes_in_group("red_flowers"):
-						flower.get_node("TutorialArrow").set_main_visibility(false)
 				elif player.drinking_flower.color == Colors.yellow:
 					yellow_drink = true
-					for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-						flower.get_node("TutorialArrow").set_main_visibility(false)
-				if yellow_drink and red_drink:
-					break
+			if yellow_drink and red_drink:
+				break
+			for flower in get_tree().get_nodes_in_group("red_flowers"):
+				flower.get_node("TutorialArrow").set_main_visibility(not red_drink)
+			for flower in get_tree().get_nodes_in_group("yellow_flowers"):
+				flower.get_node("TutorialArrow").set_main_visibility(not yellow_drink)
+			if player.pollen:
+				player.pollen_ring.visible = true
+			else:
+				player.pollen_ring.visible = false
+			await player.drink_or_bath_or_pollen_added
 
 		for flower in get_tree().get_nodes_in_group("red_flowers"):
 			flower.get_node("TutorialArrow").set_main_visibility(false)
 		for flower in get_tree().get_nodes_in_group("yellow_flowers"):
 			flower.get_node("TutorialArrow").set_main_visibility(false)
+		player.pollen_ring.visible = false
 
 		while not orange_seeds_polinated:
 			await SignalBus.flower_pollinated
