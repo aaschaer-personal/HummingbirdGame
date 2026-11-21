@@ -11,6 +11,7 @@ extends NinePatchRect
 @onready var printing_packets_tab = $Tabs/PrintingPackets
 @onready var genetics_tab = $Tabs/Genetics
 @onready var species_details = $Content/Genetics/SpeciesDetails
+@onready var starting_genes = $Content/Genetics/StartingGenes
 @onready var example_punnet_square = $Content/Genetics/CrossContainer/PunnetSquare
 @onready var exit_button = $ExitButton
 
@@ -36,18 +37,24 @@ func _ready():
 		if level.flower_species == "sunflower":
 			# sunflowers are explained in the example
 			species_details.visible = false
-		elif level.flower_species == "jewelweed":
-			species_details.text = "* Jewelweeds have one color locus with three alleles, R for red, P for purple, and Y for yellow. There are six unique combinations which produce four different colors."
-		elif level.flower_species == "lupine":
-			species_details.text = "* Lupines have two color loci with two alleles. The red locus has alleles R and r, with R adding red to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are nine unique combinations that produce five different colors."
-		elif level.flower_species == "zinnia":
-			species_details.text = "* Zinnias have one color locus with four alleles, R for red, F for Fushia, Y for yellow, and W for white. There are ten unique combinations which produce six different colors."
-		elif level.flower_species == "hibiscus":
-			species_details.text = "* Hibiscuses have two color loci. The red locus has alleles R and r, with R adding red to the flower. The other locus can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors."
-		elif level.flower_species == "orchid":
-			species_details.text = "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding yellow to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors."
 		else:
-			assert(level == null)
+			var species_details_by_species = {
+				"jewelweed": "* Jewelweeds have one color locus with three alleles, R for red, P for purple, and Y for yellow. There are six unique combinations which produce four different colors.",
+				"lupine": "* Lupines have two color loci with two alleles. The red locus has alleles R and r, with R adding red to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are nine unique combinations that produce five different colors.",
+				"zinnia": "* Zinnias have one color locus with four alleles, R for red, F for Fushia, Y for yellow, and W for white. There are ten unique combinations which produce six different colors.",
+				"hibiscus": "* Hibiscuses have two color loci. The red locus has alleles R and r, with R adding red to the flower. The other locus can be B for blue, Y for yellow, or W for white. There are eighteen unique combinations which produce seven different colors.",
+				"orchid": "* Orchids have three color loci. The red locus has alleles R and r, with R adding red to the flower. The yellow locus has alleles Y and y, with Y adding yellow to the flower. The blue locus has alleles B and b, with B adding blue to the flower. There are twenty-seven unique combinations which produce nine different colors.",
+			}
+			species_details.text = species_details_by_species[level.flower_species]
+		var starting_genes_by_level = {
+			1: "RR and YY (3).",
+			2: "RR, YY, and PP.",
+			3: "RrBb (2), Rrbb, and rrBB.",
+			4: "RY, Rw, and FF.",
+			5: "RRYY, RrBw, and rrww.",
+			6: "RrYyBb, RRyyBB, rrYYbb, and rryybb.",
+		}
+		starting_genes.text += starting_genes_by_level[level.level_num]
 
 func toggle(tab_name):
 	for tab in tabs.get_children():
