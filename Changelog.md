@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.11.1
+- Fix double click/tap item dropping
+- Further widen Lupine hitboxes
+- Add distance based selection priority
+
 ## v0.11
 - Update flower assets to make it easier to interact with a specific flower
 - Prevent items from overlapping or entering inaccessible locations

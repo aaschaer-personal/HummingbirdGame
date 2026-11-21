@@ -207,12 +207,10 @@ func set_interaction_target(
 	interactable,
 	point,
 ):
-	if controllable:
+	if controllable and interactable.has_method("get_player_interaction"):
 		# get interaction info from interactable's duck typing methods
 		_unset_interaction_target()
-		var new_interaction = "_drop_item_at_point"
-		if interactable.has_method("get_player_interaction"):
-			new_interaction = interactable.get_player_interaction()
+		var new_interaction = interactable.get_player_interaction()
 		var new_target = interactable
 		if interactable.has_method("get_interaction_target"):
 			new_target = interactable.get_interaction_target()
@@ -325,7 +323,7 @@ func _drop_item(item):
 	item.reparent(get_parent())
 	item.drop()
 
-func _drop_item_at_point(_point):
+func drop_item_at_point(_point):
 	drop_held_item()
 
 func drop_held_item():

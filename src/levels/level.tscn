@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cu1hmijlk3lrc"]
+[gd_scene load_steps=18 format=3 uid="uid://cu1hmijlk3lrc"]
 
 [ext_resource type="Script" uid="uid://843cit7nl465" path="res://src/levels/level.gd" id="1_fflhd"]
 [ext_resource type="PackedScene" uid="uid://cbssd3406yp7p" path="res://src/UI/energy_bar.tscn" id="2_2p5c1"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ov3l2hi8x4rl" path="res://src/environment/wind.tscn" id="11_xf04e"]
 [ext_resource type="PackedScene" uid="uid://cpttbohtndpah" path="res://src/cache/cache.tscn" id="13_hr6dh"]
 [ext_resource type="PackedScene" uid="uid://b48sse34cd42d" path="res://src/visitors/visitor_manager.tscn" id="14_alqih"]
+[ext_resource type="Script" uid="uid://c4557o88oqnq5" path="res://src/drop_point.gd" id="14_nrsx4"]
 [ext_resource type="PackedScene" uid="uid://cmm2y8bfkj02n" path="res://src/input_logic.tscn" id="18_dnpum"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_du6bw"]
@@ -125,6 +126,7 @@ position = Vector2(320, 82)
 
 [node name="DropPoint" type="Area2D" parent="." groups=["drop_point"]]
 process_mode = 1
+script = ExtResource("14_nrsx4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropPoint"]
 shape = SubResource("CircleShape2D_du6bw")

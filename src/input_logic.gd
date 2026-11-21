@@ -122,13 +122,26 @@ func _unhandled_input(event):
 				continue
 			elif area.has_method("is_interactable") and area.is_interactable():
 				clickables.append(area)
-		# prioritize portable items to prevent them getting stuck
+
+		# if multiple clickables, choose the one closest to point
+		var closest_distance = null
 		for area in clickables:
+			# prioritize portable items to prevent them getting stuck
 			if area is Item:
 				selected = area
 				break
-		if selected == null and clickables:
-			selected = clickables[0]
+
+			var interaction_point
+			if area.has_method("get_interaction_point"):
+				interaction_point = area.get_interaction_point(click_point)
+			elif area.has_method("get_interaction_area"):
+				interaction_point = area.get_interaction_area().global_position
+			else:
+				interaction_point = area.global_position
+			var distance = click_point.distance_to(interaction_point)
+			if closest_distance == null or distance < closest_distance:
+				selected = area
+				closest_distance = distance
 
 		# if theres a selected clickable, it takes priority
 		if selected:
@@ -139,8 +152,7 @@ func _unhandled_input(event):
 			drop_point.global_position = event.position
 			# wait for area to move
 			await get_tree().create_timer(0.1, false).timeout
-			# Node2D uses all default target behaviors including move_to_point
-			player.set_interaction_target(Node2D.new(), event.position)
+			player.set_interaction_target(drop_point, event.position)
 
 		# otherwise move
 		else:
