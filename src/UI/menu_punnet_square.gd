@@ -1,25 +1,25 @@
 extends Control
 
 @onready var exit_button = $ExitButton
-@onready var punnet_square = $VBC/HBC/PunnetContainer/PunnetSquare
-@onready var p1_example_flower = $VBC/HBC/P1/Example/Flower
-@onready var p1_example_petals = $VBC/HBC/P1/Example/Petals
-@onready var p1_example_color_label = $VBC/HBC/P1/Example/ColorLabel
-@onready var p2_example_flower = $VBC/HBC/P2/Example/Flower
-@onready var p2_example_petals = $VBC/HBC/P2/Example/Petals
-@onready var p2_example_color_label = $VBC/HBC/P2/Example/ColorLabel
-@onready var p1a1 = $VBC/HBC/P1/A1
-@onready var p1a2 = $VBC/HBC/P1/A2
-@onready var p1b1 = $VBC/HBC/P1/B1
-@onready var p1b2 = $VBC/HBC/P1/B2
-@onready var p1c1 = $VBC/HBC/P1/C1
-@onready var p1c2 = $VBC/HBC/P1/C2
-@onready var p2a1 = $VBC/HBC/P2/A1
-@onready var p2a2 = $VBC/HBC/P2/A2
-@onready var p2b1 = $VBC/HBC/P2/B1
-@onready var p2b2 = $VBC/HBC/P2/B2
-@onready var p2c1 = $VBC/HBC/P2/C1
-@onready var p2c2 = $VBC/HBC/P2/C2
+@onready var punnet_square = $SC/VBC/HBC/PunnetContainer/PunnetSquare
+@onready var p1_example_flower = $SC/VBC/HBC/P1/Example/Flower
+@onready var p1_example_petals = $SC/VBC/HBC/P1/Example/Petals
+@onready var p1_example_color_label = $SC/VBC/HBC/P1/Example/ColorLabel
+@onready var p2_example_flower = $SC/VBC/HBC/P2/Example/Flower
+@onready var p2_example_petals = $SC/VBC/HBC/P2/Example/Petals
+@onready var p2_example_color_label = $SC/VBC/HBC/P2/Example/ColorLabel
+@onready var p1a1 = $SC/VBC/HBC/P1/A1
+@onready var p1a2 = $SC/VBC/HBC/P1/A2
+@onready var p1b1 = $SC/VBC/HBC/P1/B1
+@onready var p1b2 = $SC/VBC/HBC/P1/B2
+@onready var p1c1 = $SC/VBC/HBC/P1/C1
+@onready var p1c2 = $SC/VBC/HBC/P1/C2
+@onready var p2a1 = $SC/VBC/HBC/P2/A1
+@onready var p2a2 = $SC/VBC/HBC/P2/A2
+@onready var p2b1 = $SC/VBC/HBC/P2/B1
+@onready var p2b2 = $SC/VBC/HBC/P2/B2
+@onready var p2c1 = $SC/VBC/HBC/P2/C1
+@onready var p2c2 = $SC/VBC/HBC/P2/C2
 
 var species
 

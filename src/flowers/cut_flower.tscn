@@ -5,7 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="2_v0oe7"]
 [ext_resource type="PackedScene" uid="uid://ccbx5cj7fi15w" path="res://src/UI/tutorial_arrow.tscn" id="4_noscy"]
 
-[node name="CutFlower" type="Area2D"]
+[node name="CutFlower" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
 script = ExtResource("1_3umnu")
 
 [node name="DecayTimer" type="Timer" parent="."]

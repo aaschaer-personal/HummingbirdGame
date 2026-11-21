@@ -53,10 +53,15 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpmfy"]
-radius = 9.0
+radius = 8.0
 height = 20.0
 
-[node name="Clippers" type="Area2D" groups=["clippers"]]
+[node name="Clippers" type="RigidBody2D" groups=["clippers"]]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
 script = ExtResource("1_k4tqf")
 ground_height = -1
 pickup_height = 6
@@ -80,7 +85,7 @@ texture = ExtResource("2_gy2to")
 [node name="ShadowGenerator" parent="TransportDisk" instance=ExtResource("4_5q66u")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 4)
+position = Vector2(0, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_rpmfy")
 

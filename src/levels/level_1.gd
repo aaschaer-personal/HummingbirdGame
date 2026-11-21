@@ -3,6 +3,7 @@ extends SunflowerLevel
 var water_explained = false
 var energy_explained = false
 var bees_explained = false
+var bee_shooed = false
 var print_started = false
 var packet_printed = false
 var guide_opened = false
@@ -33,6 +34,7 @@ Here, we teach the basics of growing and crossing flowers."""
 	SignalBus.watering_can_emptied.connect(_on_watering_can_emptied)
 	player.energy_quartered.connect(_on_energy_quartered)
 	SignalBus.bee_arrived.connect(_on_bee_arrived)
+	SignalBus.bee_shooed.connect(_on_bee_shooed)
 	var options = get_tree().get_first_node_in_group("options")
 	options.show_tutorial_changed.connect(set_tutorial_visibility)
 
@@ -72,6 +74,9 @@ func _on_punnet_square_opened():
 func _on_guide_opened():
 	guide_opened = true
 
+func _on_bee_shooed():
+	bee_shooed = true
+
 func _on_flower_pollinated(parent_gene_dicts):
 	if GenomeHelpers.orange_parents(parent_gene_dicts):
 		orange_seeds_polinated = true
@@ -108,23 +113,27 @@ Interact with the pond (click or %interact) while holding the watering can.
 	pond_arrow.set_side_visibility(false)
 	await remove_tutorial_text("Water")
 
-func _on_bee_arrived(bee):
+func _on_bee_arrived():
 	if not bees_explained:
 		bees_explained = true
 		add_tutorial_text("Bees",
-		"""(Optional) Shoo off a bee:
+		"""Shoo off a bee:
 
-Drink from the flower (click or %interact) to shoo off the bee. If left alone, the bee will pollinate the flower with random pollen.
+Drink from a flower (click or %interact) to shoo off a bee. If left alone, bees will pollinate flowers with random pollen.
 
 """)
-		var flower = bee.get_parent()
-		var flower_arrow = flower.get_node("TutorialArrow")
-		flower_arrow.set_side_visibility(true)
-		while flower.bee:
-			await SignalBus.bee_flew_away
+		while not bee_shooed:
+			for flower in get_tree().get_nodes_in_group("flower"):
+				if flower.bee:
+					flower.get_node("TutorialArrow").set_side_visibility(true)
+				else:
+					flower.get_node("TutorialArrow").set_side_visibility(false)
+			await SignalBus.bee_arrived_or_flew_away
 			# wait for flower.bee to be null
 			await get_tree().create_timer(0.1, false).timeout
-		flower_arrow.set_side_visibility(false)
+
+		for flower in get_tree().get_nodes_in_group("flower"):
+			flower.get_node("TutorialArrow").set_side_visibility(false)
 		await remove_tutorial_text("Bees")
 
 func add_tutorial_text(text_name: String, template: String, mobile_text: String = ""):
@@ -357,11 +366,13 @@ func tutorial_sequence():
 
 		# if player has pollen, arrow over pond until bathed
 		if player.pollen:
+			player.pollen_ring.visible = true
 			var pond_arrow = $Pond/TutorialArrow
 			pond_arrow.set_main_visibility(true)
 			await player.bath_started
 			pond_arrow.set_main_visibility(false)
-			await player.drink_or_bath
+			await player.drink_or_bath_or_pollen_added
+		player.pollen_ring.visible = false
 
 		# arrow over flowers that the player doesn't have pollen for
 		while not orange_seeds_polinated:
@@ -373,33 +384,28 @@ func tutorial_sequence():
 					red_drink = true
 				elif color == Colors.yellow:
 					yellow_drink = true
-
-			if not red_drink:
-				for flower in get_tree().get_nodes_in_group("red_flowers"):
-					flower.get_node("TutorialArrow").set_main_visibility(true)
-			if not yellow_drink:
-				for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-					flower.get_node("TutorialArrow").set_main_visibility(true)
-			if yellow_drink and red_drink:
-					break
-
-			await player.drink_or_bath
 			if player.drinking_flower:
 				if player.drinking_flower.color == Colors.red:
 					red_drink = true
-					for flower in get_tree().get_nodes_in_group("red_flowers"):
-						flower.get_node("TutorialArrow").set_main_visibility(false)
 				elif player.drinking_flower.color == Colors.yellow:
 					yellow_drink = true
-					for flower in get_tree().get_nodes_in_group("yellow_flowers"):
-						flower.get_node("TutorialArrow").set_main_visibility(false)
-				if yellow_drink and red_drink:
-					break
+			if yellow_drink and red_drink:
+				break
+			for flower in get_tree().get_nodes_in_group("red_flowers"):
+				flower.get_node("TutorialArrow").set_main_visibility(not red_drink)
+			for flower in get_tree().get_nodes_in_group("yellow_flowers"):
+				flower.get_node("TutorialArrow").set_main_visibility(not yellow_drink)
+			if player.pollen:
+				player.pollen_ring.visible = true
+			else:
+				player.pollen_ring.visible = false
+			await player.drink_or_bath_or_pollen_added
 
 		for flower in get_tree().get_nodes_in_group("red_flowers"):
 			flower.get_node("TutorialArrow").set_main_visibility(false)
 		for flower in get_tree().get_nodes_in_group("yellow_flowers"):
 			flower.get_node("TutorialArrow").set_main_visibility(false)
+		player.pollen_ring.visible = false
 
 		while not orange_seeds_polinated:
 			await SignalBus.flower_pollinated

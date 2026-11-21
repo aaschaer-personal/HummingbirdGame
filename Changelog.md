@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.11
+- Update flower assets to make it easier to interact with a specific flower
+- Prevent items from overlapping or entering inaccessible locations
+- Make bee shooing tutorial non optional
+- Add ring around pollen during relevant tutorial section
+- Various bugfixes
+
+## v0.10
+- Add support for touch inputs
+- Change dropping controls to not require a seperate button
+- Make punnet square easier to find and access
+- Various bugfixes
+
 ## v0.9
 - Control remapping
 - Accessibility and difficulty options

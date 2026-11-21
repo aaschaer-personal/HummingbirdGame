@@ -1,15 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://b0hojrcdx88dr"]
+[gd_scene load_steps=32 format=3 uid="uid://b0hojrcdx88dr"]
 
 [ext_resource type="PackedScene" uid="uid://bthpcl3gbouwc" path="res://src/flowers/cut_flower.tscn" id="1_iligp"]
 [ext_resource type="Texture2D" uid="uid://bis34ehm2bj7o" path="res://assets/Flowers/Jewelweed/jewelweed_cut_decay.png" id="2_skycn"]
-[ext_resource type="Texture2D" uid="uid://b6imbt03se81j" path="res://assets/Flowers/Jewelweed/jewelweed_cut.png" id="3_iwgkc"]
 [ext_resource type="PackedScene" uid="uid://7dvw7728t334" path="res://src/shadows/shadow_generator.tscn" id="4_u2s3o"]
 [ext_resource type="Texture2D" uid="uid://cnef6m52g0rdp" path="res://assets/Flowers/Jewelweed/jewelweed_cut_decay_petals.png" id="5_eydur"]
-[ext_resource type="Texture2D" uid="uid://bocpuvujebxn6" path="res://assets/Flowers/Jewelweed/jewelweed_cut_petals.png" id="6_u4llw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pwyob"]
-radius = 7.00066
-height = 22.0
+radius = 8.999999
+height = 29.999996
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u6sru"]
 atlas = ExtResource("2_skycn")
@@ -55,8 +53,8 @@ region = Rect2(360, 0, 40, 32)
 atlas = ExtResource("2_skycn")
 region = Rect2(400, 0, 40, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h538b"]
-atlas = ExtResource("3_iwgkc")
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uodo"]
+atlas = ExtResource("2_skycn")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g2hir"]
@@ -101,7 +99,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h538b")
+"texture": SubResource("AtlasTexture_2uodo")
 }],
 "loop": false,
 "name": &"default",
@@ -152,8 +150,8 @@ region = Rect2(360, 0, 40, 32)
 atlas = ExtResource("5_eydur")
 region = Rect2(400, 0, 40, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ytjs3"]
-atlas = ExtResource("6_u4llw")
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7vlb"]
+atlas = ExtResource("5_eydur")
 region = Rect2(0, 0, 40, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_is887"]
@@ -198,7 +196,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ytjs3")
+"texture": SubResource("AtlasTexture_k7vlb")
 }],
 "loop": false,
 "name": &"default",
@@ -211,7 +209,7 @@ pickup_height = 13
 drop_duration = 0.2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
-position = Vector2(10, 1)
+position = Vector2(4.9999995, 2)
 rotation = 1.57146
 shape = SubResource("CapsuleShape2D_pwyob")
 

@@ -747,7 +747,9 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Cache" type="Area2D" groups=["cache"]]
+[node name="Cache" type="StaticBody2D" groups=["cache"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_30kay")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://2vtqd2l5sp86"]
+[gd_scene load_steps=96 format=3 uid="uid://2vtqd2l5sp86"]
 
 [ext_resource type="PackedScene" uid="uid://5rcf7awoltde" path="res://src/flowers/flower.tscn" id="1_p8w5l"]
 [ext_resource type="Texture2D" uid="uid://bgcki2dhvgtqq" path="res://assets/Flowers/Orchid/orchid_bloom_petals_2.png" id="2_r5y7l"]
@@ -609,8 +609,11 @@ radius = 5.0
 height = 22.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r5y7l"]
-radius = 3.0
+radius = 4.0
 height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r5y7l"]
+radius = 8.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42fcx"]
 radius = 1.4142132
@@ -660,23 +663,28 @@ frame_progress = 1.0
 object_height = 10
 height_off_ground = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
+[node name="BloomCollisionShape" type="CollisionShape2D" parent="." index="6"]
 position = Vector2(-9, -2)
 shape = SubResource("CapsuleShape2D_17grc")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="7"]
+[node name="BloomCollisionShape2" type="CollisionShape2D" parent="." index="7"]
 position = Vector2(-9, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_r5y7l")
 
-[node name="DrinkableArea" type="Area2D" parent="." index="8"]
+[node name="SeedCollisionShape" type="CollisionShape2D" parent="." index="8"]
+position = Vector2(-10, 1)
+shape = SubResource("CircleShape2D_r5y7l")
+disabled = true
+
+[node name="DrinkableArea" type="Area2D" parent="." index="9"]
 position = Vector2(-10, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
 rotation = 0.7853982
 shape = SubResource("CapsuleShape2D_42fcx")
 
-[node name="NectarMeter" parent="." index="9" instance=ExtResource("11_u1nqt")]
+[node name="NectarMeter" parent="." index="10" instance=ExtResource("11_u1nqt")]
 offset_left = -14.0
 offset_top = -50.0
 offset_right = -2.0

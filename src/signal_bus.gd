@@ -17,6 +17,7 @@ signal flower_accepted
 signal orange_seeds_harvested
 signal bee_arrived
 signal bee_flew_away
+signal bee_shooed
 signal paused
 signal unpaused
 signal guide_opened
@@ -37,6 +38,7 @@ signal paused_or_unpaused
 signal paused_unpaused_or_guide_opened
 signal paused_unpaused_or_punnet_square_opened
 signal cache_opened_closed_or_print_started
+signal bee_arrived_or_flew_away
 
 func _ready():
 	# seed_planted_removed_or_item_dropped
@@ -77,3 +79,6 @@ func _ready():
 	cache_opened.connect(cache_opened_closed_or_print_started.emit)
 	cache_closed.connect(cache_opened_closed_or_print_started.emit)
 	print_started.connect(cache_opened_closed_or_print_started.emit)
+	# bee_arrived_or_flew_away
+	bee_arrived.connect(bee_arrived_or_flew_away.emit)
+	bee_flew_away.connect(bee_arrived_or_flew_away.emit)

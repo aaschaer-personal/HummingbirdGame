@@ -536,7 +536,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17grc"]
 radius = 9.0
-height = 20.0
+height = 18.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42fcx"]
 radius = 2.0
@@ -582,17 +582,22 @@ autoplay = "bloom"
 object_height = 10
 height_off_ground = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="6"]
-position = Vector2(0, -21)
+[node name="BloomCollisionShape" type="CollisionShape2D" parent="." index="6"]
+position = Vector2(0, -22)
 shape = SubResource("CapsuleShape2D_17grc")
 
-[node name="DrinkableArea" type="Area2D" parent="." index="7"]
+[node name="SeedCollisionShape" type="CollisionShape2D" parent="." index="7"]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_17grc")
+disabled = true
+
+[node name="DrinkableArea" type="Area2D" parent="." index="8"]
 position = Vector2(-1, -20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DrinkableArea" index="0"]
 shape = SubResource("CapsuleShape2D_42fcx")
 
-[node name="NectarMeter" parent="." index="8" instance=ExtResource("11_dlsfw")]
+[node name="NectarMeter" parent="." index="9" instance=ExtResource("11_dlsfw")]
 offset_left = -6.0
 offset_top = -68.0
 offset_right = 6.0

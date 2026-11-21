@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://3s8pfxwc815f" path="res://assets/Flowers/Orchid/orchid_cut_decay_petals.png" id="5_k41el"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xxx6l"]
-radius = 8.0
-height = 32.0
+radius = 9.999999
+height = 35.999992
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5016"]
 atlas = ExtResource("5_k41el")
@@ -247,7 +247,6 @@ animations = [{
 
 [node name="CutFlower" instance=ExtResource("1_c02jn")]
 species = "orchid"
-ground_height = 4
 pickup_height = 13
 drop_duration = 0.2
 
@@ -262,7 +261,6 @@ sprite_frames = SubResource("SpriteFrames_eq720")
 autoplay = "default"
 
 [node name="ShadowGenerator" parent="PetalSprite" index="0" instance=ExtResource("4_1ysac")]
-object_height = 2
 offset_rotation = true
 
 [node name="Item" type="AnimatedSprite2D" parent="." index="5"]
@@ -271,5 +269,4 @@ sprite_frames = SubResource("SpriteFrames_x6mtb")
 autoplay = "default"
 
 [node name="ShadowGenerator" parent="Item" index="0" instance=ExtResource("4_1ysac")]
-object_height = 2
 offset_rotation = true

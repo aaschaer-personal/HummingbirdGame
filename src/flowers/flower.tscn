@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://bg3g4wi7ovphu" path="res://assets/Sounds/rustle.wav" id="2_pao7f"]
 [ext_resource type="AudioStream" uid="uid://cmy16861yuanr" path="res://assets/Sounds/bee.wav" id="3_bgpyq"]
 
-[node name="Flower" type="Area2D"]
+[node name="Flower" type="Area2D" groups=["flower"]]
 z_as_relative = false
 script = ExtResource("1_sv1xc")
 

@@ -661,6 +661,13 @@ custom_minimum_size = Vector2(330, 0)
 layout_mode = 2
 fit_content = true
 
+[node name="StartingGenes" type="RichTextLabel" parent="Content/Genetics"]
+clip_contents = false
+custom_minimum_size = Vector2(330, 0)
+layout_mode = 2
+text = "* This level's starting color genes are "
+fit_content = true
+
 [node name="Text2" type="RichTextLabel" parent="Content/Genetics"]
 clip_contents = false
 custom_minimum_size = Vector2(330, 0)

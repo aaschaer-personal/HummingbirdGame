@@ -1,5 +1,6 @@
-class_name Visitor extends Interactable
+class_name Visitor extends Area2D
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @export var species: String
 @onready var sprite = $MainSprite
 @onready var desires = $Desires

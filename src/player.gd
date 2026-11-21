@@ -5,14 +5,16 @@ signal energy_quartered
 signal energy_to_third_or_perch
 signal energy_back_to_half
 signal bath_started
-signal drink_or_bath
+signal drink_or_bath_or_pollen_added
 signal dispense_slot_pickup
 
-@onready var body_sprite = $Animation/Body
-@onready var front_wing_sprite = $Animation/FrontWing
-@onready var back_wing_sprite = $Animation/BackWing
-@onready var pollen_sprite = $Animation/Pollen
-@onready var splash_particles = $Animation/SplashParticles
+@onready var animation_player = $AnimationPlayer
+@onready var body_sprite = $Sprites/Body
+@onready var front_wing_sprite = $Sprites/FrontWing
+@onready var back_wing_sprite = $Sprites/BackWing
+@onready var pollen_sprite = $Sprites/Pollen
+@onready var pollen_ring = $Sprites/PollenRing
+@onready var splash_particles = $Sprites/SplashParticles
 @onready var flippables = $Flippables
 @onready var hold_point = $Flippables/HoldPoint
 @onready var pickup_area = $Flippables/PickupArea
@@ -44,10 +46,9 @@ var target_point = null
 var interaction_direction = null
 var held_item = null
 var drinking_flower = null
-var hovering_frame = 0
 var perch_y = 0
 var facing_right = true
-var target_animation = "hoveringa"
+var target_animation = "hovering"
 var pollen: Array[Dictionary] = []
 var controllable = false
 var in_motion = false
@@ -62,7 +63,11 @@ var level
 func _ready():
 	general_interaction_area.area_entered.connect(
 		_on_interaction_area_entered.bind(general_interaction_area))
+	general_interaction_area.body_entered.connect(
+		_on_interaction_area_entered.bind(general_interaction_area))
 	pickup_area.area_entered.connect(
+		_on_interaction_area_entered.bind(pickup_area))
+	pickup_area.body_entered.connect(
 		_on_interaction_area_entered.bind(pickup_area))
 	drinking_area.area_entered.connect(
 		_on_interaction_area_entered.bind(drinking_area))
@@ -92,7 +97,7 @@ func _process(delta):
 	if energy <= 0 and target_animation in ["hovering", "zooming"]:
 		target_animation = "tired"
 
-	if drinking_flower and body_sprite.animation == "drinking":
+	if drinking_flower and animation_player.current_animation == "drinking":
 		if drinking_flower.stage == 1:
 			var gained_energy = drinking_flower.drink(delta)
 			energy += gained_energy
@@ -112,7 +117,7 @@ func _process(delta):
 	elif audio_player.stream == drinking_sound:
 		audio_player.stop()
 
-	if body_sprite.animation == "perching":
+	if animation_player.current_animation == "perching":
 		if energy < max_energy / 3.0:
 			var rate = (-0.1 * energy) + 10
 			rate = max(rate, 0)
@@ -149,7 +154,9 @@ func _physics_process(delta):
 	var speed = base_speed
 	if energy <= 0:
 		speed = base_speed / 2.0
-	elif body_sprite.animation == "zooming":
+	elif animation_player.current_animation == "start_zooming":
+		speed = base_speed * 1.5
+	elif animation_player.current_animation == "zooming":
 		speed = base_speed * 2
 	
 	var direction = Vector2.ZERO
@@ -173,17 +180,22 @@ func _physics_process(delta):
 func interact_with_nearest_target():
 	var nearest_target = null
 	var best_distance = null
-	
-	for potential_target in interaction_radius.get_overlapping_areas():
-		if potential_target is Interactable and potential_target.is_interactable():
-			var distance = potential_target.get_player_interaction_area().global_position.distance_to(
-				potential_target.get_interaction_area().global_position)
+	for potential_target in interaction_radius.get_overlapping_areas() + interaction_radius.get_overlapping_bodies():
+		if potential_target.has_method("is_interactable") and potential_target.is_interactable():
+			var potential_player_interaction_area = general_interaction_area
+			if potential_target.has_method("get_player_interaction_area"):
+				potential_player_interaction_area = potential_target.get_player_interaction_area()
+			var potential_interaction_area = potential_target
+			if potential_target.has_method("get_interaction_area"):
+				potential_interaction_area = potential_target.get_interaction_area()
+			var distance = potential_player_interaction_area.global_position.distance_to(
+				potential_interaction_area.global_position)
 			if best_distance == null or distance < best_distance:
 				best_distance = distance
 				nearest_target = potential_target
 
 	if nearest_target != null:
-		nearest_target.on_selected(nearest_target.global_position)
+		set_interaction_target(nearest_target, nearest_target.global_position)
 
 func move_to_point(new_target_point, overide_controllable=false):
 	if controllable or overide_controllable:
@@ -192,15 +204,30 @@ func move_to_point(new_target_point, overide_controllable=false):
 		interaction_position = Vector2.ZERO
 
 func set_interaction_target(
-	new_interaction,
-	new_target,
-	new_interaction_area,
-	new_target_area,
-	new_target_point,
+	interactable,
+	point,
 ):
 	if controllable:
+		# get interaction info from interactable's duck typing methods
 		_unset_interaction_target()
-		if new_interaction_area.overlaps_area(new_target_area):
+		var new_interaction = "_drop_item_at_point"
+		if interactable.has_method("get_player_interaction"):
+			new_interaction = interactable.get_player_interaction()
+		var new_target = interactable
+		if interactable.has_method("get_interaction_target"):
+			new_target = interactable.get_interaction_target()
+		var new_interaction_area = general_interaction_area
+		if interactable.has_method("get_player_interaction_area"):
+			new_interaction_area = interactable.get_player_interaction_area()
+		var new_target_area = interactable
+		if interactable.has_method("get_interaction_area"):
+			new_target_area = interactable.get_interaction_area()
+		var new_target_point = point
+		if interactable.has_method("get_interaction_point"):
+			new_target_point = interactable.get_interaction_point(point)
+
+		# if we're already there, do the thing, otherwise set up targeting
+		if new_interaction_area.overlaps_area(new_target_area) or new_interaction_area.overlaps_body(new_target_area):
 			call(new_interaction, new_target)
 		else:
 			interaction = new_interaction
@@ -223,7 +250,7 @@ func set_interaction_target(
 			var right_x_distance = abs(right_point.x - target_point.x)
 			var left_x_distance = abs(left_point.x - target_point.x)
 
-			# for smaller x distances pick the closer interaction point
+			# for smaller x distances pick the closer interaction direction
 			if min(right_x_distance, left_x_distance) < base_speed / 5.0:
 				if right_distance < left_distance:
 					interaction_position = right_position
@@ -258,12 +285,15 @@ func _on_interaction_area_entered(entering_area, our_area):
 
 func pickup(item):
 	if energy > 0:
-
 		# drop any currently held item unless adding flower to bouqeut
 		if held_item != null and not (
 			item is CutFlower and held_item is Bouquet
 		):
 			drop_held_item()
+
+		# remove collision with grounded items
+		item.set_collision_layer_value(2, false)
+		item.set_collision_mask_value(2, false)
 
 		# add flower to bouquet
 		if item is CutFlower:
@@ -320,16 +350,15 @@ func start_drink(flower: Flower):
 	if drinking_flower != null and drinking_flower != flower:
 		drinking_flower.finish_drink()
 	drinking_flower = flower
-	drink_or_bath.emit()
+	drink_or_bath_or_pollen_added.emit()
 	target_animation = "drinking"
-	
+
 func use_tool_on_flower(flower: Flower):
 	# don't remove a flower while drinking from it!
 	if drinking_flower:
 		drinking_flower.finish_drink()
 		drinking_flower = null
 		target_animation = "hovering"
-
 	if flower.stage == 2 and held_item is SeedPacket:
 		flower.harvest_seeds(held_item)
 		audio_player.set_pitch_scale(randf_range(.9, 1.1))
@@ -392,6 +421,7 @@ func add_pollen(pollen_arr: Array[Dictionary]):
 	pollen += pollen_arr
 	pollen.shuffle()
 	pollen_sprite.visible = true
+	drink_or_bath_or_pollen_added.emit()
 
 func _set_wings(vis: bool, aud: bool):
 	front_wing_sprite.visible = vis
@@ -403,14 +433,12 @@ func _flip_h(val: bool):
 	front_wing_sprite.set_flip_h(val)
 	back_wing_sprite.set_flip_h(val)
 	pollen_sprite.set_flip_h(val)
-
-func _play_animation(animation_name):
-	body_sprite.play(animation_name)
-	pollen_sprite.play(animation_name)
-	
-func _set_frame(frame):
-	body_sprite.set_frame(frame)
-	pollen_sprite.set_frame(frame)
+	if val:
+		pollen_ring.position.x = -18
+		pollen_ring.scale.x = -1
+	else:
+		pollen_ring.position.x = 18
+		pollen_ring.scale.x = 1
 
 func _set_flippables(right: bool):
 	if right != (hold_point.position.x < 0):
@@ -418,10 +446,10 @@ func _set_flippables(right: bool):
 			flipabble.position.x *= -1
 
 func _do_animation():
-	var current = body_sprite.animation
+	var current = animation_player.current_animation
 
 	# don't interupt non looping animations
-	if body_sprite.is_playing() and not body_sprite.sprite_frames.get_animation_loop(current):
+	if animation_player.is_playing() and not animation_player.get_animation(current).loop_mode:
 		return
 
 	# if we were perched, immediatly flip sprite to current direction
@@ -452,7 +480,7 @@ func _do_animation():
 	if turn_flip_val != null and current != "perching":
 		# save current animation frame, stop wings, and start turn
 		var duration = 0.25  # 10 frames at 40fps
-		var current_frame = body_sprite.get_frame()
+		var animation_position = animation_player.current_animation_position
 		var wing_vis = front_wing_sprite.visible
 		var wing_sound = humm_player.playing
 		_set_wings(false, true)
@@ -460,14 +488,14 @@ func _do_animation():
 		for flippable in flippables.get_children():
 			flippable.position *= Vector2(-1, 1)
 		if energy:
-			_play_animation("turn")
+			animation_player.play("turn")
 		else:
-			_play_animation("turn_tired")
+			animation_player.play("turn_tired")
 		# halfway through the turn, turn any hold item
 		await get_tree().create_timer(duration / 2.0, false).timeout
 		if held_item:
 			held_item.set_flip_h(turn_flip_val)
-		await body_sprite.animation_finished
+		await animation_player.animation_finished
 		# flip any item picked up after the halfway point
 		if held_item:
 			held_item.set_flip_h(turn_flip_val)
@@ -475,8 +503,8 @@ func _do_animation():
 		_set_wings(wing_vis, wing_sound)
 		facing_right = !turn_flip_val
 		_flip_h(turn_flip_val)
-		_play_animation(current)
-		_set_frame(current_frame)
+		animation_player.play(current)
+		animation_player.seek(animation_position)
 
 	# stop if we're already playing the target
 	if current == target_animation:
@@ -484,22 +512,21 @@ func _do_animation():
 
 	# if we're hovering we should be one step away from target
 	if current == "hovering":
-		hovering_frame = body_sprite.get_frame()
 		if target_animation == "zooming":
 			_set_wings(false, true)
-			_play_animation("start_zooming")
-			await body_sprite.animation_finished
-			_play_animation("zooming")
+			animation_player.play("start_zooming")
+			await animation_player.animation_finished
+			animation_player.play("zooming")
 		elif target_animation == "drinking":
-			_play_animation("start_drinking")
-			await body_sprite.animation_finished
-			_play_animation("drinking")
+			animation_player.play("start_drinking")
+			await animation_player.animation_finished
+			animation_player.play("drinking")
 		elif target_animation == "perching":
 			_set_wings(false, false)
 			if energy:
-				_play_animation("start_perching")
+				animation_player.play("start_perching")
 			else:
-				_play_animation("start_perching_tired")
+				animation_player.play("start_perching_tired")
 			var tween = create_tween()
 			tween.tween_property(
 				self,
@@ -508,13 +535,13 @@ func _do_animation():
 				8.0/40.0
 			)
 			_tween_height(15, 8.0/40.0)
-			await body_sprite.animation_finished
+			await animation_player.animation_finished
 			humm_player.playing = false
 			facing_right = null
-			_play_animation("perching")
-			# intermediate frames
-			var perching_frames = [0, 2, 20, 22, 30, 32, 50, 52]
-			_set_frame(perching_frames.pick_random())
+			animation_player.play("perching")
+			var neutral_frames = [0.0, 1.25, 3.3, 6.1, 7.35, 9.4, 10.65]
+			animation_player.seek(neutral_frames.pick_random() + .01)
+			animation_player.advance(0)
 		elif target_animation == "bathe":
 			controllable = false
 			var tween = create_tween()
@@ -525,7 +552,7 @@ func _do_animation():
 				4.0/20.0
 			)
 			_tween_height(0, 4.0/20.0)
-			_play_animation("bathe")
+			animation_player.play("bathe")
 			await get_tree().create_timer(4.0/20.0, false).timeout
 			_set_wings(false, false)
 			await get_tree().create_timer(6.0/20.0, false).timeout
@@ -546,49 +573,50 @@ func _do_animation():
 				4.0/20.0
 			)
 			_tween_height(15, 4.0/20.0)
-			await body_sprite.animation_finished
+			await animation_player.animation_finished
 			pollen = []
 			pollen_sprite.visible = false
-			drink_or_bath.emit()
-			
+			drink_or_bath_or_pollen_added.emit()
 			target_animation = "hovering"
 		elif target_animation == "tired":
-			_play_animation("tired")
+			animation_player.play("tired")
 
 	# otherwise transition to hovering either as intermediate or target
 	else:
 		if current == "zooming":
-			_play_animation("stop_zooming")
-			await body_sprite.animation_finished
+			animation_player.play("stop_zooming")
+			await animation_player.animation_finished
 		elif current == "drinking":
-			_play_animation("stop_drinking")
-			await body_sprite.animation_finished
+			animation_player.play("stop_drinking")
+			await animation_player.animation_finished
 		elif current == "perching":
-			_play_animation("stop_perching")
+			animation_player.play("stop_perching")
 			_tween_height(15, .2)
-			await body_sprite.animation_finished
+			await animation_player.animation_finished
 		_set_wings(true, true)
-		_play_animation("hovering")
-		_set_frame(hovering_frame)
+		animation_player.play("hovering")
+		var neutral_frames = [0.0, 0.55, 0.8, 1.65, 2.2, 3.3]
+		animation_player.seek(neutral_frames.pick_random() + .01)
+		animation_player.advance(0)
 
 func _tween_height(target_height: int, duration: float):
 	var back_wing_tween = create_tween()
 	var body_tween = create_tween()
 	var front_wing_tween = create_tween()
 	back_wing_tween.tween_property(
-		$Animation/BackWing/ShadowGenerator,
+		$Sprites/BackWing/ShadowGenerator,
 		"height_off_ground",
 		target_height,
 		duration,
 	)
 	body_tween.tween_property(
-		$Animation/Body/ShadowGenerator,
+		$Sprites/Body/ShadowGenerator,
 		"height_off_ground",
 		target_height,
 		duration,
 	)
 	front_wing_tween.tween_property(
-		$Animation/FrontWing/ShadowGenerator,
+		$Sprites/FrontWing/ShadowGenerator,
 		"height_off_ground",
 		target_height,
 		duration,

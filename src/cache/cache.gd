@@ -1,7 +1,8 @@
-class_name Cache extends Interactable
+class_name Cache extends StaticBody2D
 
 signal packet_printed
 
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var front = $Front
 @onready var left_door = $LeftDoor
 @onready var right_door = $RightDoor
@@ -10,7 +11,6 @@ signal packet_printed
 @onready var cache_ui = $CacheUI
 @onready var watering_can_scene = preload("res://src/items/watering_can.tscn")
 @onready var clippers_scene = preload("res://src/items/clippers.tscn")
-
 @onready var audio_player = $OptionAwareAudioPlayer
 @onready var raise_sound = preload("res://assets/Sounds/cache_raise.wav")
 @onready var door_sound = preload("res://assets/Sounds/door.wav")
@@ -59,9 +59,6 @@ func get_player_interaction():
 
 func get_interaction_target():
 	return self.cache_ui
-
-func get_interaction_point(selection_point: Vector2):
-	return selection_point
 
 func quick_raise():
 	front.play("raise")

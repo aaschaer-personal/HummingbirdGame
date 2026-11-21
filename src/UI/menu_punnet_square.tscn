@@ -18,21 +18,20 @@ patch_margin_right = 6
 patch_margin_bottom = 6
 script = ExtResource("2_ob07f")
 
-[node name="ExitButton" parent="." instance=ExtResource("3_ob07f")]
+[node name="SC" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_left = 328.0
-offset_right = 345.0
-
-[node name="VBC" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 6.0
+offset_left = 8.0
+offset_top = 6.0
 offset_right = 343.0
-offset_bottom = 326.0
+offset_bottom = 322.0
+
+[node name="VBC" type="VBoxContainer" parent="SC"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="Text" type="RichTextLabel" parent="VBC"]
+[node name="Text" type="RichTextLabel" parent="SC/VBC"]
 layout_mode = 2
 mouse_filter = 2
 bbcode_enabled = true
@@ -44,77 +43,77 @@ text = "[font_size=12]
 fit_content = true
 scroll_active = false
 
-[node name="HBC" type="VBoxContainer" parent="VBC"]
+[node name="HBC" type="VBoxContainer" parent="SC/VBC"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="P1" type="HBoxContainer" parent="VBC/HBC"]
+[node name="P1" type="HBoxContainer" parent="SC/VBC/HBC"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="A1" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="A1" type="OptionButton" parent="SC/VBC/HBC/P1"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="A2" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="A2" type="OptionButton" parent="SC/VBC/HBC/P1"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="B1" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="B1" type="OptionButton" parent="SC/VBC/HBC/P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="B2" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="B2" type="OptionButton" parent="SC/VBC/HBC/P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="C1" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="C1" type="OptionButton" parent="SC/VBC/HBC/P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="C2" type="OptionButton" parent="VBC/HBC/P1"]
+[node name="C2" type="OptionButton" parent="SC/VBC/HBC/P1"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="Example" type="TextureRect" parent="VBC/HBC/P1"]
+[node name="Example" type="TextureRect" parent="SC/VBC/HBC/P1"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 mouse_filter = 2
 texture = ExtResource("3_5wjqq")
 stretch_mode = 2
 
-[node name="Petals" type="TextureRect" parent="VBC/HBC/P1/Example"]
+[node name="Petals" type="TextureRect" parent="SC/VBC/HBC/P1/Example"]
 layout_mode = 0
 offset_right = 36.0
 offset_bottom = 36.0
 mouse_filter = 2
 expand_mode = 2
 
-[node name="Flower" type="TextureRect" parent="VBC/HBC/P1/Example"]
+[node name="Flower" type="TextureRect" parent="SC/VBC/HBC/P1/Example"]
 layout_mode = 0
 offset_right = 36.0
 offset_bottom = 36.0
 mouse_filter = 2
 expand_mode = 2
 
-[node name="ColorLabel" type="Label" parent="VBC/HBC/P1/Example"]
+[node name="ColorLabel" type="Label" parent="SC/VBC/HBC/P1/Example"]
 visible = false
 layout_mode = 0
 offset_top = -12.0
@@ -124,77 +123,77 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Orange"
 horizontal_alignment = 1
 
-[node name="X" type="Label" parent="VBC/HBC"]
+[node name="X" type="Label" parent="SC/VBC/HBC"]
 layout_mode = 2
 text = "   X"
 horizontal_alignment = 1
 
-[node name="P2" type="HBoxContainer" parent="VBC/HBC"]
+[node name="P2" type="HBoxContainer" parent="SC/VBC/HBC"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="A1" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="A1" type="OptionButton" parent="SC/VBC/HBC/P2"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="A2" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="A2" type="OptionButton" parent="SC/VBC/HBC/P2"]
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="B1" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="B1" type="OptionButton" parent="SC/VBC/HBC/P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="B2" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="B2" type="OptionButton" parent="SC/VBC/HBC/P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="C1" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="C1" type="OptionButton" parent="SC/VBC/HBC/P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="C2" type="OptionButton" parent="VBC/HBC/P2"]
+[node name="C2" type="OptionButton" parent="SC/VBC/HBC/P2"]
 visible = false
 custom_minimum_size = Vector2(1, 0)
 layout_mode = 2
 theme_override_constants/h_separation = -1
 theme_override_font_sizes/font_size = 24
 
-[node name="Example" type="TextureRect" parent="VBC/HBC/P2"]
+[node name="Example" type="TextureRect" parent="SC/VBC/HBC/P2"]
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 texture = ExtResource("3_5wjqq")
 stretch_mode = 2
 
-[node name="Petals" type="TextureRect" parent="VBC/HBC/P2/Example"]
+[node name="Petals" type="TextureRect" parent="SC/VBC/HBC/P2/Example"]
 layout_mode = 0
 offset_right = 36.0
 offset_bottom = 36.0
 mouse_filter = 2
 expand_mode = 2
 
-[node name="Flower" type="TextureRect" parent="VBC/HBC/P2/Example"]
+[node name="Flower" type="TextureRect" parent="SC/VBC/HBC/P2/Example"]
 layout_mode = 0
 offset_right = 36.0
 offset_bottom = 36.0
 mouse_filter = 2
 expand_mode = 2
 
-[node name="ColorLabel" type="Label" parent="VBC/HBC/P2/Example"]
+[node name="ColorLabel" type="Label" parent="SC/VBC/HBC/P2/Example"]
 visible = false
 layout_mode = 0
 offset_top = -12.0
@@ -204,10 +203,15 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Orange"
 horizontal_alignment = 1
 
-[node name="PunnetContainer" type="HBoxContainer" parent="VBC/HBC"]
+[node name="PunnetContainer" type="HBoxContainer" parent="SC/VBC/HBC"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="PunnetSquare" parent="VBC/HBC/PunnetContainer" instance=ExtResource("4_yb35w")]
+[node name="PunnetSquare" parent="SC/VBC/HBC/PunnetContainer" instance=ExtResource("4_yb35w")]
 layout_mode = 2
+
+[node name="ExitButton" parent="." instance=ExtResource("3_ob07f")]
+layout_mode = 0
+offset_left = 328.0
+offset_right = 345.0

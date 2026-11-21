@@ -233,7 +233,6 @@ animations = [{
 
 [node name="CutFlower" instance=ExtResource("1_c6rdl")]
 species = "hibiscus"
-ground_height = 2
 pickup_height = 13
 drop_duration = 0.2
 
@@ -259,6 +258,3 @@ autoplay = "default"
 [node name="ShadowGenerator" parent="Item" index="0" instance=ExtResource("4_j8kuh")]
 object_height = 2
 offset_rotation = true
-
-[node name="Label" parent="." index="6"]
-visible = false
